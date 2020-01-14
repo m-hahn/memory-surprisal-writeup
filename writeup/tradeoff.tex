@@ -106,17 +106,52 @@ $\operatorname{H}[w_t|w_{<t}] + \sum_{t > T} \operatorname{I}_t$.
 \end{thm}
 
 
+\begin{enumerate}
+\item Ingredient 1: Language as a Stationary Stochastic Process:
+We represent language as a stochastic process of words $\dots w_{-2} w_{-1} w_0 w_{1} w_{2} \dots$, extending indefinitely both into the past and into the future.
+The symbols $w_i$ belong to a common set, representing the words of the language.\footnote{Could also be phonemes, sentences, ..., any other kind of unit.}
+
+%We model the sequence as a probabilistic sequence; that is, given a context $w_{<t}$, the next word is distributed according to a distribution $p(w_t|w_{<t})$.
+
+The assumption of infinite length is for mathematical convenience and does not affect the substance of our results:
+As we restrict our attention to the processing of individual sentences, which have finite length, we will actually not make use of long-range and infinite contexts.
+
+We make the assumption that this process is \emph{stationary}.
+Formally, this means that the conditional distribution $P(w_t|w_{<t})$ does not depend on $t$, it only depends on the actual sequence $w_{<t}$.
+Informally, this says that the process has no `internal clock', and that the statistical rules of the language do not change at the timescale we are interested in.
+In reality, the statistical rules of language do change: They change as language changes over generations, and they also change between different situations -- e.g., depending on the interlocutor at a given point in time.
+Given that we are interested in memory needs in the processing of \emph{individual sentences}, at a timescale of seconds or minutes, stationarity seems to be a reasonable assumption to make.
+
+\item Ingredient 2: Flow of Information: We now analyze memory from the perspective of the listener, who needs to maintain information about the past to predict the future.
+As the speaker's utterance unfolds, the listener maintains a memory state $m_t$.
+
+There are no assumptions about the memory architecture and the nature of its computations.
+We only make a basic assumption about the flow of information (Figure~\ref{fig:listener-markov}):
+At a given point in time, the listener's memory state $m_t$ is determined by the last word $w_t$, and the prior memory state $m_{t-1}$.
+As a consequence, $m_t$ contains no information about the process beyond what is contained in the last word observed $w_{t-1}$ and in the memory state before that word was observed $m_{t-1}$.
+This is formalized as a statement about conditional probabilities:
+        \begin{equation}\label{eq:listener-markov}
+                p(m_1| (w_{t})_{t \in \mathbb{Z}}, m_0)   = p(m_1 | m_0, w_1)
+        \end{equation}
+This says that $m_1$ contains no information about the utterances beyond what is contained in $m_0$ and $w_1$.
+As a consequence, the listener has no knowledge of the speaker's state beyond the information provided in their prior communication.
+This is a simplification, as the listener could obtain information about the speaker from other sources, such as their common environment (weather, ...).
+\mhahn{For the study of memory in sentence processing, this seems fair. Discuss this more.}
+\end{enumerate}
+
+
+
+
+
+
 We provide a rigorous proof, making only minimal mathematical assumptions, in Appendix Section X.
 
+\paragraph{Informal Argument}
 An intuitive (non-rigorous) argument for this theorem goes as follows:
 For each bit of information that is held in memory, we count the number of timesteps from when it is first entered into memory to when it is forgotten.
 If a word $w_{T-t}$, $t$ steps in the past, contains one bit of information about the current word $w_T$, and if this information is not redundant with information in the intervening words, then this bit of information had to be maintained in memory for $t$ steps.
 The amount of such information is $I_t$. This explains the factor $t$.
 
-
-Assumptions:
-
-The memory representations at time $t+1$ are entirely determined by the memory representations at time $t$ and the word $w_t$.
 
 
 The theorem allows us to estimate the extra surprisal associated with each amount of memory capacity for a language.
@@ -170,14 +205,6 @@ There are theories of retrieval where the main bottleneck lies not in capacity, 
 %define math, AND give people intuition.
 
 
-
-
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{figures-gdrive/counterfactual-languages.png}
-	\caption{\note{Can say more here to explain how it works} Estimating chance by constructing counterfactual grammars and languages.\jd{this figure is again blurry for me. also looks like there's sth in the background on the left?}}\label{fig:grammars}
-\end{figure}
 
 
 

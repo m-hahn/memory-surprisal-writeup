@@ -1,9 +1,10 @@
 
 
 We now investigate whether word orders as found in natural language reflect optimizization for the memory-surprisal tradeoff.
-We compare the memory-surprisal tradeoffs of 52 actual languages to those of counterfactual reorderings.
-We compare to counterfactual reorderings that differ from the actual languages in their word order rules, i.e., the rules that determine how syntactic structures are ordered into strings of words.\mhahn{where introduce the idea of word order}.
-To create such counterfactual reorderings, we parameterize these word order rules using a method introduced by Gildea and colleagues \citep{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015}.
+To this end, we compare the memory-surprisal tradeoffs of 52 actual languages to those of counterfactual reorderings.
+We compare to counterfactual reorderings that differ from the actual languages in their word order rules, i.e., the rules that determine how syntactic structures are ordered into strings of words.
+To create such counterfactual reorderings, we parameterize these word order rules using a method introduced by Gildea and colleagues \citep{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015}:
+We construct counterfactual ordering grammars that define ...
 
 \begin{figure}
 \centering
@@ -21,8 +22,6 @@ To create such counterfactual reorderings, we parameterize these word order rule
 	\caption{TODO Dependencies example}\label{fig:dependency}
 \end{figure}
 
-
-\mhahn{at some point the whole idea of syntactic structures have to be introduced}
 
 \subsection{Data}
 We draw on corpora annotated with syntactic structures.
@@ -57,12 +56,23 @@ We provide the sizes of the resulting datasets in Table~\ref{tab:corpora}.
 
 \subsection{Baselines: Counterfactual Ordering Grammars}
 We define ordering grammars, small models of the rules by which languages order syntactic structures into sentences.
-Our formalism of ordering grammars adapts the method of \cite{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015} to the setting of dependency corpora.
+Our formalism of ordering grammars adapts the method of \cite{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015} to the setting of dependency corpora, following \cite{hahn-universals-2020}.
+
+
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures-gdrive/counterfactual-languages.png}
+	\caption{\note{Can say more here to explain how it works} Estimating chance by constructing counterfactual grammars and languages.\jd{this figure is again blurry for me. also looks like there's sth in the background on the left?}}\label{fig:grammars}
+\end{figure}
+
+
 
 Universal Dependencies defines 37 universal syntactic relations that are used to label dependency arcs across all corpora.
 These relations encode cross-linguistically meaningful relations such as subjects, objects, and adjectival modifiers.
 We define ordering grammars by assigning a parameter $a_\tau \in [-1,1]$ to every one of these 37 universal syntactic relations.
-Relations sometimes have language-specific subtypes; we do not distinguish these subtypes.\mhahn{give an example to make clear what this refers to}
+Relations sometimes have language-specific subtypes; we do not distinguish these subtypes.
 
 Following Gildea and colleagues, this parameter defines how dependents are ordered relative to their head:
 Given a head and a set of dependents, we order each dependents by the parameter $a_\tau$ assigned to the syntactic relation linking it to the head.
@@ -71,28 +81,29 @@ Dependents with negative weights are placed to the left of the head; dependents 
 Ordering grammars describe languages that have consistent word order:
 For instance, the subject is consistently ordered before or after the verb, depending on whether the parameter for the verb-subject dependency is positive or negative.
 
-We define baseline grammars by randomly sampling the parameters $a_\tau$.
-Such baseline grammars define languages that have consistent word order, but do not exhibit any systematic correlations between the orderings of different dependents.
+We construct baseline grammars by randomly sampling the parameters $a_\tau$.
+Such baseline grammars define languages that have consistent word order, but do not exhibit preferences for specific word order patterns.
 
 
-
-\paragraph{Discussion}
 In actual languages, the ordering of words is largely determined by the syntactic relations (CITE).
 However, certain kinds of rules cannot be modeled by our word order grammars, such as rules sensitive to the category of the dependent (e.g., differences between nominal and pronominal objects).
 Word order freedom also is not modeled.
-In this sense, ordering grammars represent approximations to the kinds of ordering rules found in natural language \cite{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015}.
+In this sense, ordering grammars represent approximations to the kinds of ordering rules found in natural language \citep{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015}.
+See Section (Discussion) for further discussion.
 
 
 
 \subsection{Estimating Memory-Surprisal Tradeoff}\label{sec:method}
-To estimate mutual informations, we use LSTM recurrent neural networks, the basis of the state of the art in modeling natural language (CITE)\footnote{We note that the state-of-the-art is now achieved by other models when extremely large amounts of training data (on the order of several dozen GB of texts) are available. In comparison, LSTMs remain state of the art on small/medium training data such as the UD corpora.} and predicting the surprisal effect on reading times~\citep{frank-insensitivity-2011, goodkind-predictive-2018}.
-We provide data from alternative estimation methods in the SI.
+The key to evaluating the memory-surprisal tradeoff from corpus data is the set of quantities $I_t$.
+In order to estimate this, we use LSTM recurrent neural networks (CITE).
+Neural network models are the basis of the state-of-the art in statistical modeling of language and in predicting the surprisal effect on reading times~\citep{frank-insensitivity-2011, goodkind-predictive-2018}.
+We provide data from more traditional estimation methods in the SI.
 
 
 
 \paragraph{Model and Parameter Estimation}
 We use a recurrent neural network with Long-Short-Term Memory cells~\citep{hochreiter-long-1997} (CITE for Neural LM).
-This architecture takes as input a sequence $x_1 ... x_N$ of words, and at each time step $t=1, ..., N$, calculates a probability distribution $p(w_t|w_1...w_{t-1})$ over the next word $w_{t}$ given preceding words $w_1 ... w_{t-1}$.
+This architecture takes as input a sequence $x_1 ... x_N$ of words, and at each time $t=1, ..., N$, calculates a probability distribution $p(w_t|w_1...w_{t-1})$ over the next word $w_{t}$ given preceding words $w_1 ... w_{t-1}$.
 Our model specification follows (CITE someone who used exactly the same model).
 
 The network is parameterized by a vector $\theta$ of weights determining how the activations of neurons propagate through the network~\citep{hochreiter-long-1997}.
@@ -118,7 +129,8 @@ In our experiments, we chose $T_{max} = 20$. Prior work has found that the proba
 
 \paragraph{Choice of Hyperparameters}
 
-The LSTM model has a set of numerical \emph{hyperparameters} that need to be specified before parameter estimation, such as the number of recurrent neurons and the learning rate. %namely the dimensionalities of the embeddings $d_{emb}$, the dimensionality of the hidden states $d_{LSTM}$, and the number of LSTM layers $d_{layer}$, the learning rate $\alpha$, and the regularization parameters (dropout rate $p_{embedding}$, word dropout rate $p_{word}$, word noising rate $p_{noising}$).
+The LSTM model has a set of numerical \emph{hyperparameters} that need to be specified before parameter estimation, such as the number of neurons and the learning rate.
+See SI for details.
 For each corpus, we used Bayesian optimization using the Expected Improvement acquisition function \citep{snoek-practical-2012} to find a good setting of the hyperparameters.
 We optimized the hyperparameters to minimize average surprisal~(\ref{eq:train}) on the held-out partition resulting at the end of parameter estimation, on languages generated from random word order grammars.
 This biases the hyperparameters towards modeling counterfactual grammars better, biasing them \emph{against} our hypothesis that real orders result in better memory-surprisal tradeoffs than counterfactual orders.
@@ -138,9 +150,6 @@ Third, traditional N-gram models, which do not have this limitation, provide res
 
 
 \paragraph{Estimating the Memory-Surprisal Tradeoff Curve}
-
-
-
 The quantity $I_t$ in~(\ref{eq:memory-bound}) is equal to the difference 
 \begin{equation}
 \operatorname{I}[w_t, w_0 | w_1, ..., w_{t-1}] = H[w_t|w_1, ..., w_{t-1}] - H[w_t|w_0, w_1, ..., w_{t-1}]
@@ -163,26 +172,20 @@ We collect multiple samples for the actual orderings to control for variation du
 For each of the random grammars, we collect one sample.
 Data is collected according to a precision-based stopping criterion described in Section (REF).
 
-\subsection{Statistics}
+\subsection{Statistical Analysis}
 
 We now describe how we compared memory-surprisal tradeoffs between real and baseline languages.
-
-%For each sample, we estim
-%For each language, we viewed surprisal as a function of memory.
-%We used linear interpolation to obtain surprisal values for all levels of memory.
-
 We want to test whether languages' surprisal-memory tradeoffs better than those of most baseline languages.
-%We view surprisal as a function of memory load, so that the curve is defined on all of $\mathbb{R}_+$.
 We compare real and baseline languages by evaluating which languages result in lower surprisal at the same level of memory.
 We now describe the statistics we use to quantifying the difference between real and baseline languages.
-We do everything in a frequentist framework (null hypothesis testing \& confidence intervals), as we can do exact tests and confidence intervals without parametric assumptions.
-\mhahn{Maybe we can explain how the tests \& CIs also have reasonable Bayesian interpretations (for the specific methods used here, rejection of the null should guarantee that the posterior of the null hypothesis is small under a wide range of priors.).}
+%We do everything in a frequentist framework (null hypothesis testing \& confidence intervals), as we can do exact tests and confidence intervals without parametric assumptions.
+%\mhahn{Maybe we can explain how the tests \& CIs also have reasonable Bayesian interpretations (for the specific methods used here, rejection of the null should guarantee that the posterior of the null hypothesis is small under a wide range of priors.).}
 
 \paragraph{Median Surprisal and Confidence Interval for Medians}
 We compute surprisal at 40 evenly spaced points of memory (selected individually for each language), over all runs for the real language, and over all baselines grammars.
 We then compute the median surprisal over all runs for the real language, and over all baselines grammars.
-We compute a confidence interval for this median surprisal, using the binomial PDF. \mhahn{some standard stats reference}
-This interval is exact, without parametric assumptions or asymptotic approximations.
+For each point, we compute a confidence interval for the median surprisal, using the binomial PDF. \mhahn{some standard stats reference}
+This is an \emph{exact} confidence interval, without parametric assumptions or asymptotic approximations.
 
 % yStudyTradeoff_Bootstrap_Parallel_OnlyWordForms_BoundedVocab_BinomialTest_Single_MedianCI.py
 
@@ -250,28 +253,31 @@ To provide estimates of the degree of optimization of real orders, we also compu
 Specifically, for each level of memory $\mu$, we estimate what percentage of baseline languages have lower (or equal) surprisal than the real language.
 This is described in Figure~\ref{fig:quantile-pointwise}.
 We use the Binomial Test to derive a confidence lower bound for this quantile (CITE).
-Again, we take the REAL values to be estimated exactly by their medians.
+Again, we take the real values to be estimated exactly by their medians.
 
-%We want to create a CI at each Memory value for the quantile.
-%
-%At a fixed memory value $\mu$, let $n_+$ be the better baseline samples, $n_-$ the worse (or equal) ones.
-%
-%We want to get a confidence bound $q$ on $P_{X \sim Baseline}(X < x_{real})$.
-%Let $p := P(N_+ \leq n_+ | N_+ + N_-; q)$.
-%Then output $(0, q)$ as a level $p$ CI for the parameter $P(X < x_{real})$.
-%We minimize $q$ subject to $p < 0.05$.
-%This CI is exact in the sense that it does not involve asymptotic approximations or parametric assumptions, but it is extremely conservative.
-%
+
+
 %Also the following does not assume unimodality, and ends up getting about the same intervals
 %% yStudyTradeoff_Bootstrap_Parallel_OnlyWordForms_BoundedVocab_BinomialTest_Single_UnimodalBoundOnQuantile_BothDirections_NoAssumption.py
 
 
 
 
-\paragraph{Global Quantile Estimate}
 
-To provide a stopping criterion, we additionally need a global measure of the degree of optimization of the real language.
+\subsection{Number of Samples, Precision-Based Stopping Criterion}
+Training neural language models is computationally costly.
+Therefore, we used a precision-based stopping criterion to adaptively choose a sample size for each language.
+Precision-based stopping criteria offer a way to adaptively choose sample size without biasing results for or against the hypothesis of interest (CITE).
 
+We propose a stopping criterion using a global measure of the degree of optimization of the real language:
+For each sample $x$ from real orderings, we look at the proportions $N_+(x)$ of samples from the baseline languages that are more optimal than $x$ throughout the entire range where both curves are defined, and the proportion $N_-(x)$ of baseline samples that are consistently less optimal.
+We estimate the quotient
+\begin{equation}\label{eq:g}
+	G :=	\frac{\E_{x \sim P_1}[W_+(x)]}{\E_{x \sim P_1}[W_+(x) + W_-(x)]}
+\end{equation}
+where $P_1$ is the distribution over values obtained for real orderings.
+We use a bootstrapped confidence interval for $\E[G]$ for quantifying the degree of optimization.
+For bootstrapping, we separately resample samples from the real language and from the baseline grammars.
 Due to the use of bootstrapping, the confidence intervals are not exact.
 
 \begin{figure}
@@ -281,36 +287,6 @@ Due to the use of bootstrapping, the confidence intervals are not exact.
 	\caption{Illustration for the global quantile estimate. For each sample for the real language, we compare the memory-surprisal curve to all baselines.}\label{fig:quantile-global}
 \end{figure}
 
-
-
-For each sample $x$ from real orderings, we look at the proportions $N_+(x)$ of samples from the baseline languages that are more optimal than $x$ throughout the entire range where both curves are defined, and the proportion $N_-(x)$ of baseline samples that are consistently less optimal.
-
-%We consider the null hypothesis that, on average, not more baseline languages are consistently less optimal than are consistently more optimal than the real orderings:
-%\begin{equation}
-%	\E_{x \sim P_1}[W_+(x)] \geq \E_{x \sim P_1}[W_-(x)]
-%\end{equation}
-
-We estimate the quotient
-\begin{equation}\label{eq:g}
-	G :=	\frac{\E_{x \sim P_1}[W_+(x)]}{\E_{x \sim P_1}[W_+(x) + W_-(x)]}
-\end{equation}
-where $P_1$ is the distribution over values obtained for real orderings.
-We use a bootstrapped confidence interval for $\E[G]$ for quantifying the degree of optimization.
-For bootstrapping, we separately resample samples from the real language and from the baseline grammars.
-
-
-
-%- bootstrapping
-%- subsampling
-%- permutation test / rank test ??
-%
-
-
-
-\subsection{Number of Samples}
-Training neural language models is computationally costly.
-Therefore, we used a precision-based stopping criterion to adaptively choose a sample size for each language.
-Precision-based stopping criteria offer a way to adaptively choose sample size without biasing results (CITE).
 
 For each language, we first collected 10 data points for real orderings and 10 data points for baseline orderings.
 We continued obtaining new data points until the CI for $G$ had width $\leq 0.15$, or there were 100 samples from $P_1$ and 300 samples from $P_2$.
@@ -342,18 +318,18 @@ In Figure~\ref{tab:medians}, we show the medians for real and baseline languages
 
 Descriptively, the real language provides better tradeoffs than the median of the baselines across languages, with four exceptions (Latvian, North Sami, Polish, Slovak).
 
-In Figure~\ref{tab:slice-hists-real}, we show the distribution of surprisals achieved at the maximal memory value for real and random languages.
+%In Figure~\ref{tab:slice-hists-real}, we show the distribution of surprisals achieved at the maximal memory value for real and random languages.
 
-In Figure~\ref{fig:hist-real}, we show surprisals at maximum memory, after z-transforming for each individual language and then aggregating.
+%In Figure~\ref{fig:hist-real}, we show surprisals at maximum memory, after z-transforming for each individual language and then aggregating.
 
-In Table \ref{tab:median_diffs}, we show the differences in median surprisal, as a function of memory.
-
-
-In Table~\ref{tab:boot-g}, we report the bootstrap estimates and confidence intervals for G~(\ref{eq:g}).
-$\E[G]$ was not estimated to be significantly above $>5$ for four languages: Latvian, North Sami, Polish, and Slovak.
+%In Table \ref{tab:median_diffs}, we show the differences in median surprisal, as a function of memory.
 
 
-In Table~\ref{tab:quantiles}, we show the quantiles.
+%In Table~\ref{tab:boot-g}, we report the bootstrap estimates and confidence intervals for G~(\ref{eq:g}).
+%$\E[G]$ was not estimated to be significantly above $>5$ for four languages: Latvian, North Sami, Polish, and Slovak.
+
+
+%In Table~\ref{tab:quantiles}, we show the quantiles.
 
 
 
@@ -386,5 +362,10 @@ We found that branching direction entropy was strongly correlated with the surpr
 
 
 \mhahn{One thing that has to be discussed: the absolute values differ between languages}
+
+
+
+A possible concern is that the optimization observed in Experiment 1 might be an artifact of the grammar formalism.
+To address this possibility, we repeated the experiment comparing baseline grammars to grammars that represent the word order of the real languages as faithfully as is possible with the grammar formalism.
 
 

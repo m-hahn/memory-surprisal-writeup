@@ -1,16 +1,22 @@
-Here we match the branching entropies of the baseline grammars with those of the real language.
 
-
-A possible concern is that the optimization observed in Experiment 1 might be an artifact of the grammar formalism.
-To address this possibility, we repeated the experiment comparing baseline grammars to grammars that represent the word order of the real languages as faithfully as is possible with the grammar formalism.
 %We test this hypothesis by comparing baseline languages to \emph{fixed-order} versions of the real languages.
 %This enables us to tease apart the impact of the languages' word order rules from the impact of word order freedom.
 
+We now address points raised above by 
+
+
 
 \begin{enumerate}
-\item Baselines with matched order freedom
-\item Represent real languages by approximations within the formalism
-\item Simulation taking information structure into account (for one language)
+\item First, to ensure that results are not due to the representational restrictions of the word order grammar formalism, we compare the real languages to the result of ordering the corpora according to grammars that approximates the observed orders to the extent possible in the grammar formalism.
+These grammars have exactly the same representational constraints as the baseline grammars.
+Importantly, they differ from real languages in having entirely deterministic order.
+We expect these grammars to have better memory-surprisal tradeoffs than comparable random baseline grammars across all languages.
+
+\item Second, we compare real languages to baselines that have matched degrees of word order freedom
+
+\item Simulation taking information structure into account (for one language).
+Due to the difficulty of annotating information structure, few such corpora are available.
+We use the Prague Dependency Treebank, which has information structure annotation.
 \end{enumerate}
 
 
@@ -29,29 +35,25 @@ We create ordering grammars that are fit to the actual orderings of each languag
 These grammars faithfully represent the ordering rules if the actual language, to the extent that is possible in the formalism of ordering grammars.
 
 We construct these grammars by constructing \emph{probabilistic ordering grammars}, and setting the parameters to maximize the \emph{likelihood} of the actually observed orderings.
-We parameterized probabilistic ordering grammars as follows.
-For each relation type $\tau$, we introduce a \emph{direction parameter} $a_\tau \in [0,1]$ and a \emph{distance parameter} $b_\tau \in \mathbb{R}$.
-Each dependent is ordered on the left of its head with probability $a_\tau$ and to the right with probability $1-a_\tau$. 
-Then for each set of co-dependents $\{s_1, \dots , s_n\}$ placed on one side of a head, their order outward from the head is determined by iteratively sampling from the distribution $\operatorname{softmax}(b_{\tau_1}, \dots, b_{\tau_n})$ (\cite{goodfellow2016deep}, p. 184) without replacement. 
+The method is fully taken from \cite{hahn-universals-2020}.
+%We parameterized probabilistic ordering grammars as follows.
+%For each relation type $\tau$, we introduce a \emph{direction parameter} $a_\tau \in [0,1]$ and a \emph{distance parameter} $b_\tau \in \mathbb{R}$.
+%Each dependent is ordered on the left of its head with probability $a_\tau$ and to the right with probability $1-a_\tau$. 
+%Then for each set of co-dependents $\{s_1, \dots , s_n\}$ placed on one side of a head, their order outward from the head is determined by iteratively sampling from the distribution $\operatorname{softmax}(b_{\tau_1}, \dots, b_{\tau_n})$ (\cite{goodfellow2016deep}, p. 184) without replacement. 
+%Given a dependency tree, a probabilistic ordering grammar assigns a probability distribution over the possible projective linearizations of that tree.
+%We use gradient descent to find parameters $a_\tau, b_\tau$ so as to maximize the overall likelihood of the orders in the actual corpus.
+%We convert probabilistic ordering grammars into ordinary ordering grammars by the following method.
+%Let $A_-$ be those relations $\tau$ where $a_\tau > 0.5$, similarly for $A_+$ those here $a_\tau \geq 0.5$.
+%Then we order all relations in $A_-$ by $b_\tau$ in \emph{decreasing} order, and those in $A_+$ by $b_\tau$ in \emph{increasing} order.
+%Then ordering a tree following the converted version is equivalent to greedily choosing the highest-probability linearization for the dependents of each head in a tree.
+%We choose this method since maximum-likelihood grammars can be constructed with simple gradient descent.
+%Another option would be to use some kind of discrete optimization method to approximate the original orders without a probabilistic method.
+%However, discrete optimization is computationally challenging.
 
-Given a dependency tree, a probabilistic ordering grammar assigns a probability distribution over the possible projective linearizations of that tree.
-We use gradient descent to find parameters $a_\tau, b_\tau$ so as to maximize the overall likelihood of the orders in the actual corpus.
 
+\paragraph{Taking Information Structure into Account}
 
-We convert probabilistic ordering grammars into ordinary ordering grammars by the following method.
-Let $A_-$ be those relations $\tau$ where $a_\tau > 0.5$, similarly for $A_+$ those here $a_\tau \geq 0.5$.
-Then we order all relations in $A_-$ by $b_\tau$ in \emph{decreasing} order, and those in $A_+$ by $b_\tau$ in \emph{increasing} order.
-
-Then ordering a tree following the converted version is equivalent to greedily choosing the highest-probability linearization for the dependents of each head in a tree.
-
-
-We choose this method since maximum-likelihood grammars can be constructed with simple gradient descent.
-Another option would be to use some kind of discrete optimization method to approximate the original orders without a probabilistic method.
-However, discrete optimization is computationally challenging.
-
-\paragraph{Results}
-\mhahn{to what extent do we have to present the large results figures separately for Experiment 1 and this experiment? or maybe we just provide some summary statistics separately, but provide the figures together. or all the big figures go into the SI? I don't mind, I just don't know what people in that audience would expect.}
-
+\subsection{Results}
 
 
 
