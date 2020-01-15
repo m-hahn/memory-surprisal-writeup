@@ -53,9 +53,29 @@ The method is fully taken from \cite{hahn-universals-2020}.
 
 \paragraph{Taking Information Structure into Account}
 
+Part of the the Prague Dependency Treebank has annotation for topic-focus articulation \cite{mikulova2006annotation}.
+Constituents are annotated for contrastiveness and for contextual boundedness, i.e., givenness.
+Three labels are used:
+``c'' for contrastive and contextually bound, ``f'' for contextually non-bound, ``t'' for non-contrastive contextually bound.
+These labels are diagnosed based on constituent order and intonation.
+Some constituents remain unmarked, the vast majority of these are function words such as adpositions, conjunctions, and auxiliaries; we introduce a label ``NA'' for these.
+
+We extend the word order grammar formalism by defining separate weights for each combination of the 37 syntactic relations and these four information structure labels.
+
 \subsection{Results}
 
+\paragraph{Fitted Grammars}
 
+We show estimated tradeoffs in Figure (XX).
+
+In X languages, the fitted grammars provide better tradeoffs than at least 50\% of the random grammars.
+
+
+
+\paragraph{Information Structure}
+
+We show estimated tradeoffs in Figure (XX).
+Note that this experiment was conducted only on the subset of the Prague Dependency Treebank that has information structure annotation; thus, the numerical values are slightly different from those in Section X.
 
 %
 %\subsection{Discussion: Alternative Models}

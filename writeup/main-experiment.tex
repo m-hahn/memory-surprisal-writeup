@@ -172,6 +172,64 @@ We collect multiple samples for the actual orderings to control for variation du
 For each of the random grammars, we collect one sample.
 Data is collected according to a precision-based stopping criterion described in Section (REF).
 
+
+\subsection{Number of Samples, Precision-Based Stopping Criterion}
+Training neural language models is computationally costly.
+Therefore, we used a precision-based stopping criterion to adaptively choose a sample size for each language.
+Precision-based stopping criteria offer a way to adaptively choose sample size without biasing results for or against the hypothesis of interest (CITE).
+
+We propose a stopping criterion using a global measure of the degree of optimization of the real language:
+For each sample $x$ from real orderings, we look at the proportions $N_+(x)$ of samples from the baseline languages that are more optimal than $x$ throughout the entire range where both curves are defined, and the proportion $N_-(x)$ of baseline samples that are consistently less optimal.
+We estimate the quotient
+\begin{equation}\label{eq:g}
+	G :=	\frac{\E_{x \sim P_1}[W_+(x)]}{\E_{x \sim P_1}[W_+(x) + W_-(x)]}
+\end{equation}
+where $P_1$ is the distribution over values obtained for real orderings.
+We use a bootstrapped confidence interval for $\E[G]$ for quantifying the degree of optimization.
+For bootstrapping, we separately resample samples from the real language and from the baseline grammars.
+Due to the use of bootstrapping, the confidence intervals are not exact.
+
+\begin{figure}
+	\begin{center}
+\includegraphics[width=0.45\textwidth]{figures/quantile-global.png}
+\end{center}
+	\caption{Illustration for the global quantile estimate. For each sample for the real language, we compare the memory-surprisal curve to all baselines.}\label{fig:quantile-global}
+\end{figure}
+
+
+For each language, we first collected 10 data points for real orderings and 10 data points for baseline orderings.
+We continued obtaining new data points until the CI for $G$ had width $\leq 0.15$, or there were 100 samples from $P_1$ and 300 samples from $P_2$.
+Up to the end, we chose the next sample to be from $P_0$ with probability 2/3, and $P_1$ otherwise.\footnote{Due to a scripting error, a much higher number of samples was generated for Erzya.}
+
+This procedure was parallelized on several machines.
+In the case where the stopping criterion was reached for a language while several machines were still computing samples for this language, we did not discard those samples.
+Consequently, more samples were collected than necessary to reach the stopping criterion; however, in a way that does not bias our results towards or against our hypothesis.
+
+%Due to parallelization of this procedure, it often produced more samples than required, when the stopping criterion .
+%We chose these thresholds based on preliminary simulations which had suggested that these widths were achievable at acceptable computational cost.
+%For each language, we collected at least 5 data points for real orderings and at least 10 data points for baseline orderings.
+%We continued obtaining new data points until the CI for $G$ had width $\leq 0.15$, or there were 100 samples from $P_1$ and 300 samples from $P_2$.
+%Up to the end, we chose the next sample to be from $P_0$ with probability 2/3, and $P_1$ otherwise.
+
+
+
+
+\subsection{Results}
+
+
+
+
+The numbers of samples taken per language are provided in Table~\ref{tab:samples}.
+
+%In Figure~\ref{tab:plain-results} (TODO), we show the estimated memory-surprisal tradeoff curves for all samples.
+
+In Figure~\ref{tab:medians}, we show the medians for real and baseline languages.
+
+Descriptively, the real language provides better tradeoffs than the median of the baselines across languages, with four exceptions (Latvian, North Sami, Polish, Slovak).
+
+
+
+
 \subsection{Statistical Analysis}
 
 We now describe how we compared memory-surprisal tradeoffs between real and baseline languages.
@@ -264,59 +322,6 @@ Again, we take the real values to be estimated exactly by their medians.
 
 
 
-\subsection{Number of Samples, Precision-Based Stopping Criterion}
-Training neural language models is computationally costly.
-Therefore, we used a precision-based stopping criterion to adaptively choose a sample size for each language.
-Precision-based stopping criteria offer a way to adaptively choose sample size without biasing results for or against the hypothesis of interest (CITE).
-
-We propose a stopping criterion using a global measure of the degree of optimization of the real language:
-For each sample $x$ from real orderings, we look at the proportions $N_+(x)$ of samples from the baseline languages that are more optimal than $x$ throughout the entire range where both curves are defined, and the proportion $N_-(x)$ of baseline samples that are consistently less optimal.
-We estimate the quotient
-\begin{equation}\label{eq:g}
-	G :=	\frac{\E_{x \sim P_1}[W_+(x)]}{\E_{x \sim P_1}[W_+(x) + W_-(x)]}
-\end{equation}
-where $P_1$ is the distribution over values obtained for real orderings.
-We use a bootstrapped confidence interval for $\E[G]$ for quantifying the degree of optimization.
-For bootstrapping, we separately resample samples from the real language and from the baseline grammars.
-Due to the use of bootstrapping, the confidence intervals are not exact.
-
-\begin{figure}
-	\begin{center}
-\includegraphics[width=0.45\textwidth]{figures/quantile-global.png}
-\end{center}
-	\caption{Illustration for the global quantile estimate. For each sample for the real language, we compare the memory-surprisal curve to all baselines.}\label{fig:quantile-global}
-\end{figure}
-
-
-For each language, we first collected 10 data points for real orderings and 10 data points for baseline orderings.
-We continued obtaining new data points until the CI for $G$ had width $\leq 0.15$, or there were 100 samples from $P_1$ and 300 samples from $P_2$.
-Up to the end, we chose the next sample to be from $P_0$ with probability 2/3, and $P_1$ otherwise.\footnote{Due to a scripting error, a much higher number of samples was generated for Erzya.}
-
-This procedure was parallelized on several machines.
-In the case where the stopping criterion was reached for a language while several machines were still computing samples for this language, we did not discard those samples.
-Consequently, more samples were collected than necessary to reach the stopping criterion; however, in a way that does not bias our results towards or against our hypothesis.
-
-%Due to parallelization of this procedure, it often produced more samples than required, when the stopping criterion .
-%We chose these thresholds based on preliminary simulations which had suggested that these widths were achievable at acceptable computational cost.
-%For each language, we collected at least 5 data points for real orderings and at least 10 data points for baseline orderings.
-%We continued obtaining new data points until the CI for $G$ had width $\leq 0.15$, or there were 100 samples from $P_1$ and 300 samples from $P_2$.
-%Up to the end, we chose the next sample to be from $P_0$ with probability 2/3, and $P_1$ otherwise.
-
-
-
-
-\subsection{Results}
-
-
-
-
-The numbers of samples taken per language are provided in Table~\ref{tab:samples}.
-
-%In Figure~\ref{tab:plain-results} (TODO), we show the estimated memory-surprisal tradeoff curves for all samples.
-
-In Figure~\ref{tab:medians}, we show the medians for real and baseline languages.
-
-Descriptively, the real language provides better tradeoffs than the median of the baselines across languages, with four exceptions (Latvian, North Sami, Polish, Slovak).
 
 %In Figure~\ref{tab:slice-hists-real}, we show the distribution of surprisals achieved at the maximal memory value for real and random languages.
 

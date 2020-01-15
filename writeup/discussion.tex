@@ -21,20 +21,33 @@ In SI Section X, we show that our theoretical bounds are also compatible with a 
 
 \paragraph{Limitations of Grammar Model}
 
+\paragraph{absolute numbers, how they relate to what's known about human memory}
 
 \subsection{Other Models of Sentence Processing}
 
 There is a substantial literature proposing quantitative memory metrics for sentence processing.
 In this section, we discuss how our theoretical results relate to and generalize these previously proposed metrics.
 
+Many proposals relate to the \emph{number} of objects simultaneously held in a stack-like data structure of memory, and \emph{how long} they are stored.
 
-\paragraph{Early Models}
+Our theoretical result can be seen as an information-theoretic version of such metrics.
+It differs from these in two ways:
+First, it considers not only the cost of maintaining direct syntactic dependencies, but extends this to any statistical relations between words that can be exploited for prediction.
+Second, it weights these relations by the amount of predictive information shared between the words.
 
-\cite{yngve1960model} production model with memory complexity measure (but problematically predicts left-branching structures to be hard)
+head-dependent mutual information hypothesis
+In an idealized model \emph{all} predictive information is mediated through direct syntactic dependencies, and each dependency contributed an equal amount of predictive information, our memory bound would indeed become equivalent to such a metric.
+Note that the average number of objects held in memory simultaneously is equivalent to the average time they are stored.
 
-\cite{miller-finitary-1963}
+
+
+\cite{yngve1960model} production model with memory complexity measure (but problematically predicts left-branching structures to be hard, Kimball (1973))
+
+\cite{miller-finitary-1963}: degree of self-embedding limited
 
 \cite{frazier1985syntactic} local nonterminal count
+
+Kimball (1973): Principle of Two Sentences
 
 Rambow and Joshi 1994 using TAG
 
@@ -45,6 +58,17 @@ Marcus 1980 deterministic parsing
 \cite{gerth2009unifying}
 
 
+\cite{wanner1978atn}
+\cite{frazier1978sausage}
+
+\cite{rambow201512}: count words on stack
+
+\cite{boston2012computational}
+
+\cite{just1992capacity}
+
+\cite{marcus1978theory}: deterministic parser with small lookahead
+
 \paragraph{Dependency Locality Theory}
 The quantity described in Proposition~\ref{prop:lower-bound} is formally similar to Storage Cost in the Dependency Locality Theory (DLT) \citep{gibson-linguistic-1998}: Storage cost at a given timestep is defined as the number of predictions that are held in memory.
 Storage cost only considers predictions that are certain, and each prediction takes an equal amount of memory.
@@ -53,6 +77,11 @@ In this sense, DLT storage cost can be seen as an approximation to Proposition~\
 DLT integration cost can be seen as surprisal given an imperfect memory representation, following \cite{futrell-noisy-context-2017}.
 
 \paragraph{Cue-Based Retrieval Models}
+- small buffer, unbounded unstructured store of chunks
+
+- content-based retrieval
+
+- interference
 
 \paragraph{Lossy-Context Surprisal}
 \citet{futrell-noisy-context-2017} describe a processing model where listeners make predictions (and incur surprisal) based on lossy memory representations.
@@ -67,25 +96,26 @@ Our Proposition~\ref{prop:suboptimal} can be seen as an analogous result for gen
 
 \paragraph{Metrics based on Minimalist Parser Models}
 memory metrics based on minimalist parsers
-\cite{desanto2020parsing}
-\cite{GrafEtAl17JLM}
-\cite{GrafEtAl15MOL}
 
-
-Extending   KGH,   Graf   and   Marcinek   (2014;henceforth GM) evaluate a variety of memory-basedmetrics that measureI) how long a node is kept inmemory  (tenure),  orII)  how  many  nodes  must  bekept  in  memory  (payload),  orIII)  specific  combi-nations  of  these  two  factors.   Tenure  and  payloadare easily defined using the node indexation scheme.A node’s tenure is the difference between its indexand outdex, and the payload of the derivation tree isequal to the number of nodes with a tenure strictlygreater than2(in the derivation trees in Figs. 2–5,these nodes are boxed to highlight their contributionto the payload).
-
-tenure of a node: how long a node is kept in memory
-
-payload: how many nodes kept in memory
-
-
-\cite{wanner1978atn}
-\cite{frazier1978sausage}
-\cite{rambow201512}
-\cite{boston2012computational}
 \cite{kobele2013memory}
 \cite{graf2014evaluating}
+\cite{GrafEtAl15MOL}
 \cite{gerth2015memory}
+\cite{GrafEtAl17JLM}
+\cite{desanto2020parsing}
+based on counting how long a node is kept in memory and how many nodes are kept in memory
+
+Linear or ranked combinations of versions of these metrics have been argued to account for various complexity and acceptability differences in complex embeddings.
+
+\paragraph{Models unifying memory and surprisal}
+
+- perspective of cue-based retrieval models: memory effects arise from retrieval interference, surprisal effects from backtracking
+
+evaluating memory metrics and surprisal on reading measures \cite{boston2008parsing} \cite{demberg2008data} \cite{boston2011parallel}
+
+- Demberg et al: unified parsing model with both integration and surprisal costs \cite{demberg2009computational,demberg2013incremental}
+
+- lossy-context surprisal: the perspective taken here
 
 
 \subsection{Statistical Studies of Language}
