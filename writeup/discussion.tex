@@ -1,12 +1,22 @@
+\paragraph{The Roles of Speakers and Listeners}
+Our derivation of the memory-surprisal tradeoff considers the listener.
 
-\paragraph{Speaker vs Listener}
+Debate about the roles of speaker and listener in shaping language.
+
+
+\paragraph{Nature of the Bound}
+We have a lower bound, not an exact estimate of the tradeoff curve
 
 \paragraph{Extralinguistic Context}
+The assumption about information flow disregards the role of information sources that are external to the linguistic material in the sentence.
+For instance, the interlocutors might have common knowledge of the weather, and the listener might use this to construct predictions for the speaker's utterances, even if no relevant information has been mentioned in the prior discourse.
+Such sources of information are disregarded in our model.
 
 \paragraph{Capacity vs Retrieval}
-
-
-In SI Section X, we show that our theoretical bounds are also compatible with a retrieval-based model.
+Our theoretical analysis places the main memory bottleneck in the capacity of short-term memory.
+Not all models of memory in sentence processing make this assumption.
+Indeed, there is evidence that difficulty of retrieving items is an important bottleneck in sentence processing.
+In SI Section X, we show that our theoretical bounds are also compatible with a retrieval-based model such as ACT-R.
 
 
 \paragraph{Limitations of Grammar Model}
@@ -14,13 +24,15 @@ In SI Section X, we show that our theoretical bounds are also compatible with a 
 
 \subsection{Other Models of Sentence Processing}
 
+i think it would be nice to show how our theorem relates to all kinds of memory metric that have been proposed
+
 \paragraph{Early Models}
 
-Yngve 1960, had a complexity measure, but doesn't work well for left-branching structures
+\cite{yngve1960model} production model with memory complexity measure (but problematically predicts left-branching structures to be hard)
 
-Miller and Chomsky 1963
+\cite{miller-finitary-1963}
 
-Frzier 1985 local nonterminal count
+\cite{frazier1985syntactic} local nonterminal count
 
 Rambow and Joshi 1994 using TAG
 
@@ -28,16 +40,21 @@ Marcus 1980 deterministic parsing
 
 (Sabrina Gerth, Memory Limitations in Sentence Processing)
 
+\cite{gerth2009unifying}
 
-\paragraph{Dependency Locality}
+memory metrics based on minimalist parsers
+\cite{desanto2020parsing}
+\cite{GrafEtAl17JLM}
+\cite{GrafEtAl15MOL}
+
+\paragraph{Dependency Locality Theory}
 The quantity described in Proposition~\ref{prop:lower-bound} is formally similar to Storage Cost in the Dependency Locality Theory (DLT) \citep{gibson-linguistic-1998}: Storage cost at a given timestep is defined as the number of predictions that are held in memory.
 Storage cost only considers predictions that are certain, and each prediction takes an equal amount of memory.
 In contrast, the result in Proposition~\ref{prop:lower-bound} can be seen as weighting predictions by their certainty and the amount of predictive information.
 In this sense, DLT storage cost can be seen as an approximation to Proposition~\ref{prop:lower-bound}.
+DLT integration cost can be seen as surprisal given an imperfect memory representation, following \cite{futrell-noisy-context-2017}.
 
-also surprisal -- integration cost
-
-\paragraph{Cue-Based Retrieval}
+\paragraph{Cue-Based Retrieval Models}
 
 \paragraph{Lossy-Context Surprisal}
 \citet{futrell-noisy-context-2017} describe a processing model where listeners make predictions (and incur surprisal) based on lossy memory representations.
@@ -55,15 +72,13 @@ Our Proposition~\ref{prop:suboptimal} can be seen as an analogous result for gen
 \subsection{Statistical Studies of Language}
 
 \paragraph{Statistical Complexity}
-There are deep connections between our formalization of listener memory and studies of dynamic systems in the Physics literature.
-%Speaker memory corresponds to \emph{Generative Complexity} \cite{loehr-non-sufficient-2008, loehr-predictive-2010}.
+Our formalization of listener memory is related to studies of dynamic systems in the Physics literature.
 The tradeoff between listener memory and surprisal is formally equivalent to the \emph{Recursive Information Bottleneck} considered by \cite{still-information-2014}.
 In the limit of optimal prediction and minimal surprisal, our formalization of listener memory is equivalent to the notion of \emph{Statistical Complexity} \citep{crutchfield-inferring-1989}.
-In the limit $T \rightarrow \infty$, the quantity in (\ref{eq:memory}) is equal to the \emph{excess entropy}, which is known to bound statistical complexity \citep{crutchfield-inferring-1989}.
-However, the link between memory and information locality provided by our Proposition~\ref{prop:suboptimal} appears to be a novel contribution.
+In the limit $T \rightarrow \infty$, the quantity in (\ref{eq:memory}) is equal to the \emph{excess entropy} \citep{crutchfield-inferring-1989}.
+However, the link between memory and information locality provided by our Theorem~\ref{prop:suboptimal} appears to be a novel theoretical contribution.
 Relatedly, \cite{sharan-prediction-2016} shows a link between excess entropy and approximability by $n$-th order Markov models, noting that processes with low excess entropy can be approximated well with Markov models of low order.
 
-also information-theoretic studies of memory capacity
 
 \paragraph{Decay of Mutual Information}
 In Propositions~\ref{prop:lower-bound} and \ref{prop:suboptimal}, we showed a close link between memory and the decay of \emph{conditional} mutual information $I_t := I[w_t, w_0 | w_{1\dots t-1}]$.
@@ -81,13 +96,6 @@ Conversely, one can construct processes where the unconditional mutual informati
 \cite{debowski-excess-2011} has studied the excess entropy of language across long ranges of text, in particular studying whether it is finite. % compute excess entropy in text
 Our work contrasts with this work in that we are interested in dependencies within sentences.
 
-
-\subsection{Discussion}
-
-\mhahn{Q what are some of the things that need to go here?}
-
-\paragraph{Speakers vs Listeners}
-can we say something about this
 
 \paragraph{Decay vs Interference}
 Work has suggested that interference and memory overload is more appropriate than decay \cite[p. 408]{lewis-activation-based-2005} for modeling locality and memory in sentence processing.
