@@ -24,7 +24,9 @@ In SI Section X, we show that our theoretical bounds are also compatible with a 
 
 \subsection{Other Models of Sentence Processing}
 
-i think it would be nice to show how our theorem relates to all kinds of memory metric that have been proposed
+There is a substantial literature proposing quantitative memory metrics for sentence processing.
+In this section, we discuss how our theoretical results relate to and generalize these previously proposed metrics.
+
 
 \paragraph{Early Models}
 
@@ -42,10 +44,6 @@ Marcus 1980 deterministic parsing
 
 \cite{gerth2009unifying}
 
-memory metrics based on minimalist parsers
-\cite{desanto2020parsing}
-\cite{GrafEtAl17JLM}
-\cite{GrafEtAl15MOL}
 
 \paragraph{Dependency Locality Theory}
 The quantity described in Proposition~\ref{prop:lower-bound} is formally similar to Storage Cost in the Dependency Locality Theory (DLT) \citep{gibson-linguistic-1998}: Storage cost at a given timestep is defined as the number of predictions that are held in memory.
@@ -67,6 +65,27 @@ Given that $f$ is assumed to be decreasing, this prediction loss will be smaller
 Our Proposition~\ref{prop:suboptimal} can be seen as an analogous result for general models of memory.
 
 
+\paragraph{Metrics based on Minimalist Parser Models}
+memory metrics based on minimalist parsers
+\cite{desanto2020parsing}
+\cite{GrafEtAl17JLM}
+\cite{GrafEtAl15MOL}
+
+
+Extending   KGH,   Graf   and   Marcinek   (2014;henceforth GM) evaluate a variety of memory-basedmetrics that measureI) how long a node is kept inmemory  (tenure),  orII)  how  many  nodes  must  bekept  in  memory  (payload),  orIII)  specific  combi-nations  of  these  two  factors.   Tenure  and  payloadare easily defined using the node indexation scheme.A node’s tenure is the difference between its indexand outdex, and the payload of the derivation tree isequal to the number of nodes with a tenure strictlygreater than2(in the derivation trees in Figs. 2–5,these nodes are boxed to highlight their contributionto the payload).
+
+tenure of a node: how long a node is kept in memory
+
+payload: how many nodes kept in memory
+
+
+\cite{wanner1978atn}
+\cite{frazier1978sausage}
+\cite{rambow201512}
+\cite{boston2012computational}
+\cite{kobele2013memory}
+\cite{graf2014evaluating}
+\cite{gerth2015memory}
 
 
 \subsection{Statistical Studies of Language}
