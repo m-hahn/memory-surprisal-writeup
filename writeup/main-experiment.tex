@@ -39,6 +39,7 @@ Although there are some differences in how different formalisms would draw trees
 \paragraph{Corpora}
 We considered all languages for which there are Universal Dependencies 2.3 treebanks with a total of at least 500 sentences of training data.
 We excluded data from historical languages.\footnote{Ancient Greek, Classical Chinese, Coptic, Gothic, Latin, Old Church Slavonic, Old French.}
+TODO While running this experiment, data from additional languages became available that also had enough data, through the Universal Dependencies 2.4 release.
 This resulted in 54 languages.
 
 For each of these languages, we pooled all available corpora in one dataset.
@@ -178,7 +179,8 @@ Training neural language models is computationally costly.
 Therefore, we used a precision-based stopping criterion to adaptively choose a sample size for each language.
 Precision-based stopping criteria offer a way to adaptively choose sample size without biasing results for or against the hypothesis of interest (CITE).
 
-We propose a stopping criterion using a global measure of the degree of optimization of the real language:
+We propose a stopping criterion using a global measure of the degree of optimization of the real language.
+This is visualized in Figure~\ref{fig:quantile-global}.
 For each sample $x$ from real orderings, we look at the proportions $N_+(x)$ of samples from the baseline languages that are more optimal than $x$ throughout the entire range where both curves are defined, and the proportion $N_-(x)$ of baseline samples that are consistently less optimal.
 We estimate the quotient
 \begin{equation}\label{eq:g}
@@ -191,9 +193,9 @@ Due to the use of bootstrapping, the confidence intervals are not exact.
 
 \begin{figure}
 	\begin{center}
-\includegraphics[width=0.45\textwidth]{figures/quantile-global.png}
+\includegraphics[width=0.8\textwidth]{figures/quantile-global.png}
 \end{center}
-	\caption{Illustration for the global quantile estimate. For each sample for the real language, we compare the memory-surprisal curve to all baselines.}\label{fig:quantile-global}
+	\caption{Illustration for the global quantile estimate serving as the stopping criterion. For each sample for the real language, we compare the memory-surprisal curve to all baselines.}\label{fig:quantile-global}
 \end{figure}
 
 
@@ -218,34 +220,60 @@ Consequently, more samples were collected than necessary to reach the stopping c
 
 
 
+\begin{figure}
+	\begin{center}
+\includegraphics[width=\textwidth]{figures/full-results.png}
+\end{center}
+	\caption{Median surprisal (y-axis) at given memory level (x-axis), for real orders (blue) and random baseline grammars (red). We provide 95\% confidence bands. These are computed over different runs of the estimation algorithm for the real orders, and over different runs \emph{and} different grammars for the baseline grammars.}\label{fig:median-table}
+\end{figure}
 
-The numbers of samples taken per language are provided in Table~\ref{tab:samples}.
+
+
+%The numbers of samples taken per language are provided in SI Table~\ref{tab:samples}.
 
 %In Figure~\ref{tab:plain-results} (TODO), we show the estimated memory-surprisal tradeoff curves for all samples.
 
-In Figure~\ref{tab:medians}, we show the medians for real and baseline languages.
 
-Descriptively, the real language provides better tradeoffs than the median of the baselines across languages, with four exceptions (Latvian, North Sami, Polish, Slovak).
-
-
-
-
-\subsection{Statistical Analysis}
-
-We now describe how we compared memory-surprisal tradeoffs between real and baseline languages.
-We want to test whether languages' surprisal-memory tradeoffs better than those of most baseline languages.
-We compare real and baseline languages by evaluating which languages result in lower surprisal at the same level of memory.
-We now describe the statistics we use to quantifying the difference between real and baseline languages.
-%We do everything in a frequentist framework (null hypothesis testing \& confidence intervals), as we can do exact tests and confidence intervals without parametric assumptions.
-%\mhahn{Maybe we can explain how the tests \& CIs also have reasonable Bayesian interpretations (for the specific methods used here, rejection of the null should guarantee that the posterior of the null hypothesis is small under a wide range of priors.).}
-
-\paragraph{Median Surprisal and Confidence Interval for Medians}
+% yStudyTradeoff_Bootstrap_Parallel_OnlyWordForms_BoundedVocab_BinomialTest_Single_MedianCI.py
+In Figure~\ref{tab:medians}, we show the median surprisal at given levels of memory, for real and baseline languages.
 We compute surprisal at 40 evenly spaced points of memory (selected individually for each language), over all runs for the real language, and over all baselines grammars.
 We then compute the median surprisal over all runs for the real language, and over all baselines grammars.
 For each point, we compute a confidence interval for the median surprisal, using the binomial PDF. \mhahn{some standard stats reference}
 This is an \emph{exact} confidence interval, without parametric assumptions or asymptotic approximations.
 
-% yStudyTradeoff_Bootstrap_Parallel_OnlyWordForms_BoundedVocab_BinomialTest_Single_MedianCI.py
+Numerically, the real language provides better tradeoffs than the median of the baselines across languages, with four exceptions (Latvian, North Sami, Polish, Slovak).
+
+Bootstrapped confidence intervals for $G$ confirmed that $G>0.5$ in all but these four exceptional languages.
+
+As bootstrapped confidence intervals are valid only asymptotically, we also conducted two \emph{exact} nonparametric tests.
+
+\paragraph{Pointwise Significance Test}
+To quantify the statistical robustness of this pattern, we carried out a set of null-hypothesis  significance tests as follows.
+At five evenly spaced memory values $\mu$ (chosen per language), we conducted a nonparametric and nonasymptotic significance hypothesis test against the null hypothesis that at least half of the baseline grammars have lower surprisal than the actual language. %(Figure~\ref{fig:nhst-pointwise}).
+Formally, let $W_-(\mu)$ be the proportion of baseline languages that have strictly lower surprisal than the real language at memory level $\mu$.
+For each level $\mu$ of memory, we consider the null hypothesis that
+\begin{equation}
+	W_-(\mu) \leq 0.5
+\end{equation}
+In this test, we approximate the surprisal value of the real language by the \emph{sample median}.
+We use the Binomial Test.
+
+In all but the four exceptional languages, the test yielded $p < 0.01$ for at least the larger values of $\mu$.
+
+\paragraph{Area under the Curve}
+another way to test: which curve has the greater AUC?
+
+%\subsection{Statistical Analysis}
+
+%We now describe how we compared memory-surprisal tradeoffs between real and baseline languages.
+%We want to test whether languages' surprisal-memory tradeoffs better than those of most baseline languages.
+%We compare real and baseline languages by evaluating which languages result in lower surprisal at the same level of memory.
+%We now describe the statistics we use to quantifying the difference between real and baseline languages.
+%We do everything in a frequentist framework (null hypothesis testing \& confidence intervals), as we can do exact tests and confidence intervals without parametric assumptions.
+%\mhahn{Maybe we can explain how the tests \& CIs also have reasonable Bayesian interpretations (for the specific methods used here, rejection of the null should guarantee that the posterior of the null hypothesis is small under a wide range of priors.).}
+
+%\paragraph{Median Surprisal and Confidence Interval for Medians}
+
 
 
 %\paragraph{CI for Median Difference}
@@ -255,28 +283,18 @@ This is an \emph{exact} confidence interval, without parametric assumptions or a
 %% yStudyTradeoff_Bootstrap_Parallel_OnlyWordForms_BoundedVocab_BinomialTest_Single_MedianDiffCI.py
 
 
-\paragraph{Pointwise Significance Test}
-At five evenly spaced memory values $\mu$ (chosen per language), we do a nonparametric and nonasymptotic significance hypothesis test against the null hypothesis that at least half of the baseline grammars have lower surprisal than the actual language (Figure~\ref{fig:nhst-pointwise}).
-Formally, let $W_-(\mu)$ be the proportion of baseline languages that have strictly lower surprisal than the real language at memory level $\mu$.
-For each level $\mu$ of memory, we consider the null hypothesis that
-\begin{equation}
-	W_-(\mu) \leq 0.5
-\end{equation}
-In this test, we approximate the surprisal value of the real language by the \emph{sample median}.
-%In reality, we do not observe the curve of the real language exactly, but as noisy samples from our computational estimator.
-We use the Binomial Test.
 
 %This statistic also should have a reasonable Bayesian interpretation:
 % E.g., if the random samples are unimodal, and we do inference over only the median (location family), 
 
 
 
-\begin{figure}
-	\begin{center}
-\includegraphics[width=0.45\textwidth]{figures/nhst.png}
-\end{center}
-	\caption{Illustration for the pointwise null-hypothesis significance test. At a given level of memory, we test against the null hypothesis that at least half of the baseline orders provide lower surprisal than the real language.}\label{fig:nhst-pointwise}
-\end{figure}
+%\begin{figure}
+%	\begin{center}
+%\includegraphics[width=0.45\textwidth]{figures/nhst.png}
+%\end{center}
+%	\caption{Illustration for the pointwise null-hypothesis significance test. At a given level of memory, we test against the null hypothesis that at least half of the baseline orders provide lower surprisal than the real language.}\label{fig:nhst-pointwise}
+%\end{figure}
 
 
 
@@ -293,25 +311,32 @@ We use the Binomial Test.
 
 %We take the REAL values to be estimated exactly by their medians.
 
+In order to quantify the \emph{degree} of optimality, we compute what \emph{fraction} of baseline languages provides better tradeoffs than the real language.
 
+Again, we consider both point-by-point estimates and the total AUC.
 
 \paragraph{Pointwise Quantile Estimate}
 %CI for quantile: % yStudyTradeoff_Bootstrap_Parallel_OnlyWordForms_BoundedVocab_BinomialTest_Single_UnimodalBoundOnQuantile_BothDirections.py
 %\mhahn{might scrap the CI}
 
 
-\begin{figure}
-	\begin{center}
-\includegraphics[width=0.45\textwidth]{figures/quantile.png}
-\end{center}
-	\caption{Illustration for the quantile estimate. At each level of memory, we provide an estimate of the percentage of baseline languages that have lower surprisal than the real language.}\label{fig:quantile-pointwise}
-\end{figure}
-
-To provide estimates of the degree of optimization of real orders, we also compute what \emph{fraction} of baseline languages provides better tradeoffs than the real language.
-Specifically, for each level of memory $\mu$, we estimate what percentage of baseline languages have lower (or equal) surprisal than the real language.
-This is described in Figure~\ref{fig:quantile-pointwise}.
+For each level of memory $\mu$, we estimate what percentage of baseline languages have lower (or equal) surprisal than the real language.
+%This is described in Figure~\ref{fig:quantile-pointwise}.
 We use the Binomial Test to derive a confidence lower bound for this quantile (CITE).
 Again, we take the real values to be estimated exactly by their medians.
+
+TODO some aggregate visualization
+
+\paragraph{AUC}
+
+TODO some aggregate visualization
+
+%\begin{figure}
+%	\begin{center}
+%\includegraphics[width=0.45\textwidth]{figures/quantile.png}
+%\end{center}
+%	\caption{Illustration for the quantile estimate. At each level of memory, we provide an estimate of the percentage of baseline languages that have lower surprisal than the real language.}\label{fig:quantile-pointwise}
+%\end{figure}
 
 
 
@@ -342,13 +367,12 @@ Again, we take the real values to be estimated exactly by their medians.
 
 \subsection{Discussion}
 
-We have found that 48 out of 52 languages provide better memory-surprisal tradeoffs than random baselines with consistent but counterfactual word order rules.
+We have found that 50 out of 54 languages provide better memory-surprisal tradeoffs than random baselines with consistent but counterfactual word order rules.
 
 Four languages provide exceptions; these are Latvian (Baltic), North Sami (Uralic), Polish and Slovak (both Slavic).
 All four languages have strong word order freedom (CITE).
 Freedom of word order plausibly makes sentences less predictable, as the same syntactic structure can receive different surface realizations.
 We thus hypothesized that freedom of word order impacts the memory-surprisal tradeoff, and that languages with more strongly fixed word order should display more optimal memory-surprisal tradeoffs.
-%We hypothesized that freedom of word order freedom may be responsible for the difference between these languages and the other languages.
 
 To test this hypothesis, we examined the correlation between word order freedom and the surprisal difference between real and baseline orderings.
 To quantify word order freedom, we used a corpus-based estimate, the \emph{branching direction entropy}~\citep{futrell-quantifying-2015}.
@@ -357,7 +381,7 @@ This is the entropy of the ordering (head-first or dependent-first) of dependenc
 These two quantities are plotted in Figure~\ref{fig:hist-real}.
 We found that branching direction entropy was strongly correlated with the surprisal difference between real and baseline orderings (Spearman correlations -0.58, $p = 7.414e-6$).
 
-
+We will address this in Experiment 3.
 
 
 \begin{figure}
@@ -371,6 +395,7 @@ We found that branching direction entropy was strongly correlated with the surpr
 
 
 A possible concern is that the optimization observed in Experiment 1 might be an artifact of the grammar formalism.
-To address this possibility, we repeated the experiment comparing baseline grammars to grammars that represent the word order of the real languages as faithfully as is possible with the grammar formalism.
+We will address this in Experiment 3.
+%To address this possibility, we repeated the experiment comparing baseline grammars to grammars that represent the word order of the real languages as faithfully as is possible with the grammar formalism.
 
 

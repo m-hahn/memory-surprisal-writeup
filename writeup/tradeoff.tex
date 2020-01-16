@@ -105,13 +105,13 @@ Then this listener will incur average surprisal at least
 $\operatorname{H}[w_t|w_{<t}] + \sum_{t > T} \operatorname{I}_t$.
 \end{thm}
 
+\paragraph{Mathematical Assumptions}
+Here we make explicit which formal assumptions go into the theoretical result.
 
 \begin{enumerate}
 \item Ingredient 1: Language as a Stationary Stochastic Process:
 We represent language as a stochastic process of words $\dots w_{-2} w_{-1} w_0 w_{1} w_{2} \dots$, extending indefinitely both into the past and into the future.
 The symbols $w_i$ belong to a common set, representing the words of the language.\footnote{Could also be phonemes, sentences, ..., any other kind of unit.}
-
-%We model the sequence as a probabilistic sequence; that is, given a context $w_{<t}$, the next word is distributed according to a distribution $p(w_t|w_{<t})$.
 
 The assumption of infinite length is for mathematical convenience and does not affect the substance of our results:
 As we restrict our attention to the processing of individual sentences, which have finite length, we will actually not make use of long-range and infinite contexts.
@@ -122,21 +122,13 @@ Informally, this says that the process has no `internal clock', and that the sta
 In reality, the statistical rules of language do change: They change as language changes over generations, and they also change between different situations -- e.g., depending on the interlocutor at a given point in time.
 Given that we are interested in memory needs in the processing of \emph{individual sentences}, at a timescale of seconds or minutes, stationarity seems to be a reasonable assumption to make.
 
-\item Ingredient 2: Flow of Information: We now analyze memory from the perspective of the listener, who needs to maintain information about the past to predict the future.
-As the speaker's utterance unfolds, the listener maintains a memory state $m_t$.
-
-There are no assumptions about the memory architecture and the nature of its computations.
-We only make a basic assumption about the flow of information (Figure~\ref{fig:listener-markov}):
+\item Ingredient 2: Flow of Information: There are no assumptions about the memory architecture and the nature of its computations.
+However, we make a basic assumption about the flow of information (Figure~\ref{fig:listener-markov}):
 At a given point in time, the listener's memory state $m_t$ is determined by the last word $w_t$, and the prior memory state $m_{t-1}$.
-As a consequence, $m_t$ contains no information about the process beyond what is contained in the last word observed $w_{t-1}$ and in the memory state before that word was observed $m_{t-1}$.
-This is formalized as a statement about conditional probabilities:
-        \begin{equation}\label{eq:listener-markov}
-                p(m_1| (w_{t})_{t \in \mathbb{Z}}, m_0)   = p(m_1 | m_0, w_1)
-        \end{equation}
-This says that $m_1$ contains no information about the utterances beyond what is contained in $m_0$ and $w_1$.
+As a consequence, $m_t$ contains no information about the utterances beyond what is contained in the last word observed $w_{t-1}$ and in the memory state before that word was observed $m_{t-1}$.
 As a consequence, the listener has no knowledge of the speaker's state beyond the information provided in their prior communication.
 This is a simplification, as the listener could obtain information about the speaker from other sources, such as their common environment (weather, ...).
-\mhahn{For the study of memory in sentence processing, this seems fair. Discuss this more.}
+See Section XX for further discussion.
 \end{enumerate}
 
 
@@ -153,7 +145,7 @@ If a word $w_{T-t}$, $t$ steps in the past, contains one bit of information abou
 The amount of such information is $I_t$. This explains the factor $t$.
 
 
-
+\paragraph{Discussion}
 The theorem allows us to estimate the extra surprisal associated with each amount of memory capacity for a language.
 The quantities $\operatorname{I}_t$ can be estimated as the difference between the cross-entropy of language models that have access to the last $t-1$ or $t$ words.
 Given such estimates of $\operatorname{I}_t$, we estimate tradeoff curves as in Figure~\ref{fig:tradeoff} by tracing out $T=1, 2, \dots$.
@@ -186,32 +178,6 @@ There are theories of retrieval where the main bottleneck lies not in capacity, 
 \end{figure}
 
 
-%TODO
-%Let $I_t$ be the Conditional Mutual Information of two words $w_0, w_t$ conditioned on the intervening words:
-%\note{hard to swallow for general audience. maybe can just use more straightforward less mathy language.}
-%
-%
-%\note{Alternative:}
-%A listener will experience average surprisal at least
-%\begin{equation}
-%	H[w_t| w_{<t}] + \sum_{t=T+1}^\infty I_t
-%\end{equation}
-%where $T$ is chosen to be the smallest $T$ for which $\sum_{t=1}^T t I_t \geq B$.
-%\note{End alternative.}
-
-
-%We prove that, for any integer $T > 0$, a listener encoding $\sum_{t=1}^T t I_t$ bits of memory will incur average surprisal at least $H[w_t| w_{<t}] + \sum_{t=T+1}^\infty I_t$.
-%maybe multiple sentences in def of It?
-%define math, AND give people intuition.
-
-
-
-
-
-
-
-
-
 
 
 
@@ -221,12 +187,12 @@ We now introduce our main theoretical result on memory-surprisal tradeoffs.
 
 
 
-\begin{figure}
-	\begin{center}
-\includegraphics[width=0.45\textwidth]{figures/interpolate-curve.png}
-\end{center}
-	\caption{Estimating memory-surprisal tradeoff using the Theorem: We trace out the memory and surprisal values for all $T=1, 2, ...$, and linearly interpolate the curve.}\label{fig:interpolate}
-\end{figure}
+%\begin{figure}
+%	\begin{center}
+%\includegraphics[width=0.45\textwidth]{figures/interpolate-curve.png}
+%\end{center}
+%	\caption{Estimating memory-surprisal tradeoff using the Theorem: We trace out the memory and surprisal values for all $T=1, 2, ...$, and linearly interpolate the curve.}\label{fig:interpolate}
+%\end{figure}
 
 
 
@@ -240,28 +206,13 @@ We obtain a curve in memry-surprisal plane, which is a lower bound on the memory
 We visualize this for the two processes from Figure~\ref{fig:basic} in Figure~\ref{fig:listener-tradeoff}.
 
 
-\begin{figure*}
-\includegraphics[width=0.45\textwidth]{figures/decay.pdf}
-\includegraphics[width=0.45\textwidth]{figures/memory.pdf}
-%
-	\caption{Left: $I_t$ as a function of $t$, for two different processes. $I_t$ decays faster for the red process: Predictive information about the present observation is concentrated more strongly in the recent past. Left: $t \cdot I_t$ as a function of $t$ for the same processes. }\label{fig:basic}
-\end{figure*}
 
+%\begin{figure}
+%\includegraphics[width=0.45\textwidth]{figures/add-surp.pdf}
+%\includegraphics[width=0.45\textwidth]{figures/lower-mem.pdf}
+%	\caption{Illustration for Proposition~\ref{prop:suboptimal}. Listeners can trade off memory and surprisal: A listener only investing memory of the amount given by the black area on the right will incur at least the black area on the left in additional surprisal. In the given example, $T=4$. By varying $T$, the two areas describe the listener's memory-surprisal tradeoff curve.}\label{fig:listener-tradeoff-decay}
+%\end{figure}
 
-
-\begin{figure}
-\includegraphics[width=0.45\textwidth]{figures/add-surp.pdf}
-\includegraphics[width=0.45\textwidth]{figures/lower-mem.pdf}
-	\caption{Illustration for Proposition~\ref{prop:suboptimal}. Listeners can trade off memory and surprisal: A listener only investing memory of the amount given by the black area on the right will incur at least the black area on the left in additional surprisal. In the given example, $T=4$. By varying $T$, the two areas describe the listener's memory-surprisal tradeoff curve.}\label{fig:listener-tradeoff-decay}
-\end{figure}
-
-
-
-
-\begin{figure}
-\includegraphics[width=0.45\textwidth]{figures/listener-tradeoff.pdf}
-	\caption{Listener's memory-surprisal tradeoff for the two processes in Figure~\ref{fig:basic}. Recall that the red process had a faster decay of conditional mutual information. Correspondingly, this figure shows that a listener can achieve lower surprisal at the same level of memory load.}\label{fig:listener-tradeoff}
-\end{figure}
 
 
 
@@ -276,18 +227,10 @@ We visualize this for the two processes from Figure~\ref{fig:basic} in Figure~\r
 \subsection{Information Locality}\label{sec:info-locality}
 
 Due to the factor $t$ inside each term of the sum, carrying the same amount of information over longer distances requires more memory -- that is, modeling long statistical dependencies is more costly in terms of memory than modeling shorter ones.
-This formalizes a general, assumption-free, link between memory and locality in language production.
+This formalizes a general link between memory and locality in language production.
 In Section~\ref{sec:listener}, we will extend this analysis to listeners performing incremental prediction.
-%incremental prediction.
 
-%We will write $I_t$ as an abbreviation for $\operatorname{I}[w_t, w_0 | w_1, ..., w_{t-1}]$.
 The proposition implies that memory is decreased if $I_t$ decreases quickly as $t \rightarrow \infty$ -- that is, if the contributions of long-term dependencies in the process are small.
-In particular, memory load can only be finite if $I_t$ decreases fast enough for the infinite sum to converge to a finite value.
-%This confirms the intuition that finiteness of memory entails that the contribution of long-term 
-
-%\paragraph{Discussion}
-%We have treated the process $(w_t)_t$ as a discrete-time process whose time steps correspond to words, but this is immaterial to the analysis.
-%The analysis is not even restricted to discrete timesteps: We can replace thes sum in Proposition~\ref{prop:suboptimal} with an integral to get a continuous-time version.
 
 We illustrate Proposition~\ref{prop:lower-bound} in Figure~\ref{fig:basic}.
 We consider two processes A and B, where $I_t := 5t^{-1.5}$ for $A$ and $I_t := 3.5 t^{-2.5}$ for $B$.
@@ -298,6 +241,21 @@ This means that predictive information about an observation is concentrated more
 In Figure~\ref{fig:basic} (right), we show $t\cdot I_t$ as a function of $t$.
 Note that the area under the curve is equal to (\ref{eq:memory-bound}).
 This area is smaller for the red process, as $I_t$ decays more quickly there.  
+
+
+
+\begin{figure*}
+\includegraphics[width=0.45\textwidth]{figures/decay.pdf}
+\includegraphics[width=0.45\textwidth]{figures/memory.pdf}
+%
+	\caption{Left: $I_t$ as a function of $t$, for two different processes. $I_t$ decays faster for the red process: Predictive information about the present observation is concentrated more strongly in the recent past. Left: $t \cdot I_t$ as a function of $t$ for the same processes. }\label{fig:basic}
+\end{figure*}
+
+\begin{figure}
+\includegraphics[width=0.45\textwidth]{figures/listener-tradeoff.pdf}
+	\caption{Listener's memory-surprisal tradeoff for the two processes in Figure~\ref{fig:basic}. Recall that the red process had a faster decay of conditional mutual information. Correspondingly, this figure shows that a listener can achieve lower surprisal at the same level of memory load.}\label{fig:listener-tradeoff}
+\end{figure}
+
 
 
 
