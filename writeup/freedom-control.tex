@@ -2,6 +2,8 @@
 %We test this hypothesis by comparing baseline languages to \emph{fixed-order} versions of the real languages.
 %This enables us to tease apart the impact of the languages' word order rules from the impact of word order freedom.
 
+
+
 We now address points raised above by 
 
 
@@ -12,19 +14,19 @@ These grammars have exactly the same representational constraints as the baselin
 Importantly, they differ from real languages in having entirely deterministic order.
 We expect these grammars to have better memory-surprisal tradeoffs than comparable random baseline grammars across all languages.
 
-\item Second, we compare real languages to baselines that have matched degrees of word order freedom
+\item 
+Languages with flexible word order often show a strong influence of information structure on word order.
+Only relatively few datasets have annotations for information structure, and even fewer datasets have both syntactic and information structure annotation.
+We draw on the Prague Dependency Treebank of Czech, which has both types of annotation.
+Czech is a language with relatively high degree of word order freedom.
 
-\item Simulation taking information structure into account (for one language).
+Simulation taking information structure into account (for one language).
 Due to the difficulty of annotating information structure, few such corpora are available.
 We use the Prague Dependency Treebank, which has information structure annotation.
 \end{enumerate}
 
 
 
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{figures/full-GROUND-listener-surprisal-memory-HIST_z_byMem_onlyWordForms_boundedVocab.pdf}
-	\caption{Histogram}\label{fig:hist-real}
-\end{figure}
 
 \subsection{Setup}
 
@@ -74,6 +76,10 @@ We show estimated tradeoffs in Figure (XX).
 In X languages, the fitted grammars provide better tradeoffs than at least 50\% of the random grammars.
 
 
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{figures/full-GROUND-listener-surprisal-memory-HIST_z_byMem_onlyWordForms_boundedVocab.pdf}
+	\caption{Histogram}\label{fig:hist-real}
+\end{figure}
 
 \paragraph{Information Structure}
 
