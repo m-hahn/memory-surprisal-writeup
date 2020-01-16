@@ -23,12 +23,13 @@ In SI Section X, we show that our theoretical bounds are also compatible with a 
 
 \paragraph{absolute numbers, how they relate to what's known about human memory}
 
-\subsection{Other Models of Sentence Processing}
+\subsection{Relation to Models of Sentence Processing}
 
-There is a substantial literature proposing quantitative memory metrics for sentence processing.
+There is a substantial literature proposing sentence processing models and quantitative memory metrics for sentence processing.
 In this section, we discuss how our theoretical results relate to and generalize these previously proposed metrics.
+We do not view our model as competing with or replacing any of these models; instead, our information-theoretic analysis captures aspects that are common to most of these models and shows how they arise from very general modeling assumptions.
 
-Many proposals relate to the \emph{number} of objects simultaneously held in a stack-like data structure of memory, and \emph{how long} they are stored.
+Many proposals for memory metrics are based on the \emph{number} of objects simultaneously held in a stack-like data structure of memory, and \emph{how long} they are stored.
 
 Our theoretical result can be seen as an information-theoretic version of such metrics.
 It differs from these in two ways:
@@ -83,6 +84,14 @@ DLT integration cost can be seen as surprisal given an imperfect memory represen
 
 - interference
 
+
+In cue-based retrieval models, memory effects arise from retrieval interference, whereas surprisal effects arise from backtracking (CITE).
+Our model implements a bound on capacity, which is usually understood to be different from the presence of retrieval interference.
+See SI Section X for a version of our model that more closely parallels cue-based retrieval models.
+
+could also have more extensive discussion of the links here instead of the SI
+
+
 \paragraph{Lossy-Context Surprisal}
 \citet{futrell-noisy-context-2017} describe a processing model where listeners make predictions (and incur surprisal) based on lossy memory representations.
 In particular, they consider loss models that delete, erase, or replace words in the past.
@@ -109,7 +118,6 @@ Linear or ranked combinations of versions of these metrics have been argued to a
 
 \paragraph{Models unifying memory and surprisal}
 
-- perspective of cue-based retrieval models: memory effects arise from retrieval interference, surprisal effects from backtracking
 
 evaluating memory metrics and surprisal on reading measures \cite{boston2008parsing} \cite{demberg2008data} \cite{boston2011parallel}
 
@@ -173,6 +181,8 @@ The reason is that PCFGs assign low probabilities to long sequences.\footnote{Pr
 % RF: the fact that you would get locality effects given medium WM capacity, but not very high or very low WM capacity, as Bruno Nicenboim found. And maybe some speaker-listener asymmetries. 
 %\paragraph{Speakers}
 % RF: what matters for the speaker is not I[w_t, w_0 | w_1, …, w_{t-1}], but I[w_t, w_0 | w_1, …, w_{t-1}, G] where G is some representation of the speaker’s goal (like in the van Dijk paper). This changes the interpretation of the mutual information. For the listener, it’s just redundancy. For the speaker, it’s redundancy *conditional on the goal*—which you could interpret as something like conceptual relatedness of linguistic elements. Then the speaker’s pressure is to keep conceptually related things close. 
+
+
 
 
 

@@ -105,6 +105,18 @@ Then this listener will incur average surprisal at least
 $\operatorname{H}[w_t|w_{<t}] + \sum_{t > T} \operatorname{I}_t$.
 \end{thm}
 
+
+
+
+
+
+The theorem gives us a lower bound on the listener's memory-surprisal curve: Taking all pairs of memory $\sum_{t=1}^T t I_t$ and surprisal $H[w_t|w_{<t}] + \sum_{t > T} I_t$.
+Then interplate linearly (justify this in appendix).
+We obtain a curve in memry-surprisal plane, which is a lower bound on the memory demands of any listener at a given surprisal level.
+We visualize this for the two processes from Figure~\ref{fig:basic} in Figure~\ref{fig:listener-tradeoff}.
+
+
+
 \paragraph{Mathematical Assumptions}
 Here we make explicit which formal assumptions go into the theoretical result.
 
@@ -152,13 +164,13 @@ Given such estimates of $\operatorname{I}_t$, we estimate tradeoff curves as in 
 
 
 Our result is entirely information-theoretic and applies to \emph{any} physical encoding of the past, entirely independent of the implementation of the model. % and the mechanisms by which it computes predictions.
-In particular, while the relation to psycholinguistic and psychological models of how memory works will be interesting to explore, our result applies to any such model.
+In particular, while the relation to psycholinguistic and psychological models of how memory works will be interesting to explore (see Section X), our result applies to any such model.
 Memory representations do not have to be rational or optimal for this bound to hold:
 It provides a \emph{lower bound} on the amount of information that needs to be stored -- other memory representations will always need to store at least as much information.
 
 
 
-There are theories of retrieval where the main bottleneck lies not in capacity, but in difficulty of retrieval. See General Discussion.
+There are theories of retrieval where the main bottleneck lies not in capacity, but in difficulty of retrieval. See General Discussion for an extension of our analysis that applies to such models.
 
 
 
@@ -181,10 +193,6 @@ There are theories of retrieval where the main bottleneck lies not in capacity, 
 
 
 
-We now introduce our main theoretical result on memory-surprisal tradeoffs.
-
-
-
 
 
 %\begin{figure}
@@ -194,16 +202,6 @@ We now introduce our main theoretical result on memory-surprisal tradeoffs.
 %	\caption{Estimating memory-surprisal tradeoff using the Theorem: We trace out the memory and surprisal values for all $T=1, 2, ...$, and linearly interpolate the curve.}\label{fig:interpolate}
 %\end{figure}
 
-
-
-
-
-
-
-The proposition gives us a lower bound on the listener's memory-surprisal curve: Taking all pairs of memory $\sum_{t=1}^T t I_t$ and surprisal $H[w_t|w_{<t}] + \sum_{t > T} I_t$.
-Then interplate linearly (justify this in appendix).
-We obtain a curve in memry-surprisal plane, which is a lower bound on the memory demands of any listener at a given surprisal level.
-We visualize this for the two processes from Figure~\ref{fig:basic} in Figure~\ref{fig:listener-tradeoff}.
 
 
 
@@ -224,7 +222,7 @@ We visualize this for the two processes from Figure~\ref{fig:basic} in Figure~\r
 
 
 
-\subsection{Information Locality}\label{sec:info-locality}
+\paragraph{Consequence: Information Locality} %\label{sec:info-locality}
 
 Due to the factor $t$ inside each term of the sum, carrying the same amount of information over longer distances requires more memory -- that is, modeling long statistical dependencies is more costly in terms of memory than modeling shorter ones.
 This formalizes a general link between memory and locality in language production.
