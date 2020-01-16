@@ -224,7 +224,16 @@ Consequently, more samples were collected than necessary to reach the stopping c
 
 \begin{figure}
 	\begin{center}
-\includegraphics[width=\textwidth]{figures/full-results.png}
+\includegraphics[width=\textwidth]{results-table.pdf}
+\end{center}
+	\caption{Median surprisal (y-axis) at given memory level (x-axis), for real orders (blue) and random baseline grammars (red). We provide 95\% confidence bands. These are computed over different runs of the estimation algorithm for the real orders, and over different runs \emph{and} different grammars for the baseline grammars.}\label{fig:median-table}
+\end{figure}
+
+
+
+\begin{figure}
+	\begin{center}
+\includegraphics[width=\textwidth]{quantiles-table.pdf}
 \end{center}
 	\caption{Median surprisal (y-axis) at given memory level (x-axis), for real orders (blue) and random baseline grammars (red). We provide 95\% confidence bands. These are computed over different runs of the estimation algorithm for the real orders, and over different runs \emph{and} different grammars for the baseline grammars.}\label{fig:median-table}
 \end{figure}
@@ -261,7 +270,7 @@ We use the Binomial Test.
 We conduct a two-sided test.
 
 In all but the four exceptional languages, the real language had significantly lower surprisal than at least $50\%$ of the baseline languages for at least some values of $\mu$ at $p < 0.01$.
-Also, for those languages, there was no $\mu$ where this pattern was reversed.
+Also, for those languages, there was no $\mu$ where this pattern of significance was reversed.
 
 
 %\subsection{Statistical Analysis}
