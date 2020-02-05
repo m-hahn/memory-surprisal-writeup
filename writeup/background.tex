@@ -1,10 +1,16 @@
-A wide range of work has argued that natural language orders information in ways that reduce memory effort.
+A wide range of work has argued that information in natural language utterances is ordered in ways that reduce memory effort.
 This strand of research has brought together linguistic typologists documenting language universals, corpus linguists studying production preferences, psycholinguistics studying processing difficulty, and computer scientists studying formal properties of grammars.
 
-
-
-
 An early example is \cite{miller-finitary-1963}, who attributed the unacceptability of multiple center embeddings in English to limitations of human working memory; following work has studied how different grammars induce different memory requirements in terms of the number of symbols that must be stored at each point to produce or parse a sentence \citet{yngve1960model,yngve1961depth,abney1991memory,gibson1991computational,resnik1992left}.
+
+For example, \citet{grodner-consequences-2005} studied word-by-word reading times in a series of sentences such as~\ref{ex:grodner} below. 
+\eenumsentence{\label{ex:grodner}
+\item The \underline{administrator} who the nurse \underline{supervised}\dots\label{ex:grodner1}
+\item The \underline{administrator} who the nurse from the clinic \underline{supervised}\dots
+\item The \underline{administrator} who the nurse who was from the clinic \underline{supervised}\dots\label{ex:grodner3}
+}
+In these sentences, the distance between the noun \emph{administrator} and the verb \emph{supervised} is successively increased. \citet{grodner-consequences-2005} found that as this distance increases, there is a concomitant increase in reading time at the verb \emph{supervised} and following words. The hypothesized reason is the following: at the word \emph{supervised}, a comprehender who is trying to compute the meaning of the sentence must integrate a representation of the verb \emph{supervised} with a representation of the noun \emph{administrator}, which is a direct object of the verb. This integration requires retrieving the representation of \emph{administrator} from working memory. If this representation has been in working memory for a long time---for example as in Sentence~\ref{ex:grodner3} as opposed to \ref{ex:grodner1}---then the retrieval operation causes difficulty that manifests as increased reading time. There exists a dependency between the words \emph{administrator} and \emph{supervised}, and excess processing difficulty occurs when these two words are separated. 
+
 
 \cite{hawkins-efficiency-2003} provides cross-linguistic evidence that word orders are optimized for processing based on local contexts.
 Further work has found computational, corpus-based evidence that memory limitations impact language structure and production.
