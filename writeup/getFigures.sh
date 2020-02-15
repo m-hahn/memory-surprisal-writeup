@@ -11,4 +11,5 @@ cp ~/memory-surprisal/code/visualize_neural/figures/full-GROUND-listener-surpris
 cp ~/memory-surprisal/code/order-freedom/infostruc/analysis/visualize_neural/figures/Czech-PDT-listener-surprisal-memory-MEDIANS_onlyWordForms_boundedVocab.pdf figures/
 cp ~/memory-surprisal/writeup/quantiles-table.pdf .
 cp ~/memory-surprisal/writeup/auc-table.pdf .
+cp ~/memory-surprisal/writeup/it-table.pdf .
 
