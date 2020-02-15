@@ -1,9 +1,28 @@
 
 
-We now investigate whether word orders as found in natural language reflect optimizization for the memory-surprisal tradeoff.
-To this end, we compare the memory-surprisal tradeoffs of 52 actual languages to those of counterfactual reorderings.
-We compare to counterfactual reorderings that differ from the actual languages in their word order rules, i.e., the rules that determine how syntactic structures are ordered into strings of words.
-To create such counterfactual reorderings, we parameterize these word order rules using a method introduced by Gildea and colleagues \citep{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015}:
+We now investigate whether word orders as found in natural language reflect optimizization for the memory--surprisal trade-off.
+To this end, we compare the memory--surprisal trade-offs of 52 actual languages to those of counterfactual reorderings of those languages, which differ from the actual languages in their word order rules, i.e., the rules that determine how syntactic structures are ordered into strings of words.
+
+\subsection{Measuring the memory--surprisal trade-off in corpora}
+
+...
+
+
+\subsection{Defining baselines}
+
+...
+
+
+\subsection{Results}
+
+...
+
+
+\subsection{Discussion}
+
+...
+
+To create counterfactual reorderings, we parameterize these word order rules using a method introduced by Gildea and colleagues \citep{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015}:
 We construct counterfactual ordering grammars that define consistent ordering rules similar to those found in actual languages.
 For instance, these grammars will specify which dependents precede or follow their heads (e.g., whether objects follow or precede verbs, whether adjectives follow or precede nouns), and the relative order of different dependents on the same side of the head (e.g., whether noun phrases have order adjective-numeral-noun or numeral-adjective-noun).
 
@@ -155,8 +174,12 @@ Third, traditional N-gram models, which do not have this limitation, provide res
 \paragraph{Estimating the Memory-Surprisal Tradeoff Curve}
 The quantity $I_t$ in~(\ref{eq:memory-bound}) is equal to the difference 
 \begin{equation}
-\operatorname{I}[w_t, w_0 | w_1, ..., w_{t-1}] = H[w_t|w_1, ..., w_{t-1}] - H[w_t|w_0, w_1, ..., w_{t-1}]
+I_t = S_{t-1} - S_t,
 \end{equation}
+where $S_t$ is the average surprisal of a model that only looks at the immediately preceding $t$ words of context (i.e., a $(t+1)$-gram model). Therefore, we estimate $I_t$ by training a series of neural $n$-gram models for increasing $n$, then evaluating their 
+
+
+
 This quantity can be estimated as follows.
 After estimating the parameter vector $\theta$, we compute the following difference for each word $w_t$ ($t$ ranging from $T_{max}$ up to the length of the held-out partition) in the held-out partition:
 \begin{equation}

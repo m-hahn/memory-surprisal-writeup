@@ -1,3 +1,6 @@
+In this section, we will introduce the main concept and hypothesis of our paper from a psycholinguistic perspective. We will provide a technical definition of the memory--surprisal trade-off curve, and then we will prove a theorem showing that more efficient memory--surprisal trade-offs are possible in languages exhibiting information locality: that is, languages where words that depend on each other are close to each other. This theorem establishes the formal link between working memory efficiency in online processing and locality in word order.
+
+\subsection{An information-theoretic model of language processing difficulty}
 
 \begin{figure}
 \centering
@@ -10,7 +13,7 @@ We begin developing our model by considering the process of language comprehensi
 
 Experimental research has established three properties of online language comprehension: (1) listeners maintain some information about the words received so far in incremental memory, (2) listeners form probabilistic expectations about the upcoming words, and (3) words are easy to process to the extent that they are predictable based on a listener's memory of words received so far.
 
-We formalize these three observations into postulates intended to summarize what is known about online language processing difficulty. Consider a listener comprehending a sequence of words $w_1, \dots, w_t, \dots, w_n$, at an arbitrary time $t$.
+We formalize these three observations into postulates intended to summarize what is known about online language processing difficulty. Consider a listener processing a sequence of words $w_1, \dots, w_t, \dots, w_n$, at an arbitrary time $t$.
 \begin{enumerate}
     \item Postulate 1 (Incremental memory). At time $t$, the listener has an incremental \key{memory state} $m_t$ that contains her stored information about previous words. The memory state is given by a \key{memory encoding function} $M$ such that $m_t = M(w_{t-1}, m_{t-1})$.
     \item Postulate 2 (Incremental prediction). The listener has a subjective probability distribution at time $t$ over the next word $w_t$. This probability distribution is denoted $P(w_t|m_t)$.
@@ -22,7 +25,7 @@ We formalize these three observations into postulates intended to summarize what
 \end{enumerate}
 The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory}. Surprisal theory is an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation \citep{hale2001probabilistic}, antilocality effects, and effects of syntactic construction frequency \citep{levy2008expectation}. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \citep{smith-effect-2013,goodkind-predictive-2018}.
 
-Our expression differs from the usual formulation of surprisal theory in that we consider predictability based on a (potentially lossy or noisy) memory representation $m_t$, rather than predictability based on the true complete context $w_1, \dots, w_{t-1}$. The generalization to lossy memory representations is necessary to capture empirically observed effects of memory limitations on language processing, such as dependency locality and structural forgetting \citep{futrell-noisy-context-2017,futrell2019information}.
+Our expression differs from the usual formulation of surprisal theory in that we consider predictability based on a (potentially lossy or noisy) memory representation $m_t$, rather than predictability based on the true complete context $w_1, \dots, w_{t-1}$. The generalization to lossy memory representations is necessary to capture empirically observed effects of memory limitations on language processing, such as dependency locality and structural forgetting \citep{futrell-noisy-context-2017,futrell2019information}. For other ways of capturing memory effects within a surprisal framework, see \citet{demberg-incremental-2013} and \citet{rasmussen-2017-left}.
 
 From the perspective of information theory, surprisal measures the \key{information content} of a word $w_t$ in context. The surprisal value can be interpreted as the amount of new information contained in the word $w_t$, measured in bits, given the listener's current memory state. If processing effort is indeed proportional to surprisal, then this means that the amount of work required to process a word scales linearly with the information content of that word. The idea that information-processing cost scales with information content is in line with recent theories of the cost of computation in neuroscience \citep{friston2010free,zenon2019information} and physics \citep{still2012thermodynamics}. 
 
@@ -43,30 +46,54 @@ The \key{memory--surprisal trade-off curve} answers the question: for a given am
 \label{fig:examples}
 \end{figure}
 
+\subsection{Main hypothesis}
+
 Now that we have defined the memory--surprisal trade-off, we can precisely state the main hypothesis of this work:
-\begin{itemize}
-    \item \key{Main Hypothesis.} Natural language is characterized by a distinctively steep memory--surprisal trade-off curve.
-\end{itemize}
-That is, natural language is memory-efficient in the sense that it is possible to achieve a low level of processing difficulty (average surprisal $S_M$) while storing a relatively small amount of information about previous words (entropy of memory $H_M$). We will claim that the word orders of natural languages are structured to maintain memory efficiency in this sense.
+\paragraph{Main hypothesis.}  Natural language is characterized by a distinctively steep memory--surprisal trade-off curve.
 
-In the remainder of this section, we will provide a more technical definition of the memory--surprisal trade-off curve, and then we will prove a theorem showing that more efficient memory--surprisal trade-offs are possible in languages exhibiting information locality: that is, languages where words that depend on each other are close to each other. This theorem establishes the formal link between working memory efficiency in online processing and locality in word order.
+That is, natural language is memory-efficient in the sense that it is possible to achieve a low level of processing difficulty (average surprisal $S_M$) while storing a relatively small amount of information about previous words (entropy of memory $H_M$). We hypothesize that this structure is reflected both in the grammatical structure of languages and in usage preferences.
 
-\subsection{Formal definition}
+More specifically, in this paper we will claim that the word orders of natural languages are structured to maintain memory efficiency in this sense. Although we focus on word order in this paper, our hypothesis applies more generally, to any factors in grammar or usage which influence the memory--surprisal tradeoff.
+
+\subsection{Formal definition of the memory--surprisal trade-off}
 
 Here we provide the technical definition of the memory--surprisal trade-off curve and relate it to concepts from information theory, rate--distortion theory, and statistical complexity theory. 
 
-Let $W$ be a stationary ergodic stochastic process generating a stream of symbols called words, indexed as $w_1, \dots, w_t$.\footnote{We will use $W$ to represent languages. Large natural language texts are neither stationary nor ergodic \citep{}. However, we are interested in explaining grammatical properties of languages, which mostly hold within sentences, not within large texts as a whole. Therefore, we will represent a language using a stochastic process consisting of repeated iid samples of sentences. This stochastic process is both stationary and ergodic.} The \key{entropy rate} of $W$ is \citep[][pp. 74--75]{cover2006elements}:
+Let $W$ be a stationary ergodic stochastic process\footnote{We will use $W$ to represent languages. Large natural language texts are neither stationary nor ergodic \citep{}. However, we are interested in explaining grammatical properties of languages, which mostly involve constraints among words within sentences, not within large texts as a whole. Therefore, we will represent a language using a stochastic process consisting of repeated independent samples from a distribution over sentences. This stochastic process is both stationary and ergodic.} generating a stream of symbols called words, indexed as $w_1, \dots, w_t$.\footnote{We call these symbols words, but note that our mathematical treatment applies for \emph{any} decomposition of a sentence into a sequence of symbols---the symbols could represent phonemes, syllables, morphemes, words, phrases, etc.} Let $M$ be a memory encoding function. The \key{average surprisal} of the process $W$ under the memory encoding function $M$ is
+\begin{equation}
+    S_M &\equiv \lim_{t \rightarrow \infty} H[w_t | m_t],
+\end{equation}
+where the notation $H[\cdot | \cdot]$ indicates conditional entropy \citep[][p. 17]{cover2006elements}. The lowest possible average surprisal for $W$ that can be attained by any memory encoding function is called the \key{entropy rate} of $W$ \citep[][pp. 74--75]{cover2006elements}:
 \begin{equation}
     \label{eq:entropy-rate}
-    h \equiv \lim_{t \rightarrow \infty} H[w_t | w_1, \dots, w_{t-1}],
+    S_\infty \equiv \lim_{t \rightarrow \infty} H[w_t | w_1, \dots, w_{t-1}].
 \end{equation}
-where the notation $H[\cdot | \cdot]$ indicates conditional entropy \citep[][p. 17]{cover2006elements}. The entropy rate of a stochastic process is the irreducible unpredictability of the process: the extent to which a stream of symbols remains unpredictable even given an infinite amount of information about context. Because $W$ is stationary and ergodic by construction, the limit in Eq.~\ref{eq:entropy-rate} is guaranteed to converge to a positive number. The entropy rate of natural language text has been studied by \citet{shannon1951entropy}, \citet{takahira}, and \citet{bentz}. 
-
-Let $M$ be a memory encoding function. The \key{average surprisal} of the process $W$ under the memory encoding function $M$ is
+ The entropy rate of a stochastic process is the irreducible unpredictability of the process: the extent to which a stream of symbols remains unpredictable even for a predictor with unlimited resources. 
+ %Because $W$ is stationary and ergodic by construction, the limit in Eq.~\ref{eq:entropy-rate} is guaranteed to converge to a unique value. 
+ The entropy rate of natural language text has been studied by \citet{shannon1951entropy}, \citet{takahira}, and \citet{bentz}. 
+ The average surprisal $S_M$ can also be called a \key{cross entropy rate}. % TODO: Say something about convergence and uniqueness?
+ 
+ 
+ 
+Because the memory state $m_t$ is a function of the previous words $w_1, \dots, w_{t-1}$, we have by the Data Processing Inequality \citep[][pp. 34--35]{cover2006elements}:
 \begin{equation}
-    S_M &\equiv \lim_{t \rightarrow \infty} H[w_t | m_t].
+    S_\infty \le S_M.
 \end{equation}
-The average surprisal $S_M$ can also be called a \key{cross entropy rate} because it measures the entropy of the process $W$ conditional not on the previously-generated symbols, but on a memory representation of those symbols. If the memory state $m_t$ stores all information about the previous words $w_1, \dots, w_{t-1}$, then $S_M = h$. Therefore, by analogy with $S_M$, we also write the entropy rate $h$ as $S_\infty$, indicating that it is the lowest average surprisal that could be attained by a listener who remembers an unbounded amount of information about previous words.
+If the memory state $m_t$ stores all information about the previous words $w_1, \dots, w_{t-1}$, then we have $S_M = S_\infty$.
+
+% The "memory distortion" stuff below might be useful in an argument about the trade-off for the speaker.
+
+%In general, we can write the average surprisal $S_M$ as a sum of two non-negative terms,
+%\begin{equation}
+%    S_M = S_\infty + d_M,
+%\end{equation}
+%where $d_M$ is \key{memory distortion}: the extra surprisal incurred in addition to the unavoidable surprisal $S_\infty$, owing to the lossiness of the memory encoding function $M$. 
+%The memory distortion $d_M$ is formally a KL divergence:
+%\begin{equation}
+%    \label{eq:memory-distortion}
+%    d_M = \lim_{t \rightarrow \infty} D_{\text{KL}} [ p(w_t | w_1, \dots, w_{t-1}) || p(w_t | m_t)].
+%\end{equation}
+%Finding a memory encoding function $M$ to minimize $S_M$ is equivalent to minimizing the memory distortion $d_M$.
 
 The average amount of information stored in the memory states $m_t$ is the entropy of the stationary distribution over memory states, $H_M$:
 \begin{equation}
@@ -74,22 +101,6 @@ The average amount of information stored in the memory states $m_t$ is the entro
     H_M \equiv H[m_t].
 \end{equation}
 The minimum value of $H_M$ that achieves $S_M = S_\infty$ is called the \key{statistical complexity} of the process $W$ \citep{feldman-measures-1998}. The statistical complexity of natural language has been studied by \citet{hahn2019neural}. We will be imposing bounds on $H_M$ and studying the resulting values of $S_M$. 
-
-Because the memory state $m_t$ is a function of the previous words $w_1, \dots, w_{t-1}$, we have by the Data Processing Inequality \citep[][pp. 34--35]{cover2006elements}:
-\begin{equation}
-    S_\infty \le S_M,
-\end{equation}
-and therefore we can write the average surprisal $S_M$ as a sum of two positive terms,
-\begin{equation}
-    S_M = S_\infty + d_M,
-\end{equation}
-where $d_M$ is \key{memory distortion}: the extra surprisal incurred in addition to the unavoidable surprisal $S_\infty$, owing to the lossiness of the memory encoding function $M$. 
-The memory distortion $d_M$ is a KL divergence:
-\begin{equation}
-    \label{eq:memory-distortion}
-    d_M = \lim_{t \rightarrow \infty} D_{\text{KL}} [ p(w_t | w_1, \dots, w_{t-1}) || p(w_t | m_t)].
-\end{equation}
-Because the surprisal indicated by $S_\infty$ is not a function of the memory encoding function $M$, finding a memory encoding function $M$ to minimize $S_M$ is equivalent to minimizing the memory distortion $d_M$.
 
 \begin{definition}
 The \key{memory--surprisal trade-off curve} for a process $W$ is defined as the lowest achievable average surprisal $S_M$ for each value of $H_M$. Let $R$ denote an upper bound on the memory entropy $H_M$; then the memory--surprisal trade-off curve is given by
@@ -99,15 +110,15 @@ The \key{memory--surprisal trade-off curve} for a process $W$ is defined as the 
 \end{equation}
 \end{definition}
 
-The memory state $m_t$ is a lossily compressed representation of the true context of words $w_1, \dots, w_{t-1}$. The mathematical theory of lossy representations is \key{rate--distortion theory}, a field within information theory \citep[for an overview and key results, see][pp. 301--347]{cover2006elements}. Rate--distortion theory studies curves of the form of Eq.~\ref{eq:ms-formal}, which quantify trade-offs between utility (distortion) and information (rate). Our memory--surprisal trade-off curve is similar to a rate--distortion curve, with $H_M$ as the rate and $S_M$ as the distortion. It differs from a typical rate--distortion problem in that rate--distortion theory typically involves finding a minimum distortion per bit of mutual information between the input and output of a channel; instead, we quantify rate as the entropy of the memory state. Our memory--surprisal curve is also closely related to the \key{predictive information bottleneck} curve introduced by \citet{still-information-2014} and studied by \citet{marzen-predictive-2016}. 
+The memory state $m_t$ is generally a lossy representation of the true context of words $w_1, \dots, w_{t-1}$, meaning that $m_t$ does not contain all the possible information about $w_1, \dots, w_{t-1}$. The mathematical theory of lossy representations is \key{rate--distortion theory}, a field within information theory \citep[for an overview and key results, see][pp. 301--347]{cover2006elements}. Rate--distortion theory studies curves of the form of Eq.~\ref{eq:ms-formal}, which quantify trade-offs between utility (`distortion') and information (`rate'). Our memory--surprisal trade-off curve is a distortion--rate curve, with $H_M$ as the rate and $S_M$ as the distortion. It differs from the typical curve studied in rate--distortion theory in that we define rate using entropy, rather than mutual information \citep[see][for a discussion of some of the consequences of this formulation]{strouse-deterministic-2017}. Our memory--surprisal curve is closely related to the \emph{predictive information bottleneck} introduced by \citet{still-information-2014} and studied by \citet{marzen-predictive-2016}; in particular, it is a version of the \emph{recursive information bottleneck} \citep[][\S 4]{still-information-2014}. 
 
 
 \subsection{Information locality}
 
-The shape of the memory--surprisal trade-off is determined in part by the grammatical structure of a language, and in particular its word order:
-some languages enable more efficient trade-offs than others by forcing a listener to store more bits in memory to achieve the same level of average surprisal.
+The shape of the memory--surprisal trade-off is determined in part by the grammatical structure of a language.
+Some languages enable more efficient trade-offs than others by forcing a listener to store more bits in memory to achieve the same level of average surprisal.
 
-Here, we will demonstrate that the memory--surprisal trade-off is optimized by word orders exhibiting \key{information locality}: that is, word orders where words that depend on each other statistically are located close to each other in time. We will argue that information locality generalizes the well-known word order principle of dependency locality, which has been studied in psycholinguistics, corpus linguistics, and typology for decades \citep{rijkhoff-word-1986,hawkins-performance-1994,gibson-linguistic-1998,liu-dependency-2018,futrell-large-scale-2015,liu-dependency-2017,temperley-minimizing-2018}. 
+Here, we will demonstrate that the memory--surprisal trade-off is optimized by languages with word orders exhibiting a property called \key{information locality}. Information locality means that words that depend on each other statistically are located close to each other in time. We will argue that information locality generalizes the well-known word order principle of dependency locality, which has been studied in psycholinguistics, corpus linguistics, and typology for decades \citep{rijkhoff-word-1986,hawkins-performance-1994,gibson-linguistic-1998,liu-dependency-2018,futrell-large-scale-2015,liu-dependency-2017,temperley-minimizing-2018}. 
 
 We will make our argument by defining a lower bound on the memory--surprisal trade-off curve (Eq.~\ref{eq:ms-formal}). This lower bound represents an unavoidable cost associated with a certain level of memory usage $H_M$; the true average surprisal $S_M$ might be higher than this bound. 
 
@@ -119,16 +130,16 @@ Our argument will make use of a quantity called \key{mutual information}. Mutual
 \end{align}
 Mutual information is always non-negative. It is zero when $X$ and $Y$ are conditionally independent given $Z$, and positive whenever $X$ gives any information that makes the value of $Y$ more predictable, or vice versa. 
 
-We will study the mutual information structure of natural language sentences, and in particular the mutual information between words at certain distances in linear order. Define $I_t$ as the mutual information between words at distance $t$ from each other, conditional on the intervening words:
+We will study the mutual information structure of natural language sentences, and in particular the mutual information between words at certain distances in linear order. We define the notation $I_t$ to mean the mutual information between words at distance $t$ from each other, conditional on the intervening words:
 \begin{align}
     I_t &\equiv I[w_t : w_0 | w_1, \dots, w_{t-1}] \\
     &= H[w_t | w_1, \dots, w_{t-1}] - H[w_t | w_0, \dots, w_{t-1}].
 \end{align}
-This quantity, visualized in Figure~\ref{fig:theorem} (a), measures how much predictive information is provided about a given word by the word $t$ steps in the past.
+This quantity, visualized in Figure~\ref{fig:theorem}(a), measures how much predictive information is provided about the current word by the word $t$ steps in the past.
 It is a statistical property of the language, and can be estimated from large-scale text data.
 
 Equipped with this notion of mutual information at a distance, we can now state our theorem:
-\begin{thm}\label{prop:suboptimal}(Information locality) For any positive integer $T$, let $M$ be a memory encoding function such that
+\begin{thm}\label{prop:suboptimal}(Information locality bound) For any positive integer $T$, let $M$ be a memory encoding function such that
 \begin{equation}
 \label{eq:memory-bound}
 H_M \le \sum_{t=1}^T t I_t.    
@@ -141,7 +152,13 @@ S_M \ge S_\infty + \sum_{t=T}^\infty I_t.
 \end{thm}
 A formal proof, relying only on the stationarity of the stochastic process, is given in Appendix Section X. 
 
-\paragraph{Interpretation} The meaning of the theorem is illustrated visually in Figure~\ref{fig:theorem}. The theorem describes a memory encoding function which has enough capacity to remember the relevant information from at most $T$ words in the immediate past. The minimal amount of memory capacity which would be required to retain this information is the sum $\sum_{t=0}^T t I_t$ (Eq.~\ref{eq:memory-bound}), reflecting the cost of holding $I_t$ bits in memory for $t$ timesteps up to $t=T$. The surprisal cost for this memory encoding function is at least $\sum_{t=T}^\infty I_t$ (Eq.~\ref{eq:surprisal-bound}), which is the sum of all the relevant information contained in words \emph{more} than $T$ timesteps in the past, which were forgotten by the memory state (see Figure~\ref{fig:theorem}(b)). The theorem gives a lower bound on the memory--surprisal trade-off curve, meaning that there is no memory encoding function with memory capacity $H_M$ which achieves lower average surprisal than Eq.~\ref{eq:surprisal-bound}.
+\paragraph{Interpretation} The theorem means that a predictor with limited memory capacity will always be affected by surprisal cost arising from long-term statistical dependencies of length greater than $T$, for some finite $T$. This is why we call the result `information locality': processes are easier to predict when most statistical dependencies are short-term (shorter than $T$). Below we explain in more detail how this interpretation matches the mathematics of the theorem.
+
+The quantities in the theorem are illustrated visually in Figure~\ref{fig:theorem}. Eq.~\ref{eq:memory-bound} describes a memory encoding function which has enough capacity to remember the relevant information from at most $T$ words in the immediate past. The minimal amount of memory capacity which would be required to retain this information is the sum $\sum_{t=0}^T t I_t$, reflecting the cost of holding $I_t$ bits in memory for $t$ timesteps up to $t=T$. 
+
+The information locality bound theorem says that the surprisal cost for this memory encoding function is at least $S_\infty + \sum_{t=T}^\infty I_t$ (Eq.~\ref{eq:surprisal-bound}). The first term $S_\infty$ is the entropy rate of the process, representing the bits of information in the process which could not have been predicted given any amount of memory. The second term $\sum_{t=T}^\infty I_t$ is the sum of all the relevant information contained in words \emph{more} than $T$ timesteps in the past (see Figure~\ref{fig:theorem}(b)). These correspond to bits of information in the process which \emph{could have} been predicted given infinite memory resources, but which were not, due to the limit on memory usage.
+
+The theorem gives a lower bound on the memory--surprisal trade-off curve, meaning that there is no memory encoding function with memory capacity $H_M$ which achieves lower average surprisal than Eq.~\ref{eq:surprisal-bound}. In terms of psycholinguistics, if memory usage is bounded by Eq.~\ref{eq:memory-bound}, then processing cost of at least Eq.~\ref{eq:surprisal-bound} is inevitable.
 
 \begin{figure*}
 \includegraphics[width=0.45\textwidth]{figures/decay.pdf}
@@ -155,13 +172,13 @@ A formal proof, relying only on the stationarity of the stochastic process, is g
 	\caption{Listener's memory-surprisal tradeoff for the two processes in Figure~\ref{fig:basic}. Recall that the red process had a faster decay of conditional mutual information. Correspondingly, this figure shows that a listener can achieve lower surprisal at the same level of memory load.}\label{fig:listener-tradeoff}
 \end{figure}
 
-The theorem predicts that maintaining long-term dependencies requires higher memory usage. Due to the factor $t$ inside each term of the sum, carrying the same amount of information over longer distances requires more memory---that is, modeling long-term statistical dependencies is more costly in terms of memory than modeling shorter ones.
-This formalizes a general link between memory and locality in language comprehension: language comprehension requires less memory resources when statistical dependencies are mostly short-term. 
-In Section~\ref{sec:speaker}, we will extend this analysis to language production.
+Eq.~\ref{eq:memory-bound} means that maintaining long-term dependencies requires higher memory usage. Carrying the same amount of information over longer distances requires more memory; this fact is reflected in the factor $t$ inside each term of the sum. 
+The result is that modeling long-term statistical dependencies is more costly in terms of memory usage than modeling shorter ones.
+The information locality bound theorem demonstrates in a highly general way that language comprehension requires less memory resources when statistical dependencies are mostly short-term. 
 
 Because processing long-term dependencies requires higher memory usage, the theorem also implies that a language will be easier to process when most of the predictive information about a word is concentrated close to that word in time---that is, when $I_t$ falls off rapidly as $t \rightarrow \infty$. When memory capacity is limited, then there must be some timescale $T$ such that a listener appears to be affected by excess surprisal arising from statistical dependencies of length greater than $T$. A language avoids such cost to the extent that it avoids dependencies with a time-span larger than $T$.
 
-We illustrate Proposition~\ref{prop:suboptimal} in Figure~\ref{fig:basic}.
+We illustrate the theorem in Figure~\ref{fig:basic}.
 We consider two processes $A$ and $B$, where $I_t := 5t^{-1.5}$ for $A$ and $I_t := 3.5 t^{-2.5}$ for $B$.
 The curves of $I_t$, as a function of the distance $t$, are shown in Figure~\ref{fig:basic} (left).
 In both cases, $I_t$ converges to zero as $t$ grows to infinity. 
@@ -183,17 +200,27 @@ Our information locality theorem says that \emph{statistical} dependencies shoul
 
 If statistical dependencies, as measured using mutual information, can be identified with syntactic dependencies, then that would mean that information locality is a generalization of dependency locality. \citet{futrell2019syntactic} gives theoretical and empirical arguments that this is so. They show that syntactic dependencies as annotated in dependency treebanks identify word pairs with especially high mutual information, and give a derivation showing that this is to be expected according to a formalization of the postulates of dependency grammar. The connection between mutual information and syntactic dependency has also been explored by \citet{}. 
 
-\paragraph{Relation with previous results on information locality} A similar information locality result was established by \citet{futrell-noisy-context-2017}, who showed that if incremental memory is affected by progressively increasing noise, then (following the postulates above) processing difficulty increases when words with high pointwise mutual information are separated by large distances. Our current result is more general and powerful. Our theorem differs from \citet{futrell-noisy-context-2017} in that (1) we do not require any assumptions about incremental memory except that it has bounded capacity, and (2) our result is a precise bound, whereas the previous result was an approximation based on neglecting higher-order interactions among words, and (3) our result is about the fall-off of \emph{average} mutual information conditional on the intervening words, whereas the previous result was about the fall-off of pointwise mutual information between specific words without conditioning on intervening words.
+\paragraph{Relation with previous results on information locality} A similar information locality result was established by \citet{futrell-noisy-context-2017}, who showed that if incremental memory is affected by progressively increasing noise, then (following the postulates above) processing difficulty increases when words with high pointwise mutual information are separated by large distances. Our current result is more general and powerful. Our theorem differs from \citet{futrell-noisy-context-2017} in three ways:
+\begin{enumerate}
+    \item \citet{futrell-noisy-context-2017} required an assumption that incremental memory is subject to monotonically increasing erasure noise. In contrast, we do not require any assumptions about incremental memory except that it has bounded capacity.
+    \item Our result is a precise bound, whereas the previous result was an approximation based on neglecting higher-order interactions among words.
+    \item Our result is about the fall-off of \emph{average} mutual information conditional on the intervening words, whereas the previous result was about the fall-off of pointwise mutual information between specific words without conditioning on intervening words.
+\end{enumerate}
 
 \paragraph{Relation with psycholinguistic theories} 
-Our result is couched in the language of surprisal theory \citep{hale2001probabilistic,levy2008expectation,hale2016information}, but the memory--surprisal curve reflects fundamental information-theoretic trade-offs that must apply in any psycholinguistic theory. In particular, we have made no assumptions about the architecture of incremental memory, and so our result is general across all such architectures: there is no physically realizable memory architecture that can violate the bound in our theorem. In particular, we emphasize that memory representations do not have to be rational or optimal for our bound to hold.
+Our result is couched in the language of surprisal theory \citep{hale2001probabilistic,levy2008expectation,hale2016information}, but the memory--surprisal curve reflects fundamental information-theoretic trade-offs that must apply in any theory. In particular, we have made no assumptions about the architecture of incremental memory, and so our result is general across all such architectures: there is no physically realizable memory architecture that can violate the bound in our theorem. In particular, we emphasize that memory representations do not have to be rational or optimal for our bound to hold.
 
-In some psycholinguistic theories, memory-related difficulty arises not because of a bound on memory capacity, but rather because of difficulties involved in retrieving information from memory \citep{}. We are able to prove an analogous theorem that applies to such theories: see General Discussion for an extension of our analysis to the case involving a short-term memory (STM) with unbounded capacity, a working memory (WM) with limited capacity, and cost associated with communication between WM and STM. Essentially, the constraint on the the memory state in our theorem above can be re-interpreted as a constraint on the capacity of a communication channel linking STM to WM. In particular, we show how this result constrains models based on cue-based retrieval such as the ACT-R model of \citet{lewis-activation-based-2005}.
+In some psycholinguistic theories, memory-related difficulty arises not because of a bound on memory capacity, but rather because of difficulties involved in retrieving information from memory \citep{}. We are able to prove an analogous theorem that applies to such theories: see General Discussion for an extension of our analysis to the case involving a short-term memory (STM) with unbounded capacity, a working memory (WM) with limited capacity, and cost associated with communication between WM and STM. Essentially, the constraint on the the memory state in our theorem above can be re-interpreted as a constraint on the capacity of a communication channel linking STM to WM. In particular, this result constrains surprisal cost in models based on cue-based retrieval such as the ACT-R model of \citet{lewis-activation-based-2005}.
 
 While we have proven a general relationship between memory capacity and average surprisal, psycholinguistic theories may differ on whether average surprisal $S_M$ really is the right predictor of processing difficulty for humans. That is, our Linking Hypothesis is not true across all existing psycholinguistic theories. 
 
 We argue that any realistic theory of sentence processing must include surprisal as at least a \emph{component} of the cost of processing a word, i.e. processing difficulty for a word $w_t$ must at least be given by $k (-\log P(w_t |m_t)) + R$, with $k$ a scaling factor giving the relative contribution of surprisal to processing cost, and $R$ representing all other factors. The scaling factor $k$ may be small, but we argue it cannot be zero, for both empirical and theoretical reasons. Empirically, surprisal makes a well-documented and robust contribution to processing difficulty in empirical studies of reading times and event-related potentials \citep{smith2013effect,frank2016erp}. Theoretically, surprisal may represent an irreducible thermodynamic cost incurred by any information processing system \citep{brillouin,still2012thermodynamic,zenon2019information}, and there are multiple converging theoretical arguments for why it should hold as a cost in human language processing in particular \citep{levy2013memory}.
 
+\paragraph{Are distant words necessarily forgotten?} Our theorem shows that a listener will inevitably be affected by surprisal cost arising from dependencies longer than some timescale $T$. However, it does not necessarily imply that a listener has forgotten words beyond some amount of time $T$ in the past. An optimal listener may well decide to remember words more distant than $T$, but in order to stay within the bounds of memory, she can only remember words from beyond $T$ at the cost of forgetting some words closer than $T$.
+See SI Appendix Section X for a mathematical example illustrating this phenomenon.
+%\rljf{TODO: This needs to be clarified. This is basically about the non-tightness of the bound.}
+
+\mhahn{Do we also want to expound on what `bits of memory' means? E.g., how this could be instantiated in different mechanistic models or grammar formalisms. Also, we can make clear that capacity bounds do not have to mean bounds on the number of `items' in memory, but also, e.g., bounds on the precision with which these are encoded or utilized.}
 
 \paragraph{Computing the lower bounds}
 The theorem allows us to estimate numerical values for the lower bounds on the average surprisal associated with each amount of memory capacity for a language.
@@ -212,7 +239,7 @@ then we can calculate $I_T$ straightforwardly:
     I_T &= I[w_t : w_{t-T} | w_{t-T+1}, \dots, w_{t-1}] \\
     &= S_{T-1} - S_T.
 \end{align}
-We can fit LSTM $T$-gram models for various values of $T$ to natural language sentences, and then use the resulting $S_T$ values to calculate lower bounds on the memory--surprisal trade-off curve using the theorem by tracing out $T=1, 2, \dots$.
+We can use LSTMs to fit $T$th-order Markov models for various values of $T$ to natural language sentences, and then use the resulting $S_T$ values to calculate lower bounds on the memory--surprisal trade-off curve using the theorem by tracing out $T=1, 2, \dots$.
 
 
 
