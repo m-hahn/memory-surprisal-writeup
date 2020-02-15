@@ -21,7 +21,8 @@ Dependency length can be linked to memory use in certain models of incremental s
 
 All these models of memory in sentence processing, and derived measures of efficiency for memory allocation, require specific assumptions about the architecture of memory.
 This leaves open the question whether such assumptions are necessary, or whether word orders across languages are optimized for memory independently of the implementation and architecture of human language processing.
-
+For example, models of memory in sentence processing differ in whether they assume limitations in capacity \citep{gibson1998linguistic}, the precision at which information is encoded (CITE), or the precision with which specific elements can be retrieved from memory (CITE). From an information-theoretic perspective, these options are different instantiations of the same quantity, namely, the mutual information between past input and the representations that are used for processing new material.
+\mhahn{maybe it would be beneficial to, at some point (Discussion), illustrate how limitations in our framework are instantiated by memory limitations in different frameworks, such as DLT, ACT-R, Marking\&Morphing, ...}
 
 We approach this question by first providing general information-theoretic lower bounds on memory load that will hold independently of the architecture of memory representations.
 We will consider a general setting of a listener performing incremental prediction.
