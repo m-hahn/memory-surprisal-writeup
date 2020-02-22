@@ -1,6 +1,8 @@
 In this section, we will introduce the main concept and hypothesis of our paper from a psycholinguistic perspective. We will provide a technical definition of the memory--surprisal trade-off curve, and then we will prove a theorem showing that more efficient memory--surprisal trade-offs are possible in languages exhibiting information locality: that is, languages where words that depend on each other are close to each other. This theorem establishes the formal link between working memory efficiency in online processing and locality in word order.
 
-\subsection{An information-theoretic model of language processing difficulty}
+The memory--surprisal trade-off applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension, and then we will show how the same trade-off applies in language production.
+
+\subsection{An information-theoretic model of online language comprehension}
 
 \begin{figure}
 \centering
@@ -16,7 +18,7 @@ Experimental research has established three properties of online language compre
 We formalize these three observations into postulates intended to summarize what is known about online language processing difficulty. Consider a listener processing a sequence of words $w_1, \dots, w_t, \dots, w_n$, at an arbitrary time $t$.
 \begin{enumerate}
     \item Postulate 1 (Incremental memory). At time $t$, the listener has an incremental \key{memory state} $m_t$ that contains her stored information about previous words. The memory state is given by a \key{memory encoding function} $M$ such that $m_t = M(w_{t-1}, m_{t-1})$.
-    \item Postulate 2 (Incremental prediction). The listener has a subjective probability distribution at time $t$ over the next word $w_t$. This probability distribution is denoted $P(w_t|m_t)$.
+    \item Postulate 2 (Incremental prediction). The listener has a subjective probability distribution at time $t$ over the next word $w_t$ as a function of the memory state $m_t$. This probability distribution is denoted $P(w_t|m_t)$.
     \item Postulate 3 (Linking hypothesis). Processing a word $w_t$ incurs difficulty proportional to the \key{surprisal} of $w_t$ given the memory state $m_t$:
     \begin{equation}
     \label{eq:lossy-surp}
@@ -29,7 +31,7 @@ Our expression differs from the usual formulation of surprisal theory in that we
 
 From the perspective of information theory, surprisal measures the \key{information content} of a word $w_t$ in context. The surprisal value can be interpreted as the amount of new information contained in the word $w_t$, measured in bits, given the listener's current memory state. If processing effort is indeed proportional to surprisal, then this means that the amount of work required to process a word scales linearly with the information content of that word. The idea that information-processing cost scales with information content is in line with recent theories of the cost of computation in neuroscience \citep{friston2010free,zenon2019information} and physics \citep{still2012thermodynamics}. 
 
-In this work, we are interested in using theories of processing difficulty to derive predictions about languages as a whole, not about individual words or sentences. Therefore, we need a measure of the processing difficulty associated with a language as a whole. For this, we consider the \emph{average} surprisal per word in the language. We call this quantity the \key{average surprisal}, denoted $S_M$ and measured in bits.
+In this work, we are interested in using theories of processing difficulty to derive predictions about languages as a whole, not about individual words or sentences. Therefore, we need a measure of the processing difficulty associated with a language as a whole. For this, we consider the \emph{average} surprisal per word in the language. We call this quantity the \key{average surprisal} of a language given a memory encoding function $M$, denoted $S_M$ and measured in bits.
 
 Crucially, the listener's ability to predict upcoming words accurately depends on how much she remembers about previous words. As the precision of her memory increases, the accuracy of her predictions also increases, and the average surprisal $S_M$ for each incoming word decreases. Taking an information-theoretic perspective, we can think about the amount of information (measured in bits) about previous words stored in the listener's memory state. This quantity of information is given by the \key{entropy} of the memory state, denoted $H_M$:
 \begin{equation}
@@ -37,7 +39,7 @@ Crucially, the listener's ability to predict upcoming words accurately depends o
 \end{equation}
 where the summation runs over all possible memory states $m$. As the listener stores more and more bits of information about the previous words her memory state, she can achieve lower and lower surprisal values for the upcoming words. This trade-off between memory and surprisal is the main object of study in this paper.
 
-The \key{memory--surprisal trade-off curve} answers the question: for a given amount of information about previous words $H_M$ stored in the listener's memory state, what is the lowest achievable average surprisal $S_M$? Two example trade-off curves are shown in Figure~\ref{fig:examples}. In general, as the listener stores more information about previous words in her memory state, her lowest achievable average surprisal must go down. So the curve is always monotonically decreasing. However, the precise shape of the trade-off curve depends on the structure of the language being predicted. For example, Figure~\ref{fig:examples} shows how two processes might engender different trade-off curves, with Language A allowing more favorable trade-offs than Language B. That is, for Language A, it is possible to achieve lower processing difficulty while investing less memory resources than in Language B.
+The \key{memory--surprisal trade-off curve} answers the question: for a given amount of information about previous words $H_M$ stored in the listener's memory state, what is the lowest achievable average surprisal $S_M$? Two example trade-off curves are shown in Figure~\ref{fig:examples}. In general, as the listener stores more information about previous words in her memory state, her lowest achievable average surprisal must go down. So the curve is always monotonically decreasing. However, the precise shape of the trade-off curve depends on the structure of the language being predicted. For example, Figure~\ref{fig:examples} shows how two processes might engender different trade-off curves, with Language $A$ allowing more favorable trade-offs than Language $B$. That is, for Language $A$, it is possible to achieve lower processing difficulty while investing less memory resources than in Language $B$.
 
 \begin{figure}
 \centering
@@ -72,10 +74,7 @@ where the notation $H[\cdot | \cdot]$ indicates conditional entropy \citep[][p. 
  %Because $W$ is stationary and ergodic by construction, the limit in Eq.~\ref{eq:entropy-rate} is guaranteed to converge to a unique value. 
  The entropy rate of natural language text has been studied by \citet{shannon1951entropy}, \citet{takahira}, and \citet{bentz}. 
  The average surprisal $S_M$ can also be called a \key{cross entropy rate}. % TODO: Say something about convergence and uniqueness?
- 
- 
- 
-Because the memory state $m_t$ is a function of the previous words $w_1, \dots, w_{t-1}$, we have by the Data Processing Inequality \citep[][pp. 34--35]{cover2006elements}:
+ Because the memory state $m_t$ is a function of the previous words $w_1, \dots, w_{t-1}$, we can prove by the Data Processing Inequality \citep[][pp. 34--35]{cover2006elements} that the entropy rate must be less than or equal to the average surprisal for any memory encoding function $M$:
 \begin{equation}
     S_\infty \le S_M.
 \end{equation}
@@ -83,17 +82,17 @@ If the memory state $m_t$ stores all information about the previous words $w_1, 
 
 % The "memory distortion" stuff below might be useful in an argument about the trade-off for the speaker.
 
-%In general, we can write the average surprisal $S_M$ as a sum of two non-negative terms,
-%\begin{equation}
-%    S_M = S_\infty + d_M,
-%\end{equation}
-%where $d_M$ is \key{memory distortion}: the extra surprisal incurred in addition to the unavoidable surprisal $S_\infty$, owing to the lossiness of the memory encoding function $M$. 
-%The memory distortion $d_M$ is formally a KL divergence:
-%\begin{equation}
-%    \label{eq:memory-distortion}
-%    d_M = \lim_{t \rightarrow \infty} D_{\text{KL}} [ p(w_t | w_1, \dots, w_{t-1}) || p(w_t | m_t)].
-%\end{equation}
-%Finding a memory encoding function $M$ to minimize $S_M$ is equivalent to minimizing the memory distortion $d_M$.
+In general, we can write the average surprisal $S_M$ as a sum of two non-negative terms,
+\begin{equation}
+    S_M = S_\infty + d_M,
+\end{equation}
+where $d_M$ is \key{memory distortion}: the extra surprisal incurred in addition to the unavoidable surprisal $S_\infty$, owing to the lossiness of the memory encoding function $M$. 
+The memory distortion $d_M$ is formally a KL divergence:
+\begin{equation}
+    \label{eq:memory-distortion}
+    d_M = \lim_{t \rightarrow \infty} D_{\text{KL}} [ p(w_t | w_1, \dots, w_{t-1}) || p(w_t | m_t)].
+\end{equation}
+Finding a memory encoding function $M$ to minimize $S_M$ is equivalent to minimizing the memory distortion $d_M$.
 
 The average amount of information stored in the memory states $m_t$ is the entropy of the stationary distribution over memory states, $H_M$:
 \begin{equation}
@@ -202,12 +201,12 @@ If statistical dependencies, as measured using mutual information, can be identi
 
 \paragraph{Relation with previous results on information locality} A similar information locality result was established by \citet{futrell-noisy-context-2017}, who showed that if incremental memory is affected by progressively increasing noise, then (following the postulates above) processing difficulty increases when words with high pointwise mutual information are separated by large distances. Our current result is more general and powerful. Our theorem differs from \citet{futrell-noisy-context-2017} in three ways:
 \begin{enumerate}
-    \item \citet{futrell-noisy-context-2017} required an assumption that incremental memory is subject to monotonically increasing erasure noise. In contrast, we do not require any assumptions about incremental memory except that it has bounded capacity.
+    \item \citet{futrell-noisy-context-2017} required an assumption that incremental memory is subject to decay over time. In contrast, we do not require any assumptions about incremental memory except that it has bounded capacity.
     \item Our result is a precise bound, whereas the previous result was an approximation based on neglecting higher-order interactions among words.
     \item Our result is about the fall-off of \emph{average} mutual information conditional on the intervening words, whereas the previous result was about the fall-off of pointwise mutual information between specific words without conditioning on intervening words.
 \end{enumerate}
 
-\paragraph{Relation with psycholinguistic theories} 
+\paragraph{Relation with psycholinguistic theories of comprehension} 
 Our result is couched in the language of surprisal theory \citep{hale2001probabilistic,levy2008expectation,hale2016information}, but the memory--surprisal curve reflects fundamental information-theoretic trade-offs that must apply in any theory. In particular, we have made no assumptions about the architecture of incremental memory, and so our result is general across all such architectures: there is no physically realizable memory architecture that can violate the bound in our theorem. In particular, we emphasize that memory representations do not have to be rational or optimal for our bound to hold.
 
 In some psycholinguistic theories, memory-related difficulty arises not because of a bound on memory capacity, but rather because of difficulties involved in retrieving information from memory \citep{}. We are able to prove an analogous theorem that applies to such theories: see General Discussion for an extension of our analysis to the case involving a short-term memory (STM) with unbounded capacity, a working memory (WM) with limited capacity, and cost associated with communication between WM and STM. Essentially, the constraint on the the memory state in our theorem above can be re-interpreted as a constraint on the capacity of a communication channel linking STM to WM. In particular, this result constrains surprisal cost in models based on cue-based retrieval such as the ACT-R model of \citet{lewis-activation-based-2005}.
@@ -256,6 +255,31 @@ We can use LSTMs to fit $T$th-order Markov models for various values of $T$ to n
 \end{figure}
 
 
+
+\section{Memory--surprisal trade-off in language production}
+
+An analogous memory--surprisal trade-off exists in language production. We can derive the existence of this trade-off from the following postulates about language production. Let a language be represented by a stationary ergodic stochastic process, parameterized by a probability distribution $p(w_t | \mathbf{w_{<t}})$ giving the conditional probability of any word $w_t$ given an unbounded number of previous words. Our postulates describe a speaker who tries to match the probability distribution $p(w_t | \mathbf{w_{<t}})$ using incremental memory representations:
+
+\begin{enumerate}
+    \item Production Postulate 1 (Incremental memory). At time $t$, the speaker has an incremental \key{memory state} $m_t$ that contains (1) her stored information about previous words that she has produced, and (2) information about her production target. The memory state is given by a \key{memory encoding function} $M$ such that $m_t = M(w_{t-1}, m_{t-1})$. This memory encoding function may differ from the one used in comprehension.
+    
+    \item Production Postulate 2 (Production policy). At time $t$, the speaker produces the next word $w_t$ conditional on her memory state by drawing from a probability distribution $q(w_t | m_t)$, called the \key{production policy}. 
+    
+    \item Production Postulate 3 (Minimizing divergence). The production policy $q(w_t|m_t)$ is selected to minimize the Kullback-Leibler divergence to the target language $p(w_t|\mathbf{w}_{<t})$. We call this divergence the \key{competence--performance divergence} under the memory encoding function $M$ and the production policy $q$. It measures the extent to which the produced language differs from the target language:
+    \begin{align}
+    \label{eq:comp-perf-div}
+    d^q_M &\equiv D_{\text{KL}} [ p(w_t|\mathbf{w_{<t}}) || q(w_t|m_t) ] \\
+        &= \sum_{\mathbf{w_{\le t}}} p(\mathbf{w_{\le t}}) \log \frac{p(w_t | \mathbf{w_{<t}})}{q(w_t|m_t)}.
+    \end{align}
+    The production policy is then the solution to the functional minimization problem:
+    \begin{equation}
+        \mathop{\text{minimize }}_{q(w_t|m_t)} d^q_M.
+    \end{equation}
+\end{enumerate}
+
+Completing the link with the memory--surprisal trade-off in comprehension, we note that when the production policy $q(w_t|m_t)$ is selected to minimize the competence--performance divergence $d^q_M$, this divergence becomes equal to the memory distortion $d_M$ discussed above. Therefore, under these postulates, the Information Locality Bound Theorem will apply in production as well as comprehension. This means that languages that exhibit information locality can be produced with greater accuracy given limited memory resources.
+
+Although the memory--surprisal trade-off is mathematically equivalent between comprehension and production, its psycholinguistic interpretation is different. In the case of language comprehension, the trade-off represents excess processing \emph{difficulty} arising due to memory constraints. In the case of language production, the trade-off represents \emph{production error} arising due to memory constraints. When memory is constrained, then the speaker's productions will diverge from her target language. And as memory is more and more constrained, this divergence will increase more and more. The degree of divergence is measured in the same units as surprisal, hence the formal equivalence between the listener's and speaker's memory--surprisal trade-offs. 
 
 
 
