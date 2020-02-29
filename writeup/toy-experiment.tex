@@ -1,7 +1,8 @@
 So far, we have proven that there must exist a trade-off between memory and surprisal, and that this trade-off is optimized when languages have relatively short-term dependencies. Here, we illustrate the linguistic predictions of our theoretical results, and confirm that favored word orders with short syntactic dependencies do indeed optimize the memory--surprisal tradeoff in a toy language.
 
 We will illustrate the operation of our theoretical framework by reanalyzing the data from \cite{fedzechkina-human-2017}.
-This is a miniature artificial language study that showed a bias for dependency locality in production in artificial language learning. We will show that the languages which were favored in the artificial language learning experiment are those which optimize the memory--surprisal trade-off.
+This is a miniature artificial language study that showed a bias for dependency locality in production in artificial language learning. 
+We will show that the languages which were favored in the artificial language learning experiment are those which optimize the memory--surprisal trade-off.
 
 \subsection{Background: \citet{fedzechkina-human-2017}}
 
@@ -52,16 +53,17 @@ Crucially, \citet{fedzechkina-human-2017} set up the experiment such that in all
 
 \subsection{Calculating the memory--surprisal trade-off for the artificial languages}
 
-We hypothesize, in line with our Main Hypothesis, that the favored language $A$ has a steeper memory--surprisal trade-off curve than the disfavored language $B$. Because of the controlled nature of this artificial language, we are able to test this hypothesis by exactly computing the bound on the speaker's memory as given in Theorem~\ref{prop:suboptimal}.
+We hypothesize, in line with our Main Hypothesis, that the favored language $A$ has a steeper memory--surprisal trade-off curve than the disfavored language $B$. Because of the controlled nature of this artificial language, we are able to test this hypothesis by exactly computing the bound on memory as given in Theorem~\ref{prop:suboptimal}. 
 
-We only consider the head-final version of \citet{fedzechkina-human-2017}'s artificial language. This is because our bound on the memory--surprisal trade-off curve is invariant under reversal of a language: that is, if we take a language and reverse the order of all the words in all its sentences, we would measure the same lower bound on the memory--surprisal trade-off curve.\footnote{For a proof see SI Section TODO.}. Therefore, strictly head-final and strictly head-initial languages are equivalent under our bound. Note that this invariance to reversal applies only to our \emph{lower bound} on the memory-surprisal trade-off curve; the true curve is not generally invariant to word order reversal \citep{crutchfield-times-2009}.
+We only consider the head-final version of \citet{fedzechkina-human-2017}'s artificial language. This is because our bound on the memory--surprisal trade-off curve is invariant under reversal of a language. That is, if we take a language and reverse the order of all the words in all its sentences, we would measure the same lower bound on the memory--surprisal trade-off curve.\footnote{For a proof see SI Section TODO.} Therefore, strictly head-final and strictly head-initial languages are equivalent under our bound. Note that this invariance to reversal applies only to our \emph{lower bound} on the memory-surprisal trade-off curve; the true curve is not generally invariant to word order reversal \citep{crutchfield-times-2009}. In fact, for this toy process, we can prove that the bound provided by the theorem is tight, meaning that TODO TODO TODO.
+
+% RF: We need to explain concretely what tightness means in this case
+
 %The language has consistent head-final order, and uses case marking on objects.
 %The relevant production targets are transitive sentences where one of the two arguments is much longer than the other, due to the presence of a PP modifier, as shown in Table~\ref{tab:artificial}.
 %The language has variable order of subjects and objects; for the production targets, the B versions produce much longer dependencies than the A versions.
 %Dependency Length Minimization thus predicts that speakers are more likely to use the A versions.
 %\cite{fedzechkina-human-2017} confirmed this experimentally.
-
-\mhahn{In fact, for this toy process, we can prove that the bound provided by the theorem is tight.}
 
 We constructed a stochastic process representing the language consisting of sentences with the $A$ orders from Figure~\ref{tab:artificial}, and one language consisting of the $B$ orders. Following the experimental setup of \cite{fedzechkina-human-2017}, we assigned equal probability to the two possible configurations per language, and used a separate set of nouns (inanimate nouns) for the embedded noun in the long phrase.
 
@@ -70,7 +72,7 @@ We constructed a stochastic process representing the language consisting of sent
 
 
 We interpreted each of the two languages as a stationary processes, extending infinitely in both directions, by concatenating independent samples drawn from the language.
-			We computed (\ref{eq:memory-bound}) from a chain of 1000 independently sampled sentences, for each of the two versions of the toy language.
+We computed (\ref{eq:memory-bound}) from a chain of 1000 independently sampled sentences, for each of the two versions of the toy language.
 % TODO: More on how this was done.			
 % TODO: Convert nats to bits
 
@@ -173,4 +175,5 @@ For reaching optimal surprisal, the empirically-favored language $A$ requires st
 
 In a reinterpretation of previous experimental findings, we showed that the languages which are favored in artificial language learning experiments are those which optimize the memory--surprisal trade-off. 
 This is evidence that learners and/or speakers have a bias toward word orders that optimize the trade-off. 
-Furthermore, this result solidifies the link between the memory--surprisal trade-off and more traditional notions from linguistics, such as dependency locality. We found that the word orders which are optimal from the perspective of dependency locality are also those orders which are optimal from the perspective of the memory--surprisal trade-off.
+Furthermore, this result solidifies the link between the memory--surprisal trade-off and more traditional notions from linguistics, such as dependency locality. 
+We found that the word orders which are optimal from the perspective of dependency locality are also those orders which are optimal from the perspective of the memory--surprisal trade-off.
