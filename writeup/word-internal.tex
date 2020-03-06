@@ -29,48 +29,82 @@ can also directly quantify MI with verb stem (presence \& choice for each slot) 
 
 \paragraph{Data Selection}
 
-UD corpora 2.4 with freely available word forms
+UD corpora 2.4 with freely available word forms. Only training set, so only GSD.
 
-selected all chains VERB AUX...AUX. If a -te followed, added this.
+Verb forms are tokenized so that most suffixes are segmented as individual words.
 
-We obtained X forms.
+We selected all chains VERB AUX...AUX. If a -te followed, added this.
+
+We obtained 15281 forms, with a median number of X suffixes (max=...).
 
 Describe format: form vs lemma.
 
-Selected all morphemes occurring at least 50 times and annotated their meaning/function.
+
+Japanese verb stems and suffixes show alternations conditioned on neighboring suffixes.
+In the GSD treebank, each stem and suffix is annotated with a `lemma' indicating a normalized context-independent representation of the morpheme.
+
+In the UD treebanks, each morpheme is 
+
 
 \paragraph{Verb Suffixes in Japanese}
 
 Japanese orthography does not indicate word boundaries, and there is no universally accepted segmentation.
 
+We determined a set of common morphemes as follows.
+We selected all morphemes occurring at least 50 times and annotated their meaning/function.
+Also, we excluded three morphemes that are treated as independent words, not suffixes, by \cite{kaiser2013japanese} (dekiru, naru, yoo).
+
 We list the morphemes according to the order extracted according to the model.
 While this ordering matches almost all observed forms, there are some orderings that do not fit into this pattern, see below.
 
-Think we should exclude YOODA and NARU. By the same criteria, might want to exclude DEKIRU?
+TODO read Kaiser p. 398 potential
 
 \begin{enumerate}
 \item suru: derivational, turns Sino-Japanese nouns into verbs.
-\item VALENCE: causative (-ase-). Hasegawa 142 (saseru, seru. 190)
-\item VOICE: passive (-areru, -rareru). passive (Hasegawa 152) -areru, -rareru. (rareu, reru. 2000)
-\item MODALITY: dekiru potential (180), -ta- (-tai, -taku-, -taka-) desiderative (tai. 85). but can also have masu after tai: ikitakunarimasu IKU-TAI-NARU-MASU `I want to go'. ORDER CONFLICT: mimashitai `I want to see'
-\item POLITENESS (masu, mashi, mase. 600). comes between dekiru and tai % 見できます, 見ましたい
+\item VALENCE: causative (-ase-). \cite[142]{hasegawa2014japanese} \cite[Chapter 13]{kaiser2013japanese} (saseru, seru. 190)
+\item VOICE: passive (-areru, -rareru). passive \cite[152]{hasegawa2014japanese} \cite[Chapter 12]{kaiser2013japanese} -areru, -rareru. (rareru, reru. 2000)
+\item POLITENESS (masu, mashi, mase. 600) \cite[190]{kaiser2013japanese}. % 見できます, 見ましたい
+\item MODALITY: -ta- (-tai, -taku-, -taka-) desiderative (tai. 85) \cite[238]{kaiser2013japanese}. mi-mashi-tai `I want to see'
 \item NEGATION: negation (-nai, -n-, -nakaC-. 630). also -mai for negative+volition.
-\item yooda (180) EVIDENTIAL? yooda. but past -ta- can be after it: iruyoodatta IRU-YOODA-TA (Kaiser et al 9.5.6.1.1.1) vs misenakattayooda MISERU-NAI-TA-YOODA `it didn't seem' (GSD treebank). Maybe this should be thought of better as an SCONJ at least when including -ni, Vaccari p. 238-241.
-\item naru (`become', 102). Maybe this should be excluded, not treated as an affix in the books.
-\item TENSE/ASPECT: tense (-ta for past 4000, -yoo for hortative 92 Vaccari p. 170, ...)
-\item TE (creates nonfintie form. 4000)
-%\item -i (as in -tai, -nai, adjectives)
-%\item EVIDENTIAL: tashii
+\item TENSE/ASPECT/MOOD:
+
+-ta for past (4000)
+
+-yoo for hortative, future, ... 92 \cite[229]{kaiser2013japanese}. Q how do-nai- and -yoo interact?
+\item -te derives a nonfinite form \cite[186]{kaiser2013japanese}. 4000
 \end{enumerate}
 
+EXAMPLES:
+
+\begin{tabular}{llllllll|llllllll}
+Stem & Causative & Passive & Politeness & Desiderative & Negation & TAM & -te & \\ \hline
+mi &          &       &            &          & naka     & tta &    & did not see \cite[153]{vaccari1938complete}\\
+mi &          &       &            & taku     & nai      &     &     & I do not wish to see \cite[98]{vaccari1938complete} \\
+mi &          &       &            & taku     & naka    & tta  &      & I did not wish to see \cite[98]{vaccari1938complete} \\
+oyog & ase    &       &            &          &         & ta    &     & made swim \\
+tat & ase     & rare  &            &          &         & ta    &     & was made to stand up \cite[396]{kaiser2013japanese} \\
+waraw  &       & are  &            &           &         & ta    &    & was laughed at \cite[384]{kaiser2013japanese} \\
+mi     &       & rare & mase       &          & n        &      &     & is not seen \cite[337]{vaccari1938complete} \\
+mi     &       & rare & mash      &           &          & yoo  &    & will be seen \cite[337]{vaccari1938complete} \\
+de     &       &     &            &           & naka     & roo  &    & will not go out \cite[170]{vaccari1938complete}
+\end{tabular}
+
+Not all combinations are possible. 
+`was not seen' is miraremasen deshita \cite[337]{vaccari1938complete}, not MIRU-RERU-MASE-NAI-TA
+Negation is not directly combined with -yoo.
 
 Some relatively frequent morphemes that are below the threshold
 
 \begin{enumerate}
-\item nakereba `if not'
+\item nakereba `if not' (cf \cite[9.3.1.4]{kaiser2013japanese})
 \item tsudzukeru (continuative, 30)
 \item yasui `easy to'
 \item hajimeru (inchoative, 21)
+\item naru (`become', 102). Maybe this should be excluded, not treated as an affix in the books.
+\item yooda (180) EVIDENTIAL? yooda. but past -ta- can be after it: iruyoodatta IRU-YOODA-TA (Kaiser et al 9.5.6.1.1.1) vs misenakattayooda MISERU-NAI-TA-YOODA `it didn't seem' (GSD treebank). Maybe this should be thought of better as an SCONJ at least when including -ni, Vaccari p. 238-241.
+\item beki Necessitative \cite[248]{kaiser2013japanese}
+\item soo `likely to' \cite[258]{kaiser2013japanese}, probably not AUX in UD
+\item dekiru potential (180), 
 \end{enumerate}
 
 
@@ -99,20 +133,6 @@ there's just too many verb forms, here limited to frequent ones we found in the 
 
 % da/de/na (lemmatized as da): copula (?). na after adjectives.
 
-
-past negation: nakat-ta
-
-mi-naka-tta did not see (Vaccari 153)
-
-desiderative:
-
--tai, -takatta (past)
-
-mi-taku-nai I do not wish to see (98)
-
-mi-taku-naka-tta I didn't wish  to see
-
-oyog-ase-ta `made swim'
 
 
 
