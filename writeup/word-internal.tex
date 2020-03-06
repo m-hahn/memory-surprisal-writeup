@@ -53,9 +53,12 @@ Japanese orthography does not indicate word boundaries, and there is no universa
 We determined a set of common morphemes as follows.
 We selected all morphemes occurring at least 50 times and annotated their meaning/function.
 Also, we excluded three morphemes that are treated as independent words, not suffixes, by \cite{kaiser2013japanese} (dekiru, naru, yoo).
+Also, passive and potential markers are formally identical for many verbs; we included both here.
 
 We list the morphemes according to the order extracted according to the model.
 While this ordering matches almost all observed forms, there are some orderings that do not fit into this pattern, see below.
+
+
 
 TODO read Kaiser p. 398 potential
 
@@ -63,6 +66,10 @@ TODO read Kaiser p. 398 potential
 \item suru: derivational, turns Sino-Japanese nouns into verbs.
 \item VALENCE: causative (-ase-). \cite[142]{hasegawa2014japanese} \cite[Chapter 13]{kaiser2013japanese} (saseru, seru. 190)
 \item VOICE: passive (-areru, -rareru). passive \cite[152]{hasegawa2014japanese} \cite[Chapter 12]{kaiser2013japanese} -areru, -rareru. (rareru, reru. 2000)
+\item POTENTIAL: (e.g., -eru in UD)  atsuka-e-nai `can't handle' %扱えない GSD treebank
+araso-e-nai `can't dispute' % 争えない GSD treebank
+
+how is this ordered relative to PASSIVE? In UD, they don't seem to be always separated (ambiguity of reru/rareru. \cite[346]{vaccari1938complete}: identical to the passive for one class, or -eru for other verb class).
 \item POLITENESS (masu, mashi, mase. 600) \cite[190]{kaiser2013japanese}. % 見できます, 見ましたい
 \item MODALITY: -ta- (-tai, -taku-, -taka-) desiderative (tai. 85) \cite[238]{kaiser2013japanese}. mi-mashi-tai `I want to see'
 \item NEGATION: negation (-nai, -n-, -nakaC-. 630). also -mai for negative+volition.
@@ -86,8 +93,11 @@ tat & ase     & rare  &            &          &         & ta    &     & was made
 waraw  &       & are  &            &           &         & ta    &    & was laughed at \cite[384]{kaiser2013japanese} \\
 mi     &       & rare & mase       &          & n        &      &     & is not seen \cite[337]{vaccari1938complete} \\
 mi     &       & rare & mash      &           &          & yoo  &    & will be seen \cite[337]{vaccari1938complete} \\
-de     &       &     &            &           & naka     & roo  &    & will not go out \cite[170]{vaccari1938complete}
+de     &       &     &            &           & naka     & roo  &    & will not go out \cite[170]{vaccari1938complete} \\
+mi     &       & e   & mase       &           & n        &      &    & cannot see \cite[349]{vaccari1938complete} \\
+mi     &       &     & mashi      & tai       &          &      &    & want to see
 \end{tabular}
+
 
 Not all combinations are possible. 
 `was not seen' is miraremasen deshita \cite[337]{vaccari1938complete}, not MIRU-RERU-MASE-NAI-TA
@@ -192,7 +202,7 @@ honorific -masu
 
 \subsection{Sesotho}
 
-
+\cite{doke1967textbook}
 
 \paragraph{Verb Prefixes in Sesotho}
 
