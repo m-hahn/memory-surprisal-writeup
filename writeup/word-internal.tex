@@ -55,6 +55,8 @@ We selected all morphemes occurring at least 50 times and annotated their meanin
 Also, we excluded three morphemes that are treated as independent words, not suffixes, by \cite{kaiser2013japanese} (dekiru, naru, yoo).
 Also, passive and potential markers are formally identical for many verbs; we included both here.
 
+Also, we took suru to be a unit with the preceding element (it is used for turning Sino-Japanese words into verbs).
+
 We list the morphemes according to the order extracted according to the model.
 While this ordering matches almost all observed forms, there are some orderings that do not fit into this pattern, see below.
 
@@ -63,7 +65,6 @@ While this ordering matches almost all observed forms, there are some orderings 
 TODO read Kaiser p. 398 potential
 
 \begin{enumerate}
-\item suru: derivational, turns Sino-Japanese nouns into verbs.
 \item VALENCE: causative (-ase-). \cite[142]{hasegawa2014japanese} \cite[Chapter 13]{kaiser2013japanese} (saseru, seru. 190)
 \item VOICE: passive (-areru, -rareru). passive \cite[152]{hasegawa2014japanese} \cite[Chapter 12]{kaiser2013japanese} -areru, -rareru. (rareru, reru. 2000)
 \item POTENTIAL: (e.g., -eru in UD)  atsuka-e-nai `can't handle' %扱えない GSD treebank
@@ -71,6 +72,9 @@ araso-e-nai `can't dispute' % 争えない GSD treebank
 
 how is this ordered relative to PASSIVE? In UD, they don't seem to be always separated (ambiguity of reru/rareru. \cite[346]{vaccari1938complete}: identical to the passive for one class, or -eru for other verb class).
 \item POLITENESS (masu, mashi, mase. 600) \cite[190]{kaiser2013japanese}. % 見できます, 見ましたい
+
+It is interesting that this is relatively close to the verb
+
 \item MODALITY: -ta- (-tai, -taku-, -taka-) desiderative (tai. 85) \cite[238]{kaiser2013japanese}. mi-mashi-tai `I want to see'
 \item NEGATION: negation (-nai, -n-, -nakaC-. 630). also -mai for negative+volition.
 \item TENSE/ASPECT/MOOD:
@@ -81,21 +85,26 @@ how is this ordered relative to PASSIVE? In UD, they don't seem to be always sep
 \item -te derives a nonfinite form \cite[186]{kaiser2013japanese}. 4000
 \end{enumerate}
 
+Parallel to Bybee's hierarchy: valence closest, then voice.
+
+Difference from Bybee' hierarchy: mood/modality are ordered closer than tense/aspect.
+
 EXAMPLES:
 
-\begin{tabular}{llllllll|llllllll}
-Stem & Causative & Passive & Politeness & Desiderative & Negation & TAM & -te & \\ \hline
-mi &          &       &            &          & naka     & tta &    & did not see \cite[153]{vaccari1938complete}\\
-mi &          &       &            & taku     & nai      &     &     & I do not wish to see \cite[98]{vaccari1938complete} \\
-mi &          &       &            & taku     & naka    & tta  &      & I did not wish to see \cite[98]{vaccari1938complete} \\
-oyog & ase    &       &            &          &         & ta    &     & made swim \\
-tat & ase     & rare  &            &          &         & ta    &     & was made to stand up \cite[396]{kaiser2013japanese} \\
-waraw  &       & are  &            &           &         & ta    &    & was laughed at \cite[384]{kaiser2013japanese} \\
-mi     &       & rare & mase       &          & n        &      &     & is not seen \cite[337]{vaccari1938complete} \\
-mi     &       & rare & mash      &           &          & yoo  &    & will be seen \cite[337]{vaccari1938complete} \\
-de     &       &     &            &           & naka     & roo  &    & will not go out \cite[170]{vaccari1938complete} \\
-mi     &       & e   & mase       &           & n        &      &    & cannot see \cite[349]{vaccari1938complete} \\
-mi     &       &     & mashi      & tai       &          &      &    & want to see
+\begin{tabular}{lllllllll|lllllll}
+     & VALENCE   & VOICE    & \multicolumn{3}{c}{MOOD/MODALITY} & NEGATION & TENSE \\
+Stem & Causative & Passive & Potential & Politeness & Desiderative & Negation & TAM & -te & \\ \hline
+mi &          &      & &            &          & naka     & tta &    & did not see \cite[153]{vaccari1938complete}\\
+mi &          &      & &            & taku     & nai      &     &     & I do not wish to see \cite[98]{vaccari1938complete} \\
+mi &          &      & &            & taku     & naka    & tta  &      & I did not wish to see \cite[98]{vaccari1938complete} \\
+oyog & ase    &      & &            &          &         & ta    &     & made swim \\
+tat & ase     & rare & &            &          &         & ta    &     & was made to stand up \cite[396]{kaiser2013japanese} \\
+waraw  &       & are & &            &           &         & ta    &    & was laughed at \cite[384]{kaiser2013japanese} \\
+mi     &       & rare& & mase       &          & n        &      &     & is not seen \cite[337]{vaccari1938complete} \\
+mi     &       & rare& & mash      &           &          & yoo  &    & will be seen \cite[337]{vaccari1938complete} \\
+de     &       &    & &            &           & naka     & roo  &    & will not go out \cite[170]{vaccari1938complete} \\
+mi     &       &    & e & mase       &           & n        &      &    & cannot see \cite[349]{vaccari1938complete} \\
+mi     &       &    & & mashi      & tai       &          &      &    & want to see
 \end{tabular}
 
 
@@ -119,6 +128,34 @@ Some relatively frequent morphemes that are below the threshold
 
 
 there's just too many verb forms, here limited to frequent ones we found in the corpus.
+
+
+\paragraph{Experiment}
+
+modes:
+
+- predicting on the phoneme level
+
+- predicting on the grapheme level: equivalent to phonemic, but in units of syllables
+
+- predicting on the level of morphemes: we take the lemmas, and unite saseru+seru to CAUSATIVE and reru+rareru+eru+keru to PASSIVE/POTENTIAL.
+
+This controls for allomorphy / morphophonemic changes, which are conditioned on surrounding affixes (so naturally favor locality).
+
+
+comparison to baselines
+
+- random grammars
+
+optimization:
+
+- phonemes
+
+- graphemes
+
+- morphemes
+
+
 
 % volitional 加わろう kawawar-oo
 % volitional polite 加わりましょう kawawar-i-mashy-oo
@@ -204,41 +241,90 @@ honorific -masu
 
 \cite{doke1967textbook}
 
+We use the Demuth Corpus \cite{demuth1992acquisition} of child and child-directed speech, containing about 13K utterances with 500K morphemes.
+
+The corpus has very extensive manual morphological segmentation and annotation; each verb form is segmented into morphemes, which are annotated for their function.
+
+Sometimes morphemes fused, indicated with slash in the annotation.
+
+Sesotho has composite forms consisting of an inflected auxiliary followed by an inflected verb.
+Both verbs carry subject agreement.
+While they are annotated as a unit in the Demuth corpus, they are treated as separate words in grammars \citep{doke1967textbook,guma1971outline,lombard1969handbook}.
+We separated these, taking the main verb to start at its subject agreement prefix.
+We only considered main verbs for the experiments here.
+
+% TODO analysis for adult-oly portion
+
 \paragraph{Verb Prefixes in Sesotho}
 
-Most common:
+In the Demuth corpus, each morpheme is annotated; a two-letter key indicates the type of morpheme (e.g. subject agreement, TAM marker).
+We classified morphemes by this annotation.
+We considered morpheme types occurring at least 50 times in the corpus.
+
+As in Japanese, morphemes show different forms depending on their environment, and the corpus contains some instances of fused neighboring morphemes that were not segmented further.
+
 \begin{enumerate}
-    \item Subject agreement (sm or sr): person/number or noun class. also has variation depending on verb form (e.g. 1st sg is ke-, ka-, N- depending on form, Guma 1971, p. 162). See Lombard 1985, p. 104-106 for morphophonological rules.
-    \item Tense/aspect marker (t{\^\ }) Guma 1971, p. 165-166. -a- Lombard 1985, p. 109.
-    \item Object agreement (om)
+    \item SUBJECT Subject agreement (sm- 17K or sr- 193): person/number or noun class. also has variation depending on verb form (e.g. 1st sg is ke-, ka-, N- depending on form, Guma 1971, p. 162). See Lombard 1985, p. 104-106 for morphophonological rules.
+    
+    \cite[\textsection 395]{doke1967textbook}
+    
+    \item NEGATION Negation (ska, seka, sa, skaba, 362). sa used in Negative Dependent Present (Paroz 1946, p.31) and Perfect (ibid p. 80). E.g. Sec 13.38 p.172 in Guma 1971. -sa- and -se- Lombard 1985 p. 108, appear in different moods.
+    
+    \item TENSE/ASPECT Tense/aspect marker (t\^{} 13K) Guma 1971, p. 165-166. -a- Lombard 1985, p. 109.
+    
+    Some of the common markers in the corpus are t\^{}f for future and t\^{}pf for perfect.
+    
+    (e.g., ile- for remote past \cite[\textsection 177]{doke1967textbook})
+    
+    Also often fused with the object agreement marker.
+    
+    \item MOOD Conditional morpheme (\emph{ho}, `if', 314)
+    
+    \item OJECT Object agreement (om 6K) or reflexive (rf, 751). These are mutually exclusive \cite[p. 165]{guma1971handbook}
 \end{enumerate}
 
 
 TODO ha- negation is a prefix coming before the subject agreement prefix (Guma 1971, p. 164).  ga- in Lomard 1985 p. 108.
 
-Also some merging between tense and object markers. for the lemma-based version, have to construct a version where all of this merging is undone (e.g. including a slash, or \begin{verbatim}t^.om2s\end{verbatim})
 
-Other morphemes
-\begin{enumerate}
-    \item SUBJECT: Subject agreement
-    \item (TODO) Copula (cp)
-    \item NEGATION Negation (ska, seka, sa, skaba). sa used in Negative Dependent Present (Paroz 1946, p.31) and Perfect (ibid p. 80). E.g. Sec 13.38 p.172 in Guma 1971. -sa- and -se- Lombard 1985 p. 108, appear in different moods.
-    \item TAM Tense/aspect marker (e.g., ile- for remote past)
-    \item (TODO) conditional morpheme (\emph{ho}, `if')
-    \item OBJECT Object agreement (optional) or Reflexive (rf, i-) (exclusive: Guma 1971, p. 165)
-\end{enumerate}
+
+Also some merging between tense and object markers. for the lemma-based version, have to construct a version where all of this merging is undone (e.g. including a slash, or t\^{}.om2s)
 
 
 \paragraph{Verb Suffixes in Sesotho}
 
+Again, we extracted morpheme types occurring at least 50 times.
 
 \begin{enumerate}
-    \item VALENCE: applicative
-    (ap -el- \cite[\textsection 310]{doke1967textbook} \cite[p. 109]{lombard1969handbook}, with morphophonological changes), causative (c), neuter/stative (nt), reversive (rv), rc reciprocal
-    \item VOICE: passive (p, -iw- Lombard 1985, p. 114)
-    \item TENSE: tense (e.g., -il...e for perfect), Guma 1971 p. 167, Lombard 1985 p. 116.
-    \item MOOD: Mood
-    \item (TODO) wh marker, relative marker (rl, -ng Guma 1971, p. 168)
+    \item VALENCE:
+    
+    - applicative
+    (ap -el- \cite[\textsection 310]{doke1967textbook} \cite[p. 109]{lombard1969handbook}, with morphophonological changes), 2K times
+    
+    - causative (c 1K), -isa (with morphophonological change) \cite[\textsection 325]{doke1967textbook}
+    
+    - neuter/stative (nt, 229), -eha, -ahala \cite[\textsection 307]{doke1967textbook}
+    
+    - reversive (rv, 214),  \cite[\textsection 345]{doke1967textbook} -- not really VALENCE, ex. bind -- loosen
+    
+    - rc reciprocal (-an 103 times)  \cite[\textsection 338]{doke1967textbook}
+    
+    \item VOICE: passive -iw- (1K)
+    
+    \cite[\textsection 300]{doke1967textbook} \cite[p. 114]{lombard1969handbook}
+    
+    \item TENSE: tense (t\^{}, 3K) (e.g., -il...e for perfect), \cite[p. 167]{guma1971outline}, \cite[p. 116]{lombard1969handbook}.
+    \item MOOD: Mood (m\^{}, 37K times)
+    \item (TODO) wh marker, relative marker
+    
+    (wh -ng \cite[p. 168]{guma1971handbook}) 2K times
+    
+    (rl -ng 857 times)
+    
+    TODO cl COMPL -ets, -ell (66 times)
+    
+    
+    
 \end{enumerate}
 
 
