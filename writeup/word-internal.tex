@@ -29,7 +29,7 @@ can also directly quantify MI with verb stem (presence \& choice for each slot) 
 
 \paragraph{Data Selection}
 
-UD corpora 2.4 with freely available word forms. Only training set, so only GSD.
+UD corpora 2.4 with freely available word forms. Only training set, so only GSD \cite{tanaka2016universal, asahara2018universal}.
 
 Verb forms are tokenized so that most suffixes are segmented as individual words.
 
@@ -253,6 +253,9 @@ While they are annotated as a unit in the Demuth corpus, they are treated as sep
 We separated these, taking the main verb to start at its subject agreement prefix.
 We only considered main verbs for the experiments here.
 
+
+Obtained 37K verbs.
+
 % TODO analysis for adult-oly portion
 
 \paragraph{Verb Prefixes in Sesotho}
@@ -272,7 +275,26 @@ As in Japanese, morphemes show different forms depending on their environment, a
     
     \item NEGATION Negation (ska, seka, sa, skaba, 362). sa used in Negative Dependent Present (Paroz 1946, p.31) and Perfect (ibid p. 80). E.g. Sec 13.38 p.172 in Guma 1971. -sa- and -se- Lombard 1985 p. 108, appear in different moods.
     
-    \item TENSE/ASPECT Tense/aspect marker (t\^{} 13K) Guma 1971, p. 165-166. -a- Lombard 1985, p. 109.
+    What is the order of NEGATION and TENSE/ASPECT?
+    
+    \item TENSE/ASPECT/MOOD Tense/aspect marker (t\^{} 13K) Guma 1971, p. 165-166. -a- Lombard 1985, p. 109.
+    
+    -tla-, -tlo-, -ilo- FUT \cite[\textsection 410]{doke1967textbook}
+    
+    -a- PRS \cite[\textsection 400]{doke1967textbook}
+    
+    -ka- POT \cite[\textsection 424]{doke1967textbook}
+    
+    -sa- PERSIST \cite[\textsection 414]{doke1967textbook}
+    
+    -tswa- RECENT.PST \cite[\textsection 405]{doke1967textbook} 
+    
+    ..
+    Past subjunctive
+    
+    
+    Potential -ka- (cannot be combined with negation marker in the previous slot, \cite[\textsection 424]{doke1967textbook}).
+    
     
     Some of the common markers in the corpus are t\^{}f for future and t\^{}pf for perfect.
     
@@ -283,6 +305,8 @@ As in Japanese, morphemes show different forms depending on their environment, a
     
     \item OBJECT Object agreement (om 6K) or reflexive (rf, 751). These are mutually exclusive \cite[p. 165]{guma1971handbook}
 \end{enumerate}
+
+
 
 Additionally FINITENESS (?) Conditional morpheme (\emph{ho}, `if', 314), comes before object agreement.
 
@@ -303,43 +327,139 @@ Again, we extracted morpheme types occurring at least 50 times.
 \begin{enumerate}
     \item VALENCE:
     
-    - applicative
-    (ap -el- \cite[\textsection 310]{doke1967textbook} \cite[p. 109]{lombard1969handbook}, with morphophonological changes), 2K times
     
-    \cite[\textsection 314-315]{doke1967textbook}: applicarive can be applied to other valence affixes
     
     - causative (c 1K), -isa (with morphophonological change) \cite[\textsection 325]{doke1967textbook}
     
+    See \cite[\textsection 345]{doke1967textbook} for reversive+causative.
+    
     - neuter/stative (nt, 229), -eha, -ahala \cite[\textsection 307]{doke1967textbook}
+    
     
     - reversive (rv, 214),  \cite[\textsection 345]{doke1967textbook} -- not really VALENCE, ex. bind -- loosen
     
+    General references (comparative Bantu):
+
+Schadeberg, Thilo C. 2003. Derivations. In Derek Nurse and Gerard Philippson (eds.), The
+Bantu languages, 71–89. London: Routledge.
+
+Doke, Clement. 1935. Bantu linguistic terminology. London: Longman, Green \& Co
+
+Guthrie, Malcolm. 1962. The status of radical extensions in Bantu languages. Journal of
+African Languages 1(3). 202–220.
+
+    
+    
+    - applicative
+    (ap -el- \cite[\textsection 310]{doke1967textbook} \cite[p. 109]{lombard1969handbook}, with morphophonological changes), 2K times
+    
+    Example from Demuth corpus: 
+    
+    I am lighting for you
+    
+    ke-a-u-khan-ts-ets-a
+    
+    sm1s-t\^{}p-om2s-shine-c-ap-m\^{}in
+    
+    
+    Leave my blanket alone then
+    
+    tl-oh-el-a kobo ya-ka he
+    
+    come-rv-ap-m\^{}i blanket(9,10) 9-1s ij
+    
+    
+    \cite[\textsection 314-315]{doke1967textbook}: applicative can be applied to other valence affixes
+    
+    -  Perfective/Completive (-ets), -ell (66 times) \cite[\textsection 336]{doke1967textbook}
+    
+    This isn't really VALENCE. It is a reduplication of the applicative suffix \cite[\textsection 336]{doke1967textbook}, and as such is ordered before passive (u-neh-el-ets-w-a-ng t\^{}p.om2s-give-ap-cl-p-m\^{}in-wh What is it that you want passed to you?)
+    
     - rc reciprocal (-an 103 times)  \cite[\textsection 338]{doke1967textbook}
+    
+    Comes after applicative: 
+    
+    Do they share?
+    
+    ba-arol-el-an-a
+    
+    sm2-t\^{}p\_divide-ap-rc-m\^{}in
     
     \item VOICE: passive -iw- (1K)
     
     \cite[\textsection 300]{doke1967textbook} \cite[p. 114]{lombard1969handbook}
     
     Passive follows applicative: sho-el-oa die-APPL-PASS \cite[\textsection 324]{doke1967textbook}
-    \item TENSE: tense (t\^{}, 3K) (e.g., -il...e for perfect), \cite[p. 167]{guma1971outline}, \cite[p. 116]{lombard1969handbook}.
+    
+    
+    \item TENSE: tense (t\^{}, 3K) (e.g., -il...e for perfect), \cite[\textsection 369]{doke1967textbook}  \cite[p. 167]{guma1971outline}, \cite[p. 116]{lombard1969handbook}.
+    
+    
+    The perfect affix has the form -il-, which has a range of allomorphs depending on the preceding stem and valence/voice suffixes, if present \cite[\textsection 369]{doke1967textbook}.
+    Common morphs in the Demuth corpus are -il- and -its-.
+    
+     
     \item MOOD: Mood (m\^{}, 37K times)
+    
+    
+    
+    Demuth corpus:
+    
+    - IMP (-e)
+    
+    - SBJV1 (-e)
+    
+    - SBJV1.PL (-eng)
+    
+    - IND (-a, -e)
+    
+    - IMP.PL (-ang)
+    
+    - SBJV2 (-e, -a)
+    
+    - NEG  (-e, -a)
+    
+    % Demuth:
+    %The mood of infinitives is m^in if affirmative indicative, m^x if neg in indicative assertive, declarative, affirmative statements 
+    %pt participial in compound tenses, subordinate clauses, relative clauses 
+    %x negative in negative utterances ha ke-tseb-e ng sm1s-t^p_v^know-m^x I don’t know 
+    %i imperative m-ph-e om1s-v^give-m^i Give me. 
+    %ip imp plural bon-ang v^see-m^ip Look! 
+    %s subjunctive ere ke-bon-e  ht sm1s-t^p_v^see-m^s Let me see. 
+    %sp plural subjunctive ha re-y-eng ht sm1p-t^p_v^go-m^sp Let’s go. 
+    
     \item Interrogative (2K times) and relative (857 times) markers -ng
     
     interrogative: \cite[p. 168]{guma1971handbook}, \cite[\textsection 160, 320]{doke1967textbook}
     
     relative \cite[\textsection 271, 793]{doke1967textbook}
     
-    \item     TODO cl COMPL -ets, -ell (66 times) have to find this in the grammars
+
 \end{enumerate}
 
 relation to Bybee hierarchy: valence closest, then voice, then tense, then mood.
+
+Example
+
+\begin{tabular}{lllllllll|lllllll}
+SUBJECT & NEGATION & TAM & OBJECT & Stem & VALENCE & VOICE & TENSE & MOOD \\
+\end{tabular}
+
+
+
+modes:
 
 - phonemic
 
 - normalized to morphemes as annotated in the Demuth corpus
 
-- normalized to morphemes, undoing merging
+- normalized to morphemes, undoing merging (as indicated in the Demuth corpus)
 
+experiments:
+
+- tradeoff comparison
+
+- optimization
 
 %('c', 'ap', 'm^'): 36, 
 %('c', 'nt', 'm^'): 19, ('p', 't^', 'rl'): 12, 
