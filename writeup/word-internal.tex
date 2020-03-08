@@ -86,6 +86,20 @@ We consider all morphemes annotated in the corpus, including those less frequent
 
 \paragraph{Creating Optimal Orders}
 
+We optimize orderings for the AUC under the memory-surprisal tradeoff curve with an adaptation of the hill climbing method used by (CITE) to optimize word order grammars for the length of syntactic dependencies.
+
+We randomly initialize the assignment of integers to morphemes.
+
+In each iteration, we randomly choose one morpheme, and evaluate AUC for each way of ordering it between two other morphemes.
+We then update the weights to the ordering that yields the lowest AUC.
+
+Computation of AUC is approximated at $T=5$ for computational efficiency.
+
+To further speed up optimization, we restrict to morphemes occurring at least 10 times in the corpus for about 95\% of iterations, and to about 10\% of possible orderings in each step.
+These choices vastly reduce computation time by reducing time spent on low-frequency morphemes.
+
+We run this for X iterations.
+
 \paragraph{Results: Comparison to Baselines}
 comparison to baselines
 
@@ -100,7 +114,11 @@ comparison to baselines
 - morphemes
 
 
-
+\begin{tabular}{c|ccccc}
+             & Pair Accuracy & Full Accuracy \\ \hline
+Phonemes     &   \\
+Morphemes     &  \\
+\end{tabular}
 
 
 
