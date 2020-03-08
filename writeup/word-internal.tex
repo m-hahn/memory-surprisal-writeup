@@ -23,131 +23,75 @@ verb-valence-voice-aspect-tense-mood-modality-subj.person-subj.number
 
 can also directly quantify MI with verb stem (presence \& choice for each slot) as a sanity check
 
+We study two agglutinative languages for which extensive corpora with hand-annotated morphological segmentation and labeling is available.
 
-\subsection{Japanese}
-
-
-\paragraph{Data Selection}
-
-UD corpora 2.4 with freely available word forms. Only training set, so only GSD \cite{tanaka2016universal, asahara2018universal}.
-
-Verb forms are tokenized so that most suffixes are segmented as individual words.
-
-We selected all chains VERB AUX...AUX. If a -te followed, added this.
-
-We obtained 15281 forms, with a median number of X suffixes (max=...).
-
-Describe format: form vs lemma.
+\subsection{Japanese Verb Suffixes}
 
 
-Japanese verb stems and suffixes show alternations conditioned on neighboring suffixes.
-In the GSD treebank, each stem and suffix is annotated with a `lemma' indicating a normalized context-independent representation of the morpheme.
+\paragraph{Data Selection and Processing}
+We drew on Universal Dependencies data.
+In the tokenization scheme used for Japanese, most affixes are separated as individual tokens, effectively providing morpheme segmentations.
+We used the GSD corpus, Version 2.4, \citep{tanaka2016universal, asahara2018universal}, as it was the only corpus with a training set and freely available word forms.
 
-In the UD treebanks, each morpheme is 
+In the corpus, verb suffixes largely correspond to auxiliaries (tag AUX); only a few morphemes tagged AUX are not standardly treated as suffixes (see SI), and one frequent suffix (-\textit{te}) is labeled SCONJ.
+
+We selected verb forms by selecting all chains of a verb (tag VERB) followed by any number of auxiliaries (tag AUX) from the training set of the corpus. When the suffix -\textit{te} (tag SCONJ) followed such a chain, we added this.
+
+We obtained 15,281 verb forms, with a median number of X suffixes (max=...).
+
+In the corpus, each morpheme is annotated with a lemma, indicating a normalized context-independent representation of the morpheme.
+For both verbs and affixes, this lemma annotation abstracts away from most morphophonological and other allomorphic variation, it thus largely identifies underlying morphemes (see SI for limitations).
 
 
 \paragraph{Verb Suffixes in Japanese}
 
-Japanese orthography does not indicate word boundaries, and there is no universally accepted segmentation.
+Japanese has an extensive number of suffixes, including rarer ones that are not well represented in the corpus.
+Based on the corpus and the linguistic literature on Japanese, we identified the following frequent verb suffixes, occurring in the following order outwards from the verb (see SI for details).
 
-We determined a set of common morphemes as follows.
-We selected all morphemes occurring at least 50 times and annotated their meaning/function.
-Also, we excluded three morphemes that are treated as independent words, not suffixes, by \cite{kaiser2013japanese} (dekiru, naru, yoo).
-Also, passive and potential markers are formally identical for many verbs; we included both here.
-
-Also, we took suru to be a unit with the preceding element (it is used for turning Sino-Japanese words into verbs).
-
-We list the morphemes according to the order extracted according to the model.
-While this ordering matches almost all observed forms, there are some orderings that do not fit into this pattern, see below.
-
-
-
-TODO read Kaiser p. 398 potential
 
 \begin{enumerate}
-\item VALENCE: causative (-ase-). \cite[142]{hasegawa2014japanese} \cite[Chapter 13]{kaiser2013japanese} (saseru, seru. 190)
-\item VOICE: passive (-areru, -rareru). passive \cite[152]{hasegawa2014japanese} \cite[Chapter 12]{kaiser2013japanese} -areru, -rareru. (rareru, reru. 2000)
-\item POTENTIAL: (e.g., -eru in UD)  atsuka-e-nai `can't handle' %扱えない GSD treebank
-araso-e-nai `can't dispute' % 争えない GSD treebank
-
-how is this ordered relative to PASSIVE? In UD, they don't seem to be always separated (ambiguity of reru/rareru. \cite[346]{vaccari1938complete}: identical to the passive for one class, or -eru for other verb class).
-\item POLITENESS (masu, mashi, mase. 600) \cite[190]{kaiser2013japanese}. % 見できます, 見ましたい
-
-It is interesting that this is relatively close to the verb
-
-\item MODALITY: -ta- (-tai, -taku-, -taka-) desiderative (tai. 85) \cite[238]{kaiser2013japanese}. mi-mashi-tai `I want to see'
-\item NEGATION: negation (-nai, -n-, -nakaC-. 630). also -mai for negative+volition.
-\item TENSE/ASPECT/MOOD:
-
--ta for past (4000)
-
--yoo for hortative, future, ... 92 \cite[229]{kaiser2013japanese}. Q how do-nai- and -yoo interact?
-\item -te derives a nonfinite form \cite[186]{kaiser2013japanese}. 4000
+\item Valence: causative (-\textit{ase}-) (\citet[142]{hasegawa2014japanese}, \citet[Chapter 13]{kaiser2013japanese})
+\item Voice: passive (-\textit{are}-, -\textit{rare}-) \cite[152]{hasegawa2014japanese} \cite[Chapter 12]{kaiser2013japanese}
+\item Mood: potential (-\textit{e}-, -\textit{are}-, -\textit{rare}-)  
+\item politeness (-\textit{mas}-) \cite[190]{kaiser2013japanese}.
+\item Mood: desiderative (-\textit{ta}-) \cite[238]{kaiser2013japanese}
+\item Negation (-\textit{n}-)
+\item Tense/Aspect/Mood: past (-\textit{ta}) and future/hortative (-\textit{yoo}) \cite[229]{kaiser2013japanese}
+\item Nonfiniteness: the suffix -\textit{te} derives a nonfinite form \cite[186]{kaiser2013japanese}.
 \end{enumerate}
 
-Parallel to Bybee's hierarchy: valence closest, then voice.
+In accordance with Bybee's hierarchy, valence is marked closest to the verb, followed by voice.
+Unlike predicted by the hierarchy, tense/aspect markers are not placed closer to the verb than mood/modality markers.
 
-Difference from Bybee' hierarchy: mood/modality are ordered closer than tense/aspect.
-
-EXAMPLES:
-
-\begin{tabular}{lllllllll|lllllll}
-     & VALENCE   & VOICE    & \multicolumn{3}{c}{MOOD/MODALITY} & NEGATION & TENSE \\
-Stem & Causative & Passive & Potential & Politeness & Desiderative & Negation & TAM & -te & \\ \hline
-mi &          &      & &            &          & naka     & tta &    & did not see \cite[153]{vaccari1938complete}\\
-mi &          &      & &            & taku     & nai      &     &     & I do not wish to see \cite[98]{vaccari1938complete} \\
-mi &          &      & &            & taku     & naka    & tta  &      & I did not wish to see \cite[98]{vaccari1938complete} \\
-oyog & ase    &      & &            &          &         & ta    &     & made swim \\
-tat & ase     & rare & &            &          &         & ta    &     & was made to stand up \cite[396]{kaiser2013japanese} \\
-waraw  &       & are & &            &           &         & ta    &    & was laughed at \cite[384]{kaiser2013japanese} \\
-mi     &       & rare& & mase       &          & n        &      &     & is not seen \cite[337]{vaccari1938complete} \\
-mi     &       & rare& & mash      &           &          & yoo  &    & will be seen \cite[337]{vaccari1938complete} \\
-de     &       &    & &            &           & naka     & roo  &    & will not go out \cite[170]{vaccari1938complete} \\
-mi     &       &    & e & mase       &           & n        &      &    & cannot see \cite[349]{vaccari1938complete} \\
-mi     &       &    & & mashi      & tai       &          &      &    & want to see
-\end{tabular}
-
-
-Not all combinations are possible. 
-`was not seen' is miraremasen deshita \cite[337]{vaccari1938complete}, not MIRU-RERU-MASE-NAI-TA
-Negation is not directly combined with -yoo.
-
-Some relatively frequent morphemes that are below the threshold
-
-\begin{enumerate}
-\item nakereba `if not' (cf \cite[9.3.1.4]{kaiser2013japanese})
-\item tsudzukeru (continuative, 30)
-\item yasui `easy to'
-\item hajimeru (inchoative, 21)
-\item naru (`become', 102). Maybe this should be excluded, not treated as an affix in the books.
-\item yooda (180) EVIDENTIAL? yooda. but past -ta- can be after it: iruyoodatta IRU-YOODA-TA (Kaiser et al 9.5.6.1.1.1) vs misenakattayooda MISERU-NAI-TA-YOODA `it didn't seem' (GSD treebank). Maybe this should be thought of better as an SCONJ at least when including -ni, Vaccari p. 238-241.
-\item beki Necessitative \cite[248]{kaiser2013japanese}
-\item soo `likely to' \cite[258]{kaiser2013japanese}, probably not AUX in UD
-\item dekiru potential (180), 
-\end{enumerate}
-
-
-there's just too many verb forms, here limited to frequent ones we found in the corpus.
 
 
 \paragraph{Experiment}
 
 modes:
 
-- predicting on the phoneme level
+We considered three methods of quantifying prediction
+(1) on the level of phonemes, (2) on the level of graphemes, (3) on the level of morphemes.
 
-- predicting on the grapheme level: equivalent to phonemic, but in units of syllables
-
-- predicting on the level of morphemes: we take the lemmas, and unite saseru+seru to CAUSATIVE and reru+rareru+eru+keru to PASSIVE/POTENTIAL.
-
-This controls for allomorphy / morphophonemic changes, which are conditioned on surrounding affixes (so naturally favor locality).
+For (1): Many verb stems are written using Kanji characters; we did not phonemize these. (TODO probably we should do this to make things clean).
 
 
+For (3), we label suffixes for underlying morphemes with the aid of provided lemmatization (see SI for details)
+This controls for allomorphy / morphophonemic changes, which are conditioned on surrounding affixes.
+By conducting these 
+
+\paragraph{Parameterizing Alternative Orderings}
+
+We parameterize alternative suffix orderings by assigning an integer to each morpheme.
+We consider all morphemes annotated in the corpus, including those less frequent than the ones identified above (see SI for details).
+
+\paragraph{Creating Optimal Orders}
+
+\paragraph{Results: Comparison to Baselines}
 comparison to baselines
 
 - random grammars
 
-optimization:
+\paragraph{Results: Comparing Optimized and Real Orders}
 
 - phonemes
 
@@ -157,319 +101,108 @@ optimization:
 
 
 
-% volitional 加わろう kawawar-oo
-% volitional polite 加わりましょう kawawar-i-mashy-oo
-% volitional neg 加わるまい(+), 加わらない[よう/こと]にしよう kawawaru-mai, kawawara-nai-yoo-nishyoo
-% volitional neg polite 加わりますまい, 加わらない[よう/こと]にしましょう  kawawari-masu-mai, kawawar-anai-yoo-nishimashyoo
-
-%  verb-valence-voice-aspect-tense-mood-modality-person-number
-
-% http://nihongo.monash.edu/cgi-bin/wwwjdic?1W%B2%F1%B5%C4%A4%CB%B2%C3%A4%EF%A4%EB_v5r
-% passive negative
-% 加わられない kuwawar-are-nai
-
-% passive negative polite
-% 加わられません kuwawar-are-mase-n
-
-% causative polite
-% 加わらせます kuwawar-ase-masu
-
-% causative negative polite
-% 加わらせません kuwawar-ase-mase-n
-% 加わらしません kuwawar-ashi-mase-n
-
-% da/de/na (lemmatized as da): copula (?). na after adjectives.
-
-
-
-
-honorific -masu
-
--s-are-naka-tta ?passive+negative.past?
-
-
-
-% -u/-ru (non-past) -- not segmented off in UD?
-
-% suru - reru - ta
-% suru -masu - ta
-% reru - ta
-% suru - ta
-% masu - ta
-% rareru - ta
-% masu - nai - deshita
-% suru - reru
-% suru - nai
-% masu - nai
-% reru - masu - ta
-% dekiru - masu
-
-% TODO in excluding -te-, have to deal with -de- as in 読んで yonde (Vaccari p. 109)
-
-%(('し/動詞/し', 'た/助動詞/た'), 14389)
-%(('る/語尾/る',), 13880)
-%(('あ/動詞/あ', 'る/語尾/る'), 11481)
-%(('っ/語尾/っ', 'た/助動詞/た'), 9378)
-%(('さ/動詞/さ', 'れ/助動詞/れ', 'た/助動詞/た'), 7143)
-%(('さ/動詞/さ', 'れ/助動詞/れ', 'る/語尾/る'), 1966)
-%(('られ/助動詞/られ', 'る/語尾/る'), 1156)
-%(('だっ/助動詞/だっ', 'た/助動詞/た'), 1151)
-%(('られ/助動詞/られ', 'た/助動詞/た'), 1114)
-%(('ん/語尾/ん', 'だ/助動詞/だ'), 854)
-%((), 839)
-%(('い/語尾/い', 'た/助動詞/た'), 761)
-%(('わ/語尾/わ', 'れ/助動詞/れ', 'た/助動詞/た'), 715)
-%(('で/助動詞/で', 'あ/動詞/あ', 'る/語尾/る'), 688)
-%(('さ/語尾/さ', 'れ/助動詞/れ', 'た/助動詞/た'), 599)
-%(('わ/語尾/わ', 'れ/助動詞/れ', 'る/語尾/る'), 595)
-%(('れ/助動詞/れ', 'る/語尾/る'), 563)
-%(('く/語尾/く',), 485)
-
-
-% ('できる', 'ます'): 11, ('かもしれる', 'ます', 'ない'): 1, 
-%('ない', 'た'): 29, ('ちゃう', 'ます', 'た'): 2, 
-%('する', 'ます'): 23, ('られる', 'ます'): 4, ('できる',): 18, ('する', 'せる', 'た'): 12, ('たい', 'ない'): 1, ('する', 'ます', 'ない'): 4, ('せる', 'ない'): 1, ('らしい',): 2, ('出来る', 'ます', 'ない'): 1, ('かもしれる', 'ない'): 1, ('れる', 'ない', 'た'): 1, ('ない', 'だめ', 'だ'): 1, ('する', 'れる', 'そうだ'): 2, ('える',): 5, ('かねる', 'ない'): 1, ('れる', 'ようだ', 'なる', 'た'): 3, ('せる', 'ます', 'ない'): 2, ('続ける', 'た'): 1, ('られる', 'ようだ', 'なる', 'ます', 'た'): 1, ('できる', 'ます', 'た'): 7, ('する', 'せる'): 2, ('やすい', 'なる', 'た'): 1, ('くださる', 'ます'): 1, ('ようだ', 'なる', 'ます', 'た'): 2, ('える', 'ようだ', 'なる', 'た'): 1, ('する', 'がたい'): 1, ('する', 'れる', 'ます', 'た'): 6, ('ざるを得る', 'ます', 'ない'): 1, ('ようだ', 'なる', 'た'): 10, ('する', 'れる', 'ます'): 3, ('られる', 'ます', 'た'): 4, ('える', 'た'): 1, ('する', 'ます', 'う'): 1, ('する', 'ます', 'ない', 'でした'): 1, ('済み',): 1, ('ようだ',): 2, ('出す', 'た'): 1, ('出す',): 1, ('する', 'た', 'みたいだ'): 1, ('させる', 'た'): 2, ('きる', 'た'): 1, ('する', 'たい'): 2, ('続ける',): 2, ('ざるをえる', 'ます', 'ない'): 1, ('める', 'ます'): 6, ('せる', 'ます'): 1, ('ようだ', 'なる'): 7, ('られる', 'ようだ', 'なる', 'た'): 1, ('始める', 'た'): 2, ('ない', 'なる'): 2, ('かねる', 'ます'): 1, ('始める',): 2, ('する', 'れる', 'ない', 'た'): 1, ('える', 'ます'): 3, ('た', 'そうだ'): 4, ('れる', 'ます', 'ない'): 1, ('する', 'ようだ', 'なる'): 4, ('する', 'える', 'ない'): 1, ('ける', 'ます'): 3, ('できる', 'ない', 'た'): 1, ('する', 'ない', 'た'): 2, ('出来る', 'ます'): 1, ('れる', '始める'): 1, ('ます', 'う'): 4, ('する', '始める', 'た', 'そうだ'): 1, ('する', 'れる', 'た', 'ようだ'): 1, ('できる', 'まい'): 1, ('た', 'らしい'): 1, ('する', 'ようだ', 'なる', 'た'): 2, (' える', 'ます', 'ない'): 1, ('ける',): 2, ('られる', 'た', 'そうだ'): 1, ('られる', 'そうだ'): 1, ('れる', 'にくい'): 1, ('する', 'やすい'): 1, ('ける', 'た'): 1, ('する', 'れる', 'ます', 'ない'): 2, ('そ うだ',): 1, ('ない', 'た', 'ようだ'): 1, ('ます', 'たー'): 1, ('できる', 'た'): 3, ('べる',): 1, ('する', 'れる', 'ようだ', 'なる', 'ます', 'た'): 1, ('ない', 'ようだ'): 1, ('ける', 'ます', 'う'): 1, ('ちゃう', 'ます'): 1, ('する', 'そうだ'): 1, ('たい', 'なる'): 1, ('ようだ', 'なる', 'ます'): 1, ('たい', 'ない', 'た'): 1, ('やすい',): 3, ('かける',): 1, ('ない', 'なる', 'ようだ', 'なる', 'た'): 1, ('ない', 'そうだ'): 1, ('する', 'たい', 'ない', 'らしい'): 1, ('する', 'ちゃう', 'ます'): 1, ('た', 'ようだ'): 1, ('られる', 'たい', 'ない'): 1, ('える', 'ない'): 1, ('てる', 'ない'): 1, ('する', '易い', 'なる', 'た'): 1, ('れる', 'ない'): 1})
-
-
-% nai (negation)
-
-
 
 
 
 \subsection{Sesotho}
 
-\cite{doke1967textbook}
-
-We use the Demuth Corpus \cite{demuth1992acquisition} of child and child-directed speech, containing about 13K utterances with 500K morphemes.
-
+Sesotho (also known as Southern Sotho) is a Southern Bantu language, spoken by 5.6 Million L1 speakers (REF) mainly in Lesotho and South Africa.
+We use the Demuth Corpus \citep{demuth1992acquisition} of child and child-directed speech, containing about 13K utterances with 500K morphemes.
 The corpus has very extensive manual morphological segmentation and annotation; each verb form is segmented into morphemes, which are annotated for their function.
 
-Sometimes morphemes fused, indicated with slash in the annotation.
-
-Sesotho has composite forms consisting of an inflected auxiliary followed by an inflected verb.
-Both verbs carry subject agreement.
-While they are annotated as a unit in the Demuth corpus, they are treated as separate words in grammars \citep{doke1967textbook,guma1971outline,lombard1969handbook}.
-We separated these, taking the main verb to start at its subject agreement prefix.
-We only considered main verbs for the experiments here.
+Sesotho verbs carry both prefixes and suffixes.
+We extracted 37K verb forms (see SI for details).
 
 
-Obtained 37K verbs.
+\paragraph{Verb Affixes in Sesotho}
 
-% TODO analysis for adult-oly portion
+We identified morphemes and morpheme ordering based on the analysis in \cite{demuth1992acquisition}, supplemented with information from grammars of Sesotho \citep{doke1967textbook,guma1971outline}. See SI for details.
 
-\paragraph{Verb Prefixes in Sesotho}
-
-In the Demuth corpus, each morpheme is annotated; a two-letter key indicates the type of morpheme (e.g. subject agreement, TAM marker).
-We classified morphemes by this annotation.
-We considered morpheme types occurring at least 50 times in the corpus.
-
-As in Japanese, morphemes show different forms depending on their environment, and the corpus contains some instances of fused neighboring morphemes that were not segmented further.
+Prefixes:
 
 \begin{enumerate}
-
-
-    \item SUBJECT Subject agreement (sm- 17K or sr- 193): person/number or noun class. also has variation depending on verb form (e.g. 1st sg is ke-, ka-, N- depending on form, Guma 1971, p. 162). See Lombard 1985, p. 104-106 for morphophonological rules.
+    \item Subject agreement: This morpheme encodes agreement with the subject, for person, number, and noun class (the latter only in the 3rd person) \cite[\textsection 395]{doke1967textbook}.
     
-    \cite[\textsection 395]{doke1967textbook} for sm-
+    \item Negation 
     
-    \item NEGATION Negation (ska, seka, sa, skaba, 362). sa used in Negative Dependent Present (Paroz 1946, p.31) and Perfect (ibid p. 80). E.g. Sec 13.38 p.172 in Guma 1971. -sa- and -se- Lombard 1985 p. 108, appear in different moods.
+    \item Tense/aspect marker  Guma 1971, p. 165-166. \cite[\textsection 400-424]{doke1967textbook}
     
-    What is the order of NEGATION and TENSE/ASPECT?
+    \item Object agreement or reflexive marker. 
+    Similar to subject agreement, object agreement denotes person, number, and noun class features of the object.
+    Unlike subject agreement, it is optional (CITE).
+    \end{enumerate}
     
-    \item TENSE/ASPECT/MOOD Tense/aspect marker (t\^{} 13K) Guma 1971, p. 165-166. -a- Lombard 1985, p. 109.
+    Suffixes:
     
-    -tla-, -tlo-, -ilo- FUT \cite[\textsection 410]{doke1967textbook}
-    
-    -a- PRS \cite[\textsection 400]{doke1967textbook}
-    
-    -ka- POT \cite[\textsection 424]{doke1967textbook}
-    
-    -sa- PERSIST \cite[\textsection 414]{doke1967textbook}
-    
-    -tswa- RECENT.PST \cite[\textsection 405]{doke1967textbook} 
-    
-    ..
-    Past subjunctive
+    \begin{enumerate}
+    \item Valence: causative (-isa),  neuter/stative (-eha, -ahala), applicative (-el-), reciprocal (-an-)
     
     
-    Potential -ka- (cannot be combined with negation marker in the previous slot, \cite[\textsection 424]{doke1967textbook}).
+    Also two that aren't really valence:
     
-    
-    Some of the common markers in the corpus are t\^{}f for future and t\^{}pf for perfect.
-    
-    (e.g., ile- for remote past \cite[\textsection 177]{doke1967textbook})
-    
-    Also often fused with the object agreement marker.
-    
-    
-    \item OBJECT Object agreement (om 6K) or reflexive (rf, 751). These are mutually exclusive \cite[p. 165]{guma1971handbook}
-\end{enumerate}
-
-
-
-Additionally FINITENESS (?) Conditional morpheme (\emph{ho}, `if', 314), comes before object agreement.
-
-Parallel to Bybee hierarchy: subject agreement is farther away from the verb than TAM.
-
-
-TODO ha- negation is a prefix coming before the subject agreement prefix (Guma 1971, p. 164).  ga- in Lomard 1985 p. 108.
-
-
-
-Also some merging between tense and object markers. for the lemma-based version, have to construct a version where all of this merging is undone (e.g. including a slash, or t\^{}.om2s)
-
-
-\paragraph{Verb Suffixes in Sesotho}
-
-Again, we extracted morpheme types occurring at least 50 times.
-
-\begin{enumerate}
-    \item VALENCE:
-    
-    
-    
-    - causative (c 1K), -isa (with morphophonological change) \cite[\textsection 325]{doke1967textbook}
-    
-    See \cite[\textsection 345]{doke1967textbook} for reversive+causative.
-    
-    - neuter/stative (nt, 229), -eha, -ahala \cite[\textsection 307]{doke1967textbook}
-    
-    
-    - reversive (rv, 214),  \cite[\textsection 345]{doke1967textbook} -- not really VALENCE, ex. bind -- loosen
-    
-    General references (comparative Bantu):
-
-Schadeberg, Thilo C. 2003. Derivations. In Derek Nurse and Gerard Philippson (eds.), The
-Bantu languages, 71–89. London: Routledge.
-
-Doke, Clement. 1935. Bantu linguistic terminology. London: Longman, Green \& Co
-
-Guthrie, Malcolm. 1962. The status of radical extensions in Bantu languages. Journal of
-African Languages 1(3). 202–220.
-
-    
-    
-    - applicative
-    (ap -el- \cite[\textsection 310]{doke1967textbook} \cite[p. 109]{lombard1969handbook}, with morphophonological changes), 2K times
-    
-    Example from Demuth corpus: 
-    
-    I am lighting for you
-    
-    ke-a-u-khan-ts-ets-a
-    
-    sm1s-t\^{}p-om2s-shine-c-ap-m\^{}in
-    
-    
-    Leave my blanket alone then
-    
-    tl-oh-el-a kobo ya-ka he
-    
-    come-rv-ap-m\^{}i blanket(9,10) 9-1s ij
-    
-    
-    \cite[\textsection 314-315]{doke1967textbook}: applicative can be applied to other valence affixes
+    - reversive \cite[\textsection 345]{doke1967textbook} -- not really VALENCE, ex. bind -- loosen
     
     -  Perfective/Completive (-ets), -ell (66 times) \cite[\textsection 336]{doke1967textbook}
     
-    This isn't really VALENCE. It is a reduplication of the applicative suffix \cite[\textsection 336]{doke1967textbook}, and as such is ordered before passive (u-neh-el-ets-w-a-ng t\^{}p.om2s-give-ap-cl-p-m\^{}in-wh What is it that you want passed to you?)
-    
-    - rc reciprocal (-an 103 times)  \cite[\textsection 338]{doke1967textbook}
-    
-    Comes after applicative: 
-    
-    Do they share?
-    
-    ba-arol-el-an-a
-    
-    sm2-t\^{}p\_divide-ap-rc-m\^{}in
-    
-    \item VOICE: passive -iw- (1K)
-    
-    \cite[\textsection 300]{doke1967textbook} \cite[p. 114]{lombard1969handbook}
-    
-    Passive follows applicative: sho-el-oa die-APPL-PASS \cite[\textsection 324]{doke1967textbook}
+
+    \item Voice: passive (-iw-)
     
     
-    \item TENSE: tense (t\^{}, 3K) (e.g., -il...e for perfect), \cite[\textsection 369]{doke1967textbook}  \cite[p. 167]{guma1971outline}, \cite[p. 116]{lombard1969handbook}.
-    
-    
-    The perfect affix has the form -il-, which has a range of allomorphs depending on the preceding stem and valence/voice suffixes, if present \cite[\textsection 369]{doke1967textbook}.
-    Common morphs in the Demuth corpus are -il- and -its-.
-    
+    \item Tense: The only tense suffix is the perfect affix -il-.
+
      
-    \item MOOD: Mood (m\^{}, 37K times)
+    \item MOOD: Mood (m\^{}, 37K times), such as -a/-e for indicative \citep{demuth1992acquisition}.
     
+
+    \item Interrogative (labeled \textit{wh}, 2K times) and relative (labeled \textit{rl}, 857 times) markers -\textit{ng}
     
+    The interrogative eng `what' can be encliticized to the verb; this is treated as a suffix in the Demuth corpus \cite[p. 168]{guma1971handbook}, \cite[\textsection 160, 320]{doke1967textbook}.
     
-    Demuth corpus:
-    
-    - IMP (-e)
-    
-    - SBJV1 (-e)
-    
-    - SBJV1.PL (-eng)
-    
-    - IND (-a, -e)
-    
-    - IMP.PL (-ang)
-    
-    - SBJV2 (-e, -a)
-    
-    - NEG  (-e, -a)
-    
-    % Demuth:
-    %The mood of infinitives is m^in if affirmative indicative, m^x if neg in indicative assertive, declarative, affirmative statements 
-    %pt participial in compound tenses, subordinate clauses, relative clauses 
-    %x negative in negative utterances ha ke-tseb-e ng sm1s-t^p_v^know-m^x I don’t know 
-    %i imperative m-ph-e om1s-v^give-m^i Give me. 
-    %ip imp plural bon-ang v^see-m^ip Look! 
-    %s subjunctive ere ke-bon-e  ht sm1s-t^p_v^see-m^s Let me see. 
-    %sp plural subjunctive ha re-y-eng ht sm1p-t^p_v^go-m^sp Let’s go. 
-    
-    \item Interrogative (2K times) and relative (857 times) markers -ng
-    
-    interrogative: \cite[p. 168]{guma1971handbook}, \cite[\textsection 160, 320]{doke1967textbook}
-    
-    relative \cite[\textsection 271, 793]{doke1967textbook}
-    
+    Verbs in relative clauses are marked with -ng \cite[\textsection 271, 793]{doke1967textbook}
 
 \end{enumerate}
 
+
+
+For prefixes, in agreement with Bybee's hierarchy, subject agreement is encoded in a position further away than TAM features.
+
+For suffixes,
 relation to Bybee hierarchy: valence closest, then voice, then tense, then mood.
 
-Example
-
-\begin{tabular}{lllllllll|lllllll}
-SUBJECT & NEGATION & TAM & OBJECT & Stem & VALENCE & VOICE & TENSE & MOOD \\
-\end{tabular}
 
 
+
+\paragraph{Experiment}
 
 modes:
 
-- phonemic
+We considered three methods of quantifying prediction
+(1) on the level of phonemes, (2) on the level of graphemes, (3) on the level of morphemes.
 
-- normalized to morphemes as annotated in the Demuth corpus
-
-- normalized to morphemes, undoing merging (as indicated in the Demuth corpus)
-
-experiments:
-
-- tradeoff comparison
-
-- optimization
-
-%('c', 'ap', 'm^'): 36, 
-%('c', 'nt', 'm^'): 19, ('p', 't^', 'rl'): 12, 
-%('p/', 'm^'): 1, ('wh', 'm^'): 1, ('rc', 'm^', 'rl'): 1, ('rv', 'c', 'm^'): 2, 
-%('c', 'p', 'm^'): 32, ('c', 't^', 'p', 'm^'): 5, ('rc', 't^'): 17, ('c', 'ap', 'm^', 'wh'): 8, ('nt', 'm^', 'rl'): 10, ('rv', 'p', 'm^'): 3, ('ap', 't^'): 6, ('ap', 'cl', 'p', 'm^', 'wh'): 2, 
-%('ap', 'm^', 'rl'): 39, ('ap', 'cl', 'm^'): 29, ('rv', 'ap', 'm^'): 4, ('c', 'm^', 'wh'): 11, ('ap', 'ap', 'p', 'm^', 'rl'): 1, ('rv', 't^', 'm^', 'rl'): 2, ('c', 't^'): 5, ('c/', 'p', 'm^'): 6, ('t^', 'rl'): 6, ('c', 'rc', 'm^'): 4, ('m.',): 1, ('rc', 'c', 'rc', 'm^'): 1, ('wh',): 1, ('nt', 't^'): 1, 
-
-%('p', 'm^', 'rl'): 38, 
-
-%('p', 't^', 'm^'): 1, ('t^', 'wh'): 2, ('rc', 'c', 'm^'): 3, ('ap', 'c', 'm^'): 3, ('c', 'ap', 't^', 'm^'): 3, ('cl', 'm^'): 23, ('rc', 'c', 'ap', 'm^'): 1, ('c', 'p', 't^'): 1, ('ap', 't^', 'm^', 'wh'): 2, ('p', 't^', 'wh'): 1, ('ap', 't^', 'm^'): 20, ('nt', 't^', 'm^', 'rl'): 2, ('ap', 't^', 'm^', 'rl'): 3, ('c', 'p', 'm^', 'rl'): 1, ('m^', 'lc'): 1, ('rv', 'p', 'm^', 'rl'): 1, ('ap', 'm^', 'lc'): 1, ('c', 'cl', 'm^'): 1, ('ap', 't^', 'p', 'm^'): 3, ('ap', 'ap', 'm^', 'wh'): 2, ('cp', 't^', 'm^'): 1, ('ap', 'ap', 't^', 'm^'): 3, ('c/', 'm^', 'wh'): 1, ('ap', 't^', 'rl'): 2, ('c', 'mi'): 1, ('rv', 'nt', 't^', 'm^'): 1, ('ps', 't^'): 3, ('t^', 'p', 'm^', 'wh'): 1, ('rc', 'm^', 'wh'): 1, ('ap', 'rc', 'm^'): 5, ('rv', 'nt', 'm^'): 2, ('ap', 'cl', 't^', 'm^'): 4, ('c', 't^', 'm^', 'rl'): 8, ('rc', 'p', 'm^'): 2, ('ap', 'p', 'rc', 'wh'): 1, ('ap', 'p', 'm^', 'wh'): 2, ('ap', 'cl', 'm^', 'wh'): 1, ('c', 't^', 'rl'): 1, ('cl', 'p', 'm^', 'wh'): 1, ('rv', 't^', 'p', 'm^', 'rl'): 1, ('ap', 'c/', 'm^'): 1, ('nt', 'ap', 'm^'): 1, ('rv', 't^', 'p', 'm^'): 1, ('cl', 't^', 'm^'): 3, ('rv', 'ap', 'm^', 'wh'): 1, ('c/', 'm^', 'rl'): 1, ('c', 'ap', 'p', 'm^'): 1, ('cl', 'ap', 'm^'): 1, ('ap', 'p', 'm^', 'rl'): 1, ('cl', 'p', 'm^'): 1})
+For (1): Many verb stems are written using Kanji characters; we did not phonemize these. (TODO probably we should do this to make things clean).
 
 
+For (3), we label suffixes for underlying morphemes with the aid of provided lemmatization (see SI for details)
+This controls for allomorphy / morphophonemic changes, which are conditioned on surrounding affixes.
+By conducting these 
+
+\paragraph{Parameterizing Alternative Orderings}
+
+We parameterize alternative suffix orderings by assigning an integer to each morpheme.
+We consider all morphemes annotated in the corpus, including those less frequent than the ones identified above (see SI for details).
+
+\paragraph{Creating Optimal Orders}
+
+\paragraph{Results: Comparison to Baselines}
+comparison to baselines
+
+- random grammars
+
+\paragraph{Results: Comparing Optimized and Real Orders}
+
+- phonemes
+
+- graphemes
+
+- morphemes
 
