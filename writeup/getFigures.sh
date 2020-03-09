@@ -12,4 +12,7 @@ cp ~/memory-surprisal/code/order-freedom/infostruc/analysis/visualize_neural/fig
 cp ~/memory-surprisal/writeup/quantiles-table.pdf .
 cp ~/memory-surprisal/writeup/auc-table.pdf .
 cp ~/memory-surprisal/writeup/it-table.pdf .
+cp ~/memory-surprisal/code/ngram-control/create_models_ngrams/morph/Japanese/tradeoffs/figures/* figures/
+cp ~/memory-surprisal/code/ngram-control/create_models_ngrams/morph/Sesotho/tradeoffs/figures/* figures/
+
 
