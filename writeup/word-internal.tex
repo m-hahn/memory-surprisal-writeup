@@ -50,6 +50,7 @@ Based on the corpus and the linguistic literature on Japanese, we identified the
 
 
 \begin{enumerate}
+\item \textit{suru}: obligatory suffix after Sino-Japanese words when they are used as verbs
 \item Valence: causative (-\textit{ase}-) (\citet[142]{hasegawa2014japanese}, \citet[Chapter 13]{kaiser2013japanese})
 \item Voice: passive (-\textit{are}-, -\textit{rare}-) \cite[152]{hasegawa2014japanese} \cite[Chapter 12]{kaiser2013japanese}
 \item Mood: potential (-\textit{e}-, -\textit{are}-, -\textit{rare}-)  
@@ -110,9 +111,9 @@ comparison to baselines
 	\begin{center}
 \includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byPhonemes-it.pdf}
 \includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byPhonemes-memsurp.pdf}
-\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byPhonemes-auc.pdf}
+\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byPhonemes-auc-hist.pdf}
 \end{center}
-	\caption{Japanese verb suffixes, measuring prediction on the level of phonemes, for real (blue), random (green), and optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-phon}
+	\caption{Japanese verb suffixes, measuring prediction on the level of phonemes, for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-phon}
 \end{figure}
 
 
@@ -120,26 +121,39 @@ comparison to baselines
 	\begin{center}
 \includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-it.pdf}
 \includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-memsurp.pdf}
-\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-auc.pdf}
+\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-auc-hist.pdf}
 \end{center}
-	\caption{Japanese verb suffixes, measuring prediction on the level of morphemes, for real (blue), random (green), and optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-morph}
+	\caption{Japanese verb suffixes, measuring prediction on the level of morphemes, for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-morph}
 \end{figure}
 
 
 \paragraph{Results: Comparing Optimized and Real Orders}
 
-- phonemes
+In Figure~\ref{fig:acc-japanese}, we show the accuracy of optimized grammars in predicting affix order in the corpus, together with random baseline figures.
 
-- graphemes
+We evaluate accuracy using two methods:
 
-- morphemes
+In one method (`Pairs'), we consider, for each verb form in the corpus, all pairs of prefixes (or suffixes).
+We then evaluate for what fraction of these pairs, across the corpus, the relative order of the two affixes is as predicted by the grammar.
+
+In the other method, (`Full'), we count what fraction of forms in the corpus has exactly the affix ordering predicted by the grammar.
 
 
-\begin{tabular}{c|ccccc}
-             & Pair Accuracy & Full Accuracy \\ \hline
-Phonemes     &   \\
-Morphemes     &  \\
+\begin{figure}
+\begin{center}
+\begin{tabular}{c||ll|ll}
+             &       Pairs & Full \\ \hline\hline
+Optimized for Phoneme Prediction   &   0.976 (SD 0.007) & 0.971 (SD 0.011) \\
+Optimized for Morpheme Prediction  &   0.873 (SD 0.154) & 0.85 (SD 0.184) \\
+Random Baseline     &  0.519 (SD 0.177) & 0.559 (SD 0.202) \\
 \end{tabular}
+\end{center}
+\caption{Accuracy of approximately optimized orderings, and of random baseline orderings, in predicting verb suffix order in Japanese. `Pairs' denotes the rate of pairs of morphemes that are ordered correctly, and `Full' denotes the rate of verb forms where order is predicted entirely correctly. We show means and standard deviations over different runs of the optimization algorithm (`Optimized'), and over different random orderings (`Random').}\label{fig:acc-japanese}
+\end{figure}
+
+Error analysis
+
+
 
 
 
@@ -243,9 +257,9 @@ comparison to baselines
 	\begin{center}
 \includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byPhonemes-it.pdf}
 \includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byPhonemes-memsurp.pdf}
-\includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byPhonemes-auc.pdf}
+\includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byPhonemes-auc-hist.pdf}
 \end{center}
-	\caption{Sesotho verb suffixes, measuring prediction on the level of phonemes, for real (blue), random (green), and optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-phon}
+	\caption{Sesotho verb suffixes, measuring prediction on the level of phonemes, for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-phon}
 \end{figure}
 
 
@@ -253,17 +267,32 @@ comparison to baselines
 	\begin{center}
 \includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byMorphemes-it.pdf}
 \includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byMorphemes-memsurp.pdf}
-\includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byMorphemes-auc.pdf}
+\includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byMorphemes-auc-hist.pdf}
 \end{center}
-	\caption{Sesotho verb suffixes, measuring prediction on the level of morphemes, for real (blue), random (green), and optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-morph}
+	\caption{Sesotho verb suffixes, measuring prediction on the level of morphemes, for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-morph}
 \end{figure}
 
 
 \paragraph{Results: Comparing Optimized and Real Orders}
 
-- phonemes
+In Figure~\ref{fig:acc-sesotho}, we show the accuracy of optimized grammars in predicting affix order in the corpus, together with random baseline figures.
 
-- graphemes
 
-- morphemes
+
+Error analysis
+
+\begin{figure}
+\begin{tabular}{cc||ll|ll}
+             &              & \multicolumn{2}{c}{Prefixes}    & \multicolumn{2}{|c}{Suffixes} \\
+             &              & Pairs & Full & Pairs & Full \\ \hline\hline
+Phonemes Prediction   &   Optimized  &  0.987 (SD 0.004) & 0.982 (SD 0.005) & 0.903 (SD 0.136) & 0.894 (SD 0.146) \\ 
+           &   Random     &  0.321 (SD 0.172) & 0.173 (SD 0.197) & 0.52 (SD 0.14) & 0.47 (SD 0.131) \\ \hline
+Morpheme Prediction  &   Optimized  &  0.997 (SD 0.0) & 0.995 (SD 0.0) & 0.804 (SD 0.0) & 0.721 (SD 0.0) \\
+           &   Random  &  0.445 (SD 0.307) & 0.353 (SD 0.292) & 0.479 (SD 0.214) & 0.403 (SD 0.231) \\
+\end{tabular}
+\caption{Accuracy of approximately optimized orderings, and of random baseline orderings, in predicting verb affix order in Sesotho. `Pairs' denotes the rate of pairs of morphemes that are ordered correctly, and `Full' denotes the rate of verb forms where order is predicted entirely correctly. We show means and standard deviations over different runs of the optimization algorithm (`Optimized'), and over different random orderings (`Random').}\label{fig:acc-sesotho}
+\end{figure}
+
+
+
 
