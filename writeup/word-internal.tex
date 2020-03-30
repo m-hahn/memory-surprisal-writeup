@@ -1,21 +1,12 @@
-- datasets
-
--- unimorph
-
--- bibles corpus?
-
--- celex
-
-
-- permute phonemes
-
-- permute syllables
-
-- permute phonemes only within syllables
-
-- permute morphemes 
-
-\section{Morphology}
+%- datasets
+%-- unimorph
+%-- bibles corpus?
+%-- celex
+%- permute phonemes
+%- permute syllables
+%- permute phonemes only within syllables
+%- permute morphemes 
+%\section{Morphology}
 
 Bybee 1985:
 
@@ -32,15 +23,16 @@ We study two agglutinative languages for which extensive corpora with hand-annot
 We drew on Universal Dependencies data.
 In the tokenization scheme used for Japanese, most affixes are separated as individual tokens, effectively providing morpheme segmentations.
 We used the GSD corpus, Version 2.4, \citep{tanaka2016universal, asahara2018universal}, as it was the only corpus with a training set and freely available word forms.
-
 In the corpus, verb suffixes largely correspond to auxiliaries (tag AUX); only a few morphemes tagged AUX are not standardly treated as suffixes (see SI), and one frequent suffix (-\textit{te}) is labeled SCONJ.
 
 We selected verb forms by selecting all chains of a verb (tag VERB) followed by any number of auxiliaries (tag AUX) from the training set of the corpus. When the suffix -\textit{te} (tag SCONJ) followed such a chain, we added this.
 
-We obtained 15,281 verb forms, with a median number of X suffixes (max=...).
+We obtained 15,281 verb forms in the training set and 1,048 verb forms in the held-out set.
 
-In the corpus, each morpheme is annotated with a lemma, indicating a normalized context-independent representation of the morpheme.
-For both verbs and affixes, this lemma annotation abstracts away from most morphophonological and other allomorphic variation, it thus largely identifies underlying morphemes (see SI for limitations).
+We used the annotation provided in the corpus to identify underlying morphemes (see SI).
+
+%In the corpus, each morpheme is annotated with a lemma, indicating a normalized context-independent representation of the morpheme.
+%For both verbs and affixes, this lemma annotation abstracts away from most morphophonological and other allomorphic variation, it thus largely identifies underlying morphemes (see SI for limitations).
 
 
 \paragraph{Verb Suffixes in Japanese}
@@ -67,18 +59,11 @@ Unlike predicted by the hierarchy, tense/aspect markers are not placed closer to
 
 
 \paragraph{Experiment}
-
-modes:
-
-We considered three methods of quantifying prediction
-(1) on the level of phonemes, (2) on the level of graphemes, (3) on the level of morphemes.
-
-For (1): Many verb stems are written using Kanji characters; we did not phonemize these. (TODO probably we should do this to make things clean).
-
-
-For (3), we label suffixes for underlying morphemes with the aid of provided lemmatization (see SI for details)
+We again quantified prediction both on the level of phonemes, and on the level of morphemes.
+For phoneme-level prediction, we transliterated verb forms into syllabic Hiragana with the tagger Kytea (CITE), and then phonemized these syllabic representations.
+For morpheme-level prediction, we labeled suffixes for underlying morphemes with the aid of provided lemmatization (see SI for details)
 This controls for allomorphy / morphophonemic changes, which are conditioned on surrounding affixes.
-By conducting these 
+
 
 \paragraph{Parameterizing Alternative Orderings}
 
@@ -96,10 +81,12 @@ We then update the weights to the ordering that yields the lowest AUC.
 
 Computation of AUC is approximated at $T=5$ for computational efficiency.
 
+We calculate AUC using cross-entropies on the held-out set.
+
 To further speed up optimization, we restrict to morphemes occurring at least 10 times in the corpus for about 95\% of iterations, and to about 10\% of possible orderings in each step.
 These choices vastly reduce computation time by reducing time spent on low-frequency morphemes.
 
-We run this for X iterations.
+We run this for 1,000 iterations. Empirically, AUC converges after a few hundred iterations.
 
 \paragraph{Results: Comparison to Baselines}
 comparison to baselines
@@ -130,13 +117,24 @@ comparison to baselines
 \paragraph{Results: Comparing Optimized and Real Orders}
 
 In Figure~\ref{fig:acc-japanese}, we show the accuracy of optimized grammars in predicting affix order in the corpus, together with random baseline figures.
-
 We evaluate accuracy using two methods:
-
 In one method (`Pairs'), we consider, for each verb form in the corpus, all pairs of prefixes (or suffixes).
 We then evaluate for what fraction of these pairs, across the corpus, the relative order of the two affixes is as predicted by the grammar.
-
 In the other method, (`Full'), we count what fraction of forms in the corpus has exactly the affix ordering predicted by the grammar.
+
+
+
+
+
+By both measures, optimized grammars recover the observed orders with very high accuracy.
+For each grammar, we extracted the ten most common pairs of morphemes whose relative order is incorrectly predicted.
+For grammars optimized for phoneme prediction, most of these errors concerned low-frequency morphemes that do not belong to the nine slots identified here.
+The only exception is that desiderative and negation are consistently ordered incorrectly; this affects 13 corpus examples.
+When optimizing for morpheme prediction, this divergence also appeared.
+A few of the grammars show additional divergences among high-frequency morphemes, for instance, some grammars order politeness and negation incorrectly. 
+
+
+
 
 
 \begin{figure}
@@ -155,29 +153,14 @@ Random Baseline    &  0.504 (SD 0.0) & 0.414 (SD 0.0) \\
 
 
 
-
-
-
-
-Error analysis
-
-Optimized for phoneme prediction:
-
-Optimized for morpheme prediction:
-
-
-
-
-
 \subsection{Sesotho}
 
 Sesotho (also known as Southern Sotho) is a Southern Bantu language, spoken by 5.6 Million L1 speakers (REF) mainly in Lesotho and South Africa.
 We use the Demuth Corpus \citep{demuth1992acquisition} of child and child-directed speech, containing about 13K utterances with 500K morphemes.
 The corpus has very extensive manual morphological segmentation and annotation; each verb form is segmented into morphemes, which are annotated for their function.
-
 Sesotho verbs carry both prefixes and suffixes.
 We extracted 37K verb forms (see SI for details).
-
+We randomly selected 5\% to serve as held-out data and used the remaining 95\% as training data.
 
 \paragraph{Verb Affixes in Sesotho}
 
@@ -195,36 +178,25 @@ We identified the following prefixes:
     
     \item Object agreement or reflexive marker. 
     Similar to subject agreement, object agreement denotes person, number, and noun class features of the object.
-    Unlike subject agreement, it is optional (CITE).
 \end{enumerate}
 We identified the following suffixes:
     
 \begin{enumerate}
-    \item Valence: causative (-isa),  neuter/stative (-eha, -ahala), applicative (-el-), reciprocal (-an-)
+\item Semantic derivation: reversive (e.g., do $\rightarrow$ undo)
+    \item Valence: causative,  neuter/stative, applicative, reciprocal
+    
+    \item Voice: passive
     
     
-    Also two that aren't really valence:
-    
-    - reversive \cite[\textsection 345]{doke1967textbook} -- not really VALENCE, ex. bind -- loosen
-    
-    -  Perfective/Completive (-ets), -ell (66 times) \cite[\textsection 336]{doke1967textbook}
-    
-
-    \item Voice: passive (-iw-)
-    
-    
-    \item Tense: The only tense suffix is the perfect affix -il-.
+    \item Tense
 
      
-    \item MOOD: Mood (m\^{}, 37K times), such as -a/-e for indicative \citep{demuth1992acquisition}.
+    \item Mood
     
 
-    \item Interrogative (labeled \textit{wh}, 2K times) and relative (labeled \textit{rl}, 857 times) markers -\textit{ng}
-    
-    The interrogative eng `what' can be encliticized to the verb; this is treated as a suffix in the Demuth corpus \cite[p. 168]{guma1971handbook}, \cite[\textsection 160, 320]{doke1967textbook}.
-    
-    Verbs in relative clauses are marked with -ng \cite[\textsection 271, 793]{doke1967textbook}
-
+    \item Interrogative and relative markers -\textit{ng}.
+    The interrogative marker -\textit{ng} is an enclitized form of the interrogative `what'.
+    The relative marker -\textit{ng} is suffixed to verbs in relative clauses.
 \end{enumerate}
 
 
@@ -237,15 +209,9 @@ For suffixes, relation to Bybee hierarchy: valence closest, then voice, then ten
 
 \paragraph{Experiment}
 We again quantified prediction both on the level of phonemes, and on the level of morphemes.
-For phoneme-level prediction, we transliterated verb forms into syllabic Hiragana with the tagger Kytea (CITE), and then phonemized these syllabic representations.
-For morpheme-level prediction, we labeled suffixes for underlying morphemes with the aid of provided lemmatization (see SI for details)
-This controls for allomorphy / morphophonemic changes, which are conditioned on surrounding affixes.
-
 As before, we parameterize alternative suffix orderings by assigning an integer to each morpheme.
-We consider all morphemes annotated in the corpus, including those less frequent than the ones identified above (see SI for details).
-
-TODO we need to decide what to do with merged morphemes in the phoneme-based prediction version. Doesn't really make a difference for the result, but should be clean.
-
+Also, we consider all morphemes annotated in the corpus, including those less frequent than the ones identified above (see SI for details).
+In the phoneme-based version, we order merged phonemes according to the position of the first morpheme.
 We used the same method as before to find approximately optimal parameters.
 
 \paragraph{Results: Comparison to Baselines}
@@ -280,9 +246,10 @@ comparison to baselines
 In Figure~\ref{fig:acc-sesotho}, we show the accuracy of optimized grammars in predicting affix order in the corpus, together with random baseline figures.
 
 
-When optimizing for phoneme prediction, all optimized grammars exactly recover the ordering described above (non-perfect prediction accuracies reflect disparities in low-frequency morphemes).
-The same happens when optimizing for morpheme prediction for prefixes.
-For suffixes, order is recovered with the exception of the placement of interrogative and relative markers: These are ordered before the mood marker in optimized grammars.
+For prefixes, all optimized grammars exactly recover the ordering described above.
+Non-perfect prediction accuracies reflect disparities in low-frequency morphemes.
+For suffixes, order is recovered at above-chance accuracies, but with a few divergences.
+TODO
 
 
 \begin{figure}
