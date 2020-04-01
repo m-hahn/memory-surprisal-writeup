@@ -1,8 +1,7 @@
 
 Natural language solves the problem of allowing humans to communicate effectively given the limited cognitive resources available for producing and understanding utterances. Here, we investigate whether human languages are grammatically structured in a way that reduces the cognitive resource requirements for production and comprehension. In particular, we study whether the order of elements in linguistic sequences are structured so as to reduce incremental memory requirements. We do so by introducing a new information-theoretic formalization of the relationship between sequential order and memory usage in language processing. Our formalization allows us to predict the order of words within sentences, and morphemes within words, by the minimization of memory usage. We argue that our result explains an old intuition in linguistics: that elements of utterances which are more `relevant' or `mentally connected' to each other are closer to each other.
 
-The suggestion that the structure of human language reflects a need for efficient processing under resource limitations has been present in the linguistics and cognitive science literature for decades~\citep{yngve1961,berwick1984grammatical,hawkins1994performance,jaeger2011language,chomsky2005three,gibson2019efficiency,hahn2020universals}. The idea has been summed up in \citeauthor{hawkins1994efficiency}'s (\citeyear{hawkins1994efficiency}) \key{Performance--Grammar Correspondence Hypothesis} (PGCH), which holds that grammars are structured so that the typical utterance is easy to produce and comprehend under performance constraints.
-%The idea has also been controversial, with prominent claims that efficiency in this sense has had no or only a minimal effect on the structure of human language \citep{}.
+The suggestion that the structure of human language reflects a need for efficient processing under resource limitations has been present in the linguistics and cognitive science literature for decades~\citep{yngve1960model,berwick1984grammatical,hawkins1994performance,jaeger2011language,chomsky2005three,gibson2019efficiency,hahn2020universals}. The idea has been summed up in \citeauthor{hawkins1994efficiency}'s (\citeyear{hawkins1994efficiency}) \key{Performance--Grammar Correspondence Hypothesis} (PGCH), which holds that grammars are structured so that the typical utterance is easy to produce and comprehend under performance constraints.
 
 One major source of resource limitation in language processing is incremental memory use. 
 When producing and comprehending language in real time, a language user must keep track of what she has already produced or heard in some kind of incremental memory store, which is subject to resource constraints.
@@ -15,51 +14,12 @@ Our contribution is to present a new, highly general formalization of the relati
 We formalize the notion of memory constraints in terms of what we call the \key{memory--surprisal trade-off}: the idea that the ease of comprehension and the accuracy of production depend on the amount of computational resources invested into remembering previous words.
 Therefore, there exists a trade-off between the quantity of memory resources invested, and the ease of language processing.
 The shape of this trade-off depends on the grammar of a language, and in particular the way that it structures information in time.
-We characterize memory resources using the theory of lossy data compression \citep{cover2006elements,berger}, which has recently had success in predicting cognitive phenomena \citep{sims,gershman}, and we show how the trade-off described by our general theory is manifested in different ways in existing mechanistic theories of language processing. % cite the crutchfield nature review, and predictive info bottleneck
+We characterize memory resources using the theory of lossy data compression \citep{cover2006elements,berger}, which has recently had success in predicting cognitive phenomena \citep{sims2018efficient,gershman}, and we show how the trade-off described by our general theory is manifested in different ways in existing mechanistic theories of language processing. 
 
-Within our framework, we prove a theorem showing that lower memory requirements result when utterance elements that depend on each other statistically are placed close to each other. This theorem does not require any assumptions about the architecture or functioning of memory, except that it has a bounded capacity. We demonstrate that word orders with short dependencies do indeed engender lower working memory resource requirements in toy languages from previous literature, and we show that real word orders in corpora of TODO languages have lower memory requirements than would be expected under artificial baseline comparison grammars. Finally, we show that we can predict the order of morphemes within words in two languages using our principle of the minimization of memory usage.
+Within our framework, we prove a theorem showing that lower memory requirements result when utterance elements that depend on each other statistically are placed close to each other. This theorem does not require any assumptions about the architecture or functioning of memory, except that it has a bounded capacity. We demonstrate that word orders with short dependencies do indeed engender lower working memory resource requirements in toy languages from previous literature, and we show that real word orders in corpora of 54 languages have lower memory requirements than would be expected under artificial baseline comparison grammars. Finally, we show that we can predict the order of morphemes within words in two languages using our principle of the minimization of memory usage.
 
-Our work not only formalizes and tests an old idea in functional linguistics and psycholinguistics, it also opens up connections between those fields and the statistical analysis of natural language \citep{debowski-excess-2011,bentz2017word,lin-critical-2017}, and more broadly, between linguistics and fields that have studied information-processing costs and resource requirements in brains \citep{friston}, organisms \citep{england}, and general physical systems \citep{still2012thermodynamic}. %For example, our memory--surprisal tradeoff is a variant of the Predictive Rate--Distortion curve introduced by \citet{still-optimal-2010} and studied by \citet{marzen-nearly-2017}. 
+Our work not only formalizes and tests an old idea in functional linguistics and psycholinguistics, it also opens up connections between those fields and the statistical analysis of natural language \citep{debowski-excess-2011,bentz2017word,lin-critical-2017}, and more broadly, between linguistics and fields that have studied information-processing costs and resource requirements in brains \citep{friston}, organisms \citep{england}, and general physical systems \citep{still2012thermodynamic}. 
 
-
-
-
-
-
-
-
-%Complementing this work, a number of researchers in linguistic typology and corpus linguistics have shown how various universal properties of grammars can be explained in terms of memory-based processing difficulty \citep{hawkins2004efficiency,hawkins2014crosslinguistic,ferrericancho2006syntactic,gildea2010grammars,futrell2015largescale,liu2017dependency,temperley2018dependency}.
-%We will see that one of the most successful theories in this domain, the principle of \key{dependency length minimization}, falls out of our formalization of processing efficiency as a special case.
-%Our work formalizes and generalizes this previous work.
-
-
-
-
-%For each amount of memory invested, a language permits a certain level of ease of processing 
-%The resulting tradeoff of memory and surprisal of depends on the word order properties of a language. Analogous results also hold for language production by resource-constrained speakers. We show evidence that the preferred word orders of natural languages are those that enable efficient memory--surprisal tradeoffs.
-
-
-
-%These strategies can be seen as sets of rules that differ in the way ...
-%Languages differ considerably in the rules they apply to order information: English orders the object after the verb, Japanese places it before the verb \note{make more explicit here}.
-%Explaining the variation in the strategies languages use to  order underlying hierarchical structures into linear strings of words has been one of the foci of linguistic research (\jd{CITE}).
-%We show that these strategies reflect an underlying optimization principle: human languages are adapted to limitations in human working memory.
-
-%We test the hypothesis that human languages represent different solutions to the problem of efficient computation with constrained working memory.
-
-
-
-
-
-
-%\mhahn{original intro}
-%Since the 1950s, it has been a persistent suggestion that human language processing is shaped by a resource bottleneck in short-term memory.
-%Language is produced and comprehended incrementally in a way that crucially requires both speaker and listener to use an active memory store to keep track of what was previously said.
-%Since short-term memory of this kind is known to be highly limited in capacity \citep{miller1956magical}, it makes sense for these capacity limits to comprise a major constraint on production and comprehension.
-%Indeed, a great deal of work in sentence processing has focused on characterizing the effects of memory constraints on language processing \citep{gibson-linguistic-1998,lewis-activation-based-2005,levy2013memory}.
-
-%At the same time, the field of functional linguistics has argued that these resource constraints not only affect online language processing, they also shape the form of human language itself.
-%For example, the Performace--Grammar Correspondence Hypothesis (PGCH) of \citet{hawkins1994performance} holds that forms which are practically easier to produce and comprehend end up becoming part of the grammars of languages, and that this process can explain several of the universal properties of human languages originally documented by \citet{greenberg-universals-1963}.
 
 
 
