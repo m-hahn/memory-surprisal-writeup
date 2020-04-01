@@ -65,9 +65,7 @@ We only consider the head-final version of \citet{fedzechkina-human-2017}'s arti
 
 We constructed a stochastic process representing the language consisting of sentences with the $A$ orders from Figure~\ref{tab:artificial}, and one language consisting of the $B$ orders. Following the experimental setup of \cite{fedzechkina-human-2017}, we assigned equal probability to the two possible configurations per language, and used a separate set of nouns (inanimate nouns) for the embedded noun in the long phrase.
 
-
 % TODO: Does the process only include those orders, or does it also include the SOV and OSV orders with equal-complexity O and S?
-
 
 We interpreted each of the two languages as a stationary processes, extending infinitely in both directions, by concatenating independent samples drawn from the language.
 We computed (\ref{eq:memory-bound}) from a chain of 1000 independently sampled sentences, for each of the two versions of the toy language.
@@ -105,7 +103,8 @@ We computed (\ref{eq:memory-bound}) from a chain of 1000 independently sampled s
 \begin{figure}
 \centering
 \includegraphics[width=0.45\textwidth]{figures/toy-mem-surp.pdf}
-	\caption{Tradeoff between listener memory and surprisal, for the two versions of the artificial language from \cite{fedzechkina-human-2017}. Language $A$ requires less memory at the same level of surprisal.}\label{fig:toy-listener-tradeoff}
+	\caption{Tradeoff between listener memory and surprisal, for the two versions of the artificial language from \cite{fedzechkina-human-2017}. Language $A$ requires less memory at the same level of surprisal.}
+	\label{fig:toy-listener-tradeoff}
 \end{figure}
 
 In Figure~\ref{fig:toy-listener-tradeoff}, we show the resulting memory--surprisal trade-off curve for the two versions of the artificial language from \cite{fedzechkina-human-2017}. % TODO: Fill in the missing red line on the bottom; set bottom of y axis to 0; extend the x axis further to the right (and maybe to the left)

@@ -8,36 +8,16 @@
 %- permute morphemes 
 %\section{Morphology}
 
-Bybee 1985:
+The memory--surprisal trade-off described in Section~\ref{sec:ms-tradeoff} applies not only at the level of words, but also at the level of any linguistic element, including morphemes within words. Therefore, just as word orders are influenced by information locality, the order of morphemes within words should be structured so that morphemes which predict each other are close to each other.
 
-verb-valence-voice-aspect-tense-mood-modality-subj.person-subj.number
+Here, we apply the memory--surprisal trade-off to explain the order of morphemes within morphologically complex words in two agglutinative languages. We study two agglutinative languages for which extensive corpora with hand-annotated morphological segmentation and labeling is available: Japanese and Sesotho.
 
-can also directly quantify MI with verb stem (presence \& choice for each slot) as a sanity check
-
-We study two agglutinative languages for which extensive corpora with hand-annotated morphological segmentation and labeling is available.
 
 \subsection{Japanese Verb Suffixes}
 
+In Japanese, verbs are marked with an extensive number of suffixes. For example, the following 
 
-\paragraph{Data Selection and Processing}
-We drew on Universal Dependencies data.
-In the tokenization scheme used for Japanese, most affixes are separated as individual tokens, effectively providing morpheme segmentations.
-We used the GSD corpus, Version 2.4, \citep{tanaka2016universal, asahara2018universal}, as it was the only corpus with a training set and freely available word forms.
-In the corpus, verb suffixes largely correspond to auxiliaries (tag AUX); only a few morphemes tagged AUX are not standardly treated as suffixes (see SI), and one frequent suffix (-\textit{te}) is labeled SCONJ.
-
-We selected verb forms by selecting all chains of a verb (tag VERB) followed by any number of auxiliaries (tag AUX) from the training set of the corpus. When the suffix -\textit{te} (tag SCONJ) followed such a chain, we added this.
-
-We obtained 15,281 verb forms in the training set and 1,048 verb forms in the held-out set.
-
-We used the annotation provided in the corpus to identify underlying morphemes (see SI).
-
-%In the corpus, each morpheme is annotated with a lemma, indicating a normalized context-independent representation of the morpheme.
-%For both verbs and affixes, this lemma annotation abstracts away from most morphophonological and other allomorphic variation, it thus largely identifies underlying morphemes (see SI for limitations).
-
-
-\paragraph{Verb Suffixes in Japanese}
-
-Japanese has an extensive number of suffixes, including rarer ones that are not well represented in the corpus.
+The Japanese language has an extensive number of suffixes, including rarer ones that are not well represented in the corpus.
 Based on the corpus and the linguistic literature on Japanese, we identified the following frequent verb suffixes, occurring in the following order outwards from the verb (see SI for details).
 
 
@@ -55,6 +35,23 @@ Based on the corpus and the linguistic literature on Japanese, we identified the
 
 In accordance with Bybee's hierarchy, valence is marked closest to the verb, followed by voice.
 Unlike predicted by the hierarchy, tense/aspect markers are not placed closer to the verb than mood/modality markers.
+
+
+
+\paragraph{Data Selection and Processing}
+We drew on Universal Dependencies data.
+In the tokenization scheme used for Japanese, most affixes are separated as individual tokens, effectively providing morpheme segmentations.
+We used the GSD corpus, Version 2.4, \citep{tanaka2016universal, asahara2018universal}, as it was the only corpus with a training set and freely available word forms.
+In the corpus, verb suffixes largely correspond to auxiliaries (with tag \texttt{AUX}); only a few morphemes tagged \texttt{AUX} are not standardly treated as suffixes (see SI), and one frequent suffix (-\textit{te}) is labeled \texttt{SCONJ}.
+
+We selected verb forms by selecting all chains of a verb (tag \texttt{VERB}) followed by any number of auxiliaries (tag \texttt{AUX}) from the training set of the corpus. When the suffix -\textit{te} (tag \texttt{SCONJ}) followed such a chain, we added this.
+
+We obtained 15,281 verb forms in the training set and 1,048 verb forms in the held-out set.
+
+%We used the annotation provided in the corpus to identify underlying morphemes (see SI).
+
+%In the corpus, each morpheme is annotated with a lemma, indicating a normalized context-independent representation of the morpheme.
+%For both verbs and affixes, this lemma annotation abstracts away from most morphophonological and other allomorphic variation, it thus largely identifies underlying morphemes (see SI for limitations).
 
 
 
@@ -101,18 +98,12 @@ comparison to baselines
 \includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byPhonemes-it-heldout.pdf}
 \includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byPhonemes-memsurp-heldout.pdf}
 \includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byPhonemes-auc-hist-heldout.pdf}
-\end{center}
-	\caption{Japanese verb suffixes, measuring prediction on the level of phonemes, for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-phon}
-\end{figure}
 
-
-\begin{figure}
-	\begin{center}
 \includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-it-heldout.pdf}
 \includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-memsurp-heldout.pdf}
 \includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-auc-hist-heldout.pdf}
 \end{center}
-	\caption{Japanese verb suffixes, measuring prediction on the level of morphemes, for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-morph}
+	\caption{Japanese verb suffixes, measuring prediction on the level of phonemes (top) and morphemes (bottom), for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-phon-morph}
 \end{figure}
 
 
@@ -228,19 +219,16 @@ comparison to baselines
 \includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byPhonemes-it-heldout.pdf}
 \includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byPhonemes-memsurp-heldout.pdf}
 \includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byPhonemes-auc-hist-heldout.pdf}
-\end{center}
-	\caption{Sesotho verb affixes, measuring prediction on the level of phonemes, for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-phon}
-\end{figure}
 
-
-\begin{figure}
-	\begin{center}
 \includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byMorphemes-it-heldout.pdf}
 \includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byMorphemes-memsurp-heldout.pdf}
 \includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byMorphemes-auc-hist-heldout.pdf}
 \end{center}
-	\caption{Sesotho verb affixes, measuring prediction on the level of morphemes, for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-morph}
+	\caption{Sesotho verb affixes, measuring prediction on the level of phonemes (top) and morphemes (bottom), for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-phon-morph}
 \end{figure}
+
+
+
 
 
 \paragraph{Results: Comparing Optimized and Real Orders}
@@ -264,3 +252,13 @@ Morph.  &   Optimized  &  0.988 (SD 0.0) & 0.989 (SD 0.0) & 0.756 (SD 0.014) & 0
 \end{tabular}
 \caption{Accuracy of approximately optimized orderings, and of random baseline orderings, in predicting verb affix order in Sesotho. `Pairs' denotes the rate of pairs of morphemes that are ordered correctly, and `Full' denotes the rate of verb forms where order is predicted entirely correctly. We show means and standard deviations over different runs of the optimization algorithm (`Optimized'), and over different random orderings (`Random').}\label{fig:acc-sesotho}
 \end{figure}
+
+\subsection{Discussion}
+
+
+Bybee 1985:
+
+verb-valence-voice-aspect-tense-mood-modality-subj.person-subj.number
+
+can also directly quantify MI with verb stem (presence \& choice for each slot) as a sanity check
+
