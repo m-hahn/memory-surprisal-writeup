@@ -62,7 +62,7 @@ Here we provide the technical definition of the memory--surprisal trade-off curv
 
 Let $W$ be a stochastic process\footnote{We will use $W$ to represent languages, and we will construct $W$ to be stationary. Large natural language texts are known to be neither stationary nor ergodic \citep{debowski}. However, we are interested in explaining grammatical properties of languages, which mostly involve constraints among words within sentences, not within large texts as a whole. Therefore, we will represent a language using a stochastic process consisting of repeated independent samples from a distribution over sentences. This stochastic process is both stationary and ergodic.} generating a stream of symbols called words, indexed as $w_1, \dots, w_t$.\footnote{We call these symbols words, but note that our mathematical treatment applies for \emph{any} decomposition of a sentence into a sequence of symbols---the symbols could represent phonemes, syllables, morphemes, words, phrases, etc.} Let $M$ be a memory encoding function. The \key{average surprisal} of the process $W$ under the memory encoding function $M$ is
 \begin{equation}
-    S_M &\equiv \lim_{t \rightarrow \infty} H[w_t | m_t],
+    S_M \equiv \lim_{t \rightarrow \infty} H[w_t | m_t],
 \end{equation}
 where the notation $H[\cdot | \cdot]$ indicates conditional entropy \citep[][p. 17]{cover2006elements}:
 \begin{equation}
