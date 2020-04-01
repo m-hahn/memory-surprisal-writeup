@@ -88,6 +88,8 @@ These choices vastly reduce computation time by reducing time spent on low-frequ
 
 We run this for 1,000 iterations. Empirically, AUC converges after a few hundred iterations.
 
+We ran the algorithm ten times and selected the five runs with the highest AUC values.
+
 \paragraph{Results: Comparison to Baselines}
 comparison to baselines
 
@@ -245,12 +247,11 @@ comparison to baselines
 
 In Figure~\ref{fig:acc-sesotho}, we show the accuracy of optimized grammars in predicting affix order in the corpus, together with random baseline figures.
 
-
 For prefixes, all optimized grammars exactly recover the ordering described above.
 Non-perfect prediction accuracies reflect disparities in low-frequency morphemes.
-For suffixes, order is recovered at above-chance accuracies, but with a few divergences.
-TODO
-
+The same holds for suffixes, when optimizing for phoneme prediction.
+When optimizing for morpheme prediction, order is recovered at above-chance accuracies, though with some divergences.
+For instance, relative and interrogative suffixes are consistently placed closer to the verb stem than the mood suffix.
 
 \begin{figure}
 \begin{tabular}{cc||ll|ll}

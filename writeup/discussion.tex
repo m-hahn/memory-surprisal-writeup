@@ -36,10 +36,107 @@ In SI Section X, we show that our theoretical bounds are also compatible with a 
 \paragraph{absolute numbers, how they relate to what's known about human memory}
 
 \subsection{Relation to Models of Sentence Processing}
+\label{sec:sentprod-models}
 
 There is a substantial literature proposing sentence processing models and quantitative memory metrics for sentence processing.
-In this section, we discuss how our theoretical results relate to and generalize these previously proposed metrics.
-We do not view our model as competing with or replacing any of these models; instead, our information-theoretic analysis captures aspects that are common to most of these models and shows how they arise from very general modeling assumptions.
+In this section, we discuss how our theoretical results relate to and generalize these previously proposed models.
+We do not view our model as competing with or replacing any of these models; instead, our information-theoretic analysis captures aspects that are common to most of these models and shows how they arise from very general modeling assumptions. 
+%In this section, we argue that---although our theory is couched in the language of surprisal theory \citep{hale2001probabilistic,levy2008expectation,hale2016information}---the memory--surprisal curve reflects fundamental information-theoretic trade-offs that must apply in any theory. 
+
+In Section~\ref{sec:tradeoff}, we proved a formal relationship between the entropy of memory $H_M$ and average surprisal $S_M$. 
+We have made no assumptions about the architecture of incremental memory, and so our result is general across all such architectures.
+Memory representations do not have to be rational or optimal for our bound in Theorem~\ref{prop:suboptimal} to hold.
+There is no physically realizable memory architecture that can violate this bound.
+
+
+However, psycholinguistic theories may differ on whether the entropy of memory $H_M$ really is the right measure of memory load, and on whether average surprisal $S_M$ really is the right predictor of processing difficulty for humans. Therefore, in order to establish that our information-theoretic processing model generalizes previous theories, we will establish two links:
+\begin{itemize}
+    \item Our measure of memory usage generalizes theories that are based on counting numbers of objects stored in incremental memory \citep[e.g.,][]{yngve1960model,miller-finitary-1963,frazier1985syntactic,gibson-linguistic-1998,kobele2013memory,graf2014evaluating,GrafEtAl15MOL,gerth2015memory,GrafEtAl17JLM,desanto2020parsing}. Furthermore, for theories where memory is constrained in its capacity for \emph{retrieval} rather than storage \citep[e.g.,][]{mcelree-memory-2003,lewis-activation-based-2005}, the information locality bound will still hold.
+    \item Our measure of processing difficulty (i.e., average surprisal) reflects at least a \emph{component} of the predicted processing difficulty under other theories.
+\end{itemize}
+
+More specifically, our measure of memory usage is based on mutual information, and so it is equivalent to counting the number of objects stored in memory, weighted by their amount of predictive information.
+
+In this section, we will argue that any realistic theory of sentence processing must include surprisal as at least a \emph{component} of the cost of processing a word, even if it is not explicitly stated as such. 
+%More formally, we argue that processing difficulty for a word $w_t$ must at least be given by $k (-\log P(w_t |m_t)) + R$, with $k$ a scaling factor giving the relative contribution of surprisal to processing cost, and $R$ representing all other factors. The scaling factor $k$ may be small, but it cannot be zero, for both empirical and theoretical reasons. 
+We make this argument on both empirical and theoretical grounds.
+Empirically, surprisal makes a well-documented and robust contribution to processing difficulty in empirical studies of reading times and event-related potentials \citep{smith2013effect,frank2016erp}. 
+Theoretically, surprisal may represent an irreducible thermodynamic cost incurred by any information processing system \citep{landauer,still2012thermodynamic,zenon2019information}, and there are multiple converging theoretical arguments for why it should hold as a cost in human language processing in particular \citep{levy2013memory}. 
+
+
+
+
+Here, we discuss the concrete connections between our sentence processing model and existing models of human sentence processing. 
+
+
+
+
+\paragraph{The Dependency Locality Theory}
+We studied average surprisal in systems with bounds on memory usage. 
+Our lower bound on memory usage, described in Theorem~\ref{prop:suboptimal} Eq.~\ref{eq:memory-bound}, is formally similar to Storage Cost in the Dependency Locality Theory (DLT) \citep{gibson-linguistic-1998,gibson2000dependency}.
+In that theory, storage cost at a given timestep is defined as the `number of predictions' that are held in memory.
+Our bound on memory usage is stated in terms of mutual information, which indicates the amount of predictive information extracted from the previous context and stored in memory.
+Therefore, our measure generalizes DLT storage cost. 
+Our meaasure goes beyond DLT storage cost in that the DLT quantity only considers predictions that are certain, and each prediction takes an equal amount of memory; in contrast, our measure of memory usage can be seen as weighting predictions by their certainty and amount of predictive information. 
+In this sense, DLT storage cost can be seen as an approximation to Eq.~\ref{eq:memory-bound}.
+
+The other component of the DLT is integration cost, the amount of difficulty incurred by establishing a long-term syntactic dependency. In our framework, DLT integration cost corresponds to surprisal given an imperfect memory representation, following \cite{futrell2020lossy}.
+
+There is one remaining missing link between our theory of processing difficulty and theories such as the Dependency Locality Theory:
+our information locality theorem says that \emph{statistical} dependencies should be short-term, whereas psycholinguistic theories of locality have typically focused on the time-span of \key{syntactic dependencies}: words which depend on each other to determine the meaning or the well-formedness of a sentence. Statistical dependencies, in contrast, mean that whenever one element of a sequence determines or predicts another element \emph{in any way}, those two elements should be close to each other in time. 
+
+If statistical dependencies, as measured using mutual information, can be identified with syntactic dependencies, then that would mean that information locality is straightforwardly a generalization of dependency locality. \citet{futrell2019syntactic} give theoretical and empirical arguments that this is so. They show that syntactic dependencies as annotated in dependency treebanks identify word pairs with especially high mutual information, and give a derivation showing that this is to be expected according to a formalization of the postulates of dependency grammar. The connection between mutual information and syntactic dependency has also been explored by \citet{}. % maximizing mutual information principle; de paiva alves; yuret
+
+
+\paragraph{Cue-Based Retrieval Models}
+
+In some psycholinguistic theories, memory-related difficulty arises not because of a bound on memory capacity, but rather because of difficulties involved in retrieving information from memory \citep{}. We are able to prove an analogous theorem that applies to such theories: see General Discussion for an extension of our analysis to the case involving a short-term memory (STM) with unbounded capacity, a working memory (WM) with limited capacity, and cost associated with communication between WM and STM. Essentially, the constraint on the the memory state in our theorem above can be re-interpreted as a constraint on the capacity of a communication channel linking STM to WM. In particular, this result constrains average surprisal for memory models based on cue-based retrieval such as the ACT-R model of \citet{lewis-activation-based-2005}.
+
+
+
+The ACT-R model of \cite{lewis-activation-based-2005} does not have an explicit surprisal cost.
+Instead, surprisal effects are interpreted as arising because, in less constraining contexts, the parser is more likely to make decisions that then turn out to be incorrect, leading to additional correcting steps.
+%We see this as an algorithmic-level implementation of the justification for surprisal theory provided by \citet{levy2008expectation}:
+We view this as an algorithmic-level implementation of a surprisal cost $H[x_t|m_{t-1}]$:
+If the word $x_t$ is unexpected given the current state of the working memory -- i.e., buffers and control states -- then their current state must provide insufficient information to constrain the actual syntactic state of the sentence, meaning that the parsing steps made to integrate $x_t$ are likely to include more backtracking and correction steps.
+Thus, we argue that cue-based retrieval models predict that the surprisal $- \log P(x_t|m_{t-1})$ will be part of the cost of processing word $x_t$.
+
+
+
+See General Discussion for a more detailed discussion how how average surprisal can describe processing cost in ACT-R models of sentence processing.
+
+
+
+
+- small buffer, unbounded unstructured store of chunks
+
+- content-based retrieval
+
+- interference
+
+
+In cue-based retrieval models, memory effects arise from retrieval interference, whereas surprisal effects arise from backtracking (CITE).
+Our model implements a bound on capacity, which is usually understood to be different from the presence of retrieval interference.
+See SI Section X for a version of our model that more closely parallels cue-based retrieval models.
+
+could also have more extensive discussion of the links here instead of the SI
+
+
+\paragraph{Lossy-Context Surprisal}
+\citet{futrell2020lossy} describe a processing model where listeners make predictions (and incur surprisal) based on lossy memory representations.
+In particular, they consider loss models that delete, erase, or replace words in the past.
+Within this model, they were able to establish a similar information locality result, by showing that the theoretical processing difficulty increases when words with high \emph{pointwise mutual information} are separated by large distances \citep{futrell-noisy-context-2017,futrell2019information}. Pointwise mutual information is the extent to which a \emph{particular value} predicts another value in a joint probability distribution. For example, if we have words $w_1$ and $w_2$ in a sentence, their pointwise mutual information is:
+\begin{equation*}
+    \text{pmi}(w_1; w_2) \equiv \log \frac{P(w_2|w_1)}{P(w_2)}.
+\end{equation*}
+Mutual information, as we defined it in Eq.~\ref{eq:mi}, is the \emph{average} pointwise mutual information over an entire probability distribution.
+
+Our information locality bound theorem differs from this previous result in three ways:
+\begin{enumerate}
+    \item \citet{futrell2020lossy} required an assumption that incremental memory is subject to decay over time. In contrast, we do not require any assumptions about incremental memory except that it has bounded capacity (or that retrieval operations have bounded capacity; see below).
+    \item Our result is a precise bound, whereas the previous result was an approximation based on neglecting higher-order interactions among words.
+    \item Our result is about the fall-off of the mutual information between words, conditional on the intervening words. The previous result was about the fall-off of \emph{pointwise} mutual information between specific words, without conditioning on the intervening words.
+\end{enumerate}
 
 Many proposals for memory metrics are based on the \emph{number} of objects simultaneously held in a stack-like data structure of memory, and \emph{how long} they are stored.
 
@@ -82,37 +179,9 @@ Marcus 1980 deterministic parsing
 
 \cite{marcus1978theory}: deterministic parser with small lookahead
 
-\paragraph{Dependency Locality Theory}
-The quantity described in Proposition~\ref{prop:lower-bound} is formally similar to Storage Cost in the Dependency Locality Theory (DLT) \citep{gibson-linguistic-1998}: Storage cost at a given timestep is defined as the number of predictions that are held in memory.
-Storage cost only considers predictions that are certain, and each prediction takes an equal amount of memory.
-In contrast, the result in Proposition~\ref{prop:lower-bound} can be seen as weighting predictions by their certainty and the amount of predictive information.
-In this sense, DLT storage cost can be seen as an approximation to Proposition~\ref{prop:lower-bound}.
-DLT integration cost can be seen as surprisal given an imperfect memory representation, following \cite{futrell-noisy-context-2017}.
-
-\paragraph{Cue-Based Retrieval Models}
-- small buffer, unbounded unstructured store of chunks
-
-- content-based retrieval
-
-- interference
 
 
-In cue-based retrieval models, memory effects arise from retrieval interference, whereas surprisal effects arise from backtracking (CITE).
-Our model implements a bound on capacity, which is usually understood to be different from the presence of retrieval interference.
-See SI Section X for a version of our model that more closely parallels cue-based retrieval models.
 
-could also have more extensive discussion of the links here instead of the SI
-
-
-\paragraph{Lossy-Context Surprisal}
-\citet{futrell-noisy-context-2017} describe a processing model where listeners make predictions (and incur surprisal) based on lossy memory representations.
-In particular, they consider loss models that delete, erase, or replace words in the past.
-Under the assumption that loss affects words more strongly that are further in the past, they derive a principle of information locality:
-A listener will incur surprisal
-$$ -\log P(w_t) - \sum_{j=1}^{t-1} f(i-j) pmi(w_i; w_j) + R$$
-where the `survival probability' $f(d)$ decreases as the distance $d$ between two words increases, and $R$ is a remainder term that can be argued to be small.
-Given that $f$ is assumed to be decreasing, this prediction loss will be smaller when words with high mutual information are closer together in the input.
-Our Proposition~\ref{prop:suboptimal} can be seen as an analogous result for general models of memory.
 
 
 \paragraph{Metrics based on Minimalist Parser Models}
@@ -200,3 +269,38 @@ The reason is that PCFGs assign low probabilities to long sequences.\footnote{Pr
 
 
 
+\subsection{Remarks}
+
+
+\paragraph{Are distant words forgotten?} Our theorem shows that a listener will inevitably be affected by surprisal cost corresponding to dependencies longer than some timescale $T$. However, it does not necessarily imply that a listener forgets words beyond some amount of time $T$ in the past. An optimal listener may well decide to remember information about words more distant than $T$, but in order to stay within the bounds of memory, she can only do so at the cost of forgetting some information about words closer than $T$.
+The Information Locality Lower Bound still holds, in the sense that the long-term dependency will cause processing difficulty, even if the long-term dependency is not itself forgotten.
+See SI Appendix Section X for a mathematical example illustrating this phenomenon.
+
+\subsection{Memory--surprisal trade-off in language production}
+
+An analogous memory--surprisal trade-off exists in language production. In this case, the trade-off arises from the minimization of error in production of linguistic sequences. That is, given a \key{competence language} (a target distribution on words given contexts), a speaker tries to produce a \key{performance language} which is as close as possible to the competence language. The performance language operates under memory constraints, so the performance language will diverge from the competence language due to production errors. When a speaker has more incremental memory about what she has already produced, then she is able to produce linguistic sequences with less error, thus reducing the divergence between the performance language and the competence language. The reduction of this competence--performance divergence is formally equivalent to the minimization of average surprisal from Section~\ref{sec:listener-tradeoff}.
+
+% TODO maybe cite some Karl Lashley stuff? Maryellen MacDonald? Shota Momma?
+
+We derive the existence of this trade-off from the following postulates about language production. Let the competence language be represented by a stationary stochastic process, parameterized by a probability distribution $p(w_t | w_{<t})$ giving the conditional probability of any word $w_t$ given an unbounded number of previous words. Our postulates describe a speaker who tries to find a performance language $q(w_t|m_t)$ to match the the competence language using incremental memory representations $m_t$:
+
+\begin{enumerate}
+    \item Production Postulate 1 (Incremental memory). At time $t$, the speaker has an incremental \key{memory state} $m_t$ that contains (1) her stored information about previous words that she has produced, and (2) information about her production target. The memory state is given by a \key{memory encoding function} $M$ such that $m_t = M(w_{t-1}, m_{t-1})$.
+    
+    \item Production Postulate 2 (Production policy). At time $t$, the speaker produces the next word $w_t$ conditional on her memory state by drawing from a probability distribution $q(w_t | m_t)$. We call $q$ the speaker's \key{production policy}.
+    
+    \item Production Postulate 3 (Minimizing divergence). The production policy $q$ is selected to minimize the KL divergence from the performance language to the target competence language $p(w_t|w_{<t})$. We call this divergence the \key{competence--performance divergence} under the memory encoding function $M$ and the production policy $q$:
+    \begin{align}
+    \label{eq:comp-perf-div}
+    d^q_M &\equiv D_{\text{KL}} [ p(w_t|w_{<t}) || q(w_t|m_t) ] \\
+        &= \sum_{w_{\le t}} p(w_{\le t}) \log \frac{p(w_t | w_{<t})}{q(w_t|m_t)}.
+    \end{align}
+    The production policy is then the solution to the functional minimization problem:
+    \begin{equation}
+        \mathop{\text{minimize }}_{q(w_t|m_t)} d^q_M.
+    \end{equation}
+\end{enumerate}
+
+Completing the link with the memory--surprisal trade-off in comprehension, we note that when the production policy $q(w_t|m_t)$ is selected to minimize the competence--performance divergence $d^q_M$, then this divergence becomes equal to the memory distortion $d_M$ discussed above in the context of comprehension costs. Therefore, under these postulates, the Information Locality Bound Theorem will apply in production as well as comprehension. This means that languages that exhibit information locality can be produced with greater accuracy given limited memory resources.
+
+Although the memory--surprisal trade-off is mathematically equivalent between comprehension and production, its psycholinguistic interpretation is different. In the case of language comprehension, the trade-off represents excess processing \emph{difficulty} arising due to memory constraints. In the case of language production, the trade-off represents \emph{production error} arising due to memory constraints. When memory is constrained, then the speaker's productions will diverge from her target language. And as memory is more and more constrained, this divergence will increase more and more. The degree of divergence is measured in the same units as surprisal, hence the formal equivalence between the listener's and speaker's memory--surprisal trade-offs. 

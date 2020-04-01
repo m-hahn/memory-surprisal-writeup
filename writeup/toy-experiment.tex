@@ -45,7 +45,7 @@ Crucially, \citet{fedzechkina-human-2017} set up the experiment such that in all
 		\end{tabular}} & Verb \\
 		\end{tabular}
 
-			\caption{Production targets in the artificial mini language from \cite{fedzechkina-human-2017}. The language has head-final order, with free variation between SO and OS orders. When one of the arguments is much longer than the other, placing the longer one first ($A$ orders) shortens syntactic dependencies, compared to $B$ orders.}\label{tab:artificial}
+			\caption{Production targets in the miniature artificial language from \cite{fedzechkina-human-2017}. The language has head-final order, with free variation between SO and OS orders. When one of the arguments is much longer than the other, placing the longer one first ($A$ orders) shortens syntactic dependencies, compared to $B$ orders.}\label{tab:artificial}
 
 \end{figure}
 
@@ -53,11 +53,9 @@ Crucially, \citet{fedzechkina-human-2017} set up the experiment such that in all
 
 \subsection{Calculating the memory--surprisal trade-off for the artificial languages}
 
-We hypothesize, in line with our Main Hypothesis, that the favored language $A$ has a steeper memory--surprisal trade-off curve than the disfavored language $B$. Because of the controlled nature of this artificial language, we are able to test this hypothesis by exactly computing the bound on memory as given in Theorem~\ref{prop:suboptimal}. 
+We hypothesize, in line with our Main Hypothesis, that the favored language $A$ has a steeper memory--surprisal trade-off curve than the disfavored language $B$. Because of the controlled nature of this artificial language, we are able to test this hypothesis by exactly computing the bound on memory as given in Theorem~\ref{prop:suboptimal}. In fact, for this toy process, we can prove that the bound provided by the theorem is achievable, meaning that our computations reflect the true memory--surprisal trade-off curve, and not only a lower bound on it.
 
-We only consider the head-final version of \citet{fedzechkina-human-2017}'s artificial language. This is because our bound on the memory--surprisal trade-off curve is invariant under reversal of a language. That is, if we take a language and reverse the order of all the words in all its sentences, we would measure the same lower bound on the memory--surprisal trade-off curve.\footnote{For a proof see SI Section TODO.} Therefore, strictly head-final and strictly head-initial languages are equivalent under our bound. Note that this invariance to reversal applies only to our \emph{lower bound} on the memory-surprisal trade-off curve; the true curve is not generally invariant to word order reversal \citep{crutchfield-times-2009}. In fact, for this toy process, we can prove that the bound provided by the theorem is tight, meaning that TODO TODO TODO.
-
-% RF: We need to explain concretely what tightness means in this case
+We only consider the head-final version of \citet{fedzechkina-human-2017}'s artificial language. This is because our bound on the memory--surprisal trade-off curve is invariant under reversal of a language. That is, if we take a language and reverse the order of all the words in all its sentences, we would measure the same lower bound on the memory--surprisal trade-off curve.\footnote{For a proof see SI Section TODO.} Therefore, strictly head-final and strictly head-initial languages are equivalent under our bound.\footnote{Note that this invariance to reversal applies only to our \emph{lower bound} on the memory-surprisal trade-off curve; the true curve is not generally invariant to word order reversal \citep{crutchfield-times-2009}.} 
 
 %The language has consistent head-final order, and uses case marking on objects.
 %The relevant production targets are transitive sentences where one of the two arguments is much longer than the other, due to the presence of a PP modifier, as shown in Table~\ref{tab:artificial}.
