@@ -37,8 +37,8 @@ Based on corpus data and the linguistic literature on Japanese, we identified th
 \item politeness (-\textit{mas}-) \cite[190]{kaiser2013japanese}.
 \item Mood: desiderative (-\textit{ta}-) \cite[238]{kaiser2013japanese}
 \item Negation (-\textit{n}-)
-\item Tense/Aspect/Mood: past (-\textit{ta}) and future/hortative (-\textit{yoo}) \cite[229]{kaiser2013japanese}
-\item Nonfiniteness: the suffix -\textit{te} derives a nonfinite form \cite[186]{kaiser2013japanese}.
+\item Tense/Aspect/Mood/Finiteness: past (-\textit{ta}), future/hortative (-\textit{yoo}) \cite[229]{kaiser2013japanese}, nonfiniteness (-\textit{te}) \cite[186]{kaiser2013japanese}
+%\item Nonfiniteness: the suffix -\textit{te} derives a nonfinite form .
 \end{enumerate}
 
 %In accordance with Bybee's hierarchy, valence is marked closest to the verb, followed by voice.
@@ -68,6 +68,7 @@ We identified the following prefixes:
 
 \begin{enumerate}
     \item Subject agreement: This morpheme encodes agreement with the subject, for person, number, and noun class (the latter only in the 3rd person) \cite[\textsection 395]{doke1967textbook}.
+	    The annotation provided by \cite{demuth1992acquisition} distinguishes between ordinary subject agreement prefixes and agreement prefixes used in relative clauses; we distinguish these morpheme types here.
     
     \item Negation \cite[\textsection 429]{doke1967textbook}
     
@@ -80,7 +81,7 @@ We identified the following suffixes:
     
 \begin{enumerate}
 \item Semantic derivation: reversive (e.g., do $\rightarrow$ undo)  \cite[\textsection 345]{doke1967textbook}
-    \item Valence: causative,  neuter/stative, applicative, reciprocal \cite[\textsection 307--338]{doke1967textbook}
+\item Valence: Common valence-altering suffixes include causative, neuter/stative, applicative, and reciprocal \cite[\textsection 307--338]{doke1967textbook}. See SI for details on their meanings.
     \item Voice: passive \cite[\textsection 300]{doke1967textbook} 
     \item Tense \cite[\textsection 369]{doke1967textbook}
     \item Mood \cite[\textsection 386--445]{doke1967textbook}
@@ -189,38 +190,56 @@ We then evaluate for what fraction of these pairs, across the corpus, the relati
 In the other method, (`Full'), we count what fraction of verb forms in the corpus has exactly the affix ordering predicted by the grammar.
 
 
-
-
-
 In Japanese, by both measures, optimized grammars recover the observed orders with very high accuracy.
 For each grammar, we extracted the ten most common pairs of morphemes whose relative order is incorrectly predicted.
 The most frequent divergence is that desiderative and negation are consistently ordered incorrectly; this affects 13 corpus examples.
 A few of the optimized grammars show additional divergences among high-frequency morphemes, for instance, some grammars order politeness and negation incorrectly. 
+We compare the real grammar with the approximately optimized grammar that achieved the lowest AUC value in Figure~\ref{fig:grammar-table-jap}.
+
+\begin{figure}
+    \centering
+    \begin{tabular}{llllllll}
+	    &	    Real & Optimized \\ \hline\hline
+	    &    Stem & Stem \\ \hline
+	    1 & suru & suru \\
+	    2 & causative & causative \\
+	    3 & passive/potential & passive/potential \\
+	    4 & desiderative & politeness \\
+	    5 & politeness & negation \\
+	    6 &negation & desiderative \\
+	    7 & future & nonfinite \\
+	    & past & past \\
+	     & nonfinite & future \\ \hline
+    \end{tabular}
+    \caption{Comparing order of Japanese affixes in the observed orders (left) and according to an approximatively optimized grammar (right).}
+    \label{fig:grammar-table-jap}
+\end{figure}
 
 
 
 \begin{figure}
     \centering
     \begin{tabular}{llllllll}
-    Subject (relative) & Subject (relative) & Subject (relative) \\
-Subject & Subject & Subject \\
-Negation & Tense/aspect & Tense/aspect \\
-Tense/aspect & Negation & Negation \\
-Object & Object & Object \\
-Stem & Stem & Stem \\
-Reversive & Passive & Passive \\
-Causative & Reciprocal & Reciprocal \\
-Neuter & Tense/aspect & Tense/aspect \\
-Applicative & Neuter & Neuter \\
-Reciprocal & Relative & Relative \\
-Passive & Causative & Causative \\
-Tense/aspect & Applicative & Applicative \\
-Mood & Interrogative & Interrogative \\
-Interrogative & Reversive & Reversive \\
-Relative & Mood & Mood \\
+	    &	    Real & Optimized \\ \hline\hline
+	    1 & Subject & Subject \\
+	      & Subject (rel.) & Subject (rel.) \\
+	    2 & Negation & Tense/aspect \\
+	    3& Tense/aspect & Negation \\
+	    4 &Object & Object \\ \hline
+	    &Stem & Stem  \\ \hline
+	    1 & Reversive & Passive \\
+	    2& Causative & Reciprocal \\
+	    &Neuter & Tense/aspect \\
+	    &Applicative & Neuter \\
+	    &Reciprocal & Relative \\
+	    3&Passive & Causative \\
+	    4&Tense/aspect & Applicative \\
+	    5&Mood & Interrogative \\
+	    6&Interrogative & Reversive \\
+	    &Relative & Mood \\ \hline
     \end{tabular}
-    \caption{Caption}
-    \label{fig:my_label}
+	\caption{Comparing order of Sesotho affixes in the observed orders (left) and according to an approximatively optimized grammar (right). Note that order was separately optimized for prefixes and suffixes.}
+    \label{fig:grammar-table-sesotho}
 \end{figure}
 
 
@@ -249,10 +268,13 @@ Relative & Mood & Mood \\
 
 
 
-In Sesotho, for prefixes, all optimized grammars exactly recover the ordering described above.
-Imperfect prediction accuracies reflect disparities in ordering low-frequency morphemes.
+In Sesotho, for prefixes, all optimized grammars almost exactly recover the ordering described above.
+The only divergence among the high-frequency morphemes is that negation and the tense/aspect prefix are ordered incorrectly; this accounts for only 11 occurrences in the data set, as the two prefixes only rare co-occur
+Other divergences affect lower-frequency morphemes.
 For suffixes, order is recovered at above-chance accuracies, though with some divergences.
 For instance, relative and interrogative suffixes are consistently placed closer to the verb stem than the mood suffix.
+Furthermore, valence-changing suffixes are ordered farther away from the stem than various other suffixes, in contrast with the actual orders.
+We compare the real grammar with the approximately optimized grammar that achieved the lowest AUC value in Figure~\ref{fig:grammar-table-sesotho}.
 
 \begin{figure}
 \begin{tabular}{cc||ll|ll}
