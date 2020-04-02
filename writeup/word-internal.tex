@@ -119,7 +119,7 @@ We randomly selected 5\% to serve as held-out data and used the remaining 95\% a
 
 
 \paragraph{Estimating Memory-Surprisal Tradeoff}
-As in many languages, Japanese suffixes show morphophonemic interactions between neighboring morphemes; for instance, the politeness morpheme -\textit{mas}- takes the form -\textit{masu} when it is word-final, while it has the allomorph -\textit{mase} when followed by the negation suffix -\textit{n}.
+As in many languages, affixes in Japanese and Sesotho show morphophonemic interactions between neighboring morphemes; for instance, the Japanese politeness morpheme -\textit{mas}- takes the form -\textit{masu} when it is word-final, while it has the allomorph -\textit{mase} when followed by the negation suffix -\textit{n}.
 
 To control for these interactions, we model prediction on the level of morphemes sequences.
 That is, we represent each verb form as a sequence of a stem and suffix morphemes, abstracting away from morphophonemic interactions.
@@ -136,9 +136,9 @@ Similar results are obtained when instead using the simple `naive' estimator for
 
 \paragraph{Parameterizing Alternative Orderings}
 
-We parameterize alternative suffix orderings by assigning a weight in $[0,1]$ to each morpheme.
-Given such a grammar, suffixes are ordered by the values assigned to their underlying morphemes.
-We consider all morphemes annotated in the corpus, including low-frequency ones going beyond the ones identified above (see SI for details).
+We parameterize alternative affix orderings by assigning a weight in $[0,1]$ to each morpheme.
+Given such a grammar, affixes are ordered by the values assigned to their underlying morphemes.
+We consider all morphemes annotated in the corpora, including low-frequency ones going beyond the ones identified above (see SI for details).
 
 
 
@@ -160,11 +160,10 @@ We ran the algorithm ten times and selected the five runs with the lowest AUC va
 
 \subsection{Results}
 
-\paragraph{Results: Comparison to Baselines (Japanese)}
-In Figure~\ref{fig:jap-phon-morph}, we compare the area under curve of the memory-surprisal tradeoff for Japanese suffixes.
+In Figure~\ref{fig:jap-phon-morph}, we compare the area under curve of the memory-surprisal tradeoff for Japanese and Sesotho under different orderings.
 Both observed orders and the aproximately optimized grammars show lower AUCs than all random baseline samples.
 For comparison, we also show AUC for the order resulting from \emph{reversing} all suffix chains in the observed orders; this results in high AUC even exceeding most random grammars.
-
+These results show that Japanese and Sesotho affix orderings enable approximately optimal memory-surprisal tradeoffs.
 
 %\begin{figure}
 %	\begin{center}
@@ -181,22 +180,22 @@ For comparison, we also show AUC for the order resulting from \emph{reversing} a
 %\end{figure}
 
 
-\paragraph{Results: Comparing Optimized and Real Orders}
+We now ask to what extent the observed morpheme ordering is predicted correctly by approximately optimized grammars.
 
-In Figure~\ref{fig:acc-japanese}, we show the accuracy of optimized grammars in predicting affix order in the corpus, together with random baseline figures.
+In Figure~\ref{fig:morph-acc}, we show the accuracy of optimized grammars in predicting affix order in the corpus, together with random baseline figures.
 We evaluate accuracy using two methods:
 In one method (`Pairs'), we consider, for each verb form in the corpus, all pairs of prefixes (or suffixes).
 We then evaluate for what fraction of these pairs, across the corpus, the relative order of the two affixes is as predicted by the grammar.
-In the other method, (`Full'), we count what fraction of forms in the corpus has exactly the affix ordering predicted by the grammar.
+In the other method, (`Full'), we count what fraction of verb forms in the corpus has exactly the affix ordering predicted by the grammar.
 
 
 
 
 
-By both measures, optimized grammars recover the observed orders with very high accuracy.
+In Japanese, by both measures, optimized grammars recover the observed orders with very high accuracy.
 For each grammar, we extracted the ten most common pairs of morphemes whose relative order is incorrectly predicted.
 The most frequent divergence is that desiderative and negation are consistently ordered incorrectly; this affects 13 corpus examples.
-A few of the grammars show additional divergences among high-frequency morphemes, for instance, some grammars order politeness and negation incorrectly. 
+A few of the optimized grammars show additional divergences among high-frequency morphemes, for instance, some grammars order politeness and negation incorrectly. 
 
 
 
@@ -225,25 +224,19 @@ A few of the grammars show additional divergences among high-frequency morphemes
 %
 %\includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byMorphemes-it-heldout.pdf}
 %\includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byMorphemes-memsurp-heldout.pdf}
-\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-auc-hist-heldout.pdf}
-\includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byMorphemes-auc-hist-heldout.pdf}
+\includegraphics[width=0.3\textwidth]{figures/Both-suffixes-byMorphemes-auc-hist-heldout.pdf}
+%\includegraphics[width=0.3\textwidth]{figures/Sesotho-suffixes-byMorphemes-auc-hist-heldout.pdf}
 \end{center}
-	\caption{Areas under the curve for the memory-surprisal tradeoff for verb affixes in Japanese (left) and Sesotho (right).}\label{fig:jap-phon-morph}
+	\caption{Areas under the curve for the memory-surprisal tradeoff for verb affixes in Japanese (left) and Sesotho (right).}\label{fig:morph-auc}
 %	\caption{Sesotho verb affixes, measuring prediction on the level of phonemes (top) and morphemes (bottom), for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-phon-morph}
 \end{figure}
 
 
 
 
-
-\paragraph{Results: Comparing Optimized and Real Orders (Sesotho)}
-
-In Figure~\ref{fig:acc-sesotho}, we show the accuracy of optimized grammars in predicting affix order in the corpus, together with random baseline figures.
-
-For prefixes, all optimized grammars exactly recover the ordering described above.
-Non-perfect prediction accuracies reflect disparities in low-frequency morphemes.
-The same holds for suffixes, when optimizing for phoneme prediction.
-When optimizing for morpheme prediction, order is recovered at above-chance accuracies, though with some divergences.
+In Sesotho, for prefixes, all optimized grammars exactly recover the ordering described above.
+Imperfect prediction accuracies reflect disparities in ordering low-frequency morphemes.
+For suffixes, order is recovered at above-chance accuracies, though with some divergences.
 For instance, relative and interrogative suffixes are consistently placed closer to the verb stem than the mood suffix.
 
 \begin{figure}
@@ -257,15 +250,15 @@ Japanese & Optimized  & -- &  -- &   0.954 (SD 0.009) & 0.945 (SD 0.012) \\
 Sesotho &   Optimized  &  0.988 (SD 0.0) & 0.989 (SD 0.0) & 0.756 (SD 0.014) & 0.676 (SD 0.017) \\
 &   Baseline  &  0.672 (SD 0.305) & 0.604 (SD 0.338) & 0.423 (SD 0.204) & 0.332 (SD 0.211) \\ 
 \end{tabular}
-\caption{Accuracy of approximately optimized orderings, and of random baseline orderings, in predicting verb affix order in Sesotho. `Pairs' denotes the rate of pairs of morphemes that are ordered correctly, and `Full' denotes the rate of verb forms where order is predicted entirely correctly. We show means and standard deviations over different runs of the optimization algorithm (`Optimized'), and over different random orderings (`Random').}\label{fig:acc-sesotho}
+\caption{Accuracy of approximately optimized orderings, and of random baseline orderings, in predicting verb affix order in Sesotho. `Pairs' denotes the rate of pairs of morphemes that are ordered correctly, and `Full' denotes the rate of verb forms where order is predicted entirely correctly. We show means and standard deviations over different runs of the optimization algorithm (`Optimized'), and over different random orderings (`Random').}\label{fig:morph-acc}
 \end{figure}
 
 \subsection{Discussion}
-
+We have found that the ordering of verb affixes in Japanese and Sesotho provides approximately optimal memory-surprisal tradeoffs.
+We further found that many aspects of these languages' ordering rules can be derived from optimizing order for efficient tradeoffs.
 
 Bybee 1985:
 
 verb-valence-voice-aspect-tense-mood-modality-subj.person-subj.number
 
-can also directly quantify MI with verb stem (presence \& choice for each slot) as a sanity check
 
