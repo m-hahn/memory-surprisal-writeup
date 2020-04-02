@@ -292,10 +292,25 @@ Sesotho &   Optimized  &  0.988 (SD 0.0) & 0.989 (SD 0.0) & 0.756 (SD 0.014) & 0
 
 \subsection{Discussion}
 We have found that the ordering of verb affixes in Japanese and Sesotho provides approximately optimal memory-surprisal tradeoffs.
-We further found that many aspects of these languages' ordering rules can be derived from optimizing order for efficient tradeoffs.
+We further found that parts of these languages' ordering rules can be derived from optimizing order for efficient tradeoffs.
 
 Bybee 1985:
 
 verb-valence-voice-aspect-tense-mood-modality-subj.person-subj.number
 
+Japanese and Sesotho verb affixes are broadly in agreement with this generalization.
+For instance, valence and voice suffixes are closer to the stem than tense/aspect/mood markers.
+Subject agreement in Sesotho is farther away from the verb than tense/aspect/mood prefixes.
+This ordering is reproduced closely by optimization in Japanese and for Sesotho prefixes, and to some extent also for Sesotho suffixes.
+
+Bybee (p. 37) argues that order is determined by the degree of \emph{relevance} between the affix and the stem, that is, the degree to which ``the semantic content of the first [element] directly affects or modifies the semantic content of the second'' (p. 13).
+She argues that elements whose meanings are more relevant to each other appear closer together.
+For instance, the meaning of a verb is impacted more strongly by a causative affix than by a tense affix:
+Combining a verb with a causative marker results in a form that denotes a different action, whereas a tense affix only locates the action in time.
+
+We conjecture that this notion of relevance is related to mutual information.
+If an affix has a stronger impact on the meaning of the verb, it will typically not be applicable to all verbs.
+For instance, causative markers will only attach to verbs whose semantics is compatible with causation.
+In contrast, a past tense marker can attach to all verbs that are compatible with actions that can have occurred in the past.
+Therefore, we expect that affixes that are more relevant to a verb stem will also tend to have higher mutual information with the verb.
 
