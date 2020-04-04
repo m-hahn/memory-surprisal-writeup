@@ -155,7 +155,9 @@ See Section (Discussion) for further discussion.
 %In Figure~\ref{tab:plain-results} (TODO), we show the estimated memory-surprisal tradeoff curves for all samples.
 
 
-% yStudyTradeoff_Bootstrap_Parallel_OnlyWordForms_BoundedVocab_BinomialTest_Single_MedianCI.py
+In Figure~\ref{fig:it}, we show the estimated values of $I_t$ for all languages.
+In most languages, $I_1$ is distinctly larger for the actual orderings (blue) compared to the baseline orderings (red). This means that real orderings tend to have 
+
 In Figure~\ref{tab:medians}, we show the median surprisal at given levels of memory, for real and baseline languages.
 We compute surprisal at 40 evenly spaced points of memory (selected individually for each language), over all runs for the real language, and over all baselines grammars.
 We then compute the median surprisal over all runs for the real language, and over all baselines grammars.
@@ -164,37 +166,21 @@ This is an \emph{exact} confidence interval, without parametric assumptions or a
 
 Numerically, the real language provides better tradeoffs than the median of the baselines across languages, with four exceptions (Latvian, North Sami, Polish, Slovak).
 
-Bootstrapped confidence intervals for $G$ confirmed that $G>0.5$ in all but these four exceptional languages.
-
-As bootstrapped confidence intervals are valid only asymptotically, we also conducted two \emph{exact} nonparametric tests to further ascertain the statistical robustness of this pattern.
-
-
 In order to quantify the \emph{degree} of optimality, we compute what \emph{fraction} of baseline languages provides better tradeoffs than the real language.
-
 At five evenly spaced memory values $\mu$ (chosen per language), we estimate what percentage $W_-(\mu)$ of baseline languages have lower (or equal) surprisal than the real language.
 We use the Binomial Test to derive a confidence lower bound for this quantile (CITE), and to test against the null hypothesis that
 \begin{equation}
 	W_-(\mu) = 0.5
 \end{equation}
 In this test, we approximate the surprisal value of the real language by the \emph{sample median}.
-
 Again, we take the real values to be estimated exactly by their medians.
-
 Results are shown in Figure~\ref{fig:quantile-table}.
-
-%At five evenly spaced memory values $\mu$ (chosen per language), we conducted a nonparametric and nonasymptotic significance hypothesis test against the null hypothesis that half of the baseline grammars have lower surprisal than the actual language. %(Figure~\ref{fig:nhst-pointwise}).
-%Formally, let $W_-(\mu)$ be the proportion of baseline languages that have strictly lower surprisal than the real language at memory level $\mu$.
-%For each level $\mu$ of memory, we consider the null hypothesis that
-%\begin{equation}
-%	W_-(\mu) = 0.5
-%\end{equation}
-%In this test, we approximate the surprisal value of the real language by the \emph{sample median}.
-%We use the Binomial Test.
-%We conduct a two-sided test.
 
 In all but the four exceptional languages, the real language had significantly lower surprisal than at least $50\%$ of the baseline languages for at least some values of $\mu$ at $p < 0.01$.
 Also, for those languages, there was no $\mu$ where this pattern of significance was reversed.
 
+We further computed the area under the memory-surprisal tradeoff curve (AUC) for real and baseline orderings.
+In Figure~\ref{fig:auc}, we plot the AUC for the real orderings, together with the distribution of AUCs for baseline grammars.
 
 %\subsection{Statistical Analysis}
 

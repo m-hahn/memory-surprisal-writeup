@@ -141,7 +141,11 @@ We parameterize alternative affix orderings by assigning a weight in $[0,1]$ to 
 Given such a grammar, affixes are ordered by the values assigned to their underlying morphemes.
 We consider all morphemes annotated in the corpora, including low-frequency ones going beyond the ones identified above (see SI for details).
 
+In Japanese, the passive and potential markers are formally indistinguishable for many verbs.
+As we cannot systematically distinguish them on the basis of the available corpus annotation, we merge these into a single underlying morpheme `Passive/Potential'.
+This does not reduce the expressiveness of the grammar formalism, as 
 
+%To verify that this formalism is appropriate to capturing moroheme order in Japanese and Sesotho, we also fitted models parameterized in this way to the observed orders.
 
 \paragraph{Creating Optimal Orders}
 
