@@ -24,7 +24,7 @@ then we can calculate $I_t$ straightforwardly in the following way:
     \nonumber
     &= S_{t-1} - S_t.
 \end{align}
-Therefore, to evaluate $I_t$, all we need is a way of fitting Markov models of order $t$ and $t-1$.
+Therefore, to evaluate $I_t$, all we need is a way of fitting Markov models of order $t$ and $t-1$. Then the average surprisal values can be extracted from these models straightforwardly.
 
 To fit Markov models to the data, we use neural language models. In particular, we use Recurrent Neural Networks with Long Short-Term Memory architectures \citep{hochreiter-long-1997}. 
 Neural network models are the basis of the state-of-the art in statistical modeling of language and in predicting the surprisal effect on reading times~\citep{frank-insensitivity-2011,goodkind-predictive-2018}.

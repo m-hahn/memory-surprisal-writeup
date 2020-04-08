@@ -141,11 +141,13 @@ We parameterize alternative affix orderings by assigning a weight in $[0,1]$ to 
 Given such a grammar, affixes are ordered by the values assigned to their underlying morphemes.
 We consider all morphemes annotated in the corpora, including low-frequency ones going beyond the ones identified above (see SI for details).
 
-In Japanese, the passive and potential markers are formally indistinguishable for many verbs.
+In Japanese, the passive (slot 3) and potential (slot 4) markers are formally indistinguishable for many verbs.
 As we cannot systematically distinguish them on the basis of the available corpus annotation, we merge these into a single underlying morpheme `Passive/Potential'.
-This does not reduce the expressiveness of the grammar formalism, as 
 
-%To verify that this formalism is appropriate to capturing moroheme order in Japanese and Sesotho, we also fitted models parameterized in this way to the observed orders.
+
+To verify that this formalism is appropriate to capturing moroheme order in Japanese and Sesotho, we also fitted models parameterized in this way to the observed orders.
+We found that ordering morphemes according to these fitted models recovered the observed order for almost all forms (XX\% for Japanese, XX\% for Sesotho prefixes, XX\% for Sesotho suffixes).
+
 
 \paragraph{Creating Optimal Orders}
 
@@ -161,7 +163,8 @@ These choices vastly reduce computation time by reducing time spent on low-frequ
 This optimization method is approximate, as it only guarantees convergence to a local optimum, not to a globally optimal assignment.
 
 We ran this method for 1,000 iterations. Empirically, AUC converges after a few hundred iterations.
-We ran the algorithm ten times and selected the five runs with the lowest AUC values, i.e., those where optimization was most successful.
+To control for the randomness in initialization and the optimization steps, we ran this algorithm ten times.
+For Sesotho, we ran the algorithm separetely for prefixes and suffixes.
 
 \subsection{Results}
 
@@ -198,7 +201,7 @@ In Japanese, by both measures, optimized grammars recover the observed orders wi
 For each grammar, we extracted the ten most common pairs of morphemes whose relative order is incorrectly predicted.
 The most frequent divergence is that desiderative and negation are consistently ordered incorrectly; this affects 13 corpus examples.
 A few of the optimized grammars show additional divergences among high-frequency morphemes, for instance, some grammars order politeness and negation incorrectly. 
-We compare the real grammar with the approximately optimized grammar that achieved the lowest AUC value in Figure~\ref{fig:grammar-table-jap}.
+We compare the real grammar with the approximately optimized grammar that achieved the lowest AUC value in Figure~\ref{fig:grammar-table-jap}; here, the divergence is that desiderative suffixes are placed after the negation suffix (slot 6), whereas real Japanese orders place them before the politeness suffix (slot 5).
 
 \begin{figure}
     \centering
@@ -273,7 +276,7 @@ We compare the real grammar with the approximately optimized grammar that achiev
 
 
 In Sesotho, for prefixes, all optimized grammars almost exactly recover the ordering described above.
-The only divergence among the high-frequency morphemes is that negation and the tense/aspect prefix are ordered incorrectly; this accounts for only 11 occurrences in the data set, as the two prefixes only rare co-occur
+The only divergence among the high-frequency morphemes is that negation and the tense/aspect prefix are ordered incorrectly; this accounts for only 11 occurrences in the data set, as the two prefixes rarely co-occur.
 Other divergences affect lower-frequency morphemes.
 For suffixes, order is recovered at above-chance accuracies, though with some divergences.
 For instance, relative and interrogative suffixes are consistently placed closer to the verb stem than the mood suffix.
