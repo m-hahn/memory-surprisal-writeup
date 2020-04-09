@@ -147,10 +147,6 @@ We then continued to construct baseline grammars until a precision-based stoppin
 
 
 
-%The numbers of samples taken per language are provided in SI Table~\ref{tab:samples}.
-
-%In Figure~\ref{tab:plain-results} (TODO), we show the estimated memory-surprisal tradeoff curves for all samples.
-
 
 In Figure~\ref{fig:it}, we show the estimated values of $I_t$ for real orders (blue) and the median of $I_t$ across different baseline grammars (red).
 In most languages, $I_1$ is distinctly larger for the actual orderings (blue) compared to the baseline orderings (red). This means that real orderings tend to concentrate more predictive information at the immediately preceding word than baseline grammars.
@@ -168,91 +164,13 @@ In order to quantify the degree of optimality of real orders, we further compute
 Area under the curve (AUC) is a general quantity evaluating the efficiency of a tradeoff curve (CITE).
 A \emph{smaller} area indicates a \emph{more efficient} tradeoff.
 In Figure~\ref{fig:auc}, we plot the AUC for the real orderings, together with the distribution of AUCs for baseline grammars.
-Numerically, the AUC is smaller in the real orderings than in at least 50\% of baseline grammars in all but four languages
-
-%\subsection{Statistical Analysis}
-
-%We now describe how we compared memory-surprisal tradeoffs between real and baseline languages.
-%We want to test whether languages' surprisal-memory tradeoffs better than those of most baseline languages.
-%We compare real and baseline languages by evaluating which languages result in lower surprisal at the same level of memory.
-%We now describe the statistics we use to quantifying the difference between real and baseline languages.
-%We do everything in a frequentist framework (null hypothesis testing \& confidence intervals), as we can do exact tests and confidence intervals without parametric assumptions.
-%\mhahn{Maybe we can explain how the tests \& CIs also have reasonable Bayesian interpretations (for the specific methods used here, rejection of the null should guarantee that the posterior of the null hypothesis is small under a wide range of priors.).}
-
-%\paragraph{Median Surprisal and Confidence Interval for Medians}
-
-
-
-%\paragraph{CI for Median Difference}
-%We create (nonparametric and nonasymptotic) confidence interval for the difference between real and baseline median surprisals at each memory value.
-%\mhahn{the resulting plots are not very intuitive, might scrap this}
-%
-%% yStudyTradeoff_Bootstrap_Parallel_OnlyWordForms_BoundedVocab_BinomialTest_Single_MedianDiffCI.py
-
-
-
-%This statistic also should have a reasonable Bayesian interpretation:
-% E.g., if the random samples are unimodal, and we do inference over only the median (location family), 
-
-
-
-%\begin{figure}
-%	\begin{center}
-%\includegraphics[width=0.45\textwidth]{figures/nhst.png}
-%\end{center}
-%	\caption{Illustration for the pointwise null-hypothesis significance test. At a given level of memory, we test against the null hypothesis that at least half of the baseline orders provide lower surprisal than the real language.}\label{fig:nhst-pointwise}
-%\end{figure}
-
-
-
-
-
-
-%For each memory value $\mu$, we do a significance test (nonparametric and nonasymptotic).
-%\begin{equation}
-%	W_+(\mu) \geq W_-(\mu)
-%\end{equation}
-%We use the empirical median for the real language.
-
-% yStudyTradeoff_Bootstrap_Parallel_OnlyWordForms_BoundedVocab_BinomialTest_Single.py
-
-%We take the REAL values to be estimated exactly by their medians.
-
-%TODO some aggregate visualization of the quantiles
-%\paragraph{AUC}
-%TODO some aggregate visualization
-
-%\begin{figure}
-%	\begin{center}
-%\includegraphics[width=0.45\textwidth]{figures/quantile.png}
-%\end{center}
-%	\caption{Illustration for the quantile estimate. At each level of memory, we provide an estimate of the percentage of baseline languages that have lower surprisal than the real language.}\label{fig:quantile-pointwise}
-%\end{figure}
-
-
-
-%Also the following does not assume unimodality, and ends up getting about the same intervals
-%% yStudyTradeoff_Bootstrap_Parallel_OnlyWordForms_BoundedVocab_BinomialTest_Single_UnimodalBoundOnQuantile_BothDirections_NoAssumption.py
-
-
-
-
-
-
-%In Figure~\ref{tab:slice-hists-real}, we show the distribution of surprisals achieved at the maximal memory value for real and random languages.
-
-%In Figure~\ref{fig:hist-real}, we show surprisals at maximum memory, after z-transforming for each individual language and then aggregating.
-
-%In Table \ref{tab:median_diffs}, we show the differences in median surprisal, as a function of memory.
-
-
-%In Table~\ref{tab:boot-g}, we report the bootstrap estimates and confidence intervals for G~(\ref{eq:g}).
-%$\E[G]$ was not estimated to be significantly above $>5$ for four languages: Latvian, North Sami, Polish, and Slovak.
-
-
-%In Table~\ref{tab:quantiles}, we show the quantiles.
-
-
+We quantify the degree of optimality by the fraction of baseline grammars for which the AUC is higher than for the real orders:
+The real ordering is highly efficient if it results in a lower AUC than almost all baseline grammars.
+Numerically, the AUC is smaller in the real orderings than in at least 50\% of baseline grammars in all but three languages (Polish, Slovak, North Sami).
+We evaluated significance using a two-sided binomial test.
+In these three languages, the AUC is higher in the real orderings than in significantly less than 50\% ($p < 0.01$ in each language).
+In all other languages except for Latvian, the fraction of more efficient baseline grammars was significantly less than 50\%, at $p=0.01$ using Hochberg's step-up procedure (CITE).
+In 42 of the 54 languages, the fraction of more efficient baseline grammars out of the samples taken was 0\%.
 
 
 
@@ -284,8 +202,8 @@ We will address this in Experiment 3.
 
 
 
-A possible concern is that the optimization observed in Experiment 1 might be an artifact of the grammar formalism.
-We will address this in Experiment 3.
-%To address this possibility, we repeated the experiment comparing baseline grammars to grammars that represent the word order of the real languages as faithfully as is possible with the grammar formalism.
+A possible concern with this experiment that the optimization observed in Experiment 2 might be an artifact of the grammar formalism:
+Baseline grammars cannot exactly represented all word order rules found in real languages, and this restriction in representational capacity might potentially impact the optimality of resulting memory-surprisal tradeoffs.
+We will address this in Experiment 3 by repeating the experiment comparing baseline grammars to grammars that represent the word order of the real languages as faithfully as is possible with the grammar formalism.
 
 
