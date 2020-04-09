@@ -1,5 +1,5 @@
 We now investigate whether word orders as found in natural language reflect optimization for the memory--surprisal trade-off more generally.
-To this end, we compare the memory--surprisal trade-offs of 52 actual languages to those of counterfactual baseline languages, which differ from the actual languages only in their word order rules. This method of comparison against counterfactual baseline languages was introduced by \citet{gildea-optimizing-2007,gildea-grammars-2010} has been applied to study optimization-based models of word order universals by \citet{futrell-large-scale-2015}, \citet{gildea-human-2015}, and \citet{hahn2020universals}.
+To this end, we compare the memory--surprisal trade-offs of 52 actual languages to those of counterfactual baseline languages, which differ from the actual languages only in their word order rules. This method of comparison against counterfactual baseline languages was introduced by \citet{gildea-optimizing-2007,gildea-grammars-2010} has been applied to study optimization-based models of word order universals by \citet{futrell-large-scale-2015}, \citet{gildea-human-2015}, and \citet{hahn2020optimization}.
 
 Here, we describe how we measure the memory--surprisal trade-off in corpora, and how we generate counterfactual baseline languages. In Section~\ref{sec:main-experiment-results}, we compare the trade-off in real corpora against the trade-off in the counterfactual baselines.
 
@@ -42,7 +42,7 @@ In dependency corpora, sentences are annotated with \emph{dependency trees} (Fig
 These are directed trees describing the grammatical relations among words. For example, the arcs labeled ``obj'' represent that the noun in question is the \emph{direct object} if the verb, rather than e.g. the subject or an indirect object.
 A dependency arc is drawn from a \emph{head} (e.g. TODO in Figure TODO) to a \emph{dependent} (e.g. TODO).
 Dependency trees can be defined in terms of many different syntactic theories \citep{corbett1993heads}.
-Although there are some differences in how different formalisms would draw trees for certain sentences, there is broad enough agreement about dependency trees that it has been possible to develop large-scale dependency-annotated corpora of text from dozens of languages \cite{nivre2017universal}.
+Although there are some differences in how different formalisms would draw trees for certain sentences, there is broad enough agreement about dependency trees that it has been possible to develop large-scale dependency-annotated corpora of text from dozens of languages \citep{nivre2017universal}.
 
 \begin{figure}
 \centering
@@ -75,12 +75,13 @@ In most cases, we used the predefined data split, separately pooling data from t
 For some languages with little data, there is no predefined training partition, or the training partition is smaller than the other partitions.
 In these cases, we redefined the split to obtain more training data.
 For these languages, we pooled all the available partitions, used 100 randomly selected sentences as held-out data, and used the remainder as training data.\footnote{This affects Amharic, Armenian, Breton, Buryat, Cantonese, Faroese, Kazakh, Kurmanji, Naija, Thai, and Uyghur.}
+We did not make use of the \textit{test} partitions here.
 We provide the sizes of the resulting datasets in Table~\ref{tab:corpora}.
 
 \subsection{Defining baselines}
 
 We construct counterfactual ordering grammars that define consistent ordering rules similar to those found in actual languages.
-For instance, these grammars will specify which dependents precede or follow their heads (e.g., whether objects follow or precede verbs, whether adjectives follow or precede nouns), and the relative order of different dependents on the same side of the head (e.g., whether noun phrases have order adjective-numeral-noun or numeral-adjective-noun). Our formalism of ordering grammars adapts the method of \citet{gildea-optimizing-2007,gildea-grammars-2010,gildea-human-2015} to the setting of dependency corpora, following \citet{futrell-large-scale-2015} and \citet{hahn2020universals}.
+For instance, these grammars will specify which dependents precede or follow their heads (e.g., whether objects follow or precede verbs, whether adjectives follow or precede nouns), and the relative order of different dependents on the same side of the head (e.g., whether noun phrases have order adjective-numeral-noun or numeral-adjective-noun). Our formalism of ordering grammars adapts the method of \citet{gildea-optimizing-2007,gildea-grammars-2010,gildea-human-2015} to the setting of dependency corpora, following \citet{futrell-large-scale-2015} and \citet{hahn2020optimization}.
 
 
 \begin{figure}
@@ -90,7 +91,7 @@ For instance, these grammars will specify which dependents precede or follow the
 \end{figure}
 
 
-Universal Dependencies defines 37 universal syntactic relations that are used to label dependency arcs across all corpora.
+Universal Dependencies 2.4 defines 37 universal syntactic relations that are used to label dependency arcs across all corpora.
 These relations encode cross-linguistically meaningful relations such as subjects, objects, and adjectival modifiers.
 We define ordering grammars by assigning a parameter $a_\tau \in [-1,1]$ to every one of these 37 universal syntactic relations.
 Relations sometimes have language-specific subtypes; we do not distinguish these subtypes.
@@ -103,7 +104,7 @@ Ordering grammars describe languages that have consistent word order:
 For instance, the subject is consistently ordered before or after the verb, depending on whether the parameter for the verb-subject dependency is positive or negative.
 
 We construct baseline grammars by randomly sampling the parameters $a_\tau$.
-Such baseline grammars define languages that have consistent word order, but do not exhibit preferences for specific word order patterns.
+Such baseline grammars define languages that have consistent word order, but do not exhibit systematic preferences for specific word order patterns such as short dependencies.
 
 
 In actual languages, the ordering of words is largely determined by the syntactic relations (CITE).
@@ -112,6 +113,9 @@ Word order freedom also is not modeled.
 In this sense, ordering grammars represent approximations to the kinds of ordering rules found in natural language \citep{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015}.
 See Section (Discussion) for further discussion.
 
+
+We first constructed at least 10 baseline grammars for each of the 54 real languages.
+We then continued to construct baseline grammars until a precision-based stopping criterion was reached (CITE). This criterion was designed to ensure that enough grammars were sampled to reliably compare the tradeoff curves of real and baseline grammars, without biasing results towards or against our hypothesis (see SI).
 
 \subsection{Results}
 
@@ -141,13 +145,6 @@ See Section (Discussion) for further discussion.
 
 
 
-\begin{figure}
-	\begin{center}
-\includegraphics[width=\textwidth]{quantiles-table.pdf}
-\end{center}
-	\caption{Quantiles: At each given memory budget, what fraction of baseline grammars leads to higher surprisal?}\label{fig:quantile-table}
-\end{figure}
-
 
 
 %The numbers of samples taken per language are provided in SI Table~\ref{tab:samples}.
@@ -155,32 +152,23 @@ See Section (Discussion) for further discussion.
 %In Figure~\ref{tab:plain-results} (TODO), we show the estimated memory-surprisal tradeoff curves for all samples.
 
 
-In Figure~\ref{fig:it}, we show the estimated values of $I_t$ for all languages.
-In most languages, $I_1$ is distinctly larger for the actual orderings (blue) compared to the baseline orderings (red). This means that real orderings tend to have 
+In Figure~\ref{fig:it}, we show the estimated values of $I_t$ for real orders (blue) and the median of $I_t$ across different baseline grammars (red).
+In most languages, $I_1$ is distinctly larger for the actual orderings (blue) compared to the baseline orderings (red). This means that real orderings tend to concentrate more predictive information at the immediately preceding word than baseline grammars.
 
-In Figure~\ref{tab:medians}, we show the median surprisal at given levels of memory, for real and baseline languages.
-We compute surprisal at 40 evenly spaced points of memory (selected individually for each language), over all runs for the real language, and over all baselines grammars.
+In Figure~\ref{fig:median-table}, we show the resulting bounds on the memory-surprisal tradeoff curves, showing median surprisals at given levels of memory, for real and baseline languages.
+We compute surprisal at 40 evenly spaced points of memory (selected individually for each language), over real orders and baseline grammars.
 We then compute the median surprisal over all runs for the real language, and over all baselines grammars.
 For each point, we compute a confidence interval for the median surprisal, using the binomial PDF. \mhahn{some standard stats reference}
 This is an \emph{exact} confidence interval, without parametric assumptions or asymptotic approximations.
 
 Numerically, the real language provides better tradeoffs than the median of the baselines across languages, with four exceptions (Latvian, North Sami, Polish, Slovak).
 
-In order to quantify the \emph{degree} of optimality, we compute what \emph{fraction} of baseline languages provides better tradeoffs than the real language.
-At five evenly spaced memory values $\mu$ (chosen per language), we estimate what percentage $W_-(\mu)$ of baseline languages have lower (or equal) surprisal than the real language.
-We use the Binomial Test to derive a confidence lower bound for this quantile (CITE), and to test against the null hypothesis that
-\begin{equation}
-	W_-(\mu) = 0.5
-\end{equation}
-In this test, we approximate the surprisal value of the real language by the \emph{sample median}.
-Again, we take the real values to be estimated exactly by their medians.
-Results are shown in Figure~\ref{fig:quantile-table}.
 
-In all but the four exceptional languages, the real language had significantly lower surprisal than at least $50\%$ of the baseline languages for at least some values of $\mu$ at $p < 0.01$.
-Also, for those languages, there was no $\mu$ where this pattern of significance was reversed.
-
-We further computed the area under the memory-surprisal tradeoff curve (AUC) for real and baseline orderings.
+In order to quantify the degree of optimality of real orders, we further computed the area under the memory-surprisal tradeoff curve (AUC) for real and baseline orderings.
+Area under the curve (AUC) is a general quantity evaluating the efficiency of a tradeoff curve (CITE).
+A \emph{smaller} area indicates a \emph{more efficient} tradeoff.
 In Figure~\ref{fig:auc}, we plot the AUC for the real orderings, together with the distribution of AUCs for baseline grammars.
+Numerically, the AUC is smaller in the real orderings than in at least 50\% of baseline grammars in all but four languages
 
 %\subsection{Statistical Analysis}
 
