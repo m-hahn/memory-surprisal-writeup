@@ -1,9 +1,20 @@
-\paragraph{The Roles of Speakers, Listeners, and Interaction}
-Our derivation of the memory-surprisal tradeoff considers the listener.
+We introduced a notion of memory efficiency in language processing, called the memory--surprisal trade-off, and we showed that the orders of words and morphemes across languages can be predicted by finding orders that optimize this trade-off. 
 
-Debate about the roles of speaker and listener in shaping language.
+Here, we discuss the implications and limitations of our results, and also how our results relate to more broadly to the fields of psycholinguistics, typology, and information theory.
 
-Interaction: We could make the process include the entire conversational history (including what the listener said before).
+
+%\paragraph{The Roles of Speakers, Listeners, and Interaction}
+%Our derivation of the memory-surprisal tradeoff considers the listener.
+
+%Debate about the roles of speaker and listener in shaping language.
+
+%Interaction: We could make the process include the entire conversational history (including what the listener said before).
+
+\subsection{Implications}
+Our results show that the order 
+
+
+\subsection{Limitations}
 
 
 \paragraph{`hockeystick problem'} conceptual issue: we're agnostic as to whether the actual full surprisal is different between real and baseline (we're restricting context length to $T$, and networks might not extract all the available information). all we're saying is that, in the setting of small memory budgets, real languages provide lower surprisals.
@@ -24,12 +35,11 @@ The assumption about information flow disregards the role of information sources
 For instance, the interlocutors might have common knowledge of the weather, and the listener might use this to construct predictions for the speaker's utterances, even if no relevant information has been mentioned in the prior discourse.
 Such sources of information are disregarded in our model.
 
-\paragraph{Capacity vs Retrieval}
-Our theoretical analysis places the main memory bottleneck in the capacity of short-term memory.
-Not all models of memory in sentence processing make this assumption.
-Indeed, there is evidence that difficulty of retrieving items is an important bottleneck in sentence processing.
-In SI Section X, we show that our theoretical bounds are also compatible with a retrieval-based model such as ACT-R.
-
+%\paragraph{Capacity vs Retrieval}
+%Our theoretical analysis places the main memory bottleneck in the capacity of short-term memory.
+%Not all models of memory in sentence processing make this assumption.
+%Indeed, there is evidence that difficulty of retrieving items is an important bottleneck in sentence processing.
+%In SI Section X, we show that our theoretical bounds are also compatible with a retrieval-based model such as ACT-R.
 
 \paragraph{Limitations of Grammar Model}
 
@@ -68,7 +78,7 @@ These models go back to \citet{yngve1960model}'s production model, where difficu
 
 Our measure of memory complexity---i.e., the memory entropy $H_M$---straightforwardly generalizes measures based on counting items stored in memory. If each item stored in memory requires $k$ bits of storage, then storing $n$ items would require a capacity of $nk$ bits in terms of memory entropy $H_M$. In general, if memory entropy is $H_M$ and all items stored in memory take $k$ bits each to store, then we can store $H_M/k$ items. 
 
-The memory entropy $H_M$ generalizes this logic, however. The memory entropy $H_M$ can be interpreted as the number of bits of memory capacity required to store $n$ different objects, while allowing that different items stored in memory might take different numbers of bits to store, and also that the memory representation might be able to compress the representations of multiple items when they are stored together, so that the capacity required to store two items might be less than the sum of the capacity required to store each individual item. 
+The memory entropy $H_M$ generalizes this logic. The memory entropy $H_M$ can be interpreted as the number of bits of memory capacity required to store $n$ different objects, while allowing that different items stored in memory might take different numbers of bits to store, and also that the memory representation might be able to compress the representations of multiple items when they are stored together, so that the capacity required to store two items might be less than the sum of the capacity required to store each individual item. 
 
 \paragraph{The Dependency Locality Theory}
 The connection with the Dependency Locality Theory is particularly interesting.
@@ -76,9 +86,10 @@ Our lower bound on memory usage, described in Theorem~\ref{prop:suboptimal} Eq.~
 In that theory, storage cost at a given timestep is defined as the \emph{number of predictions} that are held in memory.
 Our bound on memory usage is stated in terms of mutual information, which indicates the \emph{amount of predictive information} extracted from the previous context and stored in memory.
 Therefore, our measure generalizes DLT storage cost.
-Our measure and goes beyond DLT storage cost in that the DLT quantity only considers predictions that are certain, and each prediction is postulated to take an equal amount of memory.
-In contrast, our measure of memory usage can be seen as weighting predictions by their certainty and amount of predictive information. 
-In this sense, DLT storage cost can be seen as an approximation to Eq.~\ref{eq:memory-bound}.
+
+%Our measure and goes beyond DLT storage cost in that the DLT quantity only considers predictions that are certain, and each prediction is postulated to take an equal amount of memory.
+%In contrast, our measure of memory usage can be seen as weighting predictions by their certainty and amount of predictive information. 
+%In this sense, DLT storage cost can be seen as an approximation to Eq.~\ref{eq:memory-bound}.
 
 The other component of the DLT is integration cost, the amount of difficulty incurred by establishing a long-term syntactic dependency. 
 In our framework, DLT integration cost corresponds to surprisal given an imperfect memory representation, following \cite{futrell2020lossy}.
@@ -124,7 +135,7 @@ Theoretically, surprisal may represent an irreducible thermodynamic cost incurre
 
 \paragraph{Previous information locality results}
 
-
+Previous work has attempted to derive the principle of information locality from incremental processing models. 
 \citet{futrell2020lossy} describe a processing model where listeners make predictions (and incur surprisal) based on lossy memory representations.
 In particular, they consider loss models that delete, erase, or replace words in the past.
 Within this model, they were able to establish a similar information locality result, by showing that the theoretical processing difficulty increases when words with high \emph{pointwise mutual information} are separated by large distances \citep{futrell-noisy-context-2017,futrell2019information}. Pointwise mutual information is the extent to which a \emph{particular value} predicts another value in a joint probability distribution. For example, if we have words $w_1$ and $w_2$ in a sentence, their pointwise mutual information is:
@@ -147,16 +158,17 @@ Here we argue that conditional mutual information is more relevant for measuring
 While the decay of conditional mutual information provably provides a lower bound on memory entropy, the decay of unconditional mutual information does not.
 In the Supplementary Materials Section TODO, we provide an example of a stochastic process where unconditional mutual information does not decay with distance, but memory requirements remain low.
 
-
 %head-dependent mutual information hypothesis
 %In an idealized model \emph{all} predictive information is mediated through direct syntactic dependencies, and each dependency contributed an equal amount of predictive information, our memory bound would indeed become equivalent to such a metric.
 %Note that the average number of objects held in memory simultaneously is equivalent to the average time they are stored.
 
-\subsection{Memory--surprisal trade-off in language production}
+\subsection{Efficiency for the listener, or efficiency for the producer?}
 
-An analogous memory--surprisal trade-off exists in language production. In this case, the trade-off arises from the minimization of error in production of linguistic sequences. That is, given a \key{competence language} (a target distribution on words given contexts), a speaker tries to produce a \key{performance language} which is as close as possible to the competence language. The performance language operates under memory constraints, so the performance language will diverge from the competence language due to production errors. When a speaker has more incremental memory about what she has already produced, then she is able to produce linguistic sequences with less error, thus reducing the divergence between the performance language and the competence language. The reduction of this competence--performance divergence is formally equivalent to the minimization of average surprisal from Section~\ref{sec:listener-tradeoff}.
+Our theory is stated in terms of the efficiency of language processing for a comprehender of language. However, we can show that an analogous memory--surprisal trade-off exists in language production. Below, we discuss the memory--surprisal trade-off from a production perspective, and consider how it might be possible to empirically distinguish the comprehender's trade-off from the producer's trade-off.
 
-% TODO maybe cite some Karl Lashley stuff? Maryellen MacDonald? Shota Momma?
+In the case of production, the memory--surprisal trade-off arises from the minimization of error in production of linguistic sequences. That is, given a \key{competence language} (a target distribution on words given contexts), a speaker tries to produce a \key{performance language} which is as close as possible to the competence language. The performance language operates under memory constraints, so the performance language will diverge from the competence language due to production errors. When a speaker has more incremental memory about what she has already produced, then she is able to produce linguistic sequences with less error, thus reducing the divergence between the performance language and the competence language. The reduction of this competence--performance divergence is formally equivalent to the minimization of average surprisal from Section~\ref{sec:listener-tradeoff}.
+
+% TODO cite some Karl Lashley stuff? Maryellen MacDonald? Shota Momma?
 
 We derive the existence of this trade-off from the following postulates about language production. Let the competence language be represented by a stationary stochastic process, parameterized by a probability distribution $p(w_t | w_{<t})$ giving the conditional probability of any word $w_t$ given an unbounded number of previous words. Our postulates describe a speaker who tries to find a performance language $q(w_t|m_t)$ to match the the competence language using incremental memory representations $m_t$:
 
@@ -179,11 +191,13 @@ We derive the existence of this trade-off from the following postulates about la
 
 Completing the link with the memory--surprisal trade-off in comprehension, we note that when the production policy $q(w_t|m_t)$ is selected to minimize the competence--performance divergence $d^q_M$, then this divergence becomes equal to the memory distortion $d_M$ discussed above in the context of comprehension costs. Therefore, under these postulates, the Information Locality Bound Theorem will apply in production as well as comprehension. This means that languages that exhibit information locality can be produced with greater accuracy given limited memory resources.
 
-Although the memory--surprisal trade-off is mathematically equivalent between comprehension and production, its psycholinguistic interpretation is different. In the case of language comprehension, the trade-off represents excess processing \emph{difficulty} arising due to memory constraints. In the case of language production, the trade-off represents \emph{production error} arising due to memory constraints. When memory is constrained, then the speaker's productions will diverge from her target language. And as memory is more and more constrained, this divergence will increase more and more. The degree of divergence is measured in the same units as surprisal, hence the formal equivalence between the listener's and speaker's memory--surprisal trade-offs. 
+In the case of language comprehension, the trade-off represented excess processing \emph{difficulty} arising due to memory constraints. In the case of language production, the trade-off represents \emph{production error} arising due to memory constraints. When memory is constrained, then the speaker's productions will diverge from her target language. And as memory is more and more constrained, this divergence will increase more and more. The degree of divergence is measured in the same units as surprisal, hence the formal equivalence between the listener's and speaker's memory--surprisal trade-offs. 
 
+Although the memory--surprisal trade-off is mathematically similar between comprehension and production, it is not necessarily identical. The comprehender's memory--surprisal trade-off has to do with the amount of predictive information $I_t$ stored in memory, where $I_t$ is defined in terms of a probability distribution on words given $t$ words of context. In the producer's memory--surprisal tradeoff, this probability distribution may be different, because the producer has knowledge of a production target (Production Postulate 1). Nevertheless, if the producer's probability distribution is similar to the comprehender's, then we predict the same trade-off for the producer as for the comprehender.
 
+It may be possible to use this asymmetry to distinguish whether word and morpheme order is more optimized for the comprehender or the producer. If word order is best predicted under a probability model that uses zero information about a production target (as in the current work), then we have evidence that the comprehender's trade-off is more important. On the other hand, if word order is best predicted under a probability model that uses (partial) information about a production target, then we have evidence that the producer's trade-off is more important. As estimating the difference between these probabilility distributions is difficult, we leave this avenue of research to future work.
 
-\subsection{Statistical Studies of Language}
+\subsection{Information-theoretic studies of language}
 
 Our work opens up a connection between psycholinguistics, linguistic typology, and statistical studies of language. Here, we survey the connections between our work and previous statistical studies.
 

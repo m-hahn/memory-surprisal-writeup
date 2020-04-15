@@ -26,7 +26,7 @@ We formalize these three observations into postulates intended to provide a simp
     \text{Difficulty} \propto -\log P(w_t | m_t).
 \end{equation}
 \end{enumerate}
-The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory} \citep{hale2001probabilistic,levy2008expectation}, an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation, antilocality effects, and effects of syntactic construction frequency. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \citep{smith-effect-2013,goodkind-predictive-2018}.
+The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory} \citep{hale2001probabilistic,levy2008expectation}, an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation, antilocality effects, and effects of syntactic construction frequency. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \citep{smith-effect-2013,goodkind-predictive-2018}, and effects of surprisal have been observed for units as small as phonemes \citep{}.
 
 Our expression~(\ref{eq:lossy-surp}) differs from the usual formulation of surprisal theory in that we consider predictability based on a (potentially lossy or noisy) memory representation $m_t$, rather than predictability based on the true complete context $w_1, \dots, w_{t-1}$. The generalization to lossy memory representations is necessary to capture empirically observed effects of memory limitations on language processing, such as dependency locality and structural forgetting \citep{futrell2020lossy}. For other ways of capturing effects of both memory limitations and probabilistic expectations, see \citet{demberg-incremental-2013} and \citet{rasmussen-2017-left}.
 
@@ -101,17 +101,19 @@ Having defined average surprisal and related concepts, we now turn to the questi
 The minimum value of $H_M$ that achieves $S_M = S_\infty$ is called the \key{statistical complexity} of the process $W$ \citep{shalizi2001computational}. The statistical complexity of natural language has been studied by \citet{hahn2019neural}. We will be imposing bounds on $H_M$ and studying the resulting values of $S_M$. 
 
 \begin{definition}
-The \key{memory--surprisal trade-off curve} for a process $W$ is defined as the lowest achievable average surprisal $S_M$ for each value of $H_M$. Let $R$ denote an upper bound on the memory entropy $H_M$; then the memory--surprisal trade-off curve is given by
+The \key{memory--surprisal trade-off curve} for a process $W$ is the lowest achievable average surprisal $S_M$ for each value of $H_M$. Let $R$ denote an upper bound on the memory entropy $H_M$; then the memory--surprisal trade-off curve as a function of $R$ is given by
 \begin{equation}
     \label{eq:ms-formal}
-    D(R) \equiv \min_{M : H_M \le R} S_M.
+    D(R) \equiv \min_{M : H_M \le R} S_M,
 \end{equation}
+where the minimization is over all memory encoding functions $M$ whose entropy $H_M$ is less than or equal to $R$.
 \end{definition}
 
 The memory state $m_t$ is generally a lossy representation of the true context of words $w_1, \dots, w_{t-1}$, meaning that $m_t$ does not contain all the possible information about $w_1, \dots, w_{t-1}$. The mathematical theory of lossy representations is \key{rate--distortion theory} \citep[for an overview and key results, see][pp. 301--347]{cover2006elements}; this theory has seen recent successful application in cognitive science and linguistics as a model of rational action under resource constraints \citep{sims,gershman,zaslavsky2018efficient}. Rate--distortion theory studies curves of the form of Eq.~\ref{eq:ms-formal}, which quantify trade-offs between utility (`distortion') and information (`rate'). Our memory--surprisal trade-off curve is a distortion--rate curve, with $H_M$ as the rate and $S_M$ as the distortion. It differs from the typical curve studied in rate--distortion theory in that we define rate using entropy, rather than mutual information \citep[see][for a discussion of some of the consequences of this formulation]{strouse-deterministic-2017}. 
 
 
 \subsection{Information locality}
+\label{sec:infoloc}
 
 The shape of the memory--surprisal trade-off is determined in part by the grammatical structure of a language.
 Some languages enable more efficient trade-offs than others by forcing a listener to store more bits in memory to achieve the same level of average surprisal.
