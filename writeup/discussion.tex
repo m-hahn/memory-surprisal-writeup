@@ -11,29 +11,39 @@ Here, we discuss the implications and limitations of our results, and also how o
 %Interaction: We could make the process include the entire conversational history (including what the listener said before).
 
 \subsection{Implications}
-Our results show that the order 
+Our results show that the order of words and morphemes provides efficient memory--surprisal tradeoffs.
+We also showed that this predicts the known preference for short dependencies.
+Furthermore, we showed that, in two languages (Japanese and Sesotho), the order of verb affixes can partly be predicted by optimizing for the efficiency of the memory--surprisal tradeoff.
 
 
 \subsection{Limitations}
 
+\paragraph{Finiteness of Data}
+As corpora are finite, estimates for $I_t$ may not be reliable for larger values of $t$.
+In particular, we expect that models will underestimate $I_t$ for large $t$, as models will not be able to extract and utilize all available information over longer distances.
+This has implications for the interpretation of the memory--surprisal tradeoffs at higher values of memory entropy $H_M$.
+In Experiment 1, the lowest achieved surprisals are different for real and baseline orderings.
+This need not indicate that, in the limit of very large memory entropies $H_M$, these orderings still have different surprisals $S_\infty$:
+It is logically possible that real and baseline languages actually have the same surprisal $S_\infty$, but that baseline orderings spread the same amount of predictive information over a larger distance, making it harder for models to extract given finite corpus data.
+%Another possibility is that that surprisal differs across all possible memory entropes $H_M$; in this case, $S_\infty$ would be different for real and baseline orderings.
+%Our results are also compatible in principle with a situation where the difference in surprisal \emph{reverses} at high values of memory entropy $H_M$.
+What our results do imply, though, is that real languages provide lower surprisals in the setting of realtively small memory budgets.
 
-\paragraph{`hockeystick problem'} conceptual issue: we're agnostic as to whether the actual full surprisal is different between real and baseline (we're restricting context length to $T$, and networks might not extract all the available information). all we're saying is that, in the setting of small memory budgets, real languages provide lower surprisals.
-
-logically different possibilities
-
-- same asymptotic surprisal, different tradeoff
-
-- same small-memory tradeoff, different asymptotic surprisal (difference might come out later)
-
-- better small-memory tradeoff but worse high-memory tradeoff
 
 \paragraph{Nature of the Bound}
-We have a lower bound, not an exact estimate of the tradeoff curve
+Our theoretical result provides a lower bound on the tradeoff curve that holds across all ways of physically realizing a memory representation obeying the postulates (1-3).
+However, this bound may be loose in two ways:
+First, architectural properties of human memory might introduce additional constraints on possible representations.
+Depending on the role played by factors other than infomation-theoretic capacity, the tradeoffs achieved by these human memory representations need not be close to achieving the theoretical bounds.
+Furthermore, depending on properties of the stochastic process, the bound might be loose across all models, that is, there are processes where the bound is not attainable by any memory architecture.
+We provide an example with analytical calculations in SI Section X; there we also show that the bounds can be tighter for retrieval-based models.
 
 \paragraph{Extralinguistic Context}
+Comprehension Postulate 1 states that the memory state after receiving a word is determined by that word and the memory state before receiving this word.
 The assumption about information flow disregards the role of information sources that are external to the linguistic material in the sentence.
 For instance, the interlocutors might have common knowledge of the weather, and the listener might use this to construct predictions for the speaker's utterances, even if no relevant information has been mentioned in the prior discourse.
 Such sources of information are disregarded in our model.
+They are also disregarded in many other models of memory in sentence processing.
 
 %\paragraph{Capacity vs Retrieval}
 %Our theoretical analysis places the main memory bottleneck in the capacity of short-term memory.
@@ -42,6 +52,10 @@ Such sources of information are disregarded in our model.
 %In SI Section X, we show that our theoretical bounds are also compatible with a retrieval-based model such as ACT-R.
 
 \paragraph{Limitations of Grammar Model}
+In Study 2, baseline grammars are constructed in a formalism that cannot fully express some word order regularities found in languages.
+For instance, it cannot express orders that differ in main clauses and embedded clauses.
+This is a limitation common to other order grammar formalisms considered in the literature (CITE).
+This limitation does not hold in Study 4, where the formalism provides very close fit to observed morpheme orders.
 
 \paragraph{absolute numbers, how they relate to what's known about human memory}
 
@@ -118,7 +132,7 @@ our theorem does not imply that a listener forgets words beyond some amount of t
 An optimal listener may well decide to remember information about words more distant than $T$, but in order to stay within the bounds of memory, she can only do so at the cost of forgetting some information about words closer than $T$.
 The Information Locality Lower Bound still holds, in the sense that the long-term dependency will cause processing difficulty, even if the long-term dependency is not itself forgotten.
 See SI Appendix Section X for a mathematical example illustrating this phenomenon.
-y and non-redundantly depends on the character $T$ steps in the past, with $T$ large, this will create a memory cost proportional to $T$.
+%y and non-redundantly depends on the character $T$ steps in the past, with $T$ large, this will create a memory cost proportional to $T$.
 
 % TODO: Should we mention retrieval interference effects? If there is any slowdown that is *directly* attributable to similarity-based interference, then I think we can't capture it. But a lossily-compressed memory will have interference, in the sense that more "semantically" similar items in memory are more likely to be confused for each other.
 
@@ -201,7 +215,7 @@ It may be possible to use this asymmetry to distinguish whether word and morphem
 
 Our work opens up a connection between psycholinguistics, linguistic typology, and statistical studies of language. Here, we survey the connections between our work and previous statistical studies.
 
-\paragraph{Statistical Complexity}
+\paragraph{Statistical Complexity and Excess Entropy}
 Our formalization of listener memory is related to studies of dynamic systems in the physics literature.
 Our memory--surprisal curve is closely related to the \emph{predictive information bottleneck} introduced by \citet{still-information-2014} and studied by \citet{marzen-predictive-2016}; in particular, it is a version of the \emph{recursive information bottleneck} \citep[][\S 4]{still-information-2014}. 
 In the limit of optimal prediction and minimal surprisal, our formalization of listener memory is equivalent to the notion of \emph{Statistical Complexity} \citep{crutchfield-inferring-1989}.
@@ -209,17 +223,17 @@ In the limit $T \rightarrow \infty$, the quantity in Eq.~\ref{eq:memory-bound} i
 However, the link between memory and information locality provided by our Theorem~\ref{prop:suboptimal} appears to be a novel theoretical contribution.
 Relatedly, \citet{sharan-prediction-2016} shows a link between excess entropy and approximability by $n$-th order Markov models, noting that processes with low excess entropy can be approximated well with Markov models of low order.
 
+\cite{debowski-excess-2011} has studied the excess entropy of language across very long ranges of text, in particular aiming to determine whether it is finite.
+Our work contrasts with this work in that we are interested in dependencies within sentences.
 
 
-%\paragraph{Long-range dependencies in text}    % excess entropy
-%\cite{debowski-excess-2011} has studied the excess entropy of language across long ranges of text, in particular studying whether it is finite. % compute excess entropy in text
-%Our work contrasts with this work in that we are interested in dependencies within sentences.
+\cite{hahn-estimating-2019}
 
-\paragraph{Memory and Hierarchical Structure; Finiteness of Memory}
-Processing nontrivial hierarchical structures typically requires unbounded amounts of memory.
-However, crucially, the \emph{average} memory demand for prediction can be finite, if the probability mass assigned to long dependencies is small.
-For instance, languages defined by Probabilistic Context Free Grammars (PCFG) always have finite average memory.
-The reason is that PCFGs assign low probabilities to long sequences.\footnote{Proposition 2 in \cite{chi-statistical-1999} implies that words drawn from a PCFG have finite expected length. This implies that average memory demands are finite.}
+%\paragraph{Memory and Hierarchical Structure; Finiteness of Memory}
+%Processing nontrivial hierarchical structures typically requires unbounded amounts of memory.
+%However, crucially, the \emph{average} memory demand for prediction can be finite, if the probability mass assigned to long dependencies is small.
+%For instance, languages defined by Probabilistic Context Free Grammars (PCFG) always have finite average memory.
+%The reason is that PCFGs assign low probabilities to long sequences.\footnote{Proposition 2 in \cite{chi-statistical-1999} implies that words drawn from a PCFG have finite expected length. This implies that average memory demands are finite.}
 
 % TODO: Does this only hold for proper PCFGs?
 

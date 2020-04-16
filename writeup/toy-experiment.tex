@@ -12,39 +12,50 @@ Crucially, \citet{fedzechkina-human-2017} set up the experiment such that in all
 \begin{figure}
 	\textbf{A Orders: Short Dependencies}
 
-		\begin{tabular}{ccc}
-			Object & Subject & Verb \\
-			\fbox{\begin{tabular}{llllll}
-				\fbox{\begin{tabular}{llll} Adjective &Noun &Postposition\end{tabular}} & Noun-\textsc{Case}
-					\end{tabular}} & \fbox{\begin{tabular}{l}Noun\end{tabular}} & \fbox{\begin{tabular}{l}Verb\end{tabular}}  \\
-		\end{tabular}
-\\
-		\begin{tabular}{ccc}
-			Subject & Object & Verb \\
-			\fbox{\begin{tabular}{llllll}
-				\fbox{\begin{tabular}{llll} Adjective &Noun &Postposition\end{tabular}} & Noun
-					\end{tabular}} & \fbox{\begin{tabular}{l}Noun-\textsc{Case}\end{tabular}} & Verb \\
-		\end{tabular}
-\\
-\\
+	OSV: [[Adjective Noun Postposition] Noun-\textsc{Case}] Noun Verb
+
+	SOV: [[Adjective Noun Postposition] Noun] Noun-\textsc{Case} Verb
+
+%
+%	OSV:
+%		\begin{tabular}{ccc}
+%%			Object & Subject & Verb \\
+%			\fbox{\begin{tabular}{llllll}
+%				\fbox{\begin{tabular}{llll} Adjective &Noun &Postposition\end{tabular}} & Noun-\textsc{\textsc{Case}}
+%					\end{tabular}} & \fbox{\begin{tabular}{l}Noun\end{tabular}} & \fbox{\begin{tabular}{l}Verb\end{tabular}}  \\
+%		\end{tabular}
+%\\
+%
+%SOV:
+%		\begin{tabular}{ccc}
+%			%			Subject & Object & Verb \\
+%			\fbox{\begin{tabular}{llllll}
+%				\fbox{\begin{tabular}{llll} Adjective &Noun &Postposition\end{tabular}} & Noun
+%					\end{tabular}} & \fbox{\begin{tabular}{l}Noun-\textsc{\textsc{Case}}\end{tabular}} & Verb \\
+%		\end{tabular}
+%\\
+%\\
 
 	\textbf{B Orders: Long Dependencies}
 
+	SOV: Noun [[Adjective Noun Postposition] Noun-\textsc{Case}] Verb
 
-		\begin{tabular}{ccc}
-			Subject & Object & Verb \\
-			 \fbox{\begin{tabular}{l}Noun\end{tabular}} &  \fbox{\begin{tabular}{llllll}
-				\fbox{\begin{tabular}{llll} Adjective &Noun &Postposition\end{tabular}} & Noun-Case
-		\end{tabular}}  &  \fbox{\begin{tabular}{l}Verb\end{tabular}}  \\
-		\end{tabular}
-\\
-		\begin{tabular}{ccc}
-			Object & Subject & Verb \\
-			\fbox{\begin{tabular}{l}Noun-Case\end{tabular}} & \fbox{\begin{tabular}{llllll}
-				\fbox{\begin{tabular}{llll} Adjective &Noun &Postposition\end{tabular}} & Noun
-		\end{tabular}} & Verb \\
-		\end{tabular}
-
+	OSV: Noun-\textsc{Case} [[Adjective Noun Postposition] Noun] Verb
+%
+%		\begin{tabular}{ccc}
+%%			Subject & Object & Verb \\
+%			 \fbox{\begin{tabular}{l}Noun\end{tabular}} &  \fbox{\begin{tabular}{llllll}
+%				\fbox{\begin{tabular}{llll} Adjective &Noun &Postposition\end{tabular}} & Noun-Case
+%		\end{tabular}}  &  \fbox{\begin{tabular}{l}Verb\end{tabular}}  \\
+%		\end{tabular}
+%\\
+%		\begin{tabular}{ccc}
+%%			Object & Subject & Verb \\
+%			\fbox{\begin{tabular}{l}Noun-Case\end{tabular}} & \fbox{\begin{tabular}{llllll}
+%				\fbox{\begin{tabular}{llll} Adjective &Noun &Postposition\end{tabular}} & Noun
+%		\end{tabular}} & Verb \\
+%		\end{tabular}
+%
 			\caption{Production targets in the miniature artificial language from \cite{fedzechkina-human-2017}. The language has head-final order, with free variation between SO and OS orders. When one of the arguments is much longer than the other, placing the longer one first ($A$ orders) shortens syntactic dependencies, compared to $B$ orders.}\label{tab:artificial}
 
 \end{figure}

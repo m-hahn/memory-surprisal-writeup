@@ -106,7 +106,8 @@ In the corpus, verb suffixes largely correspond to auxiliaries (with tag \texttt
 We selected verb forms by selecting all chains of a verb (tag \texttt{VERB}) followed by any number of auxiliaries (tag \texttt{AUX}) from the training set of the corpus. When the suffix -\textit{te} (tag \texttt{SCONJ}) followed such a chain, we added this.
 We labeled suffixes for underlying morphemes with the help of the lemmatization provided for each suffix in the corpus (see SI for details).
 We obtained 15,281 verb forms in the training set and 1,048 verb forms in the held-out set.
-
+Of the forms in the training set, 27\% had two or more suffixes (modal group: two suffixes, 20\%; maximum seven suffixes).
+While predicting order naturally focuses on datapoints with more than one suffix, we include the other datapoints for estimating conditional mutual information $I_t$.
 %We used the annotation provided in the corpus to identify underlying morphemes (see SI).
 
 %In the corpus, each morpheme is annotated with a lemma, indicating a normalized context-independent representation of the morpheme.
@@ -117,7 +118,7 @@ The corpus has very extensive manual morphological segmentation and annotation; 
 Sesotho verbs carry both prefixes and suffixes.
 We extracted 37K verb forms (see SI for details).
 We randomly selected 5\% to serve as held-out data and used the remaining 95\% as training data.
-
+93\% of forms had two or more affixes (modal group: three affixes, 36\%; maximum eight affixes).
 
 \paragraph{Estimating Memory-Surprisal Tradeoff}
 As in many languages, affixes in Japanese and Sesotho show morphophonemic interactions between neighboring morphemes; for instance, the Japanese politeness morpheme -\textit{mas}- takes the form -\textit{masu} when it is word-final, while it has the allomorph -\textit{mase} when followed by the negation suffix -\textit{n}.
@@ -147,7 +148,8 @@ As we cannot systematically distinguish them on the basis of the available corpu
 
 
 To verify that this formalism is appropriate to capturing moroheme order in Japanese and Sesotho, we also fitted models parameterized in this way to the observed orders.
-We found that ordering morphemes according to these fitted models recovered the observed order for almost all forms (XX\% for Japanese, XX\% for Sesotho prefixes, XX\% for Sesotho suffixes).
+We found that ordering morphemes according to these fitted models recovered the observed order for almost all forms (98.6 \% for Japanese, 99.93\% for Sesotho prefixes, 97.4\% for Sesotho suffixes).
+Exceptions largely concern low-frequency suffixes beyond those considered here.
 
 
 \paragraph{Creating Optimal Orders}
@@ -224,10 +226,10 @@ Sesotho &   Optimized  &  0.988 (SD 0.0) & 0.989 (SD 0.0) & 0.756 (SD 0.014) & 0
 We compare the real grammar with the approximately optimized grammar that achieved the lowest AUC value in Table~\ref{tab:grammar-table-jap}; the main divergence is that desiderative suffixes are placed after the negation suffix (slot 6), whereas real Japanese orders place them before the politeness suffix (slot 5).
 
 We conducted an error analysis comparing the real Japanese morpheme order against our approximately optimized orders.
-For each grammar, we extracted the ten most common pairs of morphemes whose relative order is incorrectly predicted.
+For each grammar, we extracted the pairs of morphemes whose relative order is incorrectly predicted, excluding pairs involving low-frequency morphemes not discussed here, and including a few forms that do not agree with the dominant order described above (TODO figure out what these exceptions are).
 Results are shown in Table~\ref{tab:jap-err-analysis}.
-The most frequent divergence is that desiderative and negation are consistently ordered incorrectly; this affects 13 corpus examples.
-A few of the optimized grammars show additional divergences among high-frequency morphemes, for instance, some grammars order politeness and negation incorrectly. 
+The most frequent divergence is that past and negation suffixes are consistently ordered incorrectly; this affects 88 corpus examples (out of 15K total examples).
+%A few of the optimized grammars show additional divergences among high-frequency morphemes, for instance, some grammars order politeness and negation incorrectly. 
 
 \begin{table}
     \centering
@@ -267,13 +269,14 @@ negation & politeness & 3 \\
 \paragraph{Sesotho results.} We compare the real Sesotho grammar with the approximately optimized grammar that achieved the lowest AUC value in Table~\ref{tab:grammar-table-sesotho}.
 
 In Sesotho, for prefixes, all optimized grammars almost exactly recover the ordering described above.
-The only divergence among the high-frequency morphemes is that negation and the tense/aspect prefix are ordered incorrectly; this accounts for only 11 occurrences in the data set, as the two prefixes rarely co-occur.
-Other divergences affect lower-frequency morphemes.
+The only divergence among the high-frequency morphemes is that negation and the tense/aspect prefix are ordered incorrectly; this accounts for only 12 occurrences in the data set, as the two prefixes rarely co-occur.
+Other divergences affect lower-frequency morphemes (TODO how many).
 Common divergences are shown in Table~\ref{tab:sesotho-prefix-err-analysis}.
 
 For Sesotho suffixes, order is recovered at above-chance accuracies, though with some divergences.
 An error analysis is shown in Table~\ref{tab:sesotho-suffix-err-analysis}.
-For instance, relative and interrogative suffixes are consistently placed closer to the verb stem than the mood suffix.
+The most common error is that relative and interrogative suffixes are consistently placed closer to the verb stem than the mood suffix.
+We conjecture that this happens because all Sesotho verbs uniformly have a mood suffix, suggesting that there might be lower mutual information between the stem and the mood suffix than between the stem and these two suffixes.
 Furthermore, valence-changing suffixes are ordered farther away from the stem than various other suffixes, in contrast with the actual orders.
 
 \begin{table}
@@ -359,9 +362,11 @@ We further found that parts of these languages' ordering rules can be derived fr
 We argue that the memory--surprisal trade-off provides an explanation of previously-existing typological generalizations, and an operationalization of previous functionally-motivated explanations for them.
 Most prominently, \citet{bybee-morphology-1985} has claimed that a universal ordering of verbal inflectional morphemes exists across languages:
 \begin{quote}
-verb-valence-voice-aspect-tense-mood-modality-subj.person-subj.number \rljf{Make pretty}
+\begin{tabular}{llllllllllllllllllllllllll}
+verb stem & valence & voice & aspect & tense& mood & modality & subj. person & subj.number 
+\end{tabular}
 \end{quote}
-Morphemes are claimed either to go in the order above, or its reverse.
+Morphemes are claimed either to go in the order above (suffixes), or its reverse (prefixes).
 
 Japanese and Sesotho verb affixes are broadly in agreement with Bybee's generalization.
 For instance, valence and voice suffixes are closer to the stem than tense/aspect/mood markers.
