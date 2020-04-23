@@ -1,20 +1,21 @@
-In this section, we will introduce the main concept and hypothesis of our paper from a psycholinguistic perspective. We will provide a technical definition of the memory--surprisal trade-off curve, and then we will prove a theorem showing that more efficient memory--surprisal trade-offs are possible in languages exhibiting information locality: that is, languages where words that depend on each other are close to each other. This theorem establishes the formal link between working memory efficiency in online processing and locality in word order.
+In this section, we will introduce the main concept and hypothesis of our paper. % from a psycholinguistic perspective. 
+We will provide a technical definition of the memory--surprisal trade-off curve, and then we will prove a theorem showing that more efficient memory--surprisal trade-offs are possible in languages exhibiting information locality: that is, languages where words that depend on each other are close to each other. This theorem establishes the formal link between working memory efficiency in online processing and locality in word order.
 
 The memory--surprisal trade-off applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension, and then we will show how the same trade-off applies in language production.
 
 \subsection{An information-theoretic model of online language comprehension}
 \label{sec:listener-tradeoff}
 
-\begin{figure}
-\centering
-\includegraphics[width=0.9\textwidth]{figures-gdrive/communication.png}
-	\caption{Memory and language comprehension. (1) A speaker produces a sequence of words. (2) A listener maintains a representation of the words received so far. The listener can represent these at higher (left) or lower (right) levels of precision. (3) Throughout communication, the listener generates probabilistic expectations about the next word. Higher precision of memory representations leads to more precise predictions. (4) When receiving the next word, the listener incurs surprisal depending on the predictions. Higher levels of fidelity in memory lead to lower surprisal on average. \jd{what do the numbers (1) (2) etc refer to? also: image is blurry, at least on my screen}\note{make reference to $L_t$ inside the caption. you and the surprisals visually better aligned. maybe can color-code? } \mhahn{problem suggests that memory has to be contiguous substrings}}
-	\label{fig:communication}
-\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.9\textwidth]{figures-gdrive/communication.png}
+%	\caption{Memory and language comprehension. (1) A speaker produces a sequence of words. (2) A listener maintains a representation of the words received so far. The listener can represent these at higher (left) or lower (right) levels of precision. (3) Throughout communication, the listener generates probabilistic expectations about the next word. Higher precision of memory representations leads to more precise predictions. (4) When receiving the next word, the listener incurs surprisal depending on the predictions. Higher levels of fidelity in memory lead to lower surprisal on average. \jd{what do the numbers (1) (2) etc refer to? also: image is blurry, at least on my screen}\note{make reference to $L_t$ inside the caption. you and the surprisals visually better aligned. maybe can color-code? } \mhahn{problem suggests that memory has to be contiguous substrings}}
+%	\label{fig:communication}
+%\end{figure}
 
 We begin developing our model by considering the process of language comprehension illustrated in Figure~\ref{fig:communication}, where the listener Alice is processing a stream of words uttered by an interlocutor Bob (Figure~\ref{fig:communication}). 
 
-Experimental research has established three properties of online language comprehension: (1) listeners maintain some information about the words received so far in incremental memory, (2) listeners form probabilistic expectations about the upcoming words, and (3) words are easy to process to the extent that they are predictable based on a listener's memory of words received so far.
+Experimental research has established three properties of online language comprehension: (1) listeners maintain some information about the words received so far in incremental memory, (2) listeners form probabilistic expectations about the upcoming words, and (3) words are easy to process to the extent that they are predictable based on a listener's memory of words received so far. (TODO REFS)\jdegen{this invites the question of whether anything you're about to show us holds if these assumptions aren't in fact warranted. eg, people love to argue about whether listeners *really* predict}
 
 We formalize these three observations into postulates intended to provide a simplified picture of what is known about online language comprehension. Consider a listener comprehending a sequence of words $w_1, \dots, w_t, \dots, w_n$, at an arbitrary time $t$.
 \begin{enumerate}
@@ -35,7 +36,8 @@ In this work, we are interested in using theories of processing difficulty to de
 
 Crucially, the listener's ability to predict upcoming words accurately depends on how much she remembers about previous words. As the precision of her memory increases, the accuracy of her predictions also increases, and the average surprisal $S_M$ for each incoming word decreases. Taking an information-theoretic perspective, we can think about the amount of information (measured in bits) about previous words stored in the listener's memory state. This quantity of information is given by the \key{entropy} of the memory state, which we denote $H_M$. As the listener stores more and more bits of information about the previous words her memory state, she can achieve lower and lower surprisal values for the upcoming words. This trade-off between memory and surprisal is the main object of study in this paper.
 
-The \key{memory--surprisal trade-off curve} answers the question: for a given amount of information about previous words $H_M$ stored in the listener's memory state, what is the lowest achievable average surprisal $S_M$? Two example trade-off curves are shown in Figure~\ref{fig:examples}. In general, as the listener stores more information about previous words in her memory state, her lowest achievable average surprisal must go down. So the curve is always monotonically decreasing. However, the precise shape of the trade-off curve depends on the structure of the language being predicted. For example, Figure~\ref{fig:examples} shows how two processes might engender different trade-off curves, with Language $A$ allowing more favorable trade-offs than Language $B$. That is, for Language $A$, it is possible to achieve lower processing difficulty while investing less memory resources than in Language $B$.
+The \key{memory--surprisal trade-off curve} answers the question:\jdegen{move this right after the question}
+for a given amount of information about previous words $H_M$ stored in the listener's memory state, what is the lowest achievable average surprisal $S_M$? Two example trade-off curves are shown in Figure~\ref{fig:examples}. In general, as the listener stores more information about previous words in her memory state, her lowest achievable average surprisal must go down. So the curve is always monotonically decreasing. However, the precise shape of the trade-off curve depends on the structure of the language being predicted. For example, Figure~\ref{fig:examples} shows how two processes might engender different trade-off curves, with Language $A$ allowing more favorable trade-offs than Language $B$. That is, for Language $A$, it is possible to achieve lower processing difficulty while investing less memory resources than in Language $B$.
 
 \begin{figure}
 \centering
@@ -46,9 +48,9 @@ The \key{memory--surprisal trade-off curve} answers the question: for a given am
 
 \subsection{Main hypothesis}
 
-Now that we have defined the memory--surprisal trade-off, we can precisely state the main hypothesis of this work:
+Now that we have conceptually introduced the memory--surprisal trade-off, we can state the main hypothesis of this work:
 
-\paragraph{Main hypothesis.}  Natural language is characterized by a distinctively steep memory--surprisal trade-off curve.
+\paragraph{Main hypothesis.}  Natural language is characterized by a distinctively steep memory--surprisal trade-off curve.\jdegen{why?}
 
 That is, natural language is memory-efficient, in the sense that it is possible to achieve a low level of processing difficulty (average surprisal $S_M$) while storing a relatively small amount of information about previous words (entropy of memory $H_M$). We hypothesize that this property is reflected both in the grammatical structure of languages and in usage preferences.
 
@@ -56,18 +58,19 @@ That is, natural language is memory-efficient, in the sense that it is possible 
 \subsection{Formal definition of the memory--surprisal trade-off}
 \label{sec:formal-tradeoff}
 
-Here we provide the technical definition of the memory--surprisal trade-off curve and relate it to concepts from information theory, rate--distortion theory, and statistical complexity theory. 
+Here we provide the technical definition of the memory--surprisal trade-off curve and relate it to concepts from information theory, rate--distortion theory, and statistical complexity theory.
 
 Let $W$ be a stochastic process\footnote{We will use $W$ to represent languages, and we will construct $W$ to be stationary. Large natural language texts are known to be neither stationary nor ergodic \citep{debowski}. However, we are interested in explaining grammatical properties of languages, which mostly involve constraints among words within sentences, not within large texts as a whole. Therefore, we will represent a language using a stochastic process consisting of repeated independent samples from a distribution over sentences. This stochastic process is both stationary and ergodic.} generating a stream of symbols called words, indexed as $w_1, \dots, w_t$.\footnote{We call these symbols words, but note that our mathematical treatment applies for \emph{any} decomposition of a sentence into a sequence of symbols---the symbols could represent phonemes, syllables, morphemes, words, phrases, etc.} Let $M$ be a memory encoding function. The \key{average surprisal} of the process $W$ under the memory encoding function $M$ is
-\mhahn{We have to decide whether we want the process to be stationary and infinite, or instead semi-infinite. The formalization of the locality theorem assumes it is stationary and infinite in both directions.}
+%\mhahn{We have to decide whether we want the process to be stationary and infinite, or instead semi-infinite. The formalization of the locality theorem assumes it is stationary and infinite in both directions.}
 \begin{equation}
-    S_M \equiv \lim_{t \rightarrow \infty} H[w_t | m_t],
-%    S_M \equiv H[w_t | m_t],
+%    S_M \equiv \lim_{t \rightarrow \infty} H[w_t | m_t],
+    S_M \equiv H[w_t | m_t],
 \end{equation}
 where the notation $H[\cdot | \cdot]$ indicates conditional entropy \citep[][p. 17]{cover2006elements}:
 \begin{equation}
     H[w_t|m_t] \equiv -\sum_{w_t,m_t} P(m_t) P(w_t|m_t) \log P(w_t|m_t).
 \end{equation}
+%\jdegen{maybe it's worth providing the definition first but to tell readers to skip this subsection and go to the informal/intuitive explanation that currently comes before this?}
 The lowest possible average surprisal for $W$ that can be attained by any memory encoding function is called the \key{entropy rate} of $W$ \citep[][pp. 74--75]{cover2006elements}:
 \begin{equation}
     \label{eq:entropy-rate}
@@ -171,12 +174,12 @@ The theorem gives a lower bound on the memory--surprisal trade-off curve, meanin
 \includegraphics[width=0.45\textwidth]{figures/decay.pdf}
 \includegraphics[width=0.45\textwidth]{figures/memory.pdf}
 %
-	\caption{Left: $I_t$ as a function of $t$, for two different processes. $I_t$ decays faster for the red process: Predictive information about the present observation is concentrated more strongly in the recent past. Left: $t \cdot I_t$ as a function of $t$ for the same processes. }\label{fig:basic}
+	\caption{Left: $I_t$ as a function of $t$, for two different processes. $I_t$ decays faster for the red process: Predictive information about the present observation is concentrated more strongly in the recent past. Left: $t \cdot I_t$ as a function of $t$ for the same processes. \mhahn{x-axis should be integers. axis labels match captions.} }\label{fig:basic}
 \end{figure*}
 
 \begin{figure}
 \includegraphics[width=0.45\textwidth]{figures/listener-tradeoff.pdf}
-	\caption{Listener's memory-surprisal tradeoff for the two processes in Figure~\ref{fig:basic}. Recall that the red process had a faster decay of conditional mutual information. Correspondingly, this figure shows that a listener can achieve lower surprisal at the same level of memory load.}\label{fig:listener-tradeoff}
+	\caption{Listener's memory-surprisal tradeoff for the two processes in Figure~\ref{fig:basic}. Recall that the red process had a faster decay of conditional mutual information. Correspondingly, this figure shows that a listener can achieve lower surprisal at the same level of memory load. \mhahn{add missing line at bottom}}\label{fig:listener-tradeoff}
 \end{figure}
 
 Eq.~\ref{eq:memory-bound} means that maintaining long-term dependencies requires higher memory usage. Carrying the same amount of information over longer distances requires more memory; this fact is reflected in the factor $t$ inside each term of the sum. 
@@ -205,7 +208,7 @@ This area is smaller for the red process, as $I_t$ decays more quickly there.
 	\caption{
 		(a) Conditional mutual information $I_t$ captures how much predictive information about the next word is provided, on average, by the word $t$ steps in the past.
 		(b) Here we illustrate our theoretical result. We plot $I_t$ (top) and $tI_t$ (bottom) as functions of $t$. A listener using $B$ bits memory (bottom) to represent prior observations will incur at least $A$ bits of extra surprisal beyond the entropy rate (top). \note{there is t and T. COnfusing}
-		(c) \jd{FILL OUT} \note{make the colors in (c) difefrenfr from this in (b). Do want to make clear what the mapping from (b) to (c) is. Maybe can even have a pair of the two (b) curves, and then show what they map on.}
+		(c) \jd{FILL OUT} \note{make the colors in (c) difefrenfr from this in (b). Do want to make clear what the mapping from (b) to (c) is. Maybe can even have a pair of the two (b) curves, and then show what they map on. \mhahn{keep but redo in vector graphics}}
 }\label{fig:theorem}
 \end{figure}
 

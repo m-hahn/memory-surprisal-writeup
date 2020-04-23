@@ -15,6 +15,11 @@ Our results show that the order of words and morphemes provides efficient memory
 We also showed that this predicts the known preference for short dependencies.
 Furthermore, we showed that, in two languages (Japanese and Sesotho), the order of verb affixes can partly be predicted by optimizing for the efficiency of the memory--surprisal tradeoff.
 
+\mhahn{extend this. Q lik}
+
+\mhahn{UG explanations. do languages evolve slowly or does it happen faster.}
+
+\mhahn{can mention now-or-never bottleneck earlier}
 
 \subsection{Limitations}
 
@@ -27,7 +32,7 @@ This need not indicate that, in the limit of very large memory entropies $H_M$, 
 It is logically possible that real and baseline languages actually have the same surprisal $S_\infty$, but that baseline orderings spread the same amount of predictive information over a larger distance, making it harder for models to extract given finite corpus data.
 %Another possibility is that that surprisal differs across all possible memory entropes $H_M$; in this case, $S_\infty$ would be different for real and baseline orderings.
 %Our results are also compatible in principle with a situation where the difference in surprisal \emph{reverses} at high values of memory entropy $H_M$.
-What our results do imply, though, is that real languages provide lower surprisals in the setting of realtively small memory budgets.
+What our results do imply, though, is that real languages provide lower surprisals in the setting of relatively small memory budgets.
 
 
 \paragraph{Nature of the Bound}
@@ -36,7 +41,7 @@ However, this bound may be loose in two ways:
 First, architectural properties of human memory might introduce additional constraints on possible representations.
 Depending on the role played by factors other than infomation-theoretic capacity, the tradeoffs achieved by these human memory representations need not be close to achieving the theoretical bounds.
 Furthermore, depending on properties of the stochastic process, the bound might be loose across all models, that is, there are processes where the bound is not attainable by any memory architecture.
-We provide an example with analytical calculations in SI Section X; there we also show that the bounds can be tighter for retrieval-based models.
+We provide an example with analytical calculations in SI Section X \mhahn{and mention that example is not very linguistic}; there we also show that the bounds can be tighter for retrieval-based models.
 
 \paragraph{Extralinguistic Context}
 Comprehension Postulate 1 states that the memory state after receiving a word is determined by that word and the memory state before receiving this word.
@@ -57,7 +62,9 @@ For instance, it cannot express orders that differ in main clauses and embedded 
 This is a limitation common to other order grammar formalisms considered in the literature (CITE).
 This limitation does not hold in Study 4, where the formalism provides very close fit to observed morpheme orders.
 
-\paragraph{absolute numbers, how they relate to what's known about human memory}
+\mhahn{cite recent work using rate-distortion for memory (Gershman, Sims)}
+
+%\paragraph{absolute numbers, how they relate to what's known about human memory}
 
 \subsection{Relation to Models of Sentence Processing}
 \label{sec:sentprod-models}
@@ -228,6 +235,10 @@ Our work contrasts with this work in that we are interested in dependencies with
 
 
 \cite{hahn-estimating-2019}
+
+our PNAS paper, mention Zaslavsky et al
+
+refer to MI and distance, Lin and Tegmark
 
 %\paragraph{Memory and Hierarchical Structure; Finiteness of Memory}
 %Processing nontrivial hierarchical structures typically requires unbounded amounts of memory.
