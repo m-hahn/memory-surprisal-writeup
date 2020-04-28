@@ -37,12 +37,10 @@ We use the Prague Dependency Treebank, which has information structure annotatio
 
 \subsection{Setup}
 
-Everything is identical to Experiment 1, except that we replaced the real orderings with orderings generated from grammars fitted to the word orders found in the real language.
 
 \paragraph{Fitting Ordering Grammars to Actual Orders}
 We create ordering grammars that are fit to the actual orderings of each language.
 These grammars faithfully represent the ordering rules if the actual language, to the extent that is possible in the formalism of ordering grammars.
-
 We construct these grammars by constructing \emph{probabilistic ordering grammars}, and setting the parameters to maximize the \emph{likelihood} of the actually observed orderings.
 The method is fully taken from \cite{hahn-universals-2020}.
 %We parameterized probabilistic ordering grammars as follows.
@@ -58,6 +56,9 @@ The method is fully taken from \cite{hahn-universals-2020}.
 %We choose this method since maximum-likelihood grammars can be constructed with simple gradient descent.
 %Another option would be to use some kind of discrete optimization method to approximate the original orders without a probabilistic method.
 %However, discrete optimization is computationally challenging.
+
+
+Everything else is identical to Experiment 2.
 
 
 \paragraph{Taking Information Structure into Account}
@@ -78,11 +79,11 @@ We obtained 38,727 training sentences and 5,228 dev sentences.
 
 \paragraph{Fitted Grammars}
 \mhahn{fill in}
-We show estimated tradeoffs in Figure (XX).
+We show estimated tradeoffs in Figure~\ref{fig:median-table}.
 
-In X languages, the fitted grammars provide better tradeoffs than at least 50\% of the random grammars.
+\mhahn{add AUC figures for consistency with Experiment 3}
 
-The AUC is lower than more than 50\% of random baseline grammars in all 54 languages ($p < 0.01$, using two-sided Binomial test and Hochberg's step-up procedure).
+The AUC for the fitted grammars is lower than more than 50\% of random baseline grammars in all 54 languages ($p < 0.01$, using two-sided Binomial test and Hochberg's step-up procedure).
 
 
 \begin{figure}
@@ -104,10 +105,14 @@ The AUC is lower than more than 50\% of random baseline grammars in all 54 langu
 We show estimated tradeoffs in Figure~\ref{fig:median-czech-infostruc}.
 Note that this experiment was conducted only on the subset of the Prague Dependency Treebank that has information structure annotation; thus, the numerical values are slightly different from those in Section X.
 
+\mhahn{show AUC figures}
+
 TODO talk about Figures ~\ref{fig:median-czech-infostruc}, \ref{fig:freedom-mi-with-infostruc}
 
-
-
+In Figure~\ref{fig:freedom-mi-with-infostruc}, we provide a version of figure (REF) showing how the data point for Czech would move when modeling word order including information structure.
+When modeling information structure, branching direction entropy decreases, while the surprisal difference between real and baseline orders increases.
+This suggests that the weaker optimization in free word order languages observed in Experiment 2 might in part be because ordering grammars did not take information structure into account.
+	
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{figures/Czech-PDT-listener-surprisal-memory-MEDIANS_onlyWordForms_boundedVocab.pdf}
 	\caption{Czech with information structure. Green: Baselines with information structure. Red: Baselines without information structure. Blue: Real}\label{fig:median-czech-infostruc}
@@ -119,7 +124,7 @@ TODO talk about Figures ~\ref{fig:median-czech-infostruc}, \ref{fig:freedom-mi-w
 \includegraphics[width=0.9\textwidth]{figures/surprisal-branching-entropy-REAL-infostruc.pdf}
 	\caption{Order Freedom vs Difference in Surprisal at maximal memory (compare Figure (REF)). The arrow indicates how the data point for Czech would move when modeling word order including information structure.
 	When modeling information structure, branching direction entropy decreases, while the surprisal difference between real and baseline orders increases.
-	This suggests that the weaker optimization in free word order languages observed in Experiment 2 might in part be because ordering grammars did not take information structure into account.
+	This suggests that the weaker optimization in free word order languages observed in Experiment 2 might in part be because ordering grammars did not take information structure into account. \mhahn{could think about visualizing AUC difference instead, they should be very similar to surprisal difference}
 	}\label{fig:freedom-mi-with-infostruc}
 \end{figure}
 
