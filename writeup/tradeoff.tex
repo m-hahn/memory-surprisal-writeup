@@ -42,7 +42,7 @@ for a given amount of information about previous words $H_M$ stored in the liste
 \begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{figures-gdrive/tradeoff-schematic.pdf}
-\caption{Example memory--surprisal trade-off curves for two languages, $A$ and $B$. While storing 2 bits of information in memory, a listener in Language $A$ can achieve an average surprisal of 3.5 bits, while a listener in Language $B$ can achieve an average surprisal of 3.25 bits. Language $B$ has a steeper memory--surprisal trade-off than Language $A$, and requires less memory resources to achieve the same level of processing difficulty.}
+\caption{Example memory--surprisal trade-off curves for two languages, $A$ and $B$. Achieving an average surprisal of 3.5 bits requires storing at least 1.0 bits in language $A$, while it requires storing 2.0 bits in language $B$. Language $B$ has a steeper memory--surprisal trade-off than Language $A$, and requires less memory resources to achieve the same level of processing difficulty.}
 \label{fig:examples}
 \end{figure}
 
@@ -115,7 +115,8 @@ The \key{memory--surprisal trade-off curve} for a process $W$ is the lowest achi
 where the minimization is over all memory encoding functions $M$ whose entropy $H_M$ is less than or equal to $R$.
 \end{definition}
 
-The memory state $m_t$ is generally a lossy representation of the true context of words $w_1, \dots, w_{t-1}$, meaning that $m_t$ does not contain all the possible information about $w_1, \dots, w_{t-1}$. The mathematical theory of lossy representations is \key{rate--distortion theory} \citep[for an overview and key results, see][pp. 301--347]{cover2006elements}; this theory has seen recent successful application in cognitive science and linguistics as a model of rational action under resource constraints \citep{sims,gershman,zaslavsky2018efficient}. Rate--distortion theory studies curves of the form of Eq.~\ref{eq:ms-formal}, which quantify trade-offs between utility (`distortion') and information (`rate'). Our memory--surprisal trade-off curve is a distortion--rate curve, with $H_M$ as the rate and $S_M$ as the distortion. It differs from the typical curve studied in rate--distortion theory in that we define rate using entropy, rather than mutual information \citep[see SI Section X, and also][for a discussion of some of the consequences of this formulation]{strouse-deterministic-2017}.   \mhahn{we might also point out (and elaborate in the SI) that the Information Locality Bound still holds if one were to choose MI instead of entropy. I think entropy is fine for this paper though, I think it is easier to conceptualize than MI.}
+The memory state $m_t$ is generally a lossy representation of the true context of words $w_1, \dots, w_{t-1}$, meaning that $m_t$ does not contain all the possible information about $w_1, \dots, w_{t-1}$. The mathematical theory of lossy representations is \key{rate--distortion theory} \citep[for an overview and key results, see][pp. 301--347]{cover2006elements}; this theory has seen recent successful application in cognitive science and linguistics as a model of rational action under resource constraints \citep{sims,gershman,zaslavsky2018efficient}. Rate--distortion theory studies curves of the form of Eq.~\ref{eq:ms-formal}, which quantify trade-offs between utility (`distortion') and information (`rate'). Our memory--surprisal trade-off curve is a distortion--rate curve, with $H_M$ as the rate and $S_M$ as the distortion. It differs from the typical curve studied in rate--distortion theory in that we define rate using entropy, rather than mutual information \citep[see][for a discussion of some of the consequences of this formulation]{strouse-deterministic-2017}. 
+Our theoretical results still hold if we were to define rate using mutual information (see SI Section REF).
 
 
 \subsection{Information locality}
@@ -142,13 +143,12 @@ Mutual information is always non-negative. It is zero when $X$ and $Y$ are condi
 
 \begin{figure}
 	(a)
-\includegraphics[width=0.4\textwidth]{figures-gdrive/mi-distance.png}
+\includegraphics[width=0.4\textwidth]{figures-gdrive/mi-distance.pdf}
 	(b)
-\includegraphics[width=0.2\textwidth]{figures-gdrive/theorem.png}
+\includegraphics[width=0.25\textwidth]{figures-gdrive/theorem.pdf}
 	\caption{
 		(a) Conditional mutual information $I_t$ captures how much predictive information about the next word is provided, on average, by the word $t$ steps in the past.
-		(b) Here we illustrate our theoretical result. We plot $I_t$ (top) and $tI_t$ (bottom) as functions of $t$. A listener using $B$ bits memory (bottom) to represent prior observations will incur at least $A$ bits of extra surprisal beyond the entropy rate (top). \note{there is t and T. COnfusing}
-		(c) \jd{FILL OUT} \note{make the colors in (c) difefrenfr from this in (b). Do want to make clear what the mapping from (b) to (c) is. Maybe can even have a pair of the two (b) curves, and then show what they map on. \mhahn{keep but redo in vector graphics}}
+		(b) Here we illustrate our theoretical result. We plot $I_t$ (top) and $tI_t$ (bottom) as functions of $t$. For any choice of $T$, a listener using $B$ bits memory (bottom) to represent prior observations will incur at least $A$ bits of extra surprisal beyond the entropy rate (top). 
 }\label{fig:theorem}
 \end{figure}
 
