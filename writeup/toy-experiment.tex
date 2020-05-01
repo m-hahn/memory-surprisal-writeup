@@ -90,21 +90,21 @@ We computed (\ref{eq:memory-bound}) from a chain of 1000 independently sampled s
 \includegraphics[width=0.45\textwidth]{figures/toy-mis.pdf}
 \includegraphics[width=0.45\textwidth]{figures/toy-t-mis.pdf}
 %
-	\caption{Left: Decay of conditional mutual information $I_t$, as a function of the distance $t$, for the two versions in the artificial language. The areas under the two curves are identical, corresponding to the fact that both orders are equally predictable. However, mutual information decays faster in language $A$.\ \ \ Right: The minimal memory requirement $t I_t$ to store $I_t$ bits of information for timespan $t$, as a function of $t$. The area under the $B$ curve is larger, corresponding to larger memory demand for this order. \mhahn{axis labels. do something about the red and blue lines overlapping?}}\label{fig:toy-mis}
+	\caption{Left: Decay of conditional mutual information $I_t$, as a function of the distance $t$, for the two versions in the artificial language. The areas under the two curves are identical, corresponding to the fact that both orders are equally predictable. However, mutual information decays faster in language $A$.\ \ \ Right: The minimal memory requirement $t I_t$ to store $I_t$ bits of information for timespan $t$, as a function of $t$. The area under the $B$ curve is larger, corresponding to larger memory demand for this order.}\label{fig:toy-mis}
 \end{figure*}
 
-			Figure~\ref{fig:toy-mis} (left) shows the curve of the conditional mutual information $I_t$ as a function of the distance $t$, for the two languages $A$ and $B$. 
-			The curves differ at $t=2$ and $t=5$: 
-			About 0.073 nats of predictive information that are at distance $t=2$ in the $A$ orders are moved to $t=5$ in the $B$ orders.
-			The source of the difference lies in predicting the presence and absence of a case marker on the second argument---i.e., whether to anticipate a subject or object.
-			In the $A$ orders, considering the last two words is sufficient to make this decision.
-			In the $B$ orders, it is necessary to consider the word before the long second constituent, which is five words in the past.
+Figure~\ref{fig:toy-mis} (left) shows the curve of the conditional mutual information $I_t$ as a function of the distance $t$, for the two languages $A$ and $B$. 
+The curves differ at $t=2$ and $t=5$: 
+About 0.073 units of predictive information that are at distance $t=2$ in the $A$ orders are moved to $t=5$ in the $B$ orders.
+The source of the difference lies in predicting the presence and absence of a case marker on the second argument---i.e., whether to anticipate a subject or object.
+In the $A$ orders, considering the last two words is sufficient to make this decision.
+In the $B$ orders, it is necessary to consider the word before the long second constituent, which is five words in the past.
 
-			The total amounts of predictive information---corresponding to the area under the $I_t$ curve----are the same for both languages, indicating that both languages are equally predictable.
+The total amounts of predictive information---corresponding to the area under the $I_t$ curve----are the same for both languages, indicating that both languages are equally predictable.
 			
-			However, we will see that the memory demands are different.
-			Figure~\ref{fig:toy-mis} (right) shows the minimal memory requirements for remembering predictive information at a distance $t$ ($t\cdot I_t$) as a function of $t$.
-			As $I_t$ decays faster in $A$ orders, the total area under the curve now differs between $A$ and $B$, and is larger in $B$.
+However, we will see that the memory demands are different.
+Figure~\ref{fig:toy-mis} (right) shows the minimal memory requirements for remembering predictive information at a distance $t$ ($t\cdot I_t$) as a function of $t$.
+As $I_t$ decays faster in $A$ orders, the total area under the curve now differs between $A$ and $B$, and is larger in $B$.
 			Therefore, achieving the same predictive accuracy in language $B$ requires more memory resources than in language $A$.
 			%This area corresponds to the lower bound in (\ref{eq:memory-bound}), and is 2.21 nats in A orders, and 2.43 nats in B orders.
 
@@ -114,12 +114,11 @@ We computed (\ref{eq:memory-bound}) from a chain of 1000 independently sampled s
 \begin{figure}
 \centering
 \includegraphics[width=0.45\textwidth]{figures/toy-mem-surp.pdf}
-	\caption{Tradeoff between listener memory and surprisal, for the two versions of the artificial language from \cite{fedzechkina-human-2017}. Language $A$ requires less memory at the same level of surprisal. \mhahn{add horizontal line at bottom}}
+	\caption{Tradeoff between listener memory and surprisal, for the two versions of the artificial language from \cite{fedzechkina-human-2017}. Language $A$ requires less memory at the same level of surprisal. }
 	\label{fig:toy-listener-tradeoff}
 \end{figure}
 
-In Figure~\ref{fig:toy-listener-tradeoff}, we show the resulting memory--surprisal trade-off curve for the two versions of the artificial language from \cite{fedzechkina-human-2017}. % TODO: Fill in the missing red line on the bottom; set bottom of y axis to 0; extend the x axis further to the right (and maybe to the left)
-%In this language, speaker memory coincides with the memory demand of a listener who performs optimally in incremental prediction.
+In Figure~\ref{fig:toy-listener-tradeoff}, we show the resulting memory--surprisal trade-off curve for the two versions of the artificial language from \cite{fedzechkina-human-2017}.
 The curve shows that, at any desired level of surprisal, language $A$ requires at most as much memory as language $B$.
 For reaching optimal surprisal, the empirically-favored language $A$ requires strictly less memory.
 
