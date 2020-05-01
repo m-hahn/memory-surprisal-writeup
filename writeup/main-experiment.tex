@@ -38,7 +38,7 @@ In order to evaluate the average surprisal values $S_t$, we computed the empiric
 \subsection{Data}
 We draw on corpora annotated with syntactic structures.
 The Universal Dependencies project has compiled such annotated corpora for several dozen languages~\citep{nivre-universal-2017}.
-These are annotated in the format of Dependency Grammar.
+These are annotated in the format of Dependency Grammar~\citep{hays1964dependency,hudson1984word,melcuk1988dependency,corbett1993heads,tesniere2015elements}.
 
 \paragraph{Dependency Grammar}
 In dependency corpora, sentences are annotated with \emph{dependency trees} (Figure~\ref{fig:dependency}).
@@ -86,14 +86,16 @@ We provide the sizes of the resulting datasets in SI Table (REF).
 
 \subsection{Defining baselines}
 
-We construct counterfactual ordering grammars that define consistent ordering rules similar to those found in actual languages.
+We construct counterfactual ordering grammars that define consistent ordering rules similar to those found in actual languages (Figure~\ref{fig:grammars}).
 For instance, these grammars will specify which dependents precede or follow their heads (e.g., whether objects follow or precede verbs, whether adjectives follow or precede nouns), and the relative order of different dependents on the same side of the head (e.g., whether noun phrases have order adjective-numeral-noun or numeral-adjective-noun). Our formalism of ordering grammars adapts the method of \citet{gildea-optimizing-2007,gildea-grammars-2010,gildea-human-2015} to the setting of dependency corpora, following \citet{futrell-large-scale-2015} and \citet{hahn2020optimization}, among others.
 
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{figures-gdrive/counterfactual-languages.pdf}
-	\caption{\note{Can say more here to explain how it works} Estimating chance by constructing counterfactual grammars and languages.\jd{this figure is again blurry for me. also looks like there's sth in the background on the left?} \mhahn{complete}}\label{fig:grammars}
+\caption{Estimating chance by constructing counterfactual grammars and languages: We start from an annotated dependency corpus of sentences annotated with syntactic dependencies (top left). We then extract the raw dependency structures, stripping away word order information (right left).
+We construct baseline ordering grammars that provide rules for ordering the words in such dependency structures (Grammars 1--3).
+Applying any such grammar to the dependency structures yields a counterfactual corpus of a hypothetical language that has the same dependency structures as the actual language, but different word order rules.}\label{fig:grammars}
 \end{figure}
 
 
@@ -117,13 +119,13 @@ In actual languages, the ordering of words is largely determined by the syntacti
 However, certain kinds of rules cannot be modeled by our word order grammars, such as rules sensitive to the category of the dependent (e.g., differences between nominal and pronominal objects).
 Word order freedom also is not modeled.
 In this sense, ordering grammars represent approximations to the kinds of ordering rules found in natural language \citep{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015}.
-See Section (Discussion) for further discussion.
+See Sections~\ref{subsec:expt2-discussion} and \ref{subsec:freedom} for further discussion.
 
 
 We first constructed at least 10 baseline grammars for each of the 54 real languages.
-We then continued to construct baseline grammars until a precision-based stopping criterion was reached (CITE). This criterion was designed to ensure that enough grammars were sampled to reliably compare the tradeoff curves of real and baseline grammars, without biasing results towards or against our hypothesis (see SI).
+We then continued to construct baseline grammars until a precision-based stopping criterion was reached (CITE). This criterion was designed to ensure that enough grammars were sampled to reliably compare the tradeoff curves of real and baseline grammars, without biasing results towards or against our hypothesis (see SI Section REF).
 
-\subsection{Results}
+\subsection{Results}\label{sec:main-experiment-results}
 
 \begin{figure}
 	\begin{center}
@@ -182,12 +184,12 @@ The real ordering is highly efficient if it results in a lower AUC than almost a
 Numerically, the AUC is smaller in the real orderings than in at least 50\% of baseline grammars in all but three languages (Polish, Slovak, North Sami).
 We evaluated significance using a two-sided binomial test.
 In these three languages, the AUC is higher in the real orderings than in significantly less than 50\% ($p < 0.01$ in each language).
-In all other languages except for Latvian, the fraction of more efficient baseline grammars was significantly less than 50\%, at $p=0.01$ using Hochberg's step-up procedure (CITE).
+In all other languages except for Latvian, the fraction of more efficient baseline grammars was significantly less than 50\%, at $p=0.01$, where we applied Hochberg's step-up procedure \citep{hochberg1988sharper} to control for multiple comparisons.
 In 42 of the 54 languages, the fraction of more efficient baseline grammars out of the samples taken was 0\%.
 
 
 
-\subsection{Discussion}
+\subsection{Discussion}\label{subsec:expt2-discussion}
 
 We have found that 50 out of 54 languages provide better memory-surprisal tradeoffs than random baselines with consistent but counterfactual word order rules.
 
@@ -200,7 +202,7 @@ To test this hypothesis, we examined the correlation between word order freedom 
 To quantify word order freedom, we used a corpus-based estimate, the \emph{branching direction entropy}~\citep{futrell-quantifying-2015}.
 This is the entropy of the ordering (head-first or dependent-first) of dependencies conditioned on the dependency label and the part-of-speech label of head and dependent.
 These two quantities are plotted in Figure~\ref{fig:hist-real}.
-We found that branching direction entropy was strongly correlated with the surprisal difference between real and baseline orderings (Spearman correlations -0.58, $p = 7.414e-6$).
+We found that branching direction entropy was strongly correlated with the surprisal difference between real and baseline orderings (Spearman correlation $-0.58$, $p = 7.414\cdot 10^{-6}$).
 
 This result could point to different explanations.
 One possibility is that optimization of word orders for memory--surprisal tradeoffs is indeed stronger in languages with more fixed word order, and that word order freedom leads to less efficient memory--surprisal tradeoffs.
@@ -211,7 +213,8 @@ In Experiment 3, we will examine whether the degree of optimization changes when
 
 \begin{figure}
 \includegraphics[width=0.95\textwidth]{figures/surprisal-branching-entropy-REAL.pdf}
-	\caption{Surprisal Difference vs Branching Direction Entropy. \mhahn{make numbers on axes readable}}\label{fig:hist-real}
+	\caption{For each of the 54 languages, we show the branching entropy, and the difference between the real order's surprisal and the mean surprisal of the baseline grammars, at the maximum memory value (see Figure~\ref{fig:median-table}).
+	}\label{fig:hist-real}
 \end{figure}
 
 
