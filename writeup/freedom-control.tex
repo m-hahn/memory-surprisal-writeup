@@ -1,23 +1,4 @@
 
-%We test this hypothesis by comparing baseline languages to \emph{fixed-order} versions of the real languages.
-%This enables us to tease apart the impact of the languages' word order rules from the impact of word order freedom.
-
-%\mhahn{clean up text a bit}
-
-%Above, we found that the majority of languages exhibit more favorable memory--surprisal trade-offs than counterfactual baselines based on random word order grammars. We also found that the strength of the difference between the real and baseline languages varies from language to language. Furthermore, we found that the magnitude of the difference is larger for languages with a higher degree of word order flexibility.
-
-
-
-
-% Two issues: Confound because of restrictive formalism. 
-% Association of efficiency and word order: By including information structure, we make the baselines worse
-% Different orders based on info structure -> higher entropy when you don't have info structure
-
-% Two controls:
-% 1. Fixed-order baseline
-% 2. Include info structure in the baseline, so that the baseline gets higher-entropy
-
-
 
 We now address the questions raised in Section~\ref{subsec:expt2-discussion}.
 First, we compare memory-surprisal tradeoffs for grammars approximating real orders in the same formalism as the baseline grammars (Section~\ref{sec:compare-mle}).
@@ -76,14 +57,10 @@ Compare Figure~\ref{fig:auc}. \mhahn{TODO make colors consistent with previous f
 
 \subsubsection{Taking Information Structure into Account}\label{sec:czech}
 
-Second, languages with flexible word order often show a strong influence of information structure on word order.
-Only relatively few datasets have annotations for information structure, and even fewer datasets have both syntactic and information structure annotation.
+Languages with flexible word order often show a strong influence of information structure on word order (CITE).
+Due to the difficulty of annotating information structure, only relatively few datasets have annotations for information structure, and even fewer datasets have both syntactic and information structure annotation.
 We draw on the Prague Dependency Treebank of Czech, which has both types of annotation.
-Czech is a language with relatively high degree of word order freedom.
-
-Simulation taking information structure into account (for one language).
-Due to the difficulty of annotating information structure, few such corpora are available.
-We use the Prague Dependency Treebank, which has information structure annotation.
+Czech is a language with relatively high degree of word order freedom, which is generally thought to be strongly impacted by information structure (CITE).
 
 About one third of the Prague Dependency Treebank has annotation for topic-focus articulation \citep{mikulova2006annotation}.
 Constituents are annotated for contrastiveness and for contextual boundedness, i.e., givenness.
@@ -96,7 +73,7 @@ To define baselines, we extend the word order grammar formalism by defining sepa
 
 We obtained 38,727 training sentences and 5,228 dev sentences.
 
-
+We created 20 baseline grammars with information strcuture, 20baseline grammars without it, and created 5 model runs for both real orders and the fitted grammar.
 
 \paragraph{Results}
 
@@ -118,6 +95,8 @@ We found that
 	
 This does not mean that conditioning word order on information structure makes language less efficient in general.
 Rather, encoding information structure in word order may increase the information content transmitted to the listener, which may in turn balance an increase in surprisal processing effort \citep{hahn2020optimization}.
+
+Due to the difficulty and cost of annotating information structure, we could only evaluate this hypothesis on data from one language.
 
 	
 \begin{figure}
@@ -264,3 +243,28 @@ Rather, encoding information structure in word order may increase the informatio
 
 
 %Everything else is identical to Experiment 2.
+
+
+
+
+%We test this hypothesis by comparing baseline languages to \emph{fixed-order} versions of the real languages.
+%This enables us to tease apart the impact of the languages' word order rules from the impact of word order freedom.
+
+%\mhahn{clean up text a bit}
+
+%Above, we found that the majority of languages exhibit more favorable memory--surprisal trade-offs than counterfactual baselines based on random word order grammars. We also found that the strength of the difference between the real and baseline languages varies from language to language. Furthermore, we found that the magnitude of the difference is larger for languages with a higher degree of word order flexibility.
+
+
+
+
+% Two issues: Confound because of restrictive formalism. 
+% Association of efficiency and word order: By including information structure, we make the baselines worse
+% Different orders based on info structure -> higher entropy when you don't have info structure
+
+% Two controls:
+% 1. Fixed-order baseline
+% 2. Include info structure in the baseline, so that the baseline gets higher-entropy
+
+
+
+
