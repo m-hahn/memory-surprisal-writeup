@@ -21,7 +21,7 @@ Furthermore, we showed that, in two languages (Japanese and Sesotho), the order 
 
 
 Our results leave open the causal mechanism leading to the observed optimization.
-Does optimization reflect biases in language acquisition \citep[e.g.]{fedzechkina2012language, culbertson2012learning}, or in language production \citep[e.g.]{macdonald2013language}?
+Does optimization reflect biases in language acquisition \citep[e.g.][]{fedzechkina2012language, culbertson2012learning, fedzechkina-human-2017}, or in language production \citep[e.g.][]{macdonald2013language}?
 It is possible that memory efficiency makes languages more learnable, as learning should require less memory resources for languages with more efficient memory-surprisal tradeoffs.
 To the extent that optimization reflects biases in production, do they reflect pressures in sentence planning \citep{macdonald2013language} or an effort on the side of the listener to produce utterances that are easy to comprehend?
 
@@ -40,16 +40,12 @@ interesting Qs to mention?
 %This is not predicted by the Information Locality Theorem, because it inherently
 
 
-Our results are in line with work suggesting that memory strategies adapt to language structure and language statistics, and that experience can reduce memory difficulty (CITE).
-This idea is supported by experimental work showing that forgetting effects in nested head-final dependencies are reduced or absent in languages with more frequent head-final structures  \cite{MacDonald  Christiansen, 2002, Christiansen  Chater, 1999; Christiansen  MacDonald, 2009; Engelmann  Vasishth, 2009, Frank  Ernst,
-2019; Frank et al., 2016; Husain  Bhatia, 2018; Vasishth et al., 2010}
-, which can be explained in terms of surprisal given noisy memory representations \cite{futrell-noisy-context-2017}.
+Our results are in line with work suggesting that memory strategies adapt to language structure and language statistics, and that experience can reduce memory difficulty.
+This idea is supported by experimental work showing that forgetting effects in nested head-final dependencies are reduced or absent in languages with more frequent head-final structures  \cite{macdonald2002reassessing, christiansen1999toward; christiansen2009usage; engelmann2009processing, frank2019judgements, frank2016cross, vasishth2010short}, which can be explained in terms of surprisal given noisy memory representations \cite{futrell-noisy-context-2017}.
+In a corpus study, \cite{yadav2020word} found that languages tolerate longer dependencies when their direction aligns with the default word order in that language. This is predicted by our inforation-theoretic model if we hypothesize that dependencies aligning with the default order tend to be more predictable, reducing surprisal compared to dependencies going in the non-default direction. Increased memory load for longer dependencies may therefore be compensated for by reduced surprisal.
 
 %; Hsiao  MacDonald, 2013; Levy, 2008, 2013;
 %(Husain et al., 2014; Konieczny, 2000; Levy & Keller, 2013; Miyamoto & Nakamura, 2003; Nakatani  Gibson, 2010; Vasishth  Lewis, 2006)
-
-Among corpus studies, \cite{yadav2020word} found that languages tolerate longer dependencies when their direction aligns with the default word order in that language. This is predicted by our inforation-theoretic model if we hypothesize that dependencies aligning with the default order tend to be more predictable, reducing surprisal compared to dependencies going in the non-default direction. Increased memory load for longer dependencies may therefore be made up for by reduced surprisal.
-
 
 
 \subsection{Limitations}
@@ -70,7 +66,7 @@ What our results do imply, though, is that real languages provide lower surprisa
 Our theoretical result provides a lower bound on the tradeoff curve that holds across all ways of physically realizing a memory representation obeying the postulates (1-3).
 However, this bound may be loose in two ways:
 First, architectural properties of human memory might introduce additional constraints on possible representations.
-Depending on the role played by factors other than infomation-theoretic capacity, the tradeoffs achieved by these human memory representations need not be close to achieving the theoretical bounds. \mhahn{at some point cite work on modeling human memory capacity in terms of bits}
+Depending on the role played by factors other than infomation-theoretic capacity, the tradeoffs achieved by these human memory representations need not be close to achieving the theoretical bounds.
 Furthermore, depending on properties of the stochastic process, the bound might be loose across all models, that is, there are processes where the bound is not attainable by any memory architecture.
 We provide an artificial example with analytical calculations in SI Section X; however, that example does not seem linguistically natural.
 
@@ -90,10 +86,9 @@ They are also disregarded in many other models of memory in sentence processing.
 \paragraph{Limitations of Grammar Model}
 In Study 2, baseline grammars are constructed in a formalism that cannot fully express some word order regularities found in languages.
 For instance, it cannot express orders that differ in main clauses and embedded clauses.
-This is a limitation common to other order grammar formalisms considered in the literature (CITE).
-This limitation does not hold in Study 4, where the formalism provides very close fit to observed morpheme orders.
+This is a limitation common to other order grammar formalisms considered in the literature \citep{gildea-optimizing-2007,futrell2015experiments,wang2016galactic}.
+This limitation does not hold in Study 3, where the formalism provides very close fit to observed morpheme orders.
 
-\mhahn{cite recent work using rate-distortion for memory (Gershman, Sims)}
 
 %\paragraph{absolute numbers, how they relate to what's known about human memory}
 
