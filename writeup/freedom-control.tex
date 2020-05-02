@@ -104,7 +104,7 @@ We show estimated tradeoffs and the distributions over AUC values in Figure~\ref
 As this experiment was conducted only on the subset of the Prague Dependency Treebank that has information structure annotation, the numerical values are slightly different from those in Section X.
 
 We compare the real orders both with the same baselines as above (red), and with the baselines taking information structure into account (green).
-Baselines show a larger gap in efficiency between real and baseline grammars when 
+Baselines show a larger gap in efficiency between real and baseline grammars when the baselines condition word order on information structure.
 
 
 
@@ -113,8 +113,12 @@ In Figure~\ref{fig:freedom-mi-with-infostruc}, we provide a version of Figure~\r
 When modeling information structure, branching direction entropy decreases, while the surprisal difference between real and baseline orders increases.
 This suggests that the weaker optimization in free word order languages observed in Experiment 2 might in part be because ordering grammars did not take information structure into account.
 	
+\paragraph{Discussion}
+We found that 
 	
-	
+This does not mean that conditioning word order on information structure makes language less efficient in general.
+Rather, encoding information structure in word order may increase the information content transmitted to the listener, which may in turn balance an increase in surprisal processing effort \citep{hahn2020optimization}.
+
 	
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{figures/Czech-PDT-listener-surprisal-memory-MEDIANS_onlyWordForms_boundedVocab.pdf}
