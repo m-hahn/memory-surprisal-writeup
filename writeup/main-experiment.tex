@@ -1,5 +1,5 @@
 We now investigate whether word orders as found in natural language reflect optimization for the memory--surprisal trade-off more generally.
-To this end, we compare the memory--surprisal trade-offs of 52 actual languages to those of counterfactual baseline languages, which differ from the actual languages only in their word order rules. This method of comparison against counterfactual baseline languages was introduced by \citet{gildea-optimizing-2007,gildea-grammars-2010} has been applied to study optimization-based models of word order universals by \citet{futrell-large-scale-2015}, \citet{gildea-human-2015}, and \citet{hahn2020optimization}.
+To this end, we compare the memory--surprisal trade-offs of 52 actual languages to those of counterfactual baseline languages, which differ from the actual languages only in their word order rules. This method of comparison against counterfactual baseline languages was introduced by \citet{gildea-optimizing-2007,gildea-grammars-2010} has been applied to study optimization-based models of word order universals by \citet{futrell-large-scale-2015}, \citet{gildea-human-2015}, and \citet{hahn2020universals}.
 
 Here, we describe how we measure the memory--surprisal trade-off in corpora, and how we generate counterfactual baseline languages. In Section~\ref{sec:main-experiment-results}, we compare the trade-off in real corpora against the trade-off in the counterfactual baselines. For the majority of languages, we find that the real languages have more favorable memory--surprisal trade-offs than the baselines, in line with our Main Hypothesis.
 
@@ -87,7 +87,7 @@ We provide the sizes of the resulting datasets in SI Table (REF).
 \subsection{Defining baselines}
 
 We construct counterfactual ordering grammars that define consistent ordering rules similar to those found in actual languages (Figure~\ref{fig:grammars}).
-For instance, these grammars will specify which dependents precede or follow their heads (e.g., whether objects follow or precede verbs, whether adjectives follow or precede nouns), and the relative order of different dependents on the same side of the head (e.g., whether noun phrases have order adjective-numeral-noun or numeral-adjective-noun). Our formalism of ordering grammars adapts the method of \citet{gildea-optimizing-2007,gildea-grammars-2010,gildea-human-2015} to the setting of dependency corpora, following \citet{futrell-large-scale-2015} and \citet{hahn2020optimization}, among others.
+For instance, these grammars will specify which dependents precede or follow their heads (e.g., whether objects follow or precede verbs, whether adjectives follow or precede nouns), and the relative order of different dependents on the same side of the head (e.g., whether noun phrases have order adjective-numeral-noun or numeral-adjective-noun). Our formalism of ordering grammars adapts the method of \citet{gildea-optimizing-2007,gildea-grammars-2010,gildea-human-2015} to the setting of dependency corpora, following \citet{futrell-large-scale-2015} and \citet{hahn2020universals}, among others.
 
 
 \begin{figure}
