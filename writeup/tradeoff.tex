@@ -15,7 +15,7 @@ The memory--surprisal trade-off applies in both language production and comprehe
 
 We begin developing our model by considering the process of language comprehension illustrated in Figure~\ref{fig:communication}, where the listener Alice is processing a stream of words uttered by an interlocutor Bob (Figure~\ref{fig:communication}). 
 
-Experimental research has established three properties of online language comprehension: (1) listeners maintain some information about the words received so far in incremental memory, (2) listeners form probabilistic expectations about the upcoming words, and (3) words are easy to process to the extent that they are predictable based on a listener's memory of words received so far. (TODO REFS)\jdegen{this invites the question of whether anything you're about to show us holds if these assumptions aren't in fact warranted. eg, people love to argue about whether listeners *really* predict}
+Experimental research has established three properties of online language comprehension: (1) listeners maintain some information about the words received so far in incremental memory, (2) listeners form probabilistic expectations about the upcoming words, and (3) words are easy to process to the extent that they are predictable based on a listener's memory of words received so far. (TODO \REF)\jdegen{this invites the question of whether anything you're about to show us holds if these assumptions aren't in fact warranted. eg, people love to argue about whether listeners *really* predict}
 
 We formalize these three observations into postulates intended to provide a simplified picture of what is known about online language comprehension. Consider a listener comprehending a sequence of words $w_1, \dots, w_t, \dots, w_n$, at an arbitrary time $t$.
 \begin{enumerate}
@@ -116,7 +116,7 @@ where the minimization is over all memory encoding functions $M$ whose entropy $
 \end{definition}
 
 The memory state $m_t$ is generally a lossy representation of the true context of words $w_1, \dots, w_{t-1}$, meaning that $m_t$ does not contain all the possible information about $w_1, \dots, w_{t-1}$. The mathematical theory of lossy representations is \key{rate--distortion theory} \citep[for an overview and key results, see][pp. 301--347]{cover2006elements}; this theory has seen recent successful application in cognitive science and linguistics as a model of rational action under resource constraints \citep{sims,gershman,zaslavsky2018efficient}. Rate--distortion theory studies curves of the form of Eq.~\ref{eq:ms-formal}, which quantify trade-offs between utility (`distortion') and information (`rate'). Our memory--surprisal trade-off curve is a distortion--rate curve, with $H_M$ as the rate and $S_M$ as the distortion. It differs from the typical curve studied in rate--distortion theory in that we define rate using entropy, rather than mutual information \citep[see][for a discussion of some of the consequences of this formulation]{strouse-deterministic-2017}. 
-Our theoretical results still hold if we were to define rate using mutual information (see SI Section REF).
+Our theoretical results still hold if we were to define rate using mutual information (see SI Section \REF).
 
 
 \subsection{Information locality}

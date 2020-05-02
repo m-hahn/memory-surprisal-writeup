@@ -154,7 +154,7 @@ If statistical dependencies, as measured using mutual information, can be identi
 
 \paragraph{Cue-Based Retrieval Models}
 
-In some psycholinguistic theories, memory-related difficulty arises not because of a bound on memory capacity, but rather because of difficulties involved in retrieving information from memory \citep{}. We are able to prove an analogous theorem that applies to such theories: see Supplementary Material Section TODO for an extension of our analysis to the case involving a short-term memory (STM) with unbounded capacity, a working memory (WM) with limited capacity, and cost associated with communication between WM and STM. Essentially, the constraint on the the memory state in our theorem above can be re-interpreted as a constraint on the capacity of a communication channel linking STM to WM. In particular, this result constrains average surprisal for memory models based on cue-based retrieval such as the ACT-R model of \citet{lewis-activation-based-2005}.
+In some psycholinguistic theories, memory-related difficulty arises not because of a bound on memory capacity, but rather because of difficulties involved in retrieving information from memory \citep{mcelree2000sentence,lewis-activation-based-2005,nicenboim2018models,vasishth2019computational}. We are able to prove an analogous theorem that applies to such theories: see Supplementary Material Section \REF for an extension of our analysis to the case involving a short-term memory (STM) with unbounded capacity, a working memory (WM) with limited capacity, and cost associated with communication between WM and STM. Essentially, the constraint on the the memory state in our theorem above can be re-interpreted as a constraint on the capacity of a communication channel linking STM to WM. In particular, this result constrains average surprisal for memory models based on cue-based retrieval such as the ACT-R model of \citet{lewis-activation-based-2005}.
 
 The ACT-R model of \cite{lewis-activation-based-2005} does not have an explicit surprisal cost.
 Instead, surprisal effects are interpreted as arising because, in less constraining contexts, the parser is more likely to make decisions that then turn out to be incorrect, leading to additional correcting steps.
@@ -216,6 +216,13 @@ In the Supplementary Materials Section TODO, we provide an example of a stochast
 %In an idealized model \emph{all} predictive information is mediated through direct syntactic dependencies, and each dependency contributed an equal amount of predictive information, our memory bound would indeed become equivalent to such a metric.
 %Note that the average number of objects held in memory simultaneously is equivalent to the average time they are stored.
 
+
+\paragraph{Rate-Distortion Theory in Cognition}\mhahn{TODO this doesn't fit with the heading `memory of sentence processing'}
+As described in Section~\ref{sec:formal-tradeoff}, the Memory-Surprisal Tradeoff instantiates the framework of rate-distortion theory.
+This approach has previously been applied to visual working memory \citep{brady2009compression, sims2012ideal, sims2016rate}.
+These studies model visual working memory as solving the problem of storing a maximal amount of information given fixed capacity, and provide experimental evidence that visual working memory can store more items when they show stronger statistical patterns in cooccurrence \citep{brady2009compression}, and that memory performance is better when encoded items show lower variance \citep{sims2012ideal}, both in accordance with the predictions of optimal compression.
+
+
 \subsection{Efficiency for the listener, or efficiency for the producer?}
 
 Our theory is stated in terms of the efficiency of language processing for a comprehender of language. However, we can show that an analogous memory--surprisal trade-off exists in language production. Below, we discuss the memory--surprisal trade-off from a production perspective, and consider how it might be possible to empirically distinguish the comprehender's trade-off from the producer's trade-off.
@@ -254,8 +261,7 @@ It may be possible to use this asymmetry to distinguish whether word and morphem
 \subsection{Information-theoretic studies of language}
 
 Our work opens up a connection between psycholinguistics, linguistic typology, and statistical studies of language. Here, we survey the connections between our work and previous statistical studies.
-
-\paragraph{Statistical Complexity and Excess Entropy}
+%\paragraph{Statistical Complexity and Excess Entropy}
 Our formalization of listener memory is related to studies of dynamic systems in the physics literature.
 Our memory--surprisal curve is closely related to the \emph{predictive information bottleneck} introduced by \citet{still-information-2014} and studied by \citet{marzen-predictive-2016}; in particular, it is a version of the \emph{recursive information bottleneck} \citep[][\S 4]{still-information-2014}. 
 In the limit of optimal prediction and minimal surprisal, our formalization of listener memory is equivalent to the notion of \emph{Statistical Complexity} \citep{crutchfield-inferring-1989}.
@@ -265,15 +271,11 @@ Related to Theorem~\ref{prop:suboptimal}, \citet{sharan-prediction-2016} show a 
 
 \cite{debowski-excess-2011} studied the excess entropy of language across very long ranges of text, in particular aiming to determine whether it is finite.
 Our work contrasts with this work in that we are interested in dependencies within sentences.
-\cite{hahn2019estimating} empirically estimate the predictive rate-distortion tradeoff of natural language \citep{marzen-predictive-2016}; this is related to but different from the memory-surprisal tradeoff, as it models a setting where past observations are compressed once as a whole, while a memory capacity bottleneck holds at every point in time in our model.
+\cite{hahn2019estimating} empirically estimate the predictive rate-distortion tradeoff of natural language; this tradeoff related to but different from the memory-surprisal tradeoff, as it models a setting where past observations are compressed once as a whole \citep{marzen-predictive-2016}, while a memory capacity bottleneck holds at every point in time in our model.
 Nonetheless, their method might also be applicable to construct estimates of memory-surprisal tradeoff.
 
 \mhahn{mention this somewhere, seems relevant} \cite{hahn2020universals} compared surprisal and parseability for real and baseline orders, arguing that word orders optimize a tradeoff between these quantities.
 
-\paragraph{Rate-Distortion Theory in Cognition}
-As described in Section~\ref{sec:formal-tradeoff}, the Memory-Surprisal Tradeoff instantiates the framework of rate-distortion theory.
-This approach has previously been applied to visual working memory \citep{brady2009compression, sims2012ideal, sims2016rate}.
-These studies model visual working memory as solving the problem of storing a maximal amount of information given fixed capacity, and provide experimental evidence that visual working memory can store more items when they show stronger statistical patterns in cooccurrence \citep{brady2009compression}, and that memory performance is better when encoded items show lower variance \citep{sims2012ideal}, both in accordance with the predictions of optimal compression.
 
 
 

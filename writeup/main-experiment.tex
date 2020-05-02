@@ -82,7 +82,7 @@ For some languages with little data, there is no predefined training partition, 
 In these cases, we redefined the split to obtain more training data.
 For these languages, we pooled all the available partitions, used 100 randomly selected sentences as held-out data, and used the remainder as training data.\footnote{This affects Amharic, Armenian, Breton, Buryat, Cantonese, Faroese, Kazakh, Kurmanji, Naija, Thai, and Uyghur.}
 We did not make use of the \textit{test} partitions here.
-We provide the sizes of the resulting datasets in SI Table (REF).
+We provide the sizes of the resulting datasets in SI Table (\REF).
 
 \subsection{Defining baselines}
 
@@ -123,7 +123,7 @@ See Sections~\ref{subsec:expt2-discussion} and \ref{subsec:freedom} for further 
 
 
 We first constructed at least 10 baseline grammars for each of the 54 real languages.
-We then continued to construct baseline grammars until a precision-based stopping criterion was reached (CITE). This criterion was designed to ensure that enough grammars were sampled to reliably compare the tradeoff curves of real and baseline grammars, without biasing results towards or against our hypothesis (see SI Section REF).
+We then continued to construct baseline grammars until a precision-based stopping criterion was reached (CITE). This criterion was designed to ensure that enough grammars were sampled to reliably compare the tradeoff curves of real and baseline grammars, without biasing results towards or against our hypothesis (see SI Section \REF).
 
 \subsection{Results}\label{sec:main-experiment-results}
 
@@ -141,7 +141,7 @@ We then continued to construct baseline grammars until a precision-based stoppin
 \includegraphics[width=\textwidth]{results-table.pdf}
 \end{center}
 	\caption{Surprisal (y-axis) at given memory level (x-axis), for real orders (blue) and random baseline grammars (red).
-	For the real orders (blue), we provide the median across multiple random seeds of the neural network estimator for $I_t$ (see SI Section REF), and 95\% confidence bands.
+	For the real orders (blue), we provide the median across multiple random seeds of the neural network estimator for $I_t$ (see SI Section \REF), and 95\% confidence bands.
 	For the baseline grammars (red), we provide the median across both the sampled baseline grammars and multiple random seeds of the estimator, and 95\% confidence bands for the median.
 }\label{fig:median-table}
 \end{figure}
@@ -168,7 +168,7 @@ In most languages, $I_1$ is distinctly larger for the actual orderings (blue) co
 In Figure~\ref{fig:median-table}, we show the resulting bounds on the memory-surprisal tradeoff curves, showing median surprisals at given levels of memory, for real and baseline languages.
 We compute surprisal at 40 evenly spaced points of memory (selected individually for each language), over real orders and baseline grammars.
 We then compute the median surprisal over all runs for the real language, and over all baselines grammars.
-For each point, we compute an non-asymptotic and non-parametric confidence interval for the median surprisal (see SI Section REF).
+For each point, we compute an non-asymptotic and non-parametric confidence interval for the median surprisal (see SI Section \REF).
 %using the binomial PDF. \mhahn{some standard stats reference}
 %This is an \emph{exact} confidence interval, without parametric assumptions or asymptotic approximations.
 

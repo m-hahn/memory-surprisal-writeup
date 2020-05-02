@@ -57,10 +57,10 @@ Compare Figure~\ref{fig:auc}. \mhahn{TODO make colors consistent with previous f
 
 \subsubsection{Taking Information Structure into Account}\label{sec:czech}
 
-Languages with flexible word order often show a strong influence of information structure on word order (CITE).
+Languages with flexible word order often show a strong influence of information structure on word order \CITE.
 Due to the difficulty of annotating information structure, only relatively few datasets have annotations for information structure, and even fewer datasets have both syntactic and information structure annotation.
-We draw on the Prague Dependency Treebank of Czech, which has both types of annotation.
-Czech is a language with relatively high degree of word order freedom, which is generally thought to be strongly impacted by information structure (CITE).
+We draw on the Prague Dependency Treebank of Czech \CITE, which has both types of annotation.
+Czech is a language with relatively high degree of word order freedom, which is generally thought to be strongly impacted by information structure (\CITE).
 
 About one third of the Prague Dependency Treebank has annotation for topic-focus articulation \citep{mikulova2006annotation}.
 Constituents are annotated for contrastiveness and for contextual boundedness, i.e., givenness.
@@ -73,7 +73,7 @@ To define baselines, we extend the word order grammar formalism by defining sepa
 
 We obtained 38,727 training sentences and 5,228 dev sentences.
 
-We created 20 baseline grammars with information strcuture, 20baseline grammars without it, and created 5 model runs for both real orders and the fitted grammar.
+We created 20 baseline grammars with information structure, 20 baseline grammars without it, and created 5 model runs for both real orders and the fitted grammar.
 
 \paragraph{Results}
 
@@ -104,6 +104,15 @@ Due to the difficulty and cost of annotating information structure, we could onl
 \includegraphics[width=0.5\textwidth]{figures/Czech-PDT-listener-surprisal-memory-HIST_AUC_onlyWordForms_boundedVocab_REAL-infostruc.pdf}
 
 	\caption{Left: Memory-surprisal tradeoff Czech with information structure. Green: Baselines with information structure. Red: Baselines without information structure. Blue: Real. Right: AUC for Czech, for baselines without information structure (red) and baselines with information structure (green). Optimization of real orders is stronger when considering information structure in baselines. \mhahn{make colors and font size compatible}}\label{fig:median-czech-infostruc}
+\end{figure}
+
+
+	
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{writeup/figures/Czech-PDT-listener-surprisal-memory-HIST_AUC_onlyWordForms_boundedVocab_REAL-infostruc_GROUND.pdf}
+\includegraphics[width=0.5\textwidth]{writeup/figures/Czech-PDT-listener-surprisal-memory-HIST_AUC_onlyWordForms_boundedVocab_REAL-infostruc_REAL.pdf}
+
+	\caption{\mhahn{TODO}}\label{fig:median-czech-infostruc}
 \end{figure}
 
 
