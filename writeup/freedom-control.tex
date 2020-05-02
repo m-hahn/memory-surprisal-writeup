@@ -41,8 +41,7 @@ We use the Prague Dependency Treebank, which has information structure annotatio
 \paragraph{Fitting Ordering Grammars to Actual Orders}
 We create ordering grammars that are fit to the actual orderings of each language.
 These grammars faithfully represent the ordering rules if the actual language, to the extent that is possible in the formalism of ordering grammars.
-We construct these grammars by constructing \emph{probabilistic ordering grammars}, and setting the parameters to maximize the \emph{likelihood} of the actually observed orderings.
-The method is fully taken from \cite{hahn-universals-2020}.
+These grammars are extracted from the observed orders using the method of \cite{hahn2020optimization}.
 %We parameterized probabilistic ordering grammars as follows.
 %For each relation type $\tau$, we introduce a \emph{direction parameter} $a_\tau \in [0,1]$ and a \emph{distance parameter} $b_\tau \in \mathbb{R}$.
 %Each dependent is ordered on the left of its head with probability $a_\tau$ and to the right with probability $1-a_\tau$. 
@@ -58,12 +57,12 @@ The method is fully taken from \cite{hahn-universals-2020}.
 %However, discrete optimization is computationally challenging.
 
 
-Everything else is identical to Experiment 2.
+%Everything else is identical to Experiment 2.
 
 
 \paragraph{Taking Information Structure into Account}
 
-About one third of the Prague Dependency Treebank has annotation for topic-focus articulation \cite{mikulova2006annotation}.
+About one third of the Prague Dependency Treebank has annotation for topic-focus articulation \citep{mikulova2006annotation}.
 Constituents are annotated for contrastiveness and for contextual boundedness, i.e., givenness.
 Three labels are used:
 ``c'' for contrastive and contextually bound, ``f'' for contextually non-bound, ``t'' for non-contrastive contextually bound.
@@ -95,6 +94,20 @@ The AUC for the fitted grammars is lower than more than 50\% of random baseline 
 
 
 
+\begin{figure}
+	\begin{center}
+\includegraphics[width=\textwidth]{auc-table_MLE.pdf}
+\end{center}
+\caption{Histograms for the Area under the Curve (AUC) for the memory--surprisal tradeoffs for real (blue) and random baseline (red) orders.
+We provide a kernel density smoothing estimate of the distribution of random baseline orders.
+A smaller AUC value indicates a more efficient tradeoff; in most cases, the real orders provide more efficient tradeoffs than most or all baseline grammars.\mhahn{TODO make colors consistent with previous figure}
+}\label{fig:auc-mle}
+\end{figure}
+
+
+
+
+
 %\begin{figure}
 %\includegraphics[width=0.5\textwidth]{figures/full-GROUND-listener-surprisal-memory-HIST_z_byMem_onlyWordForms_boundedVocab.pdf}
 %	\caption{Histogram}\label{fig:hist-real}
@@ -115,16 +128,16 @@ This suggests that the weaker optimization in free word order languages observed
 	
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{figures/Czech-PDT-listener-surprisal-memory-MEDIANS_onlyWordForms_boundedVocab.pdf}
-	\caption{Czech with information structure. Green: Baselines with information structure. Red: Baselines without information structure. Blue: Real}\label{fig:median-czech-infostruc}
+	\caption{Memory-surprisal tradeoff Czech with information structure. Green: Baselines with information structure. Red: Baselines without information structure. Blue: Real \mhahn{add AUC plot}}\label{fig:median-czech-infostruc}
 \end{figure}
 
 
 
 \begin{figure}
 \includegraphics[width=0.9\textwidth]{figures/surprisal-branching-entropy-REAL-infostruc-invert.pdf}
-	\caption{Order Freedom vs Difference in Surprisal at maximal memory (compare Figure (REF)). The arrow indicates how the data point for Czech would move when modeling word order including information structure.
+	\caption{Order Freedom vs Difference in Surprisal at maximal memory (compare Figure~\ref{fig:freedom-surp}). The arrow indicates how the data point for Czech would move when modeling word order including information structure.
 	When modeling information structure, branching direction entropy decreases, while the surprisal difference between real and baseline orders increases.
-	This suggests that the weaker optimization in free word order languages observed in Experiment 2 might in part be because ordering grammars did not take information structure into account. \mhahn{could think about visualizing AUC difference instead, they should be very similar to surprisal difference}
+	This suggests that the weaker optimization in free word order languages observed in Experiment 2 might in part be because ordering grammars did not take information structure into account.
 	}\label{fig:freedom-mi-with-infostruc}
 \end{figure}
 
