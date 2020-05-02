@@ -18,5 +18,5 @@ cp ~/memory-surprisal/writeup/results-table-mle.pdf .
 cp ~/memory-surprisal/code/ngram-control/create_models_ngrams/morph/Japanese/tradeoffs/figures/* figures/
 cp ~/memory-surprisal/code/ngram-control/create_models_ngrams/morph/Sesotho/tradeoffs/figures/* figures/
 cp ~/memory-surprisal/code/analysis/visualize_neural/figures/surprisal-branching-entropy-REAL*.pdf figures/
-
+cp ~/memory-surprisal/code/order-freedom/infostruc/analysis/medians/auc/figures/* figures/
 
