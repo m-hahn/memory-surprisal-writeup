@@ -5,9 +5,7 @@ Here, we discuss the implications and limitations of our results, and also how o
 
 %\paragraph{The Roles of Speakers, Listeners, and Interaction}
 %Our derivation of the memory-surprisal tradeoff considers the listener.
-
 %Debate about the roles of speaker and listener in shaping language.
-
 %Interaction: We could make the process include the entire conversational history (including what the listener said before).
 
 \subsection{Implications}
@@ -20,6 +18,39 @@ Furthermore, we showed that, in two languages (Japanese and Sesotho), the order 
 \mhahn{UG explanations. do languages evolve slowly or does it happen faster.}
 
 \mhahn{can mention now-or-never bottleneck earlier}
+
+
+Our results leave open the causal mechanism leading to the observed optimization.
+Does optimization reflect biases in language acquisition \citep[e.g.]{fedzechkina2012language, culbertson2012learning}, or in language production \citep[e.g.]{macdonald2013language}?
+It is possible that memory efficiency makes languages more learnable, as learning should require less memory resources for languages with more efficient memory-surprisal tradeoffs.
+To the extent that optimization reflects biases in production, do they reflect pressures in sentence planning \citep{macdonald2013language} or an effort on the side of the listener to produce utterances that are easy to comprehend?
+
+
+Furthermore, to what extent do languages change in ways that increase or preserve memory efficiency over time, and to what extent do speakers actively structure their production in ways that increase memory efficiency?
+Our results are compatible with different mechanisms, and plausibly both mechanisms play a role.
+
+\mhahn{TODO there is a large debate to cite here}
+
+%While our work has shown that certain word-order universals can be explained by efficiency in communication, we have made a number of basic assumptions about how language works in constructing our word-order grammars: for example, that sentences can be syntactically analyzed into trees of syntactic relations. We believe a promising avenue for future work is to determine whether these more basic properties themselves might also be explainable in terms of efficient communication.
+
+
+interesting Qs to mention?
+
+%There is both corpus evidence and experimental evidence that long dependencies tend to be easier to process in head-final contexts \cite{futrell2017memory}.
+%This is not predicted by the Information Locality Theorem, because it inherently
+
+
+Our results are in line with work suggesting that memory strategies adapt to language structure and language statistics, and that experience can reduce memory difficulty (CITE).
+This idea is supported by experimental work showing that forgetting effects in nested head-final dependencies are reduced or absent in languages with more frequent head-final structures  \cite{MacDonald  Christiansen, 2002, Christiansen  Chater, 1999; Christiansen  MacDonald, 2009; Engelmann  Vasishth, 2009, Frank  Ernst,
+2019; Frank et al., 2016; Husain  Bhatia, 2018; Vasishth et al., 2010}
+, which can be explained in terms of surprisal given noisy memory representations \cite{futrell-noisy-context-2017}.
+
+%; Hsiao  MacDonald, 2013; Levy, 2008, 2013;
+%(Husain et al., 2014; Konieczny, 2000; Levy & Keller, 2013; Miyamoto & Nakamura, 2003; Nakatani  Gibson, 2010; Vasishth  Lewis, 2006)
+
+Among corpus studies, \cite{yadav2020word} found that languages tolerate longer dependencies when their direction aligns with the default word order in that language. This is predicted by our inforation-theoretic model if we hypothesize that dependencies aligning with the default order tend to be more predictable, reducing surprisal compared to dependencies going in the non-default direction. Increased memory load for longer dependencies may therefore be made up for by reduced surprisal.
+
+
 
 \subsection{Limitations}
 
@@ -39,9 +70,9 @@ What our results do imply, though, is that real languages provide lower surprisa
 Our theoretical result provides a lower bound on the tradeoff curve that holds across all ways of physically realizing a memory representation obeying the postulates (1-3).
 However, this bound may be loose in two ways:
 First, architectural properties of human memory might introduce additional constraints on possible representations.
-Depending on the role played by factors other than infomation-theoretic capacity, the tradeoffs achieved by these human memory representations need not be close to achieving the theoretical bounds.
+Depending on the role played by factors other than infomation-theoretic capacity, the tradeoffs achieved by these human memory representations need not be close to achieving the theoretical bounds. \mhahn{at some point cite work on modeling human memory capacity in terms of bits}
 Furthermore, depending on properties of the stochastic process, the bound might be loose across all models, that is, there are processes where the bound is not attainable by any memory architecture.
-We provide an example with analytical calculations in SI Section X \mhahn{and mention that example is not very linguistic}; there we also show that the bounds can be tighter for retrieval-based models.
+We provide an artificial example with analytical calculations in SI Section X; however, that example does not seem linguistically natural.
 
 \paragraph{Extralinguistic Context}
 Comprehension Postulate 1 states that the memory state after receiving a word is determined by that word and the memory state before receiving this word.
@@ -179,6 +210,8 @@ Here we argue that conditional mutual information is more relevant for measuring
 While the decay of conditional mutual information provably provides a lower bound on memory entropy, the decay of unconditional mutual information does not.
 In the Supplementary Materials Section TODO, we provide an example of a stochastic process where unconditional mutual information does not decay with distance, but memory requirements remain low.
 
+TODO: Qian and Jaeger
+
 %head-dependent mutual information hypothesis
 %In an idealized model \emph{all} predictive information is mediated through direct syntactic dependencies, and each dependency contributed an equal amount of predictive information, our memory bound would indeed become equivalent to such a metric.
 %Note that the average number of objects held in memory simultaneously is equivalent to the average time they are stored.
@@ -239,6 +272,14 @@ Our work contrasts with this work in that we are interested in dependencies with
 our PNAS paper, mention Zaslavsky et al
 
 refer to MI and distance, Lin and Tegmark
+
+\cite{qian2012cue}
+
+TODO at some point:
+
+- rate-distortion, memory capacity in psychology in general
+
+\cite{brady2009compression} model visual working memory as solving the problem of storing a maximal amount of information given fixed capacity, and provide experimental evidence that visual working memory can store more items when they show stronger statistical patterns in cooccurrence, in accordance with the prediction of optimal encoding.
 
 %\paragraph{Memory and Hierarchical Structure; Finiteness of Memory}
 %Processing nontrivial hierarchical structures typically requires unbounded amounts of memory.
