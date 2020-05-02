@@ -98,9 +98,8 @@ The AUC for the fitted grammars is lower than more than 50\% of random baseline 
 	\begin{center}
 \includegraphics[width=\textwidth]{auc-table_MLE.pdf}
 \end{center}
-\caption{Histograms for the Area under the Curve (AUC) for the memory--surprisal tradeoffs for real (blue) and random baseline (red) orders.
-We provide a kernel density smoothing estimate of the distribution of random baseline orders.
-A smaller AUC value indicates a more efficient tradeoff; in most cases, the real orders provide more efficient tradeoffs than most or all baseline grammars.\mhahn{TODO make colors consistent with previous figure}
+\caption{Histograms for the Area under the Curve (AUC) for the memory--surprisal tradeoffs for real (\mhahn{TODO color}) and random baseline (\mhahn{red}) orders, and for orders according to extracted grammars (\mhahn{TODO color}).
+Compare Figure~\ref{fig:auc}. \mhahn{TODO make colors consistent with previous figure}
 }\label{fig:auc-mle}
 \end{figure}
 
@@ -129,6 +128,13 @@ This suggests that the weaker optimization in free word order languages observed
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{figures/Czech-PDT-listener-surprisal-memory-MEDIANS_onlyWordForms_boundedVocab.pdf}
 	\caption{Memory-surprisal tradeoff Czech with information structure. Green: Baselines with information structure. Red: Baselines without information structure. Blue: Real \mhahn{add AUC plot}}\label{fig:median-czech-infostruc}
+\end{figure}
+
+
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{figures/Czech-PDT-listener-surprisal-memory-HIST_AUC_onlyWordForms_boundedVocab_REAL-infostruc.pdf}
+	\caption{AUC for Czech \mhahn{make colors consistent}}\label{fig:auc-czech-infostruc}
 \end{figure}
 
 
