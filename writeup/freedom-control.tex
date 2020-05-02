@@ -2,9 +2,9 @@
 %We test this hypothesis by comparing baseline languages to \emph{fixed-order} versions of the real languages.
 %This enables us to tease apart the impact of the languages' word order rules from the impact of word order freedom.
 
-\mhahn{clean up text a bit}
+%\mhahn{clean up text a bit}
 
-Above, we found that the majority of languages exhibit more favorable memory--surprisal trade-offs than counterfactual baselines based on random word order grammars. We also found that the strength of the difference between the real and baseline languages varies from language to language. Furthermore, we found that the magnitude of the difference is larger for languages with a higher degree of word order flexibility.
+%Above, we found that the majority of languages exhibit more favorable memory--surprisal trade-offs than counterfactual baselines based on random word order grammars. We also found that the strength of the difference between the real and baseline languages varies from language to language. Furthermore, we found that the magnitude of the difference is larger for languages with a higher degree of word order flexibility.
 
 
 
@@ -17,73 +17,35 @@ Above, we found that the majority of languages exhibit more favorable memory--su
 % 1. Fixed-order baseline
 % 2. Include info structure in the baseline, so that the baseline gets higher-entropy
 
-There is the possibility of a confound in the fact that baselines are constructed using a grammar formalism that is in some ways too restrictive to model all word order rules found in natural languages.
+
+
+We now address the questions raised in Section~\ref{subsec:expt2-discussion}.
+First, we compare memory-surprisal tradeoffs for grammars approximating real orders in the same formalism as the baseline grammars (Section~\ref{sec:compare-mle}).
+Second, we draw on a corpus of Czech with information structure annotation to determine whether real orders are more optimized when comparing to baselines taking information structure into account (Section~\ref{sec:czech}).
+
+
+\subsubsection{Comparing Grammars Fitted to Actual Orders}\label{sec:compare-mle}
+
+As discussed in Section~\ref{subsec:expt2-discussion}, there is the possibility of a confound in the fact that baselines are constructed using a grammar formalism that is in some ways too restrictive to model all word order rules found in natural languages.
 To ensure that results are not due to the representational restrictions of the word order grammar formalism, we compare the real languages to the result of ordering the corpora according to grammars that approximates the observed orders to the extent possible in the grammar formalism.
 These grammars have exactly the same representational constraints as the baseline grammars.
 Importantly, they differ from real languages in having entirely deterministic order.
 We expect these grammars to have better memory-surprisal tradeoffs than comparable random baseline grammars across all languages.
 
-Second, languages with flexible word order often show a strong influence of information structure on word order.
-Only relatively few datasets have annotations for information structure, and even fewer datasets have both syntactic and information structure annotation.
-We draw on the Prague Dependency Treebank of Czech, which has both types of annotation.
-Czech is a language with relatively high degree of word order freedom.
-
-Simulation taking information structure into account (for one language).
-Due to the difficulty of annotating information structure, few such corpora are available.
-We use the Prague Dependency Treebank, which has information structure annotation.
-
-
-
-
-\subsection{Setup}
-
-
-\paragraph{Fitting Ordering Grammars to Actual Orders}
 We create ordering grammars that are fit to the actual orderings of each language.
 These grammars faithfully represent the ordering rules if the actual language, to the extent that is possible in the formalism of ordering grammars.
 These grammars are extracted from the observed orders using the method of \cite{hahn2020optimization}.
-%We parameterized probabilistic ordering grammars as follows.
-%For each relation type $\tau$, we introduce a \emph{direction parameter} $a_\tau \in [0,1]$ and a \emph{distance parameter} $b_\tau \in \mathbb{R}$.
-%Each dependent is ordered on the left of its head with probability $a_\tau$ and to the right with probability $1-a_\tau$. 
-%Then for each set of co-dependents $\{s_1, \dots , s_n\}$ placed on one side of a head, their order outward from the head is determined by iteratively sampling from the distribution $\operatorname{softmax}(b_{\tau_1}, \dots, b_{\tau_n})$ (\cite{goodfellow2016deep}, p. 184) without replacement. 
-%Given a dependency tree, a probabilistic ordering grammar assigns a probability distribution over the possible projective linearizations of that tree.
-%We use gradient descent to find parameters $a_\tau, b_\tau$ so as to maximize the overall likelihood of the orders in the actual corpus.
-%We convert probabilistic ordering grammars into ordinary ordering grammars by the following method.
-%Let $A_-$ be those relations $\tau$ where $a_\tau > 0.5$, similarly for $A_+$ those here $a_\tau \geq 0.5$.
-%Then we order all relations in $A_-$ by $b_\tau$ in \emph{decreasing} order, and those in $A_+$ by $b_\tau$ in \emph{increasing} order.
-%Then ordering a tree following the converted version is equivalent to greedily choosing the highest-probability linearization for the dependents of each head in a tree.
-%We choose this method since maximum-likelihood grammars can be constructed with simple gradient descent.
-%Another option would be to use some kind of discrete optimization method to approximate the original orders without a probabilistic method.
-%However, discrete optimization is computationally challenging.
+
+We compared the memory-surprisal tradeoffs of these extracted grammars to the same baseline grammars as above.
 
 
-%Everything else is identical to Experiment 2.
+\paragraph{Results}
 
 
-\paragraph{Taking Information Structure into Account}
-
-About one third of the Prague Dependency Treebank has annotation for topic-focus articulation \citep{mikulova2006annotation}.
-Constituents are annotated for contrastiveness and for contextual boundedness, i.e., givenness.
-Three labels are used:
-``c'' for contrastive and contextually bound, ``f'' for contextually non-bound, ``t'' for non-contrastive contextually bound.
-These labels are diagnosed based on constituent order and intonation.
-Some constituents remain unmarked, the vast majority of these are function words such as adpositions, conjunctions, and auxiliaries; we introduce a label ``NA'' for these.
-
-To define baselines, we extend the word order grammar formalism by defining separate weights for each combination of the 37 syntactic relations and these four information structure labels.
-
-We obtained 38,727 training sentences and 5,228 dev sentences.
-
-
-\subsection{Results}
-
-\paragraph{Fitted Grammars}
-\mhahn{fill in}
-We show estimated tradeoffs in Figure~\ref{fig:median-table}.
-
-\mhahn{add AUC figures for consistency with Experiment 3}
-
+We show estimated memory-surprisal tradeoffs in Figure~\ref{fig:median-table}, and histograms of the area under the tradeoff curve (AUC) in Figure~\ref{fig:auc-mle}.
 The AUC for the fitted grammars is lower than more than 50\% of random baseline grammars in all 54 languages ($p < 0.01$, using two-sided Binomial test and Hochberg's step-up procedure).
 
+Thus, when comparing within the same word order grammar formalism, the ordering regularities of real languages provide more efficient tradeoffs than most possible order grammars, in all 54 languages.
 
 \begin{figure}
 	\begin{center}
@@ -112,30 +74,56 @@ Compare Figure~\ref{fig:auc}. \mhahn{TODO make colors consistent with previous f
 %	\caption{Histogram}\label{fig:hist-real}
 %\end{figure}
 
-\paragraph{Information Structure}
+\subsubsection{Taking Information Structure into Account}\label{sec:czech}
 
-We show estimated tradeoffs in Figure~\ref{fig:median-czech-infostruc}.
-Note that this experiment was conducted only on the subset of the Prague Dependency Treebank that has information structure annotation; thus, the numerical values are slightly different from those in Section X.
+Second, languages with flexible word order often show a strong influence of information structure on word order.
+Only relatively few datasets have annotations for information structure, and even fewer datasets have both syntactic and information structure annotation.
+We draw on the Prague Dependency Treebank of Czech, which has both types of annotation.
+Czech is a language with relatively high degree of word order freedom.
 
-\mhahn{show AUC figures}
+Simulation taking information structure into account (for one language).
+Due to the difficulty of annotating information structure, few such corpora are available.
+We use the Prague Dependency Treebank, which has information structure annotation.
 
-TODO talk about Figures ~\ref{fig:median-czech-infostruc}, \ref{fig:freedom-mi-with-infostruc}
+About one third of the Prague Dependency Treebank has annotation for topic-focus articulation \citep{mikulova2006annotation}.
+Constituents are annotated for contrastiveness and for contextual boundedness, i.e., givenness.
+Three labels are used:
+``c'' for contrastive and contextually bound, ``f'' for contextually non-bound, ``t'' for non-contrastive contextually bound.
+These labels are diagnosed based on constituent order and intonation.
+Some constituents remain unmarked, the vast majority of these are function words such as adpositions, conjunctions, and auxiliaries; we introduce a label ``NA'' for these.
 
-In Figure~\ref{fig:freedom-mi-with-infostruc}, we provide a version of figure (REF) showing how the data point for Czech would move when modeling word order including information structure.
+To define baselines, we extend the word order grammar formalism by defining separate weights for each combination of the 37 syntactic relations and these four information structure labels.
+
+We obtained 38,727 training sentences and 5,228 dev sentences.
+
+
+
+\paragraph{Results}
+
+We show estimated tradeoffs and the distributions over AUC values in Figure~\ref{fig:median-czech-infostruc}.
+As this experiment was conducted only on the subset of the Prague Dependency Treebank that has information structure annotation, the numerical values are slightly different from those in Section X.
+
+We compare the real orders both with the same baselines as above (red), and with the baselines taking information structure into account (green).
+Baselines show a larger gap in efficiency between real and baseline grammars when 
+
+
+
+
+In Figure~\ref{fig:freedom-mi-with-infostruc}, we provide a version of Figure~\ref{fig:freedom-surp} showing how the data point for Czech would move when modeling word order including information structure.
 When modeling information structure, branching direction entropy decreases, while the surprisal difference between real and baseline orders increases.
 This suggests that the weaker optimization in free word order languages observed in Experiment 2 might in part be because ordering grammars did not take information structure into account.
 	
+	
+	
+	
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{figures/Czech-PDT-listener-surprisal-memory-MEDIANS_onlyWordForms_boundedVocab.pdf}
-	\caption{Memory-surprisal tradeoff Czech with information structure. Green: Baselines with information structure. Red: Baselines without information structure. Blue: Real \mhahn{add AUC plot}}\label{fig:median-czech-infostruc}
-\end{figure}
-
-
-
-\begin{figure}
 \includegraphics[width=0.5\textwidth]{figures/Czech-PDT-listener-surprisal-memory-HIST_AUC_onlyWordForms_boundedVocab_REAL-infostruc.pdf}
-	\caption{AUC for Czech \mhahn{make colors consistent}}\label{fig:auc-czech-infostruc}
+
+	\caption{Left: Memory-surprisal tradeoff Czech with information structure. Green: Baselines with information structure. Red: Baselines without information structure. Blue: Real. Right: AUC for Czech, for baselines without information structure (red) and baselines with information structure (green). Optimization of real orders is stronger when considering information structure in baselines. \mhahn{make colors and font size compatible}}\label{fig:median-czech-infostruc}
 \end{figure}
+
+
 
 
 
@@ -254,3 +242,21 @@ This suggests that the weaker optimization in free word order languages observed
 %\end{equation}
 %where $\alpha \in \mathbb{R}_+$ is the \emph{learning rate}.
 
+
+
+%We parameterized probabilistic ordering grammars as follows.
+%For each relation type $\tau$, we introduce a \emph{direction parameter} $a_\tau \in [0,1]$ and a \emph{distance parameter} $b_\tau \in \mathbb{R}$.
+%Each dependent is ordered on the left of its head with probability $a_\tau$ and to the right with probability $1-a_\tau$. 
+%Then for each set of co-dependents $\{s_1, \dots , s_n\}$ placed on one side of a head, their order outward from the head is determined by iteratively sampling from the distribution $\operatorname{softmax}(b_{\tau_1}, \dots, b_{\tau_n})$ (\cite{goodfellow2016deep}, p. 184) without replacement. 
+%Given a dependency tree, a probabilistic ordering grammar assigns a probability distribution over the possible projective linearizations of that tree.
+%We use gradient descent to find parameters $a_\tau, b_\tau$ so as to maximize the overall likelihood of the orders in the actual corpus.
+%We convert probabilistic ordering grammars into ordinary ordering grammars by the following method.
+%Let $A_-$ be those relations $\tau$ where $a_\tau > 0.5$, similarly for $A_+$ those here $a_\tau \geq 0.5$.
+%Then we order all relations in $A_-$ by $b_\tau$ in \emph{decreasing} order, and those in $A_+$ by $b_\tau$ in \emph{increasing} order.
+%Then ordering a tree following the converted version is equivalent to greedily choosing the highest-probability linearization for the dependents of each head in a tree.
+%We choose this method since maximum-likelihood grammars can be constructed with simple gradient descent.
+%Another option would be to use some kind of discrete optimization method to approximate the original orders without a probabilistic method.
+%However, discrete optimization is computationally challenging.
+
+
+%Everything else is identical to Experiment 2.
