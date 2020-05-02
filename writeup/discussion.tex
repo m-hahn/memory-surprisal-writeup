@@ -210,7 +210,7 @@ Here we argue that conditional mutual information is more relevant for measuring
 While the decay of conditional mutual information provably provides a lower bound on memory entropy, the decay of unconditional mutual information does not.
 In the Supplementary Materials Section TODO, we provide an example of a stochastic process where unconditional mutual information does not decay with distance, but memory requirements remain low.
 
-TODO: Qian and Jaeger
+\mhahn{TODO: \cite{qian-cue-2012}}
 
 %head-dependent mutual information hypothesis
 %In an idealized model \emph{all} predictive information is mediated through direct syntactic dependencies, and each dependency contributed an equal amount of predictive information, our memory bound would indeed become equivalent to such a metric.
@@ -260,26 +260,21 @@ Our formalization of listener memory is related to studies of dynamic systems in
 Our memory--surprisal curve is closely related to the \emph{predictive information bottleneck} introduced by \citet{still-information-2014} and studied by \citet{marzen-predictive-2016}; in particular, it is a version of the \emph{recursive information bottleneck} \citep[][\S 4]{still-information-2014}. 
 In the limit of optimal prediction and minimal surprisal, our formalization of listener memory is equivalent to the notion of \emph{Statistical Complexity} \citep{crutchfield-inferring-1989}.
 In the limit $T \rightarrow \infty$, the quantity in Eq.~\ref{eq:memory-bound} is equal to the \emph{excess entropy} \citep{crutchfield-inferring-1989}.
-However, the link between memory and information locality provided by our Theorem~\ref{prop:suboptimal} appears to be a novel theoretical contribution.
-Relatedly, \citet{sharan-prediction-2016} shows a link between excess entropy and approximability by $n$-th order Markov models, noting that processes with low excess entropy can be approximated well with Markov models of low order.
+The link between memory and information locality provided by our Theorem~\ref{prop:suboptimal} appears to be a novel theoretical contribution.
+Related to Theorem~\ref{prop:suboptimal}, \citet{sharan-prediction-2016} show a link between excess entropy and approximability by $n$-th order Markov models, noting that processes with low excess entropy can be approximated well with Markov models of low order.
 
-\cite{debowski-excess-2011} has studied the excess entropy of language across very long ranges of text, in particular aiming to determine whether it is finite.
+\cite{debowski-excess-2011} studied the excess entropy of language across very long ranges of text, in particular aiming to determine whether it is finite.
 Our work contrasts with this work in that we are interested in dependencies within sentences.
+\cite{hahn-estimating-2019} empirically estimate the predictive rate-distortion tradeoff of natural language \citep{marzen-predictive-2016}; this is related to but different from the memory-surprisal tradeoff, as it models a setting where past observations are compressed once as a whole, while a memory capacity bottleneck holds at every point in time in our model.
+Nonetheless, their method might also be applicable to construct estimates of memory-surprisal tradeoff.
+\cite{hahn2020optimization} compared surprisal and parseability for real and baseline orders, arguing that word orders optimize a tradeoff between these quantities.
+
+\paragraph{Rate-Distortion Theory in Cognition}
+As described in Section~\ref{sec:formal-tradeoff}, the Memory-Surprisal Tradeoff instantiates the framework of rate-distortion theory.
+This approach has previously been applied to visual working memory \citep{brady2009compression, sims2012ideal, sims2016rate}.
+These studies model visual working memory as solving the problem of storing a maximal amount of information given fixed capacity, and provide experimental evidence that visual working memory can store more items when they show stronger statistical patterns in cooccurrence \citep{brady2009compression}, and that memory performance is better when encoded items show lower variance \citep{sims2012ideal}, both in accordance with the predictions of optimal compression.
 
 
-\cite{hahn-estimating-2019}
-
-our PNAS paper, mention Zaslavsky et al
-
-refer to MI and distance, Lin and Tegmark
-
-\cite{qian2012cue}
-
-TODO at some point:
-
-- rate-distortion, memory capacity in psychology in general
-
-\cite{brady2009compression} model visual working memory as solving the problem of storing a maximal amount of information given fixed capacity, and provide experimental evidence that visual working memory can store more items when they show stronger statistical patterns in cooccurrence, in accordance with the prediction of optimal encoding.
 
 %\paragraph{Memory and Hierarchical Structure; Finiteness of Memory}
 %Processing nontrivial hierarchical structures typically requires unbounded amounts of memory.
