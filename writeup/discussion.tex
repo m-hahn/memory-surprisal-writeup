@@ -116,7 +116,7 @@ Below, we discuss the connections between our theory and existing theories of hu
 \paragraph{Storage-based theories}
 
 There is a long tradition of models of human language processing in which difficulty is attributed to high working memory load. 
-These models go back to \citet{yngve1960model}'s production model, where difficulty was associated with moments when a large number of items have to be kept on a parser stack; this model correctly predicted the difficulty of center-embedded clauses, but problematically predicted that left-branching structures should be hard \citep{kimball1973}. Other early examples include \citet{miller-finitary-1963} and \citet{frazier1985syntactic}'s measure of syntactic complexity based on counting the number of local nonterminal nodes. More recently, a line of literature has formulated complexity metrics based on how long and how many nodes are kept in incremental memory during parsing, and used linear or ranked combinations of these metrics to predict acceptability differences in complex embeddings \citep{kobele2013memory,graf2014evaluating,rambow201512,GrafEtAl15MOL,gerth2015memory,GrafEtAl17JLM,desanto2020parsing}.
+These models go back to \citet{yngve1960model}'s production model, where difficulty was associated with moments when a large number of items have to be kept on a parser stack; this model correctly predicted the difficulty of center-embedded clauses, but problematically predicted that left-branching structures should be hard \citep{kimball1973seven}. Other early examples include \citet{miller-finitary-1963} and \citet{frazier1985syntactic}'s measure of syntactic complexity based on counting the number of local nonterminal nodes. More recently, a line of literature has formulated complexity metrics based on how long and how many nodes are kept in incremental memory during parsing, and used linear or ranked combinations of these metrics to predict acceptability differences in complex embeddings \citep{kobele2013memory,graf2014evaluating,rambow201512,GrafEtAl15MOL,gerth2015memory,GrafEtAl17JLM,desanto2020parsing}.
 
 %Our theoretical result can be seen as an information-theoretic version of such metrics.
 %It differs from these in two ways:
@@ -144,7 +144,7 @@ In our framework, DLT integration cost corresponds to surprisal given an imperfe
 There is one remaining missing link between our theory of processing difficulty and theories such as the Dependency Locality Theory:
 our information locality theorem says that \emph{statistical} dependencies should be short-term, whereas psycholinguistic theories of locality have typically focused on the time-span of \key{syntactic dependencies}: words which depend on each other to determine the meaning or the well-formedness of a sentence. Statistical dependencies, in contrast, mean that whenever one element of a sequence determines or predicts another element \emph{in any way}, those two elements should be close to each other in time. 
 
-If statistical dependencies, as measured using mutual information, can be identified with syntactic dependencies, then that would mean that information locality is straightforwardly a generalization of dependency locality. \citet{futrell2019syntactic} give theoretical and empirical arguments that this is so. They show that syntactic dependencies as annotated in dependency treebanks identify word pairs with especially high mutual information, and give a derivation showing that this is to be expected according to a formalization of the postulates of dependency grammar. The connection between mutual information and syntactic dependency has also been explored by \citet{}. % maximizing mutual information principle; de paiva alves; yuret
+If statistical dependencies, as measured using mutual information, can be identified with syntactic dependencies, then that would mean that information locality is straightforwardly a generalization of dependency locality. \citet{futrell2019syntactic} give theoretical and empirical arguments that this is so. They show that syntactic dependencies as annotated in dependency treebanks identify word pairs with especially high mutual information, and give a derivation showing that this is to be expected according to a formalization of the postulates of dependency grammar. The connection between mutual information and syntactic dependency has also been explored by \citet{de1996selection, yuret1998discovery}. % maximizing mutual information principle; de paiva alves; yuret
 
 
 \paragraph{Cue-Based Retrieval Models}
@@ -164,7 +164,8 @@ However, this is not the case:
 our theorem does not imply that a listener forgets words beyond some amount of time $T$ in the past. 
 An optimal listener may well decide to remember information about words more distant than $T$, but in order to stay within the bounds of memory, she can only do so at the cost of forgetting some information about words closer than $T$.
 The Information Locality Lower Bound still holds, in the sense that the long-term dependency will cause processing difficulty, even if the long-term dependency is not itself forgotten.
-See SI Appendix Section X for a mathematical example illustrating this phenomenon.
+See SI Appendix Section \REF for a mathematical example illustrating this phenomenon.
+
 %y and non-redundantly depends on the character $T$ steps in the past, with $T$ large, this will create a memory cost proportional to $T$.
 
 % TODO: Should we mention retrieval interference effects? If there is any slowdown that is *directly* attributable to similarity-based interference, then I think we can't capture it. But a lossily-compressed memory will have interference, in the sense that more "semantically" similar items in memory are more likely to be confused for each other.
@@ -174,8 +175,8 @@ See SI Appendix Section X for a mathematical example illustrating this phenomeno
 There are more general reasons to believe that any realistic theory of sentence processing must include surprisal as at least a \emph{component} of the cost of processing a word, even if it is not explicitly stated as such. 
 %More formally, we argue that processing difficulty for a word $w_t$ must at least be given by $k (-\log P(w_t |m_t)) + R$, with $k$ a scaling factor giving the relative contribution of surprisal to processing cost, and $R$ representing all other factors. The scaling factor $k$ may be small, but it cannot be zero, for both empirical and theoretical reasons. 
 There are both empirical and theoretical grounds for this claim.
-Empirically, surprisal makes a well-documented and robust contribution to processing difficulty in empirical studies of reading times and event-related potentials \citep{smith2013effect,frank2016erp}. 
-Theoretically, surprisal may represent an irreducible thermodynamic cost incurred by any information processing system \citep{landauer,still2012thermodynamic,zenon2019information}, and there are multiple converging theoretical arguments for why it should hold as a cost in human language processing in particular \cite[see][for a review]{levy2013memory}. 
+Empirically, surprisal makes a well-documented and robust contribution to processing difficulty in empirical studies of reading times and event-related potentials \citep{smith2013effect,frank2015erp}. 
+Theoretically, surprisal may represent an irreducible thermodynamic cost incurred by any information processing system \mhahn{landauer which citation?} \citep{landauer,still2012thermodynamic,zenon2019information}, and there are multiple converging theoretical arguments for why it should hold as a cost in human language processing in particular \cite[see][for a review]{levy2013memory}. 
 
 
 
