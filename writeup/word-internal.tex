@@ -50,7 +50,7 @@ Based on corpus data and the linguistic literature on Japanese, we identified th
 
 
 \paragraph{Verb Affixes in Sesotho}
-Sesotho (also known as Southern Sotho) is a Southern Bantu language, spoken by 5.6 million L1 speakers (\REF) mainly in Lesotho and South Africa.
+Sesotho (also known as Southern Sotho) is a Southern Bantu language spoken primarily in Lesotho and South Africa.
 Sesotho verbs are marked with both prefixes and suffixes.
 Common prefixes include markers for agreement with subjects and objects; object prefixes always follow subject prefixes \ref{ex:oadireka}.
 Common suffixes include markers changing valence and voice, and a mood suffix \ref{ex:ophehela}.
@@ -84,7 +84,7 @@ We identified the following suffixes:
 % Jeffrey Good, Strong Linearity: Three Case Studies Towards a Theory of Morphosyntactic Templatic Constructions (Diss, 2003)
     
 \begin{enumerate}
-\item Semantic derivation: reversive (e.g., do $\rightarrow$ undo)  \cite[\textsection 345]{doke1967textbook}
+\item Semantic derivation: reversive (e.g., `do' $\rightarrow$ `undo') \cite[\textsection 345]{doke1967textbook}
 \item Valence: Common valence-altering suffixes include causative, neuter/stative, applicative, and reciprocal \cite[\textsection 307--338]{doke1967textbook}. See SI for details on their meanings.
     \item Voice: passive \cite[\textsection 300]{doke1967textbook} 
     \item Tense \cite[\textsection 369]{doke1967textbook}
@@ -172,7 +172,7 @@ To control for the randomness in initialization and the optimization steps, we r
 For Sesotho, we ran the algorithm separetely for prefixes and suffixes.
 
 \subsection{Results}
-In Figure~\ref{fig:morph-auc}, we compare the area under curve of the memory--surprisal trade-off for Japanese and Sesotho under different orderings.
+In Figure~\ref{fig:morph-auc}, we compare the area under curve of the memory--surprisal trade-off for Japanese and Sesotho verb forms under different orderings.
 Both observed orders and the approximately optimized grammars show lower AUCs than all random baseline samples.
 For comparison, we also show AUC for the order resulting from \emph{reversing} all suffix chains in the observed orders; this results in high AUC even exceeding most random grammars.
 These results show that Japanese and Sesotho affix orderings enable approximately optimal memory-surprisal tradeoffs.
@@ -205,7 +205,6 @@ These results show that Japanese and Sesotho affix orderings enable approximatel
 
 
 We now ask to what extent the observed morpheme ordering is predicted correctly by approximately optimized grammars.
-
 In Table~\ref{tab:morph-acc}, we give summary statistics about the accuracy of optimized grammars in predicting affix order in the corpus, together with random baseline figures.
 We evaluate accuracy using two methods:
 In one method (`Pairs'), we consider, for each verb form in the corpus, all pairs of prefixes (or suffixes).
