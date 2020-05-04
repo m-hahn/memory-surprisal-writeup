@@ -124,14 +124,19 @@ We extracted 37K verb forms (see SI for details).
 We randomly selected 5\% to serve as held-out data and used the remaining 95\% as training data.
 93\% of forms had two or more affixes (modal group: three affixes, 36\%; maximum eight affixes).
 
-\mhahn{say again how we're turning this into a stationary process}
 
 \paragraph{Estimating Memory-Surprisal Tradeoff}
-As in many languages, affixes in Japanese and Sesotho show morphophonemic interactions between neighboring morphemes; for instance, the Japanese politeness morpheme -\textit{mas}- takes the form -\textit{masu} when it is word-final, while it has the allomorph -\textit{mase} when followed by the negation suffix -\textit{n}.
+We model prediction on the level of morpheme sequences.
+That is, we represent each verb form as a sequence of a stem and suffix morphemes, abstracting away from morphophonemic interactions between neighboring morphemes.
+As in many languages, affixes in Japanese and Sesotho show morphophonemic interactions between neighboring morphemes; for instance, the Japanese politeness morpheme -\textit{mas}- takes the form -\textit{masu} when it is word-final, while it has the allomorph -\textit{mase}- when followed by the negation suffix -\textit{n}.
+Modeling prediction on the level of morphemes, as opposed to phonemes, controls for these interactions.
 
-To control for these interactions, we model prediction on the level of morphemes sequences.
-That is, we represent each verb form as a sequence of a stem and suffix morphemes, abstracting away from morphophonemic interactions.
+
 See SI for results when modeling prediction on the level of phonemes; these results come out qualitatively similar to the results we present here.
+
+
+We model verbs forms as a stochastic process by concatenating the verb forms from the corpus in random order.
+This means, we model statistical dependencies between the different morphemes in a form, and no dependencies between verb forms and their surrounding words.
 
 We calculate $I_t$ by estimating an $n$-gram model on the training set and then computing the average surprisal $S_t$ as cross-entropy on the held-out set using Kneser-Ney smoothing.
 The model may overfit as the context size $t$ increases, leading to higher cross-entropies for larger values of $t$.
@@ -153,9 +158,9 @@ In Japanese, the passive (slot 3) and potential (slot 4) markers are formally in
 As we cannot systematically distinguish them on the basis of the available corpus annotation, we merge these into a single underlying morpheme `Passive/Potential'.
 
 
-To verify that this formalism is appropriate to capturing moroheme order in Japanese and Sesotho, we also fitted models parameterized in this way to the observed orders.
+To verify that this formalism is appropriate to capturing morpheme order in Japanese and Sesotho, we also fitted models parameterized in this way to the observed orders.
 We found that ordering morphemes according to these fitted models recovered the observed order for almost all forms (98.6 \% for Japanese, 99.93\% for Sesotho prefixes, 97.4\% for Sesotho suffixes).
-Exceptions largely concern low-frequency suffixes beyond those considered here.
+Exceptions largely concern low-frequency affixes beyond those considered here.
 
 
 \paragraph{Creating Optimal Orders}
@@ -231,7 +236,7 @@ Sesotho &   Optimized  &  0.988 (SD 0.0) & 0.989 (SD 0.0) & 0.756 (SD 0.014) & 0
 We compare the real grammar with the approximately optimized grammar that achieved the lowest AUC value in Table~\ref{tab:grammar-table-jap}; the main divergence is that desiderative suffixes are placed after the negation suffix (slot 6), whereas real Japanese orders place them before the politeness suffix (slot 5).
 
 We conducted an error analysis comparing the real Japanese morpheme order against our approximately optimized orders.
-For each grammar, we extracted the pairs of morphemes whose relative order is incorrectly predicted, excluding pairs involving low-frequency morphemes not discussed here, and including a few forms that do not agree with the dominant order described above (TODO figure out what these exceptions are).
+For each grammar, we extracted the pairs of morphemes whose relative order is incorrectly predicted, excluding pairs involving low-frequency morphemes not discussed here. %, and including a few forms that do not agree with the dominant order described above (TODO figure out what these exceptions are).
 Results are shown in Table~\ref{tab:jap-err-analysis}.
 The most frequent divergence is that past and negation suffixes are consistently ordered incorrectly; this affects 88 corpus examples (out of 15K total examples).
 %A few of the optimized grammars show additional divergences among high-frequency morphemes, for instance, some grammars order politeness and negation incorrectly. 
@@ -279,13 +284,14 @@ negation & politeness & 3 \\
 
 In Sesotho, for prefixes, all optimized grammars almost exactly recover the ordering described above.
 The only divergence among the high-frequency morphemes is that negation and the tense/aspect prefix are ordered incorrectly; this accounts for only 12 occurrences in the data set, as the two prefixes rarely co-occur.
-Other divergences affect lower-frequency morphemes (TODO how many).
-Common divergences are shown in Table~\ref{tab:sesotho-prefix-err-analysis}.
+%Other divergences affect lower-frequency morphemes. % (TODO how many).
+%Common divergences are shown in Table~\ref{tab:sesotho-prefix-err-analysis}.
 
 For Sesotho suffixes, order is recovered at above-chance accuracies, though with some divergences.
 The most common error (Table~\ref{tab:sesotho-prefix-err-analysis}) is that relative and interrogative suffixes are consistently placed closer to the verb stem than the mood suffix.
 We conjecture that this happens because all Sesotho verbs uniformly have a mood suffix, suggesting that there might be lower mutual information between the stem and the mood suffix than between the stem and these two suffixes.
 Furthermore, valence-changing suffixes are ordered farther away from the stem than various other suffixes, in contrast with the actual orders.
+Interestingly, we found that prediction was more accurate in this respect when estimating $I_t$ naively on the training set (see SI Figure \REF), suggesting that the available corpus data does not sufficiently determine the optimal ordering.
 
 \begin{table}
     \centering

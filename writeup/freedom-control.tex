@@ -16,7 +16,6 @@ We expect these grammars to have better memory-surprisal tradeoffs than comparab
 We create ordering grammars that are fit to the actual orderings of each language.
 These grammars faithfully represent the ordering rules if the actual language, to the extent that is possible in the formalism of ordering grammars.
 These grammars are extracted from the observed orders using the method of \cite{hahn2020universals}.
-
 We compared the memory-surprisal tradeoffs of these extracted grammars to the same baseline grammars as above.
 
 
@@ -26,7 +25,7 @@ We compared the memory-surprisal tradeoffs of these extracted grammars to the sa
 We show estimated memory-surprisal tradeoffs in Figure~\ref{fig:median-table}, and histograms of the area under the tradeoff curve (AUC) in Figure~\ref{fig:auc-mle}.
 The AUC for the fitted grammars is lower than more than 50\% of random baseline grammars in all 54 languages ($p < 0.01$, using two-sided Binomial test and Hochberg's step-up procedure).
 
-Thus, when comparing within the same word order grammar formalism, the ordering regularities of real languages provide more efficient tradeoffs than most possible order grammars, in all 54 languages.
+Thus, the ordering regularities of real languages provide more efficient tradeoffs than most possible order grammars also when comparing within the same word order grammar formalism.
 
 \begin{figure}
 	\begin{center}
@@ -57,10 +56,10 @@ Compare Figure~\ref{fig:auc}. \mhahn{TODO make colors consistent with previous f
 
 \subsubsection{Taking Information Structure into Account}\label{sec:czech}
 
-Languages with flexible word order often show a strong influence of information structure on word order \CITE.
+Languages with flexible word order often show a strong influence of information structure on word order \cite{givon1988pragmatics,jacobs1988probleme,neelemen2016word}.
 Due to the difficulty of annotating information structure, only relatively few datasets have annotations for information structure, and even fewer datasets have both syntactic and information structure annotation.
-We draw on the Prague Dependency Treebank of Czech \CITE, which has both types of annotation.
-Czech is a language with relatively high degree of word order freedom, which is generally thought to be strongly impacted by information structure (\CITE).
+We draw on the Prague Dependency Treebank of Czech \citep{bohmova2003prague,mikulova2006annotation}, which has both types of annotation.
+Czech is a language with relatively high degree of word order freedom, which is generally thought to be strongly impacted by information structure \citep{firbas1966defining,firbas1974aspects}.
 
 About one third of the Prague Dependency Treebank has annotation for topic-focus articulation \citep{mikulova2006annotation}.
 Constituents are annotated for contrastiveness and for contextual boundedness, i.e., givenness.
@@ -68,7 +67,6 @@ Three labels are used:
 ``c'' for contrastive and contextually bound, ``f'' for contextually non-bound, ``t'' for non-contrastive contextually bound.
 These labels are diagnosed based on constituent order and intonation.
 Some constituents remain unmarked, the vast majority of these are function words such as adpositions, conjunctions, and auxiliaries; we introduce a label ``NA'' for these.
-
 To define baselines, we extend the word order grammar formalism by defining separate weights for each combination of the 37 syntactic relations and these four information structure labels.
 
 We obtained 38,727 training sentences and 5,228 dev sentences.
@@ -78,7 +76,7 @@ We created 20 baseline grammars with information structure, 20 baseline grammars
 \paragraph{Results}
 
 We show estimated tradeoffs and the distributions over AUC values in Figure~\ref{fig:median-czech-infostruc}.
-As this experiment was conducted only on the subset of the Prague Dependency Treebank that has information structure annotation, the numerical values are slightly different from those in Section X.
+As this experiment was conducted only on the subset of the Prague Dependency Treebank that has information structure annotation, the numerical values are slightly different from those in Section \ref{sec:main-experiment-results}.
 
 We compare the real orders both with the same baselines as above (red), and with the baselines taking information structure into account (green).
 Baselines show a larger gap in efficiency between real and baseline grammars when the baselines condition word order on information structure.
@@ -91,12 +89,16 @@ When modeling information structure, branching direction entropy decreases, whil
 This suggests that the weaker optimization in free word order languages observed in Experiment 2 might in part be because ordering grammars did not take information structure into account.
 	
 \paragraph{Discussion}
-We found that \mhahn{TODO}
-	
+Using data from Czech, we found that the difference between the memory-surprisal tradeoffs of real and baseline orders increases if we choose baseline orderings that encode information structure, as real orders do.
+We hypothesize that this in part explains why the strength of memory efficiency optimization in Section~\ref{sec:main-experiment-results} is negatively correlated with the degree of word order freedom:
+Languages wit flexible word order typically encode information structure in word order, which increases average surprisal.
 This does not mean that conditioning word order on information structure makes language less efficient in general.
 Rather, encoding information structure in word order may increase the information content transmitted to the listener, which may in turn balance an increase in surprisal processing effort \citep{hahn2020universals}.
-
 Due to the difficulty and cost of annotating information structure, we could only evaluate this hypothesis on data from one language.
+As more annotated data becomes availabe, this should be replicated on data from further languages.
+
+	
+
 
 	
 \begin{figure}
