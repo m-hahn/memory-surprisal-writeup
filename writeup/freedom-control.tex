@@ -1,8 +1,8 @@
 
 
-We now address the questions raised in Section~\ref{subsec:expt2-discussion}.
+In this section we address the questions raised in Section~\ref{subsec:expt2-discussion}.
 First, we compare memory-surprisal tradeoffs for grammars approximating real orders in the same formalism as the baseline grammars (Section~\ref{sec:compare-mle}).
-Second, we draw on a corpus of Czech with information structure annotation to determine whether real orders are more optimized when comparing to baselines taking information structure into account (Section~\ref{sec:czech}).
+Second, we draw on a corpus of Czech with information structure annotation to determine whether real orders are more optimized when comparing to baselines taking information structure into account (Section~\ref{sec:czech}). \jd{this is the opposite order from the one in which you raise the issues in the previous section -- use consistent order}
 
 
 \subsubsection{Comparing Grammars Fitted to Actual Orders}\label{sec:compare-mle}
@@ -14,7 +14,7 @@ Importantly, they differ from real languages in having entirely deterministic or
 We expect these grammars to have better memory-surprisal tradeoffs than comparable random baseline grammars across all languages.
 
 We create ordering grammars that are fit to the actual orderings of each language.
-These grammars faithfully represent the ordering rules if the actual language, to the extent that is possible in the formalism of ordering grammars.
+These grammars faithfully represent the ordering rules of the actual language, to the extent  possible in the formalism of ordering grammars.\jd{what does this mean? ie, what does it mean to be fit to the actual orderings, what is "the extent possible" (what are the limits?)}
 These grammars are extracted from the observed orders using the method of \cite{hahn2020universals}.
 We compared the memory-surprisal tradeoffs of these extracted grammars to the same baseline grammars as above.
 
@@ -23,15 +23,13 @@ We compared the memory-surprisal tradeoffs of these extracted grammars to the sa
 
 
 We show estimated memory-surprisal tradeoffs in Figure~\ref{fig:median-table}, and histograms of the area under the tradeoff curve (AUC) in Figure~\ref{fig:auc-mle}.
-The AUC for the fitted grammars is lower than more than 50\% of random baseline grammars in all 54 languages ($p < 0.01$, using two-sided Binomial test and Hochberg's step-up procedure).
-
-Thus, the ordering regularities of real languages provide more efficient tradeoffs than most possible order grammars also when comparing within the same word order grammar formalism.
+The AUC for the fitted grammars is lower than more than 50\% of random baseline grammars in all 54 languages ($p < 0.01$, using two-sided Binomial test and Hochberg's step-up procedure). Thus, we replicate the result that ordering regularities of real languages provide more efficient tradeoffs than most possible order grammars even when comparing within the same word order grammar formalism. \jd{"the same"?}
 
 \begin{figure}
 	\begin{center}
 \includegraphics[width=\textwidth]{results-table-mle.pdf}
 \end{center}
-	\caption{Median surprisal (y-axis) at given memory level (x-axis), for real orders (blue) and random baseline grammars (red). We provide 95\% confidence bands. These are computed over different runs of the estimation algorithm for the real orders, and over different runs \emph{and} different grammars for the baseline grammars. \mhahn{make axis numbers readable}}\label{fig:median-table}
+	\caption{Median surprisal (y-axis) at given memory level (x-axis), for real orders (blue) and random baseline grammars (red). We provide 95\% confidence bands. These are computed over different runs of the estimation algorithm for the real orders, and over different runs \emph{and} different grammars for the baseline grammars. \mhahn{make axis numbers readable}\jd{what are the green lines?}}\label{fig:median-table}
 \end{figure}
 
 
@@ -62,7 +60,7 @@ We draw on the Prague Dependency Treebank of Czech \citep{bohmova2003prague,miku
 Czech is a language with relatively high degree of word order freedom, which is generally thought to be strongly impacted by information structure \citep{firbas1966defining,firbas1974aspects}.
 
 About one third of the Prague Dependency Treebank has annotation for topic-focus articulation \citep{mikulova2006annotation}.
-Constituents are annotated for contrastiveness and for contextual boundedness, i.e., givenness.
+Constituents are annotated for contrastiveness and for contextual boundedness, i.e., givenness.\jd{add perhaps 2 sentences about what "contrastiveness", "contextual boundedness", and "givenness" means for this audience}
 Three labels are used:
 ``c'' for contrastive and contextually bound, ``f'' for contextually non-bound, ``t'' for non-contrastive contextually bound.
 These labels are diagnosed based on constituent order and intonation.

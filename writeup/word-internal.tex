@@ -132,10 +132,10 @@ As in many languages, affixes in Japanese and Sesotho show morphophonemic intera
 Modeling prediction on the level of morphemes, as opposed to phonemes, controls for these interactions.
 
 
-See SI for results when modeling prediction on the level of phonemes; these results come out qualitatively similar to the results we present here.
+See SI Section \REF for results when modeling prediction on the level of phonemes; these results come out qualitatively similar to the results we present here.
 
 
-We model verbs forms as a stochastic process by concatenating the verb forms from the corpus in random order.
+We model verb forms as a stochastic process by concatenating the verb forms from the corpus in random order.
 This means, we model statistical dependencies between the different morphemes in a form, and no dependencies between verb forms and their surrounding words.
 
 We calculate $I_t$ by estimating an $n$-gram model on the training set and then computing the average surprisal $S_t$ as cross-entropy on the held-out set using Kneser-Ney smoothing.
