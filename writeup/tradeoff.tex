@@ -1,7 +1,9 @@
 In this section, we will introduce the main concept and hypothesis of our paper. % from a psycholinguistic perspective. 
 We will provide a technical definition of the memory--surprisal trade-off curve, and then we will prove a theorem showing that more efficient memory--surprisal trade-offs are possible in languages exhibiting information locality: that is, languages where words that depend on each other are close to each other. This theorem establishes the formal link between working memory efficiency in online processing and locality in word order.
 
-The memory--surprisal trade-off applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension, and then we will show how the same trade-off applies in language production.
+The memory--surprisal trade-off applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension; we return to the production perspective in Section~\ref{sec:sentprod-models}.
+
+\mhahn{https://www.biorxiv.org/content/10.1101/2020.01.16.903476v1}
 
 \subsection{An information-theoretic model of online language comprehension}
 \label{sec:listener-tradeoff}
@@ -14,7 +16,7 @@ The memory--surprisal trade-off applies in both language production and comprehe
 %\end{figure}
 
 We begin developing our model by considering the process of language comprehension, where a listener is processing a stream of words uttered by an interlocutor.
-Experimental research has established three properties of online language comprehension: (1) listeners maintain some information about the words received so far in incremental memory \CITE, (2) listeners form probabilistic expectations about the upcoming words \citep{kuperberg2016we, ...}, and (3) words are easy to process to the extent that they are predictable based on a listener's memory of words received so far \citep{hale2001probabilistic,levy2008expectation,...}. \mhahn{TODO citations}
+Experimental research has established three properties of online language comprehension: (1) listeners maintain some information about the words received so far in incremental memory \CITE, (2) listeners form probabilistic expectations about the upcoming words \citep{altmann1999incremental,kuperberg2016we, ...}, and (3) words are easy to process to the extent that they are predictable based on a listener's memory of words received so far \citep{hale2001probabilistic,levy2008expectation,futrell2020lossy}. 
 See Section~\ref{sec:sentprod-models} for discussion of how our model is related to theories that do not explicitly make these assumptions.
 
 We formalize these three observations into postulates intended to provide a simplified picture of what is known about online language comprehension. Consider a listener comprehending a sequence of words $w_1, \dots, w_t, \dots, w_n$, at an arbitrary time $t$.
@@ -22,7 +24,7 @@ We formalize these three observations into postulates intended to provide a simp
     \item Comprehension Postulate 1 (Incremental memory). At time $t$, the listener has an incremental \key{memory state} $m_t$ that contains her stored information about previous words. The memory state is given by a \key{memory encoding function} $M$ such that $m_t = M(w_{t-1}, m_{t-1})$.
     \item Comprehension Postulate 2 (Incremental prediction). The listener has a subjective probability distribution at time $t$ over the next word $w_t$ as a function of the memory state $m_t$. This probability distribution is denoted $P(w_t|m_t)$.
     
-    We do not assume that listeners explicitly compute a full-fledged distribution $P(w_t|m_t)$; we view $P(w_t|m_t)$ as a formalization of the probabilistic expectations that listeners form during comprehension.
+    We do not assume that listeners explicitly compute a full-fledged distribution $P(w_t|m_t)$; we view $P(w_t|m_t)$ as a formalization of the probabilistic expectations that listeners form during comprehension.\mhahn{goes into text below}
     
     \mhahn{we need some pointers to the 'what is prediction and do we predict' debate, e.g. \citep{kuperberg2016we}}
     
@@ -32,10 +34,12 @@ We formalize these three observations into postulates intended to provide a simp
     \text{Difficulty} \propto -\log P(w_t | m_t).
 \end{equation}
 \end{enumerate}
-The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory} \citep{hale2001probabilistic,levy2008expectation}, an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation, antilocality effects, and effects of syntactic construction frequency. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \citep{smith-effect-2013,goodkind-predictive-2018}, and effects of surprisal have been observed for units as small as phonemes \citep{} \mhahn{what to cite here?}.
+The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory} \citep{hale2001probabilistic,levy2008expectation}, an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation, antilocality effects, and effects of syntactic construction frequency. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \citep{smith-effect-2013,goodkind-predictive-2018}, and effects of surprisal have been observed for units as small as phonemes \citep{} \mhahn{what to cite here?}. % https://www.biorxiv.org/content/10.1101/2020.04.04.025684v1
+
+\mhahn{https://www.biorxiv.org/content/10.1101/2020.04.04.025684v1}
 
 Our expression~(\ref{eq:lossy-surp}) differs from the usual formulation of surprisal theory in that we consider predictability based on a (potentially lossy or noisy) memory representation $m_t$, rather than predictability based on the true complete context $w_1, \dots, w_{t-1}$. The generalization to lossy memory representations is necessary to capture empirically observed effects of memory limitations on language processing, such as dependency locality and structural forgetting \citep{futrell2020lossy}. For other ways of capturing effects of both memory limitations and probabilistic expectations, see \citet{demberg-incremental-2013} and \citet{rasmussen2018left}, and see Section~\ref{sec:sentprod-models} for discussion of the relations between these approaches and our models.
-\mhahn{how about also mentioning these two in the discussion}
+\mhahn{how about also mentioning these two in the discussion} \rljf{Let's move these to the discussion and not mention them here}
 
 In this work, we are interested in using theories of processing difficulty to derive predictions about languages as a whole, not about individual words or sentences. Therefore, we need a measure of the processing difficulty associated with a language as a whole. For this, we consider the \emph{average} surprisal per word in the language. We call this quantity the \key{average surprisal} of a language given a memory encoding function $M$, denoted $S_M$.
 
@@ -55,7 +59,8 @@ for a given amount of information about previous words $H_M$ stored in the liste
 
 Now that we have conceptually introduced the memory--surprisal trade-off, we can state the main hypothesis of this work:
 
-\paragraph{Main hypothesis.}  Natural language is characterized by a distinctively steep memory--surprisal trade-off curve.\jdegen{why?}
+\paragraph{Efficient Tradeoff Curve Hypothesis.}  Order of elements in natural language is characterized by a distinctively steeper memory--surprisal trade-off curve, compared to other possible orderings.
+
 
 A steep trade-off curve corresponds to memory-efficiency, in the sense that it is possible to achieve a low level of processing difficulty (average surprisal $S_M$) while storing a relatively small amount of information about previous words (entropy of memory $H_M$).
 We hypothesize that this property is reflected both in the grammatical structure of languages and in usage preferences.
@@ -66,7 +71,7 @@ We hypothesize that this property is reflected both in the grammatical structure
 
 Here we provide the technical definition of the memory--surprisal trade-off curve and relate it to concepts from information theory, rate--distortion theory, and statistical complexity theory.
 
-Let $W$ be a stochastic process\footnote{We will use $W$ to represent languages, and we will construct $W$ to be stationary. Large natural language texts are known to be neither stationary nor ergodic \citep{debowski}. However, we are interested in explaining grammatical properties of languages, which mostly involve constraints among words within sentences, not within large texts as a whole. Therefore, we will represent a language using a stochastic process consisting of repeated independent samples from a distribution over sentences. This stochastic process is both stationary and ergodic.} generating a stream of symbols called words, indexed as $w_1, \dots, w_t$. These symbols can represent words, morphemes, or other units of decomposing sentences into a sequence of symbols. %\footnote{We call these symbols words, but note that our mathematical treatment applies for \emph{any} decomposition of a sentence into a sequence of symbols---the symbols could represent phonemes, syllables, morphemes, words, phrases, etc.} 
+Let $W$ be a stochastic process\footnote{We will use $W$ to represent languages, and we will construct $W$ to be stationary. Large natural language texts are likely neither stationary nor ergodic \citep{debowski}. However, we are interested in explaining grammatical properties of languages, which mostly involve constraints among words within sentences, not within large texts as a whole. Therefore, we will represent a language using a stochastic process consisting of repeated independent samples from a distribution over sentences. This stochastic process is both stationary and ergodic.} generating a stream of symbols called words, indexed as $w_1, \dots, w_t$. These symbols can represent words, morphemes, or other units for decomposing sentences into a sequence of symbols. %\footnote{We call these symbols words, but note that our mathematical treatment applies for \emph{any} decomposition of a sentence into a sequence of symbols---the symbols could represent phonemes, syllables, morphemes, words, phrases, etc.} 
 Let $M$ be a memory encoding function. The \key{average surprisal} of the process $W$ under the memory encoding function $M$ is
 %\mhahn{We have to decide whether we want the process to be stationary and infinite, or instead semi-infinite. The formalization of the locality theorem assumes it is stationary and infinite in both directions.}
 \mhahn{I'm trying to introduce surprisal as averages, not yet sure what the best approach is}
@@ -88,7 +93,7 @@ The lowest possible average surprisal for $W$ that can be attained by any memory
  The entropy rate of a stochastic process is the irreducible unpredictability of the process: the extent to which a stream of symbols remains unpredictable even for a predictor with unlimited resources. 
  We use the notation $S_\infty$ to suggest this idea of unlimited resources.
  The entropy rate of natural language text has been studied by \citet{shannon1951entropy}, \citet{bentz2017entropy}, and \citet{takahashi2018cross}. 
- The average surprisal $S_M$ can also be called a \key{cross entropy rate}.\mhahn{do we need this term here?}
+ %The average surprisal $S_M$ can also be called a \key{cross entropy rate}.\mhahn{do we need this term here?}
  Because the memory state $m_t$ is a function of the previous words $w_1, \dots, w_{t-1}$, we can prove by the Data Processing Inequality \citep[][pp. 34--35]{cover2006elements} that the entropy rate must be less than or equal to the average surprisal for any memory encoding function $M$:
 \begin{equation}
     \label{eq:entropy-rate-dpi}
@@ -136,8 +141,9 @@ The \key{memory--surprisal trade-off curve} for a process $W$ is the lowest achi
 where the minimization is over all memory encoding functions $M$ whose entropy $H_M$ is less than or equal to $R$.
 \end{definition}
 
-The memory state $m_t$ is generally a lossy representation of the true context of words $w_1, \dots, w_{t-1}$, meaning that $m_t$ does not contain all the possible information about $w_1, \dots, w_{t-1}$. The mathematical theory of lossy representations is \key{rate--distortion theory} \citep[for an overview and key results, see][pp. 301--347]{cover2006elements}; this theory has seen recent successful application in cognitive science and linguistics as a model of rational action under resource constraints \citep{sims2018efficient,gershman,zaslavsky2018efficient}\mhahn{which Gershman citation?}. Rate--distortion theory studies curves of the form of Eq.~\ref{eq:ms-formal}, which quantify trade-offs between utility (`distortion') and information (`rate'). Our memory--surprisal trade-off curve is a distortion--rate curve, with $H_M$ as the rate and $S_M$ as the distortion. It differs from the typical curve studied in rate--distortion theory in that we define rate using entropy, rather than mutual information \citep[see][for a discussion of some of the consequences of this formulation]{strouse-deterministic-2017}. 
-Our theoretical results still hold if we were to define rate using mutual information (see SI Section \REF).
+The memory state $m_t$ is generally a lossy representation of the true context of words $w_1, \dots, w_{t-1}$, meaning that $m_t$ does not contain all the possible information about $w_1, \dots, w_{t-1}$. The mathematical theory of lossy representations is \key{rate--distortion theory} \citep[for an overview and key results, see][pp. 301--347]{cover2006elements}; this theory has seen recent successful application in cognitive science and linguistics as a model of rational action under resource constraints \citep{sims2018efficient,zaslavsky2018efficient}\mhahn{which Gershman citation?}. % "Origin of perseveration in the trade-off between reward and complexity"
+Rate--distortion theory studies curves of the form of Eq.~\ref{eq:ms-formal}, which quantify trade-offs between negative utility (`distortion') and information (`rate'). %Our memory--surprisal trade-off curve is a distortion--rate curve, with $H_M$ as the rate and $S_M$ as the distortion. It differs from the typical curve studied in rate--distortion theory in that we define rate using entropy, rather than mutual information \citep[see][for a discussion of some of the consequences of this formulation]{strouse-deterministic-2017}. 
+%Our theoretical results still hold if we were to define rate using mutual information (see SI Section \REF).
 
 
 \subsection{Information locality}

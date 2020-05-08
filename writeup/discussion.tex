@@ -1,6 +1,6 @@
-We introduced a notion of memory efficiency in language processing, called the memory--surprisal trade-off, and we showed that the orders of words and morphemes across languages can be predicted by finding orders that optimize this trade-off. 
+We introduced a notion of memory efficiency in language processing, called the memory--surprisal trade-off, and we showed that the orders of words and morphemes across languages are predicted by a process of optimizing this trade-off. \jd{bring it back to the Main Hypothesis}
 
-Here, we discuss the implications and limitations of our results, and also how our results relate to more broadly to the fields of psycholinguistics, typology, and information theory.
+Here, we discuss the limitations  of our results and the implications they have more broadly for the fields of psycholinguistics, typology, and information theory.
 
 
 %\paragraph{The Roles of Speakers, Listeners, and Interaction}
@@ -8,18 +8,18 @@ Here, we discuss the implications and limitations of our results, and also how o
 %Debate about the roles of speaker and listener in shaping language.
 %Interaction: We could make the process include the entire conversational history (including what the listener said before).
 
-\subsection{Implications}
+\subsection{Implications}\jd{maybe change this header to sth more informative}
 Our results show that the order of words and morphemes provides efficient memory--surprisal tradeoffs.
 We also showed that this predicts the known preference for short dependencies.
-Furthermore, we showed that, in two languages (Japanese and Sesotho), the order of verb affixes can partly be predicted by optimizing for the efficiency of the memory--surprisal tradeoff.
+Furthermore, we showed that, in two languages (Japanese and Sesotho), the order of verb affixes can partly be predicted by optimizing for the efficiency of the memory--surprisal tradeoff. \jd{this first paragraph is more of a summary of the results rather than implications of those results -- i'd move it up before this sub-header}
 
 
 Our results leave open the causal mechanism leading to the observed optimization.
-Does optimization for processing efficiency reflect biases in language acquisition \citep[e.g.][]{fedzechkina2012language, culbertson2012learning, fedzechkina-human-2017}, or in language production \citep[e.g.][]{macdonald2013language}?
+Does optimization for processing efficiency reflect biases in language acquisition \citep[e.g.][]{fedzechkina2012language, culbertson2012learning, fedzechkina-human-2017}, or in language production \citep[e.g.][]{macdonald2013language}? \jd{isn't there a third option, namely language processing/comprehension? i thought i remembered the fedzechkina work being agnostic about these options as well, no?}
 It is possible that memory efficiency makes languages more learnable, as learning should require less memory resources for languages with more efficient memory-surprisal tradeoffs.
 To the extent that universal-grammar based explanations make reference to computational efficiency \citep{chomsky2005tree}, such learning biases may be compatible with theories deriving word order patterns from innate biases.
-To the extent that optimization reflects biases that come into play in language production and comprehension, they may reflect pressures in sentence planning \citep{macdonald2013language}, or an effort on the side of the listener to produce utterances that are easy to comprehend. \mhahn{cite audience design}
-Our results are compatible with either mechanism.
+To the extent that optimization reflects biases that come into play in language production and comprehension, they may reflect production-internal pressures to minimize effort on the speaker's part during sentence planning \citep{macdonald2013language}\jd{is this one of the availability-based production papers? in which case you might also cite ferreira and dell 2000. note that i also modified the previous sentence to reflect the option more clearly that this could just be an epiphenomenon of speaker least effort processes}, or an effort on the side of the speaker to produce utterances that are easy to comprehend by listeners. \mhahn{cite audience design}\jd{could cite eg brennan and clark or some of herb's earlier audience design papers}
+Our results are compatible with either mechanism. \jd{what about the third option, that language processing might be set up to not be able }
 
 
 %Furthermore, to what extent do languages change in ways that increase or preserve memory efficiency over time, and to what extent do speakers actively structure their production in ways that increase memory efficiency?
@@ -33,9 +33,9 @@ Our results are compatible with either mechanism.
 %This is not predicted by the Information Locality Theorem, because it inherently
 
 \mhahn{at some point we can say the following. where?}
-Our results are in line with work suggesting that memory strategies adapt to language structure and language statistics, and that experience can reduce memory difficulty.
+Our results are compatible with work suggesting that memory strategies adapt to language structure and language statistics, and that experience can reduce memory difficulty.
 This idea is supported by experimental work showing that forgetting effects in nested head-final dependencies are reduced or absent in  head-final structures  \citep{macdonald2002reassessing, christiansen1999toward, christiansen2009usage, vasishth2010short, engelmann2009processing, frank2019judgements, frank2016cross}, which can be explained in terms of surprisal given noisy memory representations \citep{futrell2020lossy}.
-In a corpus study, \citet{yadav2020word} found that languages tolerate longer dependencies when their direction aligns with the default word order in that language. This is predicted by our inforation-theoretic model if we hypothesize that dependencies aligning with the default order tend to be more predictable, reducing surprisal compared to dependencies going in the non-default direction. Increased memory load for longer dependencies may therefore be compensated for by reduced surprisal.
+In a corpus study, \citet{yadav2020word} found that languages tolerate longer dependencies when their direction aligns with the default word order in that language. This is predicted by our information-theoretic model if we hypothesize that dependencies aligning with the default order tend to be more predictable, reducing surprisal compared to dependencies going in the non-default direction. Increased memory load for longer dependencies may therefore be compensated for by reduced surprisal.\jd{not sure i understand this last bit}
 
 %; Hsiao  MacDonald, 2013; Levy, 2008, 2013;
 %(Husain et al., 2014; Konieczny, 2000; Levy & Keller, 2013; Miyamoto & Nakamura, 2003; Nakatani  Gibson, 2010; Vasishth  Lewis, 2006)
@@ -52,7 +52,7 @@ This need not indicate that, in the limit of very large memory entropies $H_M$, 
 It is logically possible that real and baseline languages actually have the same surprisal $S_\infty$, but that baseline orderings spread the same amount of predictive information over a larger distance, making it harder for models to extract given finite corpus data.
 %Another possibility is that that surprisal differs across all possible memory entropes $H_M$; in this case, $S_\infty$ would be different for real and baseline orderings.
 %Our results are also compatible in principle with a situation where the difference in surprisal \emph{reverses} at high values of memory entropy $H_M$.
-What our results do imply, though, is that real languages provide lower surprisals in the setting of relatively small memory budgets.
+What our results do imply, though, is that real languages provide lower surprisals in the setting of relatively small memory budgets. \jd{can we say sth more concrete about which estimates are more vs less trustworthy?}
 
 
 \paragraph{Nature of the Bound}
@@ -215,7 +215,7 @@ These studies model visual working memory as solving the problem of storing a ma
 
 
 \subsection{Efficiency for the listener, or efficiency for the producer?}
-
+\mhahn{condense to one paragraph. can place this into the Implications.}
 Our theory is stated in terms of the efficiency of language processing for a comprehender of language. However, we can show that an analogous memory--surprisal trade-off exists in language production. Below, we discuss the memory--surprisal trade-off from a production perspective, and consider how it might be possible to empirically distinguish the comprehender's trade-off from the producer's trade-off.
 
 In the case of production, the memory--surprisal trade-off arises from the minimization of error in production of linguistic sequences. That is, given a \key{competence language} (a target distribution on words given contexts), a speaker tries to produce a \key{performance language} which is as close as possible to the competence language. The performance language operates under memory constraints, so the performance language will diverge from the competence language due to production errors. When a speaker has more incremental memory about what she has already produced, then she is able to produce linguistic sequences with less error, thus reducing the divergence between the performance language and the competence language. The reduction of this competence--performance divergence is formally equivalent to the minimization of average surprisal from Section~\ref{sec:listener-tradeoff}.
