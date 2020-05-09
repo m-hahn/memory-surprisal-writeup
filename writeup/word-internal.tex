@@ -146,7 +146,7 @@ To mitigate this problem, we estimate
 \end{equation}
 where $S_s$ is the cross-entropy of the $s$'th order Markov model on held-out data.
 This procedure ensures that $\hat{S}_t$ can only decrease as the context size $t$ increases.
-Similar results are obtained when instead using the simple `naive' estimator for $I_t$ on the training set; see the SI for details.
+Similar results are obtained when instead using the simple `naive' estimator for $I_t$ on the training set; this naive estimator estimates $I_t$ directly from $n$-gram counts in the training set; see the SI for details.
 
 \paragraph{Parameterizing Alternative Orderings}
 
@@ -256,7 +256,7 @@ The most frequent divergence is that past and negation suffixes are consistently
  & nonfinite & nonfinite \\ 
  \hline
     \end{tabular}
-    \caption{Comparing order of Japanese affixes in the observed orders (left) and according to an approximately optimized grammar (right).\jd{include the sesotho results as well (even if it doesn't look as clean). also, why do the numbers stop at 7?}}
+    \caption{Comparing order of Japanese affixes in the observed orders (left) and according to an approximately optimized grammar (right).\jd{why do the numbers stop at 7?}}
     \label{tab:grammar-table-jap}
 \end{table}
 
@@ -288,27 +288,7 @@ For Sesotho suffixes, order is recovered at above-chance accuracies, though with
 The most common error (Table~\ref{tab:sesotho-prefix-err-analysis}) is that relative and interrogative suffixes are consistently placed closer to the verb stem than the mood suffix.
 We conjecture that this happens because all Sesotho verbs uniformly have a mood suffix, suggesting that there might be lower mutual information between the stem and the mood suffix than between the stem and these two suffixes.
 Furthermore, valence-changing suffixes are ordered farther away from the stem than various other suffixes, in contrast with the actual orders.
-Interestingly, we found that prediction was more accurate in this respect when estimating $I_t$ naively \jd{when you first introduce the naive estimator above, say a little more about what that means} on the training set (see SI Figure \REF), suggesting that the available corpus data does not sufficiently determine the optimal ordering.
-
-\begin{table}
-    \centering
-    \begin{tabular}{ll|ll}
-    \multicolumn{2}{c|}{Error} & Frequency \\ \hline\hline
-Negation & Tense/aspect & 12 \\
-\\
-    \multicolumn{2}{c|}{Error} & Frequency \\ \hline\hline
-Mood & Interrogative & 2204 \\
-Mood & Relative & 858 \\
-Applicative & Tense/aspect & 347 \\
-%Tense/aspect & Passive & 302 \\
-Causative & Tense/aspect & 174 \\
-Neuter & Tense/aspect & 155 \\
-\end{tabular}
-    \caption{Errors in Sesotho prefixes (top) and suffixes (bottom). We only count divergences as errors here if they are predicted by the order (TODO figure out where exceptions come from). Also, we only show errors where both morphemes are among the high-frequency ones studied here.}
-    \label{tab:sesotho-prefix-err-analysis}
-\end{table}
-
-
+Interestingly, we found that prediction was more accurate in this respect when estimating $I_t$ naively  on the training set (see SI Figure \REF), suggesting that the available corpus data does not sufficiently determine the optimal ordering.
 
 
 \begin{table}
@@ -332,9 +312,31 @@ Neuter & Tense/aspect & 155 \\
 	    6&Interrogative & Reversive \\
 	    &Relative & Mood \\ \hline
     \end{tabular}
-	\caption{Comparing order of Sesotho affixes in the observed orders (left) and according to an approximatively optimized grammar (right). Note that order was separately optimized for prefixes and suffixes.\jd{oh i see, you provide this table after all, just in the reverse order from what it is in the japanese section. make sure the orders are consistent, or just collapse the japanese and sesotho table into one}}
+	\caption{Comparing order of Sesotho affixes in the observed orders (left) and according to an approximatively optimized grammar (right). Note that order was separately optimized for prefixes and suffixes.}
     \label{tab:grammar-table-sesotho}
 \end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{ll|ll}
+    \multicolumn{2}{c|}{Error} & Frequency \\ \hline\hline
+Negation & Tense/aspect & 12 \\
+\\
+    \multicolumn{2}{c|}{Error} & Frequency \\ \hline\hline
+Mood & Interrogative & 2204 \\
+Mood & Relative & 858 \\
+Applicative & Tense/aspect & 347 \\
+%Tense/aspect & Passive & 302 \\
+Causative & Tense/aspect & 174 \\
+Neuter & Tense/aspect & 155 \\
+\end{tabular}
+    \caption{Errors in Sesotho prefixes (top) and suffixes (bottom). We only count divergences as errors here if they are predicted by the order (TODO figure out where exceptions come from). Also, we only show errors where both morphemes are among the high-frequency ones studied here.}
+    \label{tab:sesotho-prefix-err-analysis}
+\end{table}
+
+
+
+
 
 
 %\begin{figure}

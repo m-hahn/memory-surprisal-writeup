@@ -31,7 +31,7 @@ Neural network models are the basis of the state-of-the art in statistical model
 See Supplementary Materials Section \REF for details on how these models were fit to data, and see Supplementary Materials Sections \REF and \REF for control studies using other methods of estimating $I_t$ (based on $n$-gram models and PCFG chart parsers). These control studies yield the same qualitative results as the neural network-based studies presented here.
 
 In order to evaluate the average surprisal values $S_t$, we computed the empirical word-by-word surprisal values under the $t$th-order Markov model for held-out data, different from the data that was used to train the model. By evaluating on held-out data, we avoid underestimating the value of $S_t$ due to overfitting.
-%We chose held-out data based on existing splits of corpora (see Section~\ref{sec:exp2-data}).
+We chose held-out data based on existing splits of corpora (see Section~\ref{sec:exp2-data}).
 \jd{say a tiny bit more about the model fitting procedure, eg how much data was held out}
 
 
@@ -112,19 +112,22 @@ Dependents with negative weights are placed to the left of the head; dependents 
 For instance, the subject is consistently ordered before or after the verb, depending on whether the parameter $a_{nsubj}$ for the verb-subject dependency is positive or negative.
 
 We construct baseline grammars by randomly sampling the parameters $a_\tau$.
-Such baseline grammars define languages that have consistent word order but, crucial for our purposes, do not exhibit systematic preferences for specific word order patterns such as short dependencies. \jd{confusing rhetorical relation between previous and following sentence} 
+Such baseline grammars define languages that have consistent word order but, crucial for our purposes, do not exhibit systematic preferences for specific word order patterns such as short dependencies. %\jd{confusing rhetorical relation between previous and following sentence} 
 %In actual languages, the ordering of words is largely determined by syntactic relations (CITE).
-
-However, certain kinds of rules cannot be modeled by our word order grammars, such as rules sensitive to the category of the dependent (e.g., differences between nominal and pronominal objects).
-Word order freedom also is not modeled.
-In this sense, ordering grammars represent approximations to the kinds of ordering rules found in natural language \citep{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015}.
-See Sections~\ref{subsec:expt2-discussion} and \ref{subsec:freedom} for further discussion.\jd{this paragraph is a little confusing. is this supposed to convince the reader that ordering grammars are a good formalism within which to construct baseline grammars? if so, pre-empt the question about the effect this will have for free word order languages by explicitly mentioning the issue and deferring its discussion to later, rather than simply saying that word order freedom is not modeled (about which the uninitiated reader will wonder whether that's a good or a bad thing)}
 
 
 We first constructed at least 10 baseline grammars for each of the 54 real languages.
 We then continued to construct baseline grammars until a precision-based stopping criterion was reached (CITE). This criterion was designed to ensure that enough grammars were sampled to reliably compare the tradeoff curves of real and baseline grammars, without biasing results towards or against our hypothesis (see SI Section \REF).
 The stopping criterion compared what fraction of baseline grammars had strictly more (or strictly less) efficient tradeoff curves than the real ordering, and required a bootstrapped 95\% confidence interval for that ratio to have width $\leq 0.15$.
 The resulting number of baseline grammars ranged from 10 (Italian and Romanian) to 347 (Estonian).\footnote{Due to a scripting error, 846 grammars were generated for Erzya even though this was not required by the stopping criterion.}
+
+Due to the way ordering grammars are specified, certain kinds of rules cannot be modeled by our word order grammars, such as rules sensitive to the category of the dependent (e.g., differences between nominal and pronominal objects).
+Word order freedom also is not modeled.
+In this sense, ordering grammars only represent an approximation to the kinds of ordering rules found in natural language \citep{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015}.
+See Sections~\ref{subsec:expt2-discussion} and \ref{subsec:freedom} for further discussion and control studies addressing these limitations.
+%\jd{this paragraph is a little confusing. is this supposed to convince the reader that ordering grammars are a good formalism within which to construct baseline grammars? if so, pre-empt the question about the effect this will have for free word order languages by explicitly mentioning the issue and deferring its discussion to later, rather than simply saying that word order freedom is not modeled (about which the uninitiated reader will wonder whether that's a good or a bad thing)}
+
+
 
 \subsection{Results}\label{sec:main-experiment-results}
 
@@ -221,7 +224,7 @@ In Section~\ref{subsec:freedom}, we will test the latter possibility by examinin
 
 
 
-A possible concern with this experiment is that the optimization observed in Experiment 2 might be an artifact of the grammar formalism\jd{if we send this to cognition, i think we'll get some pushback on calling these studies "experiments", since the cognitive psychologists have clear ideas on what counts as an experiment, and running models doesn't count :) perhaps call them "studies" instead?}:
+A possible concern with this experiment is that the optimization observed in Study 2 might be an artifact of the grammar formalism:
 The baseline grammars, by virtue of being ordering grammars, cannot exactly represent all word order rules found in real languages, and this restriction in representational capacity might potentially impact the optimality of resulting memory-surprisal tradeoffs.
 We will address this in Section~\ref{subsec:freedom} by repeating the experiment comparing the current baseline grammars to grammars that represent the word order of the real languages as faithfully as  possible within the grammar formalism.
 
