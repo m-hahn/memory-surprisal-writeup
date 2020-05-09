@@ -15,7 +15,8 @@ Importantly, they differ from real languages in having entirely deterministic or
 We expect these grammars to have better memory-surprisal tradeoffs than comparable random baseline grammars across all languages.
 
 We create ordering grammars that are fit to the actual orderings of each language.
-These grammars faithfully represent the ordering rules of the actual language, to the extent  possible in the formalism of ordering grammars.\jd{what does this mean? ie, what does it mean to be fit to the actual orderings, what is "the extent possible" (what are the limits?)}
+These grammars faithfully represent the ordering rules of the actual language, to the extent  possible in the formalism of ordering grammars:
+They match the order of the actual language in those cases where order of a relation is fully consistent; for relations where order is variable, they approximate this by modeling the most frequent order.
 These grammars are extracted from the observed orders using the method of \cite{hahn2020universals}.
 We compared the memory-surprisal tradeoffs of these extracted grammars to the same baseline grammars as above.
 
