@@ -267,10 +267,12 @@ It may be possible to use this asymmetry to distinguish whether word and morphem
 \subsection{Information-theoretic studies of language}
 
 Our work opens up a connection between psycholinguistics, linguistic typology, and statistical studies of language. Here, we survey the connections between our work and previous statistical studies.
-%\paragraph{Statistical Complexity and Excess Entropy}
-Our formalization of listener memory is related to studies of dynamic systems in the physics literature.
+
+
+
+Our formalization of memory is related to studies of dynamic systems in the physics literature.
 Our memory--surprisal curve is closely related to the \emph{predictive information bottleneck} introduced by \citet{still-information-2014} and studied by \citet{marzen-predictive-2016}; in particular, it is a version of the \emph{recursive information bottleneck} \citep[][\S 4]{still-information-2014}. 
-In the limit of optimal prediction and minimal surprisal, our formalization of listener memory is equivalent to the notion of \emph{Statistical Complexity} \citep{crutchfield-inferring-1989}.
+In the limit of optimal prediction and minimal surprisal, our formalization of memory cost is equivalent to the notion of \emph{Statistical Complexity} \citep{crutchfield-inferring-1989,shalizi2001computational}; this is the minimum value of $H_M$ that achieves $S_M = S_\infty$.
 In the limit $T \rightarrow \infty$, the quantity in Eq.~\ref{eq:memory-bound} is equal to the \emph{excess entropy} \citep{crutchfield-inferring-1989}.
 The link between memory and information locality provided by our Theorem~\ref{prop:suboptimal} appears to be a novel theoretical contribution.
 Related to Theorem~\ref{prop:suboptimal}, \citet{sharan-prediction-2016} show a link between excess entropy and approximability by $n$-th order Markov models, noting that processes with low excess entropy can be approximated well with Markov models of low order.
@@ -281,7 +283,6 @@ Our work contrasts with this work in that we are interested in dependencies with
 This tradeoff is related to but different from the memory-surprisal tradeoff: it models a setting where past observations are compressed once as a whole, while a memory capacity bottleneck holds at every point in time in our model.
 Nonetheless, their method might also be applicable to estimating of memory-surprisal tradeoff curves.
 
-The entropy rate $S_\infty$ of natural language text has been studied by \citet{shannon1951entropy}, \citet{bentz2017entropy}, and \citet{takahashi2018cross}. 
 
 While we define information locality in terms of \emph{conditional} mutual information, prior work has studied  how \emph{unconditional} mutual information decays with distance in natural language texts, at the level of orthographic characters \citep{ebeling-entropy-1994,lin-critical-2017} and words \citep{futrell2019syntactic}.
 As described in Section \REF, \citet{futrell2020lossy} used unconditional mutual information to derive an information locality result.
@@ -290,7 +291,11 @@ While the decay of conditional mutual information provably provides a lower boun
 In SI Section \REF, we provide an example of a stochastic process where unconditional mutual information does not decay with distance, but memory requirements remain low.
 
 
-Surprisal of real and counterfactual word orders have been estimated by \citet{gildea-human-2015} and \cite{hahn2020universals}.
+The entropy rate $S_\infty$ of natural language text has been studied by different authors, including \citet{shannon1951entropy,bentz2017entropy,takahashi2018cross}. 
+
+
+
+The average surprisal of real and counterfactual word orders have been studied by \citet{gildea-human-2015} and \cite{hahn2020universals}.
 \citet{gildea-human-2015} found that, in five languages, real orders provide lower trigram surprisal than baseline languages.
 This work can be viewed as instantiating our model in the case where the encoding function $M$ records exactly the past two words, and showing that these five languages show optimization for surprisal under this encoding function.
 \citet{hahn2020universals} compared surprisal and parseability for real and baseline orders as estimated using neural network models, arguing that word orders optimize a tradeoff between these quantities.

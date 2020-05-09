@@ -62,7 +62,7 @@ Crucially, \citet{fedzechkina-human-2017} set up the experiment such that in all
 
 \subsection{Calculating the memory--surprisal trade-off for the artificial languages}
 
-The Main Hypothesis\jd{i would give this a catchier name, so the name itself reminds the reader what the hypothesis is -- eg, the ``Steep tradeoff curve hypothesis'' or sth like that} predicts that the favored language $A$ has a steeper memory--surprisal trade-off curve than the disfavored language $B$. Because of the controlled nature of this artificial language, we are able to test this hypothesis by exactly computing the bound on memory as given in Theorem~\ref{prop:suboptimal}. In fact, for this toy process, we can prove that the bound provided by the theorem is achievable, meaning that our computations reflect the true memory--surprisal trade-off curve, and not only a lower bound on it.
+The Efficienct Tradeoff Hypothesis predicts that the favored language $A$ has a steeper memory--surprisal trade-off curve than the disfavored language $B$. Because of the controlled nature of this artificial language, we are able to test this hypothesis by exactly computing the bound on memory as given in Theorem~\ref{prop:suboptimal}. In fact, for this toy process, we can prove that the bound provided by the theorem is achievable, meaning that our computations reflect the true memory--surprisal trade-off curve, and not only a lower bound on it.
 
 We only consider the head-final version of \citet{fedzechkina-human-2017}'s artificial language. This is because our bound on the memory--surprisal trade-off curve is invariant under reversal of a language. That is, if we take a language and reverse the order of all the words in all its sentences, we would measure the same lower bound on the memory--surprisal trade-off curve (for a proof, see SI Section \REF). Therefore, strictly head-final and strictly head-initial languages are equivalent under our bound.\footnote{Note that this invariance to reversal applies only to our \emph{lower bound} on the memory-surprisal trade-off curve; the true curve is not generally invariant to word order reversal \citep{crutchfield-times-2009}.} 
 
@@ -173,7 +173,10 @@ To reach optimal surprisal, the empirically-favored language $A$ requires strict
 
 \subsection{Discussion}
 
-In a reinterpretation of previous experimental findings we showed that the languages which are favored in artificial language learning experiments are those which optimize the memory--surprisal trade-off. \jd{i'm not sure that saying it quite this generally is justified, given that this is a reanalysis of just one dataset. maybe tone down slightly and/or say that it would be useful to do this kind of analysis on additional, similar datasets -- the prediction, in any case, is clear.}
+In a reinterpretation of previous experimental findings, we showed that the languages which are favored in an artificial language learning experiment are those which optimize the memory--surprisal trade-off.
+%\jd{i'm not sure that saying it quite this generally is justified, given that this is a reanalysis of just one dataset. maybe tone down slightly and/or say that it would be useful to do this kind of analysis on additional, similar datasets -- the prediction, in any case, is clear.}
 This is evidence that learners and/or speakers have a bias toward word orders that optimize the trade-off. 
 Furthermore, this result solidifies the link between the memory--surprisal trade-off and more traditional notions from linguistics, such as dependency locality. 
-We found that the word orders which are optimal from the perspective of dependency locality are also those orders which are optimal from the perspective of the memory--surprisal trade-off \jd{again, just within one small toy dataset. i'd acknowledge that here, then you have a nice segue to the next section}.
+We found that the word orders which are optimal from the perspective of dependency locality are also those orders which are optimal from the perspective of the memory--surprisal trade-off, in the setting of a small controlled artificial language.
+In Study 2, we scale this approach up to larger corpora of real text.
+%\jd{again, just within one small toy dataset. i'd acknowledge that here, then you have a nice segue to the next section}.
