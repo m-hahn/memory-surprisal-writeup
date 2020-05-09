@@ -281,6 +281,8 @@ Our work contrasts with this work in that we are interested in dependencies with
 This tradeoff is related to but different from the memory-surprisal tradeoff: it models a setting where past observations are compressed once as a whole, while a memory capacity bottleneck holds at every point in time in our model.
 Nonetheless, their method might also be applicable to estimating of memory-surprisal tradeoff curves.
 
+The entropy rate $S_\infty$ of natural language text has been studied by \citet{shannon1951entropy}, \citet{bentz2017entropy}, and \citet{takahashi2018cross}. 
+
 While we define information locality in terms of \emph{conditional} mutual information, prior work has studied  how \emph{unconditional} mutual information decays with distance in natural language texts, at the level of orthographic characters \citep{ebeling-entropy-1994,lin-critical-2017} and words \citep{futrell2019syntactic}.
 As described in Section \REF, \citet{futrell2020lossy} used unconditional mutual information to derive an information locality result.
 Here we argue that conditional mutual information is more relevant for measuring memory usage than unconditional mutual information. 
