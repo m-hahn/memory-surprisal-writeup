@@ -1,4 +1,8 @@
-We introduced a notion of memory efficiency in language processing, called the memory--surprisal trade-off, and we showed that the orders of words and morphemes across languages are predicted by a process of optimizing this trade-off. \jd{bring it back to the Main Hypothesis}
+We introduced a notion of memory efficiency in language processing, called the memory--surprisal trade-off.
+We stated the Efficient Tradeoff Hypothesis: Order of elements in natural language is characterized by efficient memory--surprisal tradeoffs, compared to other possible orders.
+In Study 1, we showed that the Efficient Tradeoff Hypothesis predicts the known preference for short dependencies.
+In Study 2, we used corpus data from 54 languages to show that word order provides more efficient tradeoffs than baseline order grammars.
+In Study 3, we showed that, in two languages (Japanese and Sesotho), the order of verb affixes not only provides approximately optimal tradeoffs, but can also partly be predicted by optimizing for the efficiency of the memory--surprisal tradeoff.
 
 Here, we discuss the limitations  of our results and the implications they have more broadly for the fields of psycholinguistics, typology, and information theory.
 
@@ -9,9 +13,6 @@ Here, we discuss the limitations  of our results and the implications they have 
 %Interaction: We could make the process include the entire conversational history (including what the listener said before).
 
 \subsection{Implications}\jd{maybe change this header to sth more informative}
-Our results show that the order of words and morphemes provides efficient memory--surprisal tradeoffs.
-We also showed that this predicts the known preference for short dependencies.
-Furthermore, we showed that, in two languages (Japanese and Sesotho), the order of verb affixes can partly be predicted by optimizing for the efficiency of the memory--surprisal tradeoff. \jd{this first paragraph is more of a summary of the results rather than implications of those results -- i'd move it up before this sub-header}
 
 
 Our results leave open the causal mechanism leading to the observed optimization.
@@ -22,7 +23,7 @@ To the extent that optimization reflects biases that come into play in language 
 Our results are compatible with either mechanism. \jd{what about the third option, that language processing might be set up to not be able }
 
 
-While our theory is stated in terms of the efficiency of language processing for a comprehender of language, we can show that an analogous memory--surprisal trade-off exists in language production, and that speakers with bounded memory capacity can produce a language more accurately when it has stronger information locality (see SI Section \REF for a mathematical statement and proof).
+While our theory is stated in terms of the efficiency of language processing for a comprehender of language, we can show that an analogous memory--surprisal trade-off exists in language production, and that speakers with bounded memory capacity can produce a language more accurately when it has stronger information locality (see SI Section 1.4 for a mathematical statement and proof).
 
 
 
@@ -66,7 +67,7 @@ However, this bound may be loose in two ways:
 First, architectural properties of human memory might introduce additional constraints on possible representations.
 Depending on the role played by factors other than infomation-theoretic capacity, the tradeoffs achieved by these human memory representations need not be close to achieving the theoretical bounds.
 Furthermore, depending on properties of the stochastic process, the bound might be loose across all models, that is, there are processes where the bound is not attainable by any memory architecture.
-We provide an artificial example with analytical calculations in SI Section \REF; however, that example does not seem linguistically natural.
+We provide an artificial example with analytical calculations in SI Section 2.1; however, that example does not seem linguistically natural.
 
 \paragraph{Extralinguistic Context}
 Comprehension Postulate 1 states that the memory state after receiving a word is determined by that word and the memory state before receiving this word.
@@ -149,7 +150,7 @@ If statistical dependencies, as measured using mutual information, can be identi
 
 \paragraph{Cue-Based Retrieval Models}
 
-In some psycholinguistic theories, memory-related difficulty arises not because of a bound on memory capacity, but rather because of difficulties involved in retrieving information from memory \citep{mcelree2000sentence,lewis-activation-based-2005,nicenboim2018models,vasishth2019computational}. We are able to prove an analogous theorem that applies to such theories: see Supplementary Material Section \REF for an extension of our analysis to the case involving a short-term memory (STM) with unbounded capacity, a working memory (WM) with limited capacity, and cost associated with communication between WM and STM. Essentially, the constraint on the the memory state in our theorem above can be re-interpreted as a constraint on the capacity of a communication channel linking STM to WM. In particular, this result constrains average surprisal for memory models based on cue-based retrieval such as the ACT-R model of \citet{lewis-activation-based-2005}.
+In some psycholinguistic theories, memory-related difficulty arises not because of a bound on memory capacity, but rather because of difficulties involved in retrieving information from memory \citep{mcelree2000sentence,lewis-activation-based-2005,nicenboim2018models,vasishth2019computational}. We are able to prove an analogous theorem that applies to such theories: see SI Section 1.3 for an extension of our analysis to the case involving a short-term memory (STM) with unbounded capacity, a working memory (WM) with limited capacity, and cost associated with communication between WM and STM. Essentially, the constraint on the the memory state in our theorem above can be re-interpreted as a constraint on the capacity of a communication channel linking STM to WM. In particular, this result constrains average surprisal for memory models based on cue-based retrieval such as the ACT-R model of \citet{lewis-activation-based-2005}.
 
 The ACT-R model of \cite{lewis-activation-based-2005} does not have an explicit surprisal cost.
 Instead, surprisal effects are interpreted as arising because, in less constraining contexts, the parser is more likely to make decisions that then turn out to be incorrect, leading to additional correcting steps.
@@ -164,7 +165,7 @@ However, this is not the case:
 our theorem does not imply that a listener forgets words beyond some amount of time $T$ in the past. 
 An optimal listener may well decide to remember information about words more distant than $T$, but in order to stay within the bounds of memory, she can only do so at the cost of forgetting some information about words closer than $T$.
 The Information Locality Lower Bound still holds, in the sense that the long-term dependency will cause processing difficulty, even if the long-term dependency is not itself forgotten.
-See SI Appendix Section \REF for a mathematical example illustrating this phenomenon.
+See SI Appendix Section 2.1--2.2 for a mathematical example illustrating this phenomenon.
 
 %y and non-redundantly depends on the character $T$ steps in the past, with $T$ large, this will create a memory cost proportional to $T$.
 
@@ -208,16 +209,16 @@ Our information locality bound theorem differs from this previous result in thre
 \begin{enumerate}
     \item \citet{futrell2020lossy} required an assumption that incremental memory is subject to decay over time. In contrast, we do not require any assumptions about incremental memory except that it has bounded capacity (or that retrieval operations have bounded capacity; see above).
     \item Our result is a precise bound, whereas the previous result was an approximation based on neglecting higher-order interactions among words.
-    \item Our result is about the fall-off of the mutual information between words, \emph{conditional on the intervening words}. The previous result was about the fall-off of \emph{pointwise} mutual information between specific words, without conditioning on the intervening words. We argue that conditional mutual information  is more relevant for measuring memory usage than unconditional mutual information, see Section \REF.
+    \item Our result is about the fall-off of the mutual information between words, \emph{conditional on the intervening words}. The previous result was about the fall-off of \emph{pointwise} mutual information between specific words, without conditioning on the intervening words. We argue that conditional mutual information  is more relevant for measuring memory usage than unconditional mutual information, see SI Section 2.3.
 \end{enumerate}
 
-As noted above, this previous work defined information locality in terms of the \emph{unconditional} (pointwise) mutual information between linguistic elements (see also Section \REF for further work studying unconditional mutual information.). 
+As noted above, this previous work defined information locality in terms of the \emph{unconditional} (pointwise) mutual information between linguistic elements (see also Section~\ref{sec:disc:infotheory} for further work studying unconditional mutual information.). 
 Here we argue that conditional mutual information is more relevant for measuring memory usage than unconditional mutual information. 
 While the decay of conditional mutual information provably provides a lower bound on memory entropy, the decay of unconditional mutual information does not.
-In the Supplementary Materials Section TODO, we provide an example of a stochastic process where unconditional mutual information does not decay with distance, but memory requirements remain low.
+In SI Section 2.3, we provide an example of a stochastic process where unconditional mutual information does not decay with distance, but memory requirements remain low.
 
 
-\mhahn{also mention connectionist models of memory in incremental processing? such as \cite{macdonald2002reassessing}}
+\mhahn{also mention connectionist models of memory in incremental processing, which were in part framed as alternatives to memory capacity accounts (but actually fit well with our framework)? such as \cite{macdonald2002reassessing,christiansen2009usage}. also focus on experience-based mechanism \cite{wells2009experience}. can also mention \cite{rasmussen2018left} in this context}
 
 %\mhahn{TODO: \cite{qian-cue-2012}}
 
@@ -230,9 +231,10 @@ In the Supplementary Materials Section TODO, we provide an example of a stochast
 As described in Section~\ref{sec:formal-tradeoff}, the Memory-Surprisal Tradeoff instantiates the framework of rate-distortion theory.
 This approach has previously been applied to visual working memory \citep{brady2009compression, sims2012ideal, sims2016rate}.
 These studies model visual working memory as solving the problem of storing a maximal amount of information given fixed capacity, and provide experimental evidence that visual working memory can store more items when they show stronger statistical patterns in cooccurrence \citep{brady2009compression}, and that memory performance is better when encoded items show lower variance \citep{sims2012ideal}, both in accordance with the predictions of optimal compression.
+Relatedly, \citet{gershman2020origin} models perseveration as arising from optimizing action policies for the tradeoff between maximizing rewards and minimizing complexity.
+\mhahn{other examples applying rate-distortion theory: \citet{schach2018quantifying,zaslavsky2018efficient,sims2018efficient}}
 
-
-\subsection{Information-theoretic studies of language}
+\subsection{Information-theoretic studies of language}\label{sec:disc:infotheory}
 
 Our work opens up a connection between psycholinguistics, linguistic typology, and statistical studies of language. Here, we survey the connections between our work and previous statistical studies.
 
@@ -251,14 +253,7 @@ Our work contrasts with this work in that we are interested in dependencies with
 This tradeoff is related to but different from the memory-surprisal tradeoff: it models a setting where past observations are compressed once as a whole, while a memory capacity bottleneck holds at every point in time in our model.
 Nonetheless, their method might also be applicable to estimating of memory-surprisal tradeoff curves.
 
-
 While we define information locality in terms of \emph{conditional} mutual information, prior work has studied  how \emph{unconditional} mutual information decays with distance in natural language texts, at the level of orthographic characters \citep{ebeling-entropy-1994,lin-critical-2017} and words \citep{futrell2019syntactic}.
-As described in Section \REF, \citet{futrell2020lossy} used unconditional mutual information to derive an information locality result.
-Here we argue that conditional mutual information is more relevant for measuring memory usage than unconditional mutual information. 
-While the decay of conditional mutual information provably provides a lower bound on memory entropy, the decay of unconditional mutual information does not.
-In SI Section \REF, we provide an example of a stochastic process where unconditional mutual information does not decay with distance, but memory requirements remain low.
-
-
 The entropy rate $S_\infty$ of natural language text has been studied by different authors, including \citet{shannon1951entropy,bentz2017entropy,takahashi2018cross}. 
 
 
