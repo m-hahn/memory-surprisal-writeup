@@ -12,18 +12,47 @@ Here, we discuss the limitations  of our results and the implications they have 
 %Debate about the roles of speaker and listener in shaping language.
 %Interaction: We could make the process include the entire conversational history (including what the listener said before).
 
-\subsection{Implications}\jd{maybe change this header to sth more informative}
+\subsection{Role of Comprehension, Production, and Change}
 
+
+% Bates EA, MacWhinney B (1982) Functionalist approaches to grammar.LanguageAcquisition: The State of the Art, eds Wanner E, Gleitman L (Cambridge Univ Press,Cambridge, UK), pp 173–218.
+% Florian Jaeger T (2010) Redundancy and reduction: Speakers manage syntactic in-formation density.Cognit Psychol61(1):23–62.
+
+\cite{fedzechkina2020production}
+
+\mhahn{TODO reorganize this}
 
 Our results leave open the causal mechanism leading to the observed optimization.
-Does optimization for processing efficiency reflect biases in language acquisition \citep[e.g.][]{fedzechkina2012language, culbertson2012learning, fedzechkina-human-2017}, or in language production \citep[e.g.][]{macdonald2013language}? \jd{isn't there a third option, namely language processing/comprehension? i thought i remembered the fedzechkina work being agnostic about these options as well, no?}
-It is possible that memory efficiency makes languages more learnable, as learning should require less memory resources for languages with more efficient memory-surprisal tradeoffs.
-To the extent that universal-grammar based explanations make reference to computational efficiency \citep{chomsky2005tree}, such learning biases may be compatible with theories deriving word order patterns from innate biases.
-To the extent that optimization reflects biases that come into play in language production and comprehension, they may reflect production-internal pressures to minimize effort on the speaker's part during sentence planning \citep{macdonald2013language}\jd{is this one of the availability-based production papers? in which case you might also cite ferreira and dell 2000. note that i also modified the previous sentence to reflect the option more clearly that this could just be an epiphenomenon of speaker least effort processes}, or an effort on the side of the speaker to produce utterances that are easy to comprehend by listeners. \mhahn{cite audience design}\jd{could cite eg brennan and clark or some of herb's earlier audience design papers}
-Our results are compatible with either mechanism. \jd{what about the third option, that language processing might be set up to not be able }
 
+One option is that optimization reflects an effort on the side of the speaker to produce utterances that are easy to comprehend by listeners \citep{clark1982audience,lindblom1990communication, brennan1995feeling}.
 
+Optimization may also reflect production-internal pressures to minimize effort on the speaker's part during sentence planning \citep{ferreira2000effect,macdonald2013language}.
+
+Optimization may also reflect biases that come into play during language learning.
+It is possible that memory efficiency makes languages more learnable, as learning should require less memory resources for languages with more efficient memory--surprisal tradeoffs.
+Evidence from artificial language learning experiments suggests that language acquisition is biased towards efficiency in communication and processing \citep[e.g.][]{fedzechkina2012language, fedzechkina-human-2017}.
+
+The language processing system might be set up to favor more efficient orders.
+
+Our results are compatible with these different mechanisms.
 While our theory is stated in terms of the efficiency of language processing for a comprehender of language, we can show that an analogous memory--surprisal trade-off exists in language production, and that speakers with bounded memory capacity can produce a language more accurately when it has stronger information locality (see SI Section 1.4 for a mathematical statement and proof).
+
+
+
+\jd{isn't there a third option, namely language processing/comprehension? i thought i remembered the fedzechkina work being agnostic about these options as well, no?}
+
+fedzechkina2012language come into play during acquisition, bias for efficiency
+
+
+discussion in fedzechkina2012language:
+
+- language production system prefers efficient information transfer(32, 34, 35, 58, 59)
+
+- misinterpretation in comprehension shapes production
+
+% Lindblom B (1990) On the communication process: Speaker-listener interaction andthe development of speech.Augment Altern Commun6(4):220–230.
+
+To the extent that universal-grammar based explanations make reference to computational efficiency \citep{chomsky2005tree}, such learning biases may be compatible with theories deriving word order patterns from innate biases.
 
 
 
@@ -37,14 +66,6 @@ While our theory is stated in terms of the efficiency of language processing for
 
 %There is both corpus evidence and experimental evidence that long dependencies tend to be easier to process in head-final contexts \cite{futrell2017memory}.
 %This is not predicted by the Information Locality Theorem, because it inherently
-
-\mhahn{at some point we can say the following. where?}
-Our results are compatible with work suggesting that memory strategies adapt to language structure and language statistics, and that experience can reduce memory difficulty.
-This idea is supported by experimental work showing that forgetting effects in nested head-final dependencies are reduced or absent in  head-final structures  \citep{macdonald2002reassessing, christiansen1999toward, christiansen2009usage, vasishth2010short, engelmann2009processing, frank2019judgements, frank2016cross}, which can be explained in terms of surprisal given noisy memory representations \citep{futrell2020lossy}.
-In a corpus study, \citet{yadav2020word} found that languages tolerate longer dependencies when their direction aligns with the default word order in that language. This is predicted by our information-theoretic model if we hypothesize that dependencies aligning with the default order tend to be more predictable, reducing surprisal compared to dependencies going in the non-default direction. Increased memory load for longer dependencies may therefore be compensated for by reduced surprisal.\jd{not sure i understand this last bit}
-
-%; Hsiao  MacDonald, 2013; Levy, 2008, 2013;
-%(Husain et al., 2014; Konieczny, 2000; Levy & Keller, 2013; Miyamoto & Nakamura, 2003; Nakatani  Gibson, 2010; Vasishth  Lewis, 2006)
 
 
 \subsection{Limitations}
@@ -218,13 +239,29 @@ While the decay of conditional mutual information provably provides a lower boun
 In SI Section 2.3, we provide an example of a stochastic process where unconditional mutual information does not decay with distance, but memory requirements remain low.
 
 
-\mhahn{also mention connectionist models of memory in incremental processing, which were in part framed as alternatives to memory capacity accounts (but actually fit well with our framework)? such as \cite{macdonald2002reassessing,christiansen2009usage}. also focus on experience-based mechanism \cite{wells2009experience}. can also mention \cite{rasmussen2018left} in this context}
 
 %\mhahn{TODO: \cite{qian-cue-2012}}
 
 %head-dependent mutual information hypothesis
 %In an idealized model \emph{all} predictive information is mediated through direct syntactic dependencies, and each dependency contributed an equal amount of predictive information, our memory bound would indeed become equivalent to such a metric.
 %Note that the average number of objects held in memory simultaneously is equivalent to the average time they are stored.
+
+
+
+\paragraph{Connectionist Models}
+
+\mhahn{also mention connectionist models of memory in incremental processing, which were in part framed as alternatives to memory capacity accounts (but actually fit well with our framework)? such as \cite{macdonald2002reassessing,christiansen2009usage}. also focus on experience-based mechanism \cite{wells2009experience}. can also mention \cite{rasmussen2018left} in this context}
+
+\mhahn{at some point we can say the following. where? it could also go with discussion of experience-based models (like MacDonald and Christiansen) of memory in sentence processing}
+Our results are compatible with work suggesting that memory strategies adapt to language structure and language statistics, and that experience can reduce memory difficulty.
+This idea is supported by experimental work showing that forgetting effects in nested head-final dependencies are reduced or absent in  head-final structures  \citep{macdonald2002reassessing, christiansen1999toward, christiansen2009usage, vasishth2010short, engelmann2009processing, frank2019judgements, frank2016cross}, which can be explained in terms of surprisal given noisy memory representations \citep{futrell2020lossy}.
+
+
+\mhahn{we might say the following at some point, maybe in a condensed form here?} In a corpus study, \citet{yadav2020word} found that languages tolerate longer dependencies when their direction aligns with the default word order in that language. This is predicted by our information-theoretic model if we hypothesize that dependencies aligning with the default order tend to be more predictable, reducing surprisal compared to dependencies going in the non-default direction. Increased memory load for longer dependencies may therefore be compensated for by reduced surprisal.\jd{not sure i understand this last bit}
+
+%; Hsiao  MacDonald, 2013; Levy, 2008, 2013;
+%(Husain et al., 2014; Konieczny, 2000; Levy & Keller, 2013; Miyamoto & Nakamura, 2003; Nakatani  Gibson, 2010; Vasishth  Lewis, 2006)
+
 
 
 \paragraph{Rate-Distortion Theory in Cognition}\mhahn{TODO this doesn't fit with the heading `memory of sentence processing'}
