@@ -4,14 +4,14 @@ A wide range of work has argued that information in natural language utterances 
 
 When producing and comprehending language in real time, a language user must keep track of what she has already produced or heard in some kind of incremental memory store, which is subject to resource constraints.
 An early example of this idea is \citet{miller-finitary-1963}, who attributed the unacceptability of multiple center embeddings in English to limitations of human working memory.
-Concurrent and subsequent work studied how different grammars induce different memory requirements in terms of the number of symbols that must be stored at each point to produce or parse a sentence \citep{yngve1960modelabney1991memory,gibson1991computational,resnik1992left}. 
+Concurrent and subsequent work studied how different grammars induce different memory requirements in terms of the number of symbols that must be stored at each point to produce or parse a sentence \citep{yngve1960model,abney1991memory,gibson1991computational,resnik1992left}. 
 In psycholinguistic studies, memory constraints typically manifest in the form of processing difficulty associated with long-term dependencies.
 For example, at the level of word-by-word online language comprehension, there is observable processing difficulty at moments when it seems that information about a word must be retrieved from working memory. 
-This difficulty increases when there is a great deal of time or intervening material between the point when a word is first encountered and the point when it must be retrieved from memory  \citep{gibson1998linguistic,gibson1999memory,gibson2000dependency,mcelree2000sentence,lewis-activation-based-2005,bartek-search-2011,nicenboim2015working}. 
+This difficulty increases when there is a great deal of time or intervening material between the point when a word is first encountered and the point when it must be retrieved from memory  \citep{gibson1998linguistic,gibson1999memory,gibson2000dependency,mcelree2000sentence,lewis-activation-based-2005,bartek-search-2011,nicenboim2015working,balling2017effects}. 
 That is, language comprehension is harder from humans when words which depend on each other for their meaning are separated by many intervening words.
 This idea is most prominently associated with the \key{Dependency Locality Theory} of human sentence processing \citep{gibson2000dependency}.
 
-For example, \citet{grodner-consequences-2005} studied word-by-word reading times in a series of sentences such as~\ref{ex:grodner} below. 
+For example, \citet{grodner-consequences-2005} studied word-by-word reading times in a series of sentences such as~(\ref{ex:grodner}) below. 
 \eenumsentence{\label{ex:grodner}
 \item The \underline{administrator} who the nurse \underline{supervised}\dots\label{ex:grodner1}
 \item The \underline{administrator} who the nurse from the clinic \underline{supervised}\dots
@@ -32,7 +32,7 @@ While NP objects ordinarily precede PPs (\ref{ex:heavy-np-1}, example from~\cite
 The pattern in (\ref{ex:heavy-np-3}) is known as Heavy NP Shift \citep{ross1967constraints,arnold2000heaviness,stallings2011s}.
 Compared to (\ref{ex:heavy-np-2}), it reduces the distance between the verb ``ate'' and the PP, while only modestly increasing the distance between the verb and object NP.
 
-\eenumsentence{\label{ex:grodner}
+\eenumsentence{\label{ex:heavy-np}
 \item Lucy ate [the broccoli] with a fork.\label{ex:heavy-np-1}
 \item Lucy ate [the extremely delicious, bright green broccoli] with a fork .\label{ex:heavy-np-2}
 \item Lucy ate with a fork [the extremely delicious, bright green broccoli].\label{ex:heavy-np-3}
@@ -50,7 +50,7 @@ While these theories are widespread in the linguistics literature, there has yet
 
 \subsection{Cognitive Underpinnings}
 
-The connection between memory resources and locality principles relies on the idea that limitations in working memory will give rise to difficulty when elements that depend on each other are separated at a large distance in time. In previous work, this idea has been motivated in terms of specific assumptions about the architecture of memory. For example, models of memory in sentence processing differ in whether they assume limitations in storage capacity \citep{gibson1998linguistic} or the precision with which specific elements can be retrieved from memory \citep{lewis-activation-based-2005}. Furthermore, in order to derive the connection between memory usage in such models and locality in word order, it has been necessary to stipulate that memory representations or activations decay over time in some way. The question remains of whether these assumptions about memory architecture are necessary, or whether word orders across languages are optimized for memory independently of the implementation and architecture of human language processing.
+The connection between memory resources and locality principles relies on the idea that limitations in working memory will give rise to difficulty when elements that depend on each other are separated at a large distance in time. In previous work, this idea has been motivated in terms of specific assumptions about the architecture of memory. For example, models of memory in sentence processing differ in whether they assume limitations in storage capacity \citep[e.g.][]{gibson1998linguistic} or the precision with which specific elements can be retrieved from memory \citep[e.g.][]{lewis-activation-based-2005}. Furthermore, in order to derive the connection between memory usage in such models and locality in word order, it has been necessary to stipulate that memory representations or activations decay over time in some way. The question remains of whether these assumptions about memory architecture are necessary, or whether word orders across languages are optimized for memory independently of the implementation and architecture of human language processing.
 
 In this work, we adopt an information-theoretic perspective on working memory which abstracts away from the details of memory architecture.
 %From an information-theoretic perspective, the different ways in which memory can be constrained---constraints on storage capacity, representation precision, etc.---are different instantiations of the same quantity: namely, the mutual information between past input and the representations that are used for processing new material \citep{still-information-2014}. \mhahn{do we need to say more here?}

@@ -11,9 +11,12 @@
 The memory--surprisal trade-off described in Section~\ref{sec:ms-tradeoff} should apply not just at the level of words, but at the level of any linguistic element.
 For instance, just as observed word orders exhibit information locality, the order of morphemes within words should also be structured so that morphemes which predict each other are close to each other.\jd{you haven't been talking about things in terms of information locality in the previous 2 sections, so this is surprising here. perhaps emphasize towards the end of the previous section again how we see information locality  in the results, then readers will be ready to think about this for morpheme order as well}
 
-Here, we apply the memory--surprisal trade-off to predict the order of morphemes within morphologically complex words in two agglutinative languages. We study two agglutinative languages for which extensive corpora with hand-annotated morphological segmentation and labeling are available: Japanese and Sesotho. Below, we give brief sketches of the morphological patterns in these languages. 
+Here, we apply the memory--surprisal trade-off to predict the order of morphemes within morphologically complex words in two agglutinative languages. We study two agglutinative languages for which extensive corpora with hand-annotated morphological segmentation and labeling are available: Japanese and Sesotho. 
 
-\jd{before going into the languages and then immediately diving into the methodological details, give the reader a broad outline of what will happen in this section -- what is the general procedure and argument at an abstract level?}
+We will compare the memory-surprisal tradeoff of the actual morpheme orders in these languages with hypothetical baseline orderings.
+Furthermore, we will construct hypothetical orderings that are optimized for the efficiency of the memory-surprisal tradeoff, and compare these to the actual morpheme orderings, to investigate whether morpheme order in these languages can be predicted by optimization of tradeoff efficiency.
+
+Below, we first give brief sketches of the morphological patterns in these languages. 
 
 
 \paragraph{Verb Suffixes in Japanese}
@@ -106,14 +109,18 @@ We identified the following suffixes:
 
 \subsection{Experiment}
 \paragraph{Data Selection and Processing}
-\jd{none of this makes any sense to the reader if you don't say first what the general approach looks like for the work reported in this section (see comment above)} For Japanese, we drew on Universal Dependencies data.
+%\jd{none of this makes any sense to the reader if you don't say first what the general approach looks like for the work reported in this section (see comment above)}
+For Japanese, we drew on Universal Dependencies data.
 In the tokenization scheme used for Japanese, most affixes are separated as individual tokens, effectively providing morpheme segmentations.
 We used the GSD corpus, Version 2.4, \citep{tanaka2016universal, asahara2018universal}, as it was the only corpus with a training set and freely available word forms.
 In the corpus, verb suffixes largely correspond to auxiliaries (with tag \texttt{AUX}); only a few morphemes tagged \texttt{AUX} are not standardly treated as suffixes (see SI), and one frequent suffix (-\textit{te}) is labeled \texttt{SCONJ}.
 We selected verb forms by selecting all chains of a verb (tag \texttt{VERB}) followed by any number of auxiliaries (tag \texttt{AUX}) from the training set of the corpus. When the suffix -\textit{te} (tag \texttt{SCONJ}) followed such a chain, we added this.
-We labeled suffixes for underlying morphemes with the help of the lemmatization provided for each suffix in the corpus (see SI for details).
+We labeled suffixes for underlying morphemes with the help of the lemmatization provided for each suffix in the corpus (see SI Section 4.3 for details).
+The passive (slot 3) and potential (slot 4) markers are formally indistinguishable for many verbs.
+As we cannot systematically distinguish them on the basis of the available corpus annotation, we merge these into a single underlying morpheme `Passive/Potential'.
+
 We obtained 15,281 verb forms in the training set and 1,048 verb forms in the held-out set.
-Of the forms in the training set, 27\% had two or more suffixes (modal group: two suffixes, 20\%\jd{what does this 20\% mean? perhaps provide plot of distribution over number of suffixes (in SI)? }; maximum seven suffixes).
+Of the forms in the training set, 27\% had two or more suffixes (modal group: two suffixes, accounting for 20\% of forms; maximum seven suffixes).
 While predicting order naturally focuses on datapoints with more than one suffix, we include the other datapoints for estimating conditional mutual information $I_t$.
 %We used the annotation provided in the corpus to identify underlying morphemes (see SI).
 
@@ -123,20 +130,20 @@ While predicting order naturally focuses on datapoints with more than one suffix
 For Sesotho, we used the Demuth Corpus \citep{demuth1992acquisition} of child and child-directed speech, containing about 13K utterances with 500K morphemes.
 The corpus has very extensive manual morphological segmentation and annotation; each verb form is segmented into morphemes, which are annotated for their function.
 Sesotho verbs carry both prefixes and suffixes.
-We extracted 37K verb forms (see SI for details).
+We extracted 37K verb forms (see SI 4.2 for details).
 We randomly selected 5\% to serve as held-out data and used the remaining 95\% as training data.
-93\% of forms had two or more affixes (modal group: three affixes, 36\%; maximum eight affixes).
+93\% of forms had two or more affixes (modal group: three affixes, accounting for 36\% of forms; maximum eight affixes).
 
 
 \paragraph{Estimating Memory-Surprisal Tradeoff}
 We model predicted morpheme sequences.
-To do so, we represent each verb form as a sequence of a stem and suffix morphemes, abstracting away from morphophonemic interactions between neighboring morphemes.\jd{is it possible that, where there is divergence between model predictions and actual order, it has sth to do with phonemic pressures?}
+To do so, we represent each verb form as a sequence of a stem and suffix morphemes, abstracting away from morphophonemic interactions between neighboring morphemes.
+%\jd{is it possible that, where there is divergence between model predictions and actual order, it has sth to do with phonemic pressures?}
 As in many languages, affixes in Japanese and Sesotho show morphophonemic interactions between neighboring morphemes; for instance, the Japanese politeness morpheme -\textit{mas}- takes the form -\textit{masu} when it is word-final, while it has the allomorph -\textit{mase}- when followed by the negation suffix -\textit{n}.
-Modeling prediction on the level of morphemes, as opposed to phonemes, controls for these interactions.\footnote{See SI Section \REF for qualitatively similar results when modeling prediction at the phoneme level.}
+Modeling prediction on the level of morphemes, as opposed to phonemes, controls for these interactions.\footnote{See SI Section 4.3 for qualitatively similar results when modeling prediction at the phoneme level.}
 
-
-We model verb forms as a stochastic process by concatenating the verb forms from the corpus in random order.
-This means, we model statistical dependencies between the different morphemes in a form, and no dependencies between verb forms and their surrounding words. \jd{i don't know what this is supposed to mean.}
+In analogy to Studies 1--2, we model verb forms as a stationary stochastic process by concatenating the verb forms from the corpus in random order.
+%This means, we model statistical dependencies between the different morphemes in a form, and no dependencies between verb forms and their surrounding words. \jd{i don't know what this is supposed to mean.}
 
 We calculate $I_t$ by estimating an $n$-gram model on the training set and then computing the average surprisal $S_t$ as cross-entropy on the held-out set using Kneser-Ney smoothing.
 The model may overfit as the context size $t$ increases, leading to higher cross-entropies for larger values of $t$.
@@ -153,9 +160,6 @@ Similar results are obtained when instead using the simple `naive' estimator for
 We parameterize alternative affix orderings by assigning a weight in $[0,1]$ to each morpheme.
 Given such a grammar, affixes are ordered by the values assigned to their underlying morphemes.
 We consider all morphemes annotated in the corpora, including low-frequency ones going beyond the ones identified above (see SI for details).
-
-In Japanese, the passive (slot 3) and potential (slot 4) markers are formally indistinguishable for many verbs.
-As we cannot systematically distinguish them on the basis of the available corpus annotation, we merge these into a single underlying morpheme `Passive/Potential'.\jd{this is a detail that should come earlier, in the data selection/processing subsection}
 
 
 To verify that this formalism is appropriate for capturing morpheme order in Japanese and Sesotho, we fitted models parameterized in this way to the observed orders.
@@ -175,7 +179,7 @@ This optimization method is approximate, as it only guarantees convergence to a 
 
 We ran this method for 1,000 iterations. Empirically, AUC converges after a few hundred iterations.
 To control for the randomness in initialization and the optimization steps, we ran this algorithm ten times. \jd{so you can put error bars on the optimized order data point in figure 19 (the AUC plot)?}
-For Sesotho, we ran the algorithm separately for prefixes and suffixes.\jd{if you don't run it separately, does it not work?}
+For Sesotho, we ran the algorithm separately for prefixes and suffixes due to computational efficiency considerations.\footnote{With the exception of the tense/aspect markers, none of the morpheme types discussed above can occur both as prefixes and suffixes. Therefore, we do not expect this separation to impact results.}
 
 \subsection{Results}
 In Figure~\ref{fig:morph-auc}, we compare the area under curve of the memory--surprisal trade-off for Japanese and Sesotho verb forms under different orderings.
@@ -238,6 +242,8 @@ We conducted an error analysis comparing the real Japanese morpheme order agains
 For each grammar, we extracted the pairs of morphemes whose relative order is incorrectly predicted, excluding pairs involving low-frequency morphemes not discussed here. %, and including a few forms that do not agree with the dominant order described above (TODO figure out what these exceptions are).
 Results are shown in Table~\ref{tab:jap-err-analysis}.
 The most frequent divergence is that past and negation suffixes are consistently ordered incorrectly; this affects 88 corpus examples (out of 15K total examples).
+
+We also found that prediction was more accurate when modeling on the level of phonemes, suggesting that divergence between model predictions and actual order, might be related to phonological pressure (see SI Section 4.3).
 %A few of the optimized grammars show additional divergences among high-frequency morphemes, for instance, some grammars order politeness and negation incorrectly. 
 
 \begin{table}
@@ -273,7 +279,8 @@ negation & politeness & 3 \\
 \end{tabular}
     \caption{Errors in Japanese: We show pairs of morphemes that are ordered incorrectly by the approximately optimized grammar.
     We indicate the number of such pairs occurring in the corpus.
-    We only count divergences as errors here if they are predicted by the order (TODO figure out where exceptions come from). Also, we only show errors where both morphemes are among the high-frequency ones studied here.
+    %We only count divergences as errors here if they are predicted by the order (TODO figure out where exceptions come from). Also, 
+    We only show errors where both morphemes are among the high-frequency ones studied here.
     %\rljf{How is the frequency column calculated?}
     }
     \label{tab:jap-err-analysis}
@@ -288,7 +295,7 @@ For Sesotho suffixes, order is recovered at above-chance accuracies, though with
 The most common error (Table~\ref{tab:sesotho-prefix-err-analysis}) is that relative and interrogative suffixes are consistently placed closer to the verb stem than the mood suffix.
 We conjecture that this happens because all Sesotho verbs uniformly have a mood suffix, suggesting that there might be lower mutual information between the stem and the mood suffix than between the stem and these two suffixes.
 Furthermore, valence-changing suffixes are ordered farther away from the stem than various other suffixes, in contrast with the actual orders.
-Interestingly, we found that prediction was more accurate in this respect when estimating $I_t$ naively  on the training set (see SI Figure \REF), suggesting that the available corpus data does not sufficiently determine the optimal ordering.
+Interestingly, we found that prediction was more accurate in this respect when estimating $I_t$ naively  on the training set (see SI Section 4.3), suggesting that the available corpus data does not sufficiently determine the optimal ordering.
 
 
 \begin{table}

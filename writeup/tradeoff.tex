@@ -3,7 +3,7 @@ We will provide a technical definition of the memory--surprisal trade-off curve,
 
 The memory--surprisal trade-off applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension; we return to the production perspective in Section~\ref{sec:sentprod-models}.
 
-\mhahn{https://www.biorxiv.org/content/10.1101/2020.01.16.903476v1}
+
 
 \subsection{An information-theoretic model of online language comprehension}
 \label{sec:listener-tradeoff}
@@ -16,7 +16,7 @@ The memory--surprisal trade-off applies in both language production and comprehe
 %\end{figure}
 
 We begin developing our model by considering the process of language comprehension, where a listener is processing a stream of words uttered by an interlocutor.
-Experimental research has established three properties of online language comprehension: (1) listeners maintain some information about the words received so far in incremental memory \CITE, (2) listeners form probabilistic expectations about the upcoming words \citep{altmann1999incremental,kuperberg2016we, ...}, and (3) words are easy to process to the extent that they are predictable based on a listener's memory of words received so far \citep{hale2001probabilistic,levy2008expectation,futrell2020lossy}. 
+Experimental research has established three properties of online language comprehension: (1) listeners maintain some information about the words received so far in incremental memory, (2) listeners form probabilistic expectations about the upcoming words \citep[e.g.][]{altmann1999incremental,staub2006syntactic,kuperberg2016we}, and (3) words are easy to process to the extent that they are predictable based on a listener's memory of words received so far \citep{hale2001probabilistic,levy2008expectation,futrell2020lossy}. 
 See Section~\ref{sec:sentprod-models} for discussion of how our model is related to theories that do not explicitly make these assumptions.
 
 We formalize these three observations into postulates intended to provide a simplified picture of what is known about online language comprehension. Consider a listener comprehending a sequence of words $w_1, \dots, w_t, \dots, w_n$, at an arbitrary time $t$.
@@ -29,10 +29,9 @@ We formalize these three observations into postulates intended to provide a simp
     \text{Difficulty} \propto -\log P(w_t | m_t).
 \end{equation}
 \end{enumerate}
-The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory} \citep{hale2001probabilistic,levy2008expectation}, an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation, antilocality effects, and effects of syntactic construction frequency. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \citep{smith-effect-2013,goodkind-predictive-2018}, and effects of surprisal have been observed for units as small as phonemes \citep{}.
-\mhahn{https://www.biorxiv.org/content/10.1101/2020.04.04.025684v1}
+The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory} \citep{hale2001probabilistic,levy2008expectation}, an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation, antilocality effects, and effects of syntactic construction frequency. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \citep{smith-effect-2013,goodkind-predictive-2018}, and effects of surprisal have been observed for units as small as phonemes \citep{gwilliams2020neural}.
 Surprisal theory is compatible with different views on the mechanisms underlying predict, and can reflect different mechanisms such as preactivation and integration~\citep{kuperberg2016we}.
-In particular, we do not assume that listeners explicitly compute a full-fledged distribution $P(w_t|m_t)$; we view $P(w_t|m_t)$ as a formalization of the probabilistic expectations that listeners form during comprehension (CITE).
+We do not assume that listeners explicitly compute a full-fledged distribution $P(w_t|m_t)$; we view $P(w_t|m_t)$ as a formalization of the probabilistic expectations that listeners form during comprehension.
 
 
 Our expression~(\ref{eq:lossy-surp}) differs from the usual formulation of surprisal theory in that we consider predictability based on a (potentially lossy or noisy) memory representation $m_t$, rather than predictability based on the true complete context $w_1, \dots, w_{t-1}$. The generalization to lossy memory representations is necessary to capture empirically observed effects of memory limitations on language processing, such as dependency locality and structural forgetting \citep{futrell2020lossy}. % For other ways of capturing effects of both memory limitations and probabilistic expectations, see \citet{demberg-incremental-2013} and \citet{rasmussen2018left}, and see Section~\ref{sec:sentprod-models} for discussion of the relations between these approaches and our models.
@@ -66,13 +65,11 @@ We hypothesize that this property is reflected both in the grammatical structure
 \subsection{Formal definition of the memory--surprisal trade-off}
 \label{sec:formal-tradeoff}
 
-Here we provide the technical definition of the memory--surprisal trade-off curve and relate it to concepts from information theory, rate--distortion theory, and statistical complexity theory.
-
-
+Here we provide the technical definition of the memory--surprisal trade-off curve. % and relate it to concepts from information theory, rate--distortion theory, and statistical complexity theory.
 Let $W$ be a stochastic process %\footnote{We will use $W$ to represent languages, and we will construct $W$ to be stationary. Large natural language texts are likely neither stationary nor ergodic \citep{debowski}. However, we are interested in explaining grammatical properties of languages, which mostly involve constraints among words within sentences, not within large texts as a whole. Therefore, we will represent a language using a stochastic process consisting of repeated independent samples from a distribution over sentences. This stochastic process is both stationary and ergodic.}
 generating a stream of symbol extending indefinitely into the past and future: $\dots, w_{-2}, w_{-1}, w_0, w_{1}, w_{2}, \dots$. %indexed as $w_1, \dots, w_t, \dots$.
 These symbols can represent words, morphemes, or other units for decomposing sentences into a sequence of symbols. 
-We model this process as \emph{stationary} \CITE, that is, the joint distributions of symbols at different time points depend only on their relative positions in time, not their absolute positions (see SI Section \REF for more on this modeling assumption).
+We model this process as \emph{stationary} \citep{doob1953stochastic}, that is, the joint probability distributions of symbols at different time points depend only on their relative positions in time, not their absolute positions (see SI Section \REF for more on this modeling assumption).
 
 Let $M$ be a memory encoding function.
 We consider memory and surprisal costs at an arbitrary time point $t$.
@@ -83,7 +80,7 @@ Recall that the surprisal for a specific word $w_t$ after a past word sequence $
 \end{equation}
 The \key{average surprisal} of the process $W$ under the memory encoding function $M$ is obtained by averaging over all possible past sequences $\dots, w_{t-2}, w_{t-1}$ with associated memory states $m_t$:
 \begin{equation}
-   S_M \equiv \sum_{w_t,m_t} \cdot P(m_t) P(w_t|m_t) \left( -\log P(w_t | m_t) \right).
+   S_M \equiv \sum_{w_t,m_t}  P(m_t) P(w_t|m_t) \left( -\log P(w_t | m_t) \right).
 \end{equation}
 where $w_t$ ranges over possible symbols, $m_t$ ranges over possible outputs of the memory encoding function $M$.
 This quantity is known as the conditional entropy of $w_t$ given $m_t$ \citep[][p. 17]{cover2006elements}:
@@ -152,7 +149,7 @@ The \key{memory--surprisal trade-off curve} for a process $W$ is the lowest achi
 where the minimization is over all memory encoding functions $M$ whose entropy $H_M$ is less than or equal to $R$.
 \end{definition}
 
-The memory state $m_t$ is generally a lossy representation of the true context of words $w_1, \dots, w_{t-1}$, meaning that $m_t$ does not contain all the possible information about $w_1, \dots, w_{t-1}$. The mathematical theory of lossy representations is \key{rate--distortion theory} \citep[for an overview and key results, see][pp. 301--347]{cover2006elements}; this theory has seen recent successful application in cognitive science and linguistics as a model of rational action under resource constraints \citep{sims2018efficient,zaslavsky2018efficient}\mhahn{which Gershman citation?}. % "Origin of perseveration in the trade-off between reward and complexity"
+The memory state $m_t$ is generally a lossy representation of the true context of words $w_1, \dots, w_{t-1}$, meaning that $m_t$ does not contain all the possible information about $w_1, \dots, w_{t-1}$. The mathematical theory of lossy representations is \key{rate--distortion theory} \citep[for an overview and key results, see][pp. 301--347]{cover2006elements}; this theory has seen recent successful application in cognitive science and linguistics as a model of rational action under resource constraints \citep{sims2018efficient,zaslavsky2018efficient,gershman2020origin}. 
 Rate--distortion theory studies curves of the form of Eq.~\ref{eq:ms-formal}, which quantify trade-offs between negative utility (`distortion') and information (`rate'). %Our memory--surprisal trade-off curve is a distortion--rate curve, with $H_M$ as the rate and $S_M$ as the distortion. It differs from the typical curve studied in rate--distortion theory in that we define rate using entropy, rather than mutual information \citep[see][for a discussion of some of the consequences of this formulation]{strouse-deterministic-2017}. 
 %Our theoretical results still hold if we were to define rate using mutual information (see SI Section \REF).
 
@@ -217,7 +214,7 @@ Then we have a lower bound on the average surprisal under the memory encoding fu
 S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
 \end{equation}
 \end{thm}
-A formal proof, relying only on the stationarity of the stochastic process, is given in Appendix Section X. 
+A formal proof based on the Comprehension Postulates 1--3 is given in Appendix Section 1.2.
 
 \paragraph{Interpretation} The theorem means that a predictor with limited memory capacity will always be affected by surprisal cost arising from long-term statistical dependencies of length greater than $T$, for some finite $T$. This is why we call the result `information locality': processes are easier to predict when most statistical dependencies are short-term (shorter than $T$). Below we explain in more detail how this interpretation matches the mathematics of the theorem.
 
@@ -225,7 +222,8 @@ The quantities in the theorem are illustrated visually in Figure~\ref{fig:theore
 
 The information locality bound theorem says that the surprisal cost for this memory encoding function is at least $S_\infty + \sum_{t=T+1}^\infty I_t$ (Eq.~\ref{eq:surprisal-bound}). The first term $S_\infty$ is the entropy rate of the process, representing the bits of information in the process which could not have been predicted given any amount of memory. The second term $\sum_{t=T+1}^\infty I_t$ is the sum of all the relevant information contained in words \emph{more} than $T$ timesteps in the past (see Figure~\ref{fig:theorem}(b)). These correspond to bits of information in the process which \emph{could have} been predicted given infinite memory resources, but which were not, due to the limit on memory usage.
 
-The theorem gives a lower bound on the memory--surprisal trade-off curve, meaning that there is no memory encoding function with capacity $H_M$ which achieves lower average surprisal than Eq.~\ref{eq:surprisal-bound}. In terms of psycholinguistics, if memory usage is bounded by Eq.~\ref{eq:memory-bound}, then processing cost of at least Eq.~\ref{eq:surprisal-bound} is inevitable.
+The theorem gives a lower bound on the memory--surprisal trade-off curve, meaning that there is no memory encoding function $M$ with capacity $H_M$ which achieves lower average surprisal than Eq.~\ref{eq:surprisal-bound}. In terms of psycholinguistics, if memory usage is bounded by Eq.~\ref{eq:memory-bound}, then processing cost of at least Eq.~\ref{eq:surprisal-bound} is inevitable.
+Importantly, the bound holds for \emph{any} memory encoding function $M$, including functions that do not specifically keep track of a window of the past $T$ words.
 
 \begin{figure*}
 \includegraphics[width=0.45\textwidth]{figures/decay.pdf}
