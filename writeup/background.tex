@@ -4,8 +4,7 @@ A wide range of work has argued that information in natural language utterances 
 
 When producing and comprehending language in real time, a language user must keep track of what she has already produced or heard in some kind of incremental memory store, which is subject to resource constraints.
 An early example of this idea is \citet{miller-finitary-1963}, who attributed the unacceptability of multiple center embeddings in English to limitations of human working memory.
-Concurrent and subsequent work studied how different grammars induce different memory requirements in terms of the number of symbols that must be stored at each point to produce or parse a sentence \citep{yngve1960model,yngve1961depth,abney1991memory,gibson1991computational,resnik1992left}. \mhahn{I can't find yngve1961depth}
-
+Concurrent and subsequent work studied how different grammars induce different memory requirements in terms of the number of symbols that must be stored at each point to produce or parse a sentence \citep{yngve1960modelabney1991memory,gibson1991computational,resnik1992left}. 
 In psycholinguistic studies, memory constraints typically manifest in the form of processing difficulty associated with long-term dependencies.
 For example, at the level of word-by-word online language comprehension, there is observable processing difficulty at moments when it seems that information about a word must be retrieved from working memory. 
 This difficulty increases when there is a great deal of time or intervening material between the point when a word is first encountered and the point when it must be retrieved from memory  \citep{gibson1998linguistic,gibson1999memory,gibson2000dependency,mcelree2000sentence,lewis-activation-based-2005,bartek-search-2011,nicenboim2015working}. 
@@ -20,8 +19,7 @@ For example, \citet{grodner-consequences-2005} studied word-by-word reading time
 }
 In these sentences, the distance between the noun \emph{administrator} and the verb \emph{supervised} is successively increased. \citet{grodner-consequences-2005} found that as this distance increases, there is a concomitant increase in reading time at the verb \emph{supervised} and following words. The hypothesized reason is the following: at the word \emph{supervised}, a comprehender who is trying to compute the meaning of the sentence must integrate a representation of the verb \emph{supervised} with a representation of the noun \emph{administrator}, which is a direct object of the verb. This integration requires retrieving the representation of \emph{administrator} from working memory. If this representation has been in working memory for a long time---for example as in Sentence~\ref{ex:grodner3} as opposed to \ref{ex:grodner1}---then the retrieval operation causes difficulty that manifests as increased reading time. There exists a dependency between the words \emph{administrator} and \emph{supervised}, and excess processing difficulty occurs when these two words are separated. 
 
-The existence of dependency locality effects in human language processing, and their connection with working memory, are well-established. TODO finish this paragraph
-\mhahn{what is missing here? references to all the work on dependency locality effects?}
+The existence of dependency locality effects in human language processing, and their connection with working memory, are well-established. In this work, we will be interested in predicting word and morpheme order using an information-theoretic model of language processing which accounts for locality effects such as these. 
 
 \subsection{Locality and cross-linguistic universals of order}
 
@@ -29,10 +27,34 @@ Because of the documented difficulty associated with long-term dependencies amon
 That is, words which depend on each other syntactically should be close to each other in linear order.
 There is ample evidence from corpus statistics indicating that dependency locality is a real property of word order across many languages \citep{gildea-optimizing-2007,liu2008dependency,gildea-grammars-2010,futrell-large-scale-2015,liu-dependency-2017,temperley-minimizing-2018}. 
 \citet{hawkins-performance-1994,hawkins-efficiency-2003} formulates dependency locality as the \key{Principle of Domain Minimization}, and has shown that this principle can explain cross-linguistic universals of word order that have been documented by linguistic typologists for decades \citep{greenberg-universals-1963}. 
+An example is order alternation in postverbal constituents in English.
+While NP objects ordinarily precede PPs (\ref{ex:heavy-np-1}), this order is less preferred when the NP is very long (\ref{ex:heavy-np-2}), in which case the inverse order becomes more felicitous (\ref{ex:heavy-np-3}).
+The pattern in (\ref{ex:heavy-np-3}) is known as Heavy NP Shift.
+Compared to (\ref{ex:heavy-np-2}), it reduces the distance between the verb ``ate'' and the PP, while only modestly increasing the distance between the verb and object NP.
 
-TODO dependency locality examples \mhahn{how about a heavy NP shift example?}
+\mhahn{citations}
 
-While dependency locality has a strong ability to predict word order universals, there are certain classes of locality phenomena that are not captured by the theory. For example, ordering asymmetries between arguments and adjuncts remain unexplained \citep{}. TODO \mhahn{what is missing here?}
+%https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1615890/pdf/nihms10460.pdf
+
+% Ross,1967; but cf. Kayne, 1998; Rochemont & Culicover, 1997)
+
+Example from https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1615890/pdf/nihms10460.pdf
+
+\eenumsentence{\label{ex:grodner}
+\item Lucy ate [the broccoli] with a fork.\label{ex:heavy-np-1}
+\item Lucy ate [the extremely delicious, bright green broccoli] with a fork .\label{ex:heavy-np-2}
+\item Lucy ate with a fork [the extremely delicious, bright green broccoli].\label{ex:heavy-np-3}
+}
+
+%TODO dependency locality examples \mhahn{how about a heavy NP shift example?} \rljf{Yes, the ``threw out the trash'' example should owrk here} \mhahn{can use real Heavy NP shify example}
+
+
+
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3085651/pdf/nihms265242.pdf
+% http://citeseer.ist.psu.edu/viewdoc/download;jsessionid=8871C63972613516105B2C96A20F4EAE?doi=10.1.1.100.8375&rep=rep1&type=pdf
+
+
+%While dependency locality has a strong ability to predict word order universals, there are certain classes of locality phenomena that are not captured by the theory. For example, ordering asymmetries between arguments and adjuncts remain unexplained \citep{}. TODO \mhahn{what is missing here?}
 
 Locality principles have also appeared in a more general form in the functional linguistics literature, in the form of the idea that elements which are more `relevant' to each other will appear closer to each other in linear order in utterances \citep{behaghel1932deutsche,givon1985iconicity,givon1991markedness,bybee-morphology-1985,newmeyer1992iconicity}. Here, `elements' can refer to words or morphemes, and the definition of `relevance' varies. For example, \citet{givon1985iconicity}'s \key{Proximity Principle} states that elements are placed closer together in a sentence if they are closer conceptually.
 Applying a similar principle, \citet{bybee-morphology-1985} studied the order or morphemes within words across languages, and argued that (for example) morphemes that indicate the valence of a verb (whether it takes zero, one, or two objects) are placed closer to the verb root than morphemes that indicate the plurality of the subject of the verb, because the valence morphemes are more `relevant' to the verb root. %In previous literature, the Proximity Principle has been motivated in terms of iconicity; here, we will explain it in terms of the same kinds of online memory limitations that have been used to motivate the principle of dependency locality in syntax.
@@ -42,15 +64,14 @@ While these theories are widespread in the linguistics literature, there has yet
 
 \subsection{Cognitive Underpinnings}
 
-The connection between memory resources and locality principles relies on the idea that limitations in working memory will give rise to difficulty when elements that depend on each other are separated at a large distance in time. In previous work, this idea has been motivated in terms of specific assumptions about the architecture of memory. For example, models of memory in sentence processing differ in whether they assume limitations in storage capacity \citep{gibson1998linguistic}, the precision at which information is encoded (\CITE \mhahn{what to cite here?}), or the precision with which specific elements can be retrieved from memory \citep{lewis-activation-based-2005}. Furthermore, in order to derive the connection between memory usage in such models and locality in word order, it has been necessary to stipulate that memory representations or activations decay over time in some way. The question remains of whether these assumptions about memory architecture are necessary, or whether word orders across languages are optimized for memory independently of the implementation and architecture of human language processing.
+The connection between memory resources and locality principles relies on the idea that limitations in working memory will give rise to difficulty when elements that depend on each other are separated at a large distance in time. In previous work, this idea has been motivated in terms of specific assumptions about the architecture of memory. For example, models of memory in sentence processing differ in whether they assume limitations in storage capacity \citep{gibson1998linguistic} or the precision with which specific elements can be retrieved from memory \citep{lewis-activation-based-2005}. Furthermore, in order to derive the connection between memory usage in such models and locality in word order, it has been necessary to stipulate that memory representations or activations decay over time in some way. The question remains of whether these assumptions about memory architecture are necessary, or whether word orders across languages are optimized for memory independently of the implementation and architecture of human language processing.
 
 In this work, we adopt an information-theoretic perspective on working memory which abstracts away from the details of memory architecture.
-From an information-theoretic perspective, the different ways in which memory can be constrained---constraints on storage capacity, representation precision, etc.---are different instantiations of the same quantity: namely, the mutual information between past input and the representations that are used for processing new material \citep{still-information-2014}. \mhahn{do we need to say more here?}
+%From an information-theoretic perspective, the different ways in which memory can be constrained---constraints on storage capacity, representation precision, etc.---are different instantiations of the same quantity: namely, the mutual information between past input and the representations that are used for processing new material \citep{still-information-2014}. \mhahn{do we need to say more here?}
 %\mhahn{maybe it would be beneficial to, at some point (Discussion), illustrate how limitations in our framework are instantiated by memory limitations in different frameworks, such as DLT, ACT-R, Marking\&Morphing, ...}
-
-Within our framework, we will establish the connection between memory resources and locality principles by providing general information-theoretic lower bounds on memory load that will hold independently of the architecture of memory representations.
+Within our framework, we will establish the connection between memory resources and locality principles by providing general information-theoretic lower bounds on memory load.
 %We will consider a general setting of a listener performing incremental prediction.
-Our result immediately entails a link between locality and boundedness of memory, without any stipulations about memory representations, and in particular without any assumption that memory representations or activations decay over time \citep[as was required in][]{gibson1998linguistic, lewis-activation-based-2005, futrell-noisy-context-2017}.
+Our result immediately entails a link between locality and boundedness of memory, without any stipulations about memory representations, and in particular without any assumption that memory representations or activations decay over time \citep[as was required in][]{gibson1998linguistic, lewis-activation-based-2005, futrell2020lossy}.
 We will then show empirical evidence that the orders of words and morphemes in natural language are structured to reduce our measure of memory load.
 
 %\mhahn{can also mention \cite{christiansen2016now}}

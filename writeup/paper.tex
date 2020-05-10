@@ -29,6 +29,8 @@
 \usepackage{linguex}
 %\raggedbottom
 
+\definecolor{Purple}{RGB}{255,10,140}
+\newcommand{\jd}[1]{\textcolor{Purple}{[jd: #1]}} 
 
 
 \newcommand{\R}[0]{\mathbb{R}}
@@ -81,6 +83,7 @@
 
 \begin{abstract}
 Online memory limitations are well-established as a factor impacting sentence processing and have been argued to account for crosslinguistic word order regularities. Building off expectation-based models of language processing, we provide an information-theoretic formalization of these memory limitations. We introduce the idea of a memory-surprisal tradeoff: comprehenders can achieve lower average surprisal per word at the cost of storing more information about past context. We show that the shape of the tradeoff is determined in part by word order. In particular, languages will enable more efficient tradeoffs when they exhibit information locality: when predictive information about a word is concentrated in the word’s recent past. We show evidence from corpora of 52 real languages showing that languages allow for more efficient memory-surprisal tradeoffs than random baseline word order grammars. 
+We then use data from two agglutinative languages that morpheme order also optimizes efficiency of this tradeoff.
 \end{abstract}
 
 
@@ -106,24 +109,24 @@ Online memory limitations are well-established as a factor impacting sentence pr
 
 \input{tradeoff.tex}
 
-\section{Experiment 1: Memory and Dependency Length}
+\section{Study 1: Memory and Dependency Length}
 
 \input{toy-experiment.tex}
 
-%\section{Experiment 1b: Information Locality and Noun Phrase Order}
+%\section{Study 1b: Information Locality and Noun Phrase Order}
 %\input{np-experiment.tex}
 
 
-\section{Experiment 2: Large-Scale Evidence that natural language optimize Memory-Surprisal Tradeoff}
+\section{Study 2: Large-Scale Evidence that Natural Language Optimizes Memory-Surprisal Tradeoff}
 \label{sec:main-experiment}
 
 \input{main-experiment.tex}
 
-\subsection{Controlling for Order Freedom}\label{subsec:freedom}
+\subsection{Controlling for Word Order Freedom}\label{subsec:freedom}
 
 \input{freedom-control.tex}
 
-\section{Experiment 3: Morpheme Order}
+\section{Study 3: Morpheme Order}
 
 \input{word-internal.tex}
 
