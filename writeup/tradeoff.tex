@@ -69,7 +69,7 @@ Here we provide the technical definition of the memory--surprisal trade-off curv
 Let $W$ be a stochastic process %\footnote{We will use $W$ to represent languages, and we will construct $W$ to be stationary. Large natural language texts are likely neither stationary nor ergodic \citep{debowski}. However, we are interested in explaining grammatical properties of languages, which mostly involve constraints among words within sentences, not within large texts as a whole. Therefore, we will represent a language using a stochastic process consisting of repeated independent samples from a distribution over sentences. This stochastic process is both stationary and ergodic.}
 generating a stream of symbol extending indefinitely into the past and future: $\dots, w_{-2}, w_{-1}, w_0, w_{1}, w_{2}, \dots$. %indexed as $w_1, \dots, w_t, \dots$.
 These symbols can represent words, morphemes, or other units for decomposing sentences into a sequence of symbols. 
-We model this process as \emph{stationary} \citep{doob1953stochastic}, that is, the joint probability distributions of symbols at different time points depend only on their relative positions in time, not their absolute positions (see SI Section \REF for more on this modeling assumption).
+We model this process as \emph{stationary} \citep{doob1953stochastic}, that is, the joint probability distributions of symbols at different time points depend only on their relative positions in time, not their absolute positions (see SI Section 1.1.1 for more on this modeling assumption).
 
 Let $M$ be a memory encoding function.
 We consider memory and surprisal costs at an arbitrary time point $t$.
@@ -92,7 +92,7 @@ This quantity is known as the conditional entropy of $w_t$ given $m_t$ \citep[][
 %\begin{equation}
 %    \operatorname{H}[w_t|m_t] \equiv -\sum_{w_t,m_t} P(m_t) P(w_t|m_t) \log P(w_t|m_t).
 %\end{equation}
-Because the process $W$ is stationary, the average surprisal $S_M$ is independent of the choice of $t$ (see SI Section \REF).
+Because the process $W$ is stationary, the average surprisal $S_M$ is independent of the choice of $t$ (see SI Section 1.1.2).
 The lowest possible average surprisal for $W$ that can be attained by any memory encoding function is attained when $m_t$ perfectly encodes all previous observed words.
 This quantity is called the \key{entropy rate} of $W$ \citep[][pp. 74--75]{cover2006elements}:
 \begin{equation}
@@ -135,7 +135,7 @@ where
     \operatorname{H}[m_t] = - \sum_m p(m_t = m) \log p(m_t=m)
 \end{equation}
 where $m$ runs over all possible states of the memory encoding $m_t$.
-Again, because $W$ is stationary, this quantity does not depend on the choice of $t$ (see SI Section \REF).
+Again, because $W$ is stationary, this quantity does not depend on the choice of $t$ (see SI Section 1.1.2).
 
 
 We will be imposing bounds on $H_M$ and studying the resulting values of $S_M$. 
