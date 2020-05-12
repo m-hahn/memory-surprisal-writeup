@@ -1,4 +1,5 @@
 
+\mhahn{I wonder whether 5.6 could be part of the SI, to make the paper more streamlined?}
 
 In this section we address the questions raised in Section~\ref{subsec:expt2-discussion}.
 First, we draw on a corpus of Czech with information structure annotation to determine whether real orders are more optimized when comparing to baselines taking information structure into account (Section~\ref{sec:czech}). \jd{this is the opposite order from the one in which you raise the issues in the previous section -- use consistent order}
@@ -17,6 +18,7 @@ We expect these grammars to have better memory-surprisal tradeoffs than comparab
 We create ordering grammars that are fit to the actual orderings of each language.
 These grammars faithfully represent the ordering rules of the actual language, to the extent  possible in the formalism of ordering grammars:
 They match the order of the actual language in those cases where order of a relation is fully consistent; for relations where order is variable, they approximate this by modeling the most frequent order.
+In representing word order rules, they have the same limitations as baseline grammars have, for instance, they cannot specify rules sensitive to the category of the dependent or to larger context.
 These grammars are extracted from the observed orders using the method of \cite{hahn2020universals}.
 We compared the memory-surprisal tradeoffs of these extracted grammars to the same baseline grammars as above.
 
@@ -106,18 +108,16 @@ As more annotated data becomes available, this should be replicated on data from
 \subsection{Conclusion}
 In this section, we tested the Efficient Tradeoff Hypothesis on dependency corpora from 54 languages, comparing observed word orders to hypothetical baseline grammars.
 We found that, in 50 out of 54 languages, real orders provide more efficient memory-surprisal tradeoffs than most baseline grammars.
+This suggests that, across languages, word order favors information locality more strongly than most possible alternative orders.
 
-We found that the degree of optimizatio was weakest in languages with high degrees of word order freedom.
-We conducted two control studies to account for word order freedom:
-\mhahn{TODO}
+We also found that the degree of optimization was weaker in languages with high degrees of word order freedom.
+Using data from Czech that is annotated for both syntax and information structure, we provided evidence that this dependence on word order freedom is an artifact of the fact that languages with flexible word order tend to encode information structure in word order.
+%We conducted two control studies to account for word order freedom:
+%First, we compared the orders of real languages with baselines in a single formalism
+%\mhahn{TODO}
 
-\jd{at this point, there should be a brief summary paragraph saying what happened in the entirety of section 5, which covered a lot of ground. plus a segue sentence to the next section -- eg, sth along the lines of "how do we know the results aren't just an artifact of dealing with words and sentences?"}
-
-also bring up information locality as a segue to next section
-	
-
-
-	
+Taken together, Studies 1 and 2 suggest that crosslinguistic word orders are in part impacted by a pressure towards efficient memory--surprisal tradeoffs, and thus information locality.
+To provide evidence that the Efficient Tradeoff Hypothesis holds at different levels of representation, we will consider morpheme order in Study 3.
 
 
 

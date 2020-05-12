@@ -86,7 +86,7 @@ The datasets ranged in size from 564 sentences (Armenian) to 114,304 sentences (
 For each language, we obtain a stationary process by concatenating the sentences from the corpus in random order, separated with an end-of-sentence symbol.
 
 
-\subsection{Defining baselines}
+\subsection{Defining baselines}\label{sec:baselines}
 
 Testing the Efficient Tradeoff Hypothesis requires comparing the memory--surprisal tradeoffs of real grammars to those of baseline grammars. The baseline grammars we construct are counterfactual ordering grammars that define consistent ordering rules similar to those found in actual languages (Figure~\ref{fig:grammars}).
 For instance, these grammars specify which dependents precede or follow their heads (e.g., whether objects follow or precede verbs, whether adjectives follow or precede nouns), and the relative order of different dependents on the same side of the head (e.g., whether noun phrases have order adjective-numeral-noun or numeral-adjective-noun). Our formalism of ordering grammars adapts the method of \citet{gildea-optimizing-2007,gildea-grammars-2010,gildea-human-2015} to the setting of dependency corpora, following \citet{futrell-large-scale-2015} and \citet{hahn2020universals}, among others.
@@ -116,13 +116,17 @@ Such baseline grammars define languages that have consistent word order but, cru
 
 
 We first constructed at least 10 baseline grammars for each of the 54 real languages.
-We then continued to construct baseline grammars until a precision-based stopping criterion was reached \CITE. This criterion was designed to ensure that enough grammars were sampled to reliably compare the tradeoff curves of real and baseline grammars, without biasing results towards or against our hypothesis (see SI Section 3.2.3).
+We then continued to construct baseline grammars until a precision-based stopping criterion was reached. This criterion was designed to ensure that enough grammars were sampled to reliably compare the tradeoff curves of real and baseline grammars, without biasing results towards or against our hypothesis (see SI Section 3.2.3).
 The stopping criterion compared what fraction of baseline grammars had strictly more (or strictly less) efficient tradeoff curves than the real ordering, and required a bootstrapped 95\% confidence interval for that ratio to have width $\leq 0.15$.
 The resulting number of baseline grammars ranged from 10 (Italian and Romanian) to 347 (Estonian).\footnote{Due to a scripting error, 846 grammars were generated for Erzya even though this was not required by the stopping criterion.}
 
-Due to the way ordering grammars are specified, certain kinds of rules cannot be modeled by our word order grammars, such as rules sensitive to the category of the dependent (e.g., differences between nominal and pronominal objects).
-Word order freedom also is not modeled.
+Due to the way ordering grammars are specified, certain kinds of rules cannot be modeled by our word order grammars.
+This includes rules sensitive to the category of the dependent, such as the difference between postverbal nominal objects and preverbal pronominal objects in Romance languages.
+It also includes rules sensitive to larger context, e.g., the alternation between verb-final order in embedded clauses and verb-initial/verb-medial order in main clauses in German and Dutch.
+Furthermore, the model does not allow rules specifying interactions between different constituents, for instance, verb-second order, where exactly one dependent precedes the verb, and all others follow it.
+Finally, the model does not account for word order freedom, as all ordering choices are deterministic.
 In this sense, ordering grammars only represent an approximation to the kinds of ordering rules found in natural language \citep{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015}.
+Other models described in the literature \citep{futrell2015experiments, wang2016galactic} mostly share these limitations.
 See Sections~\ref{subsec:expt2-discussion} and \ref{subsec:freedom} for further discussion and control studies addressing these limitations.
 %\jd{this paragraph is a little confusing. is this supposed to convince the reader that ordering grammars are a good formalism within which to construct baseline grammars? if so, pre-empt the question about the effect this will have for free word order languages by explicitly mentioning the issue and deferring its discussion to later, rather than simply saying that word order freedom is not modeled (about which the uninitiated reader will wonder whether that's a good or a bad thing)}
 
@@ -163,7 +167,7 @@ A smaller AUC value indicates a more efficient tradeoff; in most cases, the real
 
 
 
-
+To test the Efficient Tradeoff Hypothesis, we compare the tradeoff curves for the real orders with those for random baseline grammars.
 
 In Figure~\ref{fig:it}, we show the estimated values of $I_t$ for real orders (blue) and the median of $I_t$ across different baseline grammars (red).
 In most languages, $I_1$ is distinctly larger for the actual orderings (blue) compared to the baseline orderings (red). This means that real orderings tend to concentrate more predictive information at the immediately preceding word than baseline grammars.
@@ -171,7 +175,7 @@ In most languages, $I_1$ is distinctly larger for the actual orderings (blue) co
 In Figure~\ref{fig:median-table-expt2}, we show the resulting bounds on the memory-surprisal tradeoff curves, showing median surprisals at given levels of memory, for real and baseline languages.
 We compute surprisal at 40 evenly spaced points of memory (selected individually for each language, between 0 and the maximal memory capacity $H_M$ obtained using Theorem~\ref{prop:suboptimal}), over real orders and baseline grammars.
 We then compute the median surprisal over all runs for the real language, and over all baselines grammars.
-For each point, we compute an non-asymptotic and non-parametric confidence interval for the median surprisal using the binomial test.
+For each point, we compute an non-asymptotic and non-parametric 95\% confidence interval for median surprisal using the binomial test.
 %using the binomial PDF. \mhahn{some standard stats reference}
 %This is an \emph{exact} confidence interval, without parametric assumptions or asymptotic approximations.
 
