@@ -8,13 +8,6 @@ The memory--surprisal trade-off applies in both language production and comprehe
 \subsection{An information-theoretic model of online language comprehension}
 \label{sec:listener-tradeoff}
 
-%\begin{figure}
-%\centering
-%\includegraphics[width=0.9\textwidth]{figures-gdrive/communication.png}
-%	\caption{Memory and language comprehension. (1) A speaker produces a sequence of words. (2) A listener maintains a representation of the words received so far. The listener can represent these at higher (left) or lower (right) levels of precision. (3) Throughout communication, the listener generates probabilistic expectations about the next word. Higher precision of memory representations leads to more precise predictions. (4) When receiving the next word, the listener incurs surprisal depending on the predictions. Higher levels of fidelity in memory lead to lower surprisal on average. \jd{what do the numbers (1) (2) etc refer to? also: image is blurry, at least on my screen}\note{make reference to $L_t$ inside the caption. you and the surprisals visually better aligned. maybe can color-code? } \mhahn{problem suggests that memory has to be contiguous substrings}}
-%	\label{fig:communication}
-%\end{figure}
-
 We begin developing our model by considering the process of language comprehension, where a listener is processing a stream of words uttered by an interlocutor.
 Experimental research has established three properties of online language comprehension: (1) listeners maintain some information about the words received so far in incremental memory, (2) listeners form probabilistic expectations about the upcoming words \citep[e.g.][]{altmann1999incremental,staub2006syntactic,kuperberg2016we}, and (3) words are easy to process to the extent that they are predictable based on a listener's memory of words received so far \citep{hale2001probabilistic,levy2008expectation,futrell2020lossy}. 
 See Section~\ref{sec:sentprod-models} for discussion of how our model is related to theories that do not explicitly make these assumptions.
@@ -30,7 +23,7 @@ We formalize these three observations into postulates intended to provide a simp
 \end{equation}
 \end{enumerate}
 The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory} \citep{hale2001probabilistic,levy2008expectation}, an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation, antilocality effects, and effects of syntactic construction frequency. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \citep{smith-effect-2013,goodkind-predictive-2018}, and effects of surprisal have been observed for units as small as phonemes \citep{gwilliams2020neural}.
-Surprisal theory is compatible with different views on the mechanisms underlying predict, and can reflect different mechanisms such as preactivation and integration~\citep{kuperberg2016we}.
+Surprisal theory is compatible with different views on the mechanisms underlying prediction, and can reflect different mechanisms such as preactivation and integration~\citep{kuperberg2016we}.
 We do not assume that listeners explicitly compute a full-fledged distribution $P(w_t|m_t)$; we view $P(w_t|m_t)$ as a formalization of the probabilistic expectations that listeners form during comprehension.
 
 
@@ -53,13 +46,15 @@ for a given amount of information about previous words $H_M$ stored in the liste
 
 \subsection{Main hypothesis}
 
-Now that we have conceptually introduced the memory--surprisal trade-off, we can state the main hypothesis of this work:
+Having conceptually introduced the memory--surprisal trade-off, we can state the main hypothesis of this work, the Efficient Tradeoff Curve Hypothesis.
 
-\paragraph{Efficient Tradeoff Curve Hypothesis.}  Order of elements in natural language is characterized by a distinctively steeper memory--surprisal trade-off curve, compared to other possible orderings.
+\begin{adjustwidth}{6em}{6em}
+\textbf{Efficient Tradeoff Curve Hypothesis:}\\
+The order of elements in natural language is characterized by a distinctively steeper memory--surprisal trade-off curve, compared to other possible orders.
+\end{adjustwidth}
 
-
-A steep trade-off curve corresponds to memory-efficiency, in the sense that it is possible to achieve a low level of processing difficulty (average surprisal $S_M$) while storing a relatively small amount of information about previous words (entropy of memory $H_M$).
-We hypothesize that this property is reflected both in the grammatical structure of languages and in usage preferences.
+A steep trade-off curve corresponds to memory efficiency, in the sense that it is possible to achieve a low level of processing difficulty (average surprisal $S_M$) while storing a relatively small amount of information about previous words (entropy of memory $H_M$).
+We hypothesize that this property is reflected in grammatical structure and usage preferences across languages.
 
 
 \subsection{Formal definition of the memory--surprisal trade-off}
@@ -67,7 +62,7 @@ We hypothesize that this property is reflected both in the grammatical structure
 
 Here we provide the technical definition of the memory--surprisal trade-off curve. % and relate it to concepts from information theory, rate--distortion theory, and statistical complexity theory.
 Let $W$ be a stochastic process %\footnote{We will use $W$ to represent languages, and we will construct $W$ to be stationary. Large natural language texts are likely neither stationary nor ergodic \citep{debowski}. However, we are interested in explaining grammatical properties of languages, which mostly involve constraints among words within sentences, not within large texts as a whole. Therefore, we will represent a language using a stochastic process consisting of repeated independent samples from a distribution over sentences. This stochastic process is both stationary and ergodic.}
-generating a stream of symbol extending indefinitely into the past and future: $\dots, w_{-2}, w_{-1}, w_0, w_{1}, w_{2}, \dots$. %indexed as $w_1, \dots, w_t, \dots$.
+generating a stream of symbols extending indefinitely into the past and future: $\dots, w_{-2}, w_{-1}, w_0, w_{1}, w_{2}, \dots$. %indexed as $w_1, \dots, w_t, \dots$.
 These symbols can represent words, morphemes, or other units for decomposing sentences into a sequence of symbols. 
 We model this process as \emph{stationary} \citep{doob1953stochastic}, that is, the joint probability distributions of symbols at different time points depend only on their relative positions in time, not their absolute positions (see SI Section 1.1.1 for more on this modeling assumption).
 
@@ -154,6 +149,17 @@ Rate--distortion theory studies curves of the form of Eq.~\ref{eq:ms-formal}, wh
 %Our theoretical results still hold if we were to define rate using mutual information (see SI Section \REF).
 
 
+\begin{figure}
+	(a)
+\includegraphics[width=0.4\textwidth]{figures-gdrive/mi-distance.pdf}
+	(b)
+\includegraphics[width=0.25\textwidth]{figures-gdrive/theorem.pdf}
+	\caption{
+		(a) Conditional mutual information $I_t$ captures how much predictive information about the next word is provided, on average, by the word $t$ steps in the past.
+		(b) Here we illustrate our theoretical result. We plot $I_t$ (top) and $tI_t$ (bottom) as functions of $t$. For any choice of $T$, a listener using $B$ bits memory (bottom) to represent prior observations will incur at least $A$ bits of extra surprisal beyond the entropy rate (top). 
+}\label{fig:theorem}
+\end{figure}
+
 \subsection{Information locality}
 \label{sec:infoloc}\label{sec:tradeoff}
 
@@ -174,22 +180,6 @@ Our argument will make use of a quantity called \key{mutual information}. Mutual
     &= H[Y|Z] - H[Y|X,Z].
 \end{align}
 Mutual information is always non-negative. It is zero when $X$ and $Y$ are conditionally independent given $Z$, and positive whenever $X$ gives any information that makes the value of $Y$ more predictable, or vice versa. 
-
-
-\begin{figure}
-	(a)
-\includegraphics[width=0.4\textwidth]{figures-gdrive/mi-distance.pdf}
-	(b)
-\includegraphics[width=0.25\textwidth]{figures-gdrive/theorem.pdf}
-	\caption{
-		(a) Conditional mutual information $I_t$ captures how much predictive information about the next word is provided, on average, by the word $t$ steps in the past.
-		(b) Here we illustrate our theoretical result. We plot $I_t$ (top) and $tI_t$ (bottom) as functions of $t$. For any choice of $T$, a listener using $B$ bits memory (bottom) to represent prior observations will incur at least $A$ bits of extra surprisal beyond the entropy rate (top). 
-}\label{fig:theorem}
-\end{figure}
-
-
-
-
 
 We will study the mutual information structure of natural language sentences, and in particular the mutual information between words at certain distances in linear order. We define the notation $I_t$ to mean the mutual information between words at distance $t$ from each other, conditional on the intervening words:
 \begin{align}
@@ -234,11 +224,11 @@ Importantly, the bound holds for \emph{any} memory encoding function $M$, includ
 
 \begin{figure}
 \includegraphics[width=0.45\textwidth]{figures/listener-tradeoff.pdf}
-	\caption{Listener's memory-surprisal tradeoff for the two processes in Figure~\ref{fig:basic}. Recall that the red process has a faster decay of conditional mutual information $I_t$. Correspondingly, this figure shows that a listener can achieve lower surprisal at the same level of memory load. }\label{fig:listener-tradeoff}
+	\caption{Listener's memory-surprisal tradeoff for the two processes in Figure~\ref{fig:basic}. Recall that the red process has a faster decay of conditional mutual information $I_t$. Correspondingly, this figure shows that a listener can achieve lower surprisal at the same level of memory load. \jd{should the axis labels here include "average"? it might also be useful to call "A" and "B" sth like "more efficient" and "less efficient" and have the legend header be "Language"} }\label{fig:listener-tradeoff}
 \end{figure}
 
 Eq.~\ref{eq:memory-bound} means that maintaining long-term dependencies requires higher memory usage. Carrying the same amount of information over longer distances requires more memory; this fact is reflected in the factor $t$ inside each term of the sum. 
-The result is that modeling long-term statistical dependencies is more costly in terms of memory usage than modeling shorter ones.
+The result is that modeling long-term statistical dependencies is more costly in terms of memory usage than modeling shorter ones; this cost can manifest in memory storage or in surprisal.
 The information locality bound theorem demonstrates in a highly general way that language comprehension requires less memory resources when statistical dependencies are mostly short-term. 
 
 Because processing long-term dependencies requires higher memory usage, the theorem also implies that a language will be easier to process when most of the predictive information about a word is concentrated close to that word in time---that is, when $I_t$ falls off rapidly as $t \rightarrow \infty$. When memory capacity is limited, then there must be some timescale $T$ such that a listener appears to be affected by excess surprisal arising from statistical dependencies of length greater than $T$. A language avoids such cost to the extent that it avoids dependencies with a time-span larger than $T$.
