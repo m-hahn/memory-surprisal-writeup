@@ -8,13 +8,6 @@ The memory--surprisal trade-off applies in both language production and comprehe
 \subsection{An information-theoretic model of online language comprehension}
 \label{sec:listener-tradeoff}
 
-%\begin{figure}
-%\centering
-%\includegraphics[width=0.9\textwidth]{figures-gdrive/communication.png}
-%	\caption{Memory and language comprehension. (1) A speaker produces a sequence of words. (2) A listener maintains a representation of the words received so far. The listener can represent these at higher (left) or lower (right) levels of precision. (3) Throughout communication, the listener generates probabilistic expectations about the next word. Higher precision of memory representations leads to more precise predictions. (4) When receiving the next word, the listener incurs surprisal depending on the predictions. Higher levels of fidelity in memory lead to lower surprisal on average. \jd{what do the numbers (1) (2) etc refer to? also: image is blurry, at least on my screen}\note{make reference to $L_t$ inside the caption. you and the surprisals visually better aligned. maybe can color-code? } \mhahn{problem suggests that memory has to be contiguous substrings}}
-%	\label{fig:communication}
-%\end{figure}
-
 We begin developing our model by considering the process of language comprehension, where a listener is processing a stream of words uttered by an interlocutor.
 Experimental research has established three properties of online language comprehension: (1) listeners maintain some information about the words received so far in incremental memory, (2) listeners form probabilistic expectations about the upcoming words \citep[e.g.][]{altmann1999incremental,staub2006syntactic,kuperberg2016we}, and (3) words are easy to process to the extent that they are predictable based on a listener's memory of words received so far \citep{hale2001probabilistic,levy2008expectation,futrell2020lossy}. 
 See Section~\ref{sec:sentprod-models} for discussion of how our model is related to theories that do not explicitly make these assumptions.
@@ -61,7 +54,7 @@ The order of elements in natural language is characterized by a distinctively st
 \end{adjustwidth}
 
 A steep trade-off curve corresponds to memory efficiency, in the sense that it is possible to achieve a low level of processing difficulty (average surprisal $S_M$) while storing a relatively small amount of information about previous words (entropy of memory $H_M$).
-We hypothesize that this property is reflected both in the grammatical structure of languages and in usage preferences.\jd{why usage preferences? because of the fedzechkina study?}
+We hypothesize that this property is reflected in grammatical structure and usage preferences across languages.
 
 
 \subsection{Formal definition of the memory--surprisal trade-off}
@@ -235,7 +228,7 @@ Importantly, the bound holds for \emph{any} memory encoding function $M$, includ
 \end{figure}
 
 Eq.~\ref{eq:memory-bound} means that maintaining long-term dependencies requires higher memory usage. Carrying the same amount of information over longer distances requires more memory; this fact is reflected in the factor $t$ inside each term of the sum. 
-The result is that modeling long-term statistical dependencies is more costly in terms of memory usage than modeling shorter ones.\jd{is it true that "memory usage" is simply a neutral term that includes both storage and retrieval? if so, it may be useful to flag that here explicitly.}
+The result is that modeling long-term statistical dependencies is more costly in terms of memory usage than modeling shorter ones; this cost can manifest in memory storage or in surprisal.
 The information locality bound theorem demonstrates in a highly general way that language comprehension requires less memory resources when statistical dependencies are mostly short-term. 
 
 Because processing long-term dependencies requires higher memory usage, the theorem also implies that a language will be easier to process when most of the predictive information about a word is concentrated close to that word in time---that is, when $I_t$ falls off rapidly as $t \rightarrow \infty$. When memory capacity is limited, then there must be some timescale $T$ such that a listener appears to be affected by excess surprisal arising from statistical dependencies of length greater than $T$. A language avoids such cost to the extent that it avoids dependencies with a time-span larger than $T$.

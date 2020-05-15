@@ -133,6 +133,29 @@ See Sections~\ref{subsec:expt2-discussion} and \ref{subsec:freedom} for further 
 
 
 \subsection{Results}\label{sec:main-experiment-results}
+To test the Efficient Tradeoff Curve Hypothesis, we compare the tradeoff curves for the real orders with those for random baseline grammars.
+In Figure~\ref{fig:it}, we show the estimated values of $I_t$ for real orders (blue) and the median of $I_t$ across different baseline grammars (red).
+In most languages, $I_1$ is distinctly larger for the actual orderings (blue) compared to the baseline orderings (red). This means that real orderings tend to concentrate more predictive information at the immediately preceding word than baseline grammars.
+
+In Figure~\ref{fig:median-table-expt2}, we show the resulting bounds on the memory-surprisal tradeoff curves, showing median surprisals at given levels of memory, for real and baseline languages.
+We compute surprisal at 40 evenly spaced points of memory (selected individually for each language, between 0 and the maximal memory capacity $H_M$ obtained using Theorem~\ref{prop:suboptimal}), over real orders and baseline grammars.
+We then compute the median surprisal over all runs for the real language, and over all baselines grammars.
+For each point, we compute an non-asymptotic and non-parametric 95\% confidence interval for median surprisal using the binomial test.
+%using the binomial PDF. \mhahn{some standard stats reference}
+%This is an \emph{exact} confidence interval, without parametric assumptions or asymptotic approximations.
+
+Numerically, the real language provides a better tradeoff than the median of the baselines across all languages, with four exceptions (Latvian, North Sami, Polish, Slovak). In order to quantify the degree of optimality of real orders, we further computed the area under the memory-surprisal tradeoff curve (AUC) for real and baseline orderings.
+Area under the curve (AUC) is a general quantity evaluating the efficiency of a tradeoff curve \citep{bradley1997use}.
+A \emph{smaller} area indicates a \emph{more efficient} memory-surprisal tradeoff.
+In Figure~\ref{fig:auc}, we plot the AUC for the real orderings, together with the distribution of AUCs for baseline grammars.
+We quantify the degree of optimality by the fraction of baseline grammars for which the AUC is higher than for the real orders:
+The real ordering is highly efficient if it results in a lower AUC than almost all baseline grammars.
+Numerically, the AUC is smaller in the real orderings than in at least 50\% of baseline grammars in all but three languages (Polish, Slovak, North Sami).
+We evaluated significance using a two-sided binomial test.
+In these three languages, the AUC is higher in the real orderings than in significantly less than 50\% ($p < 0.01$ in each language).
+In all other languages except for Latvian, the fraction of more efficient baseline grammars was significantly less than 50\%, at $p=0.01$, where we applied Hochberg's step-up procedure \citep{hochberg1988sharper} to control for multiple comparisons.
+In 42 of the 54 languages, the real language was more efficient than all of the sampled baseline grammars. % fraction of more efficient baseline grammars out of the samples taken was 0\%.
+
 
 \begin{figure}
 	\begin{center}
@@ -167,37 +190,11 @@ A smaller AUC value indicates a more efficient tradeoff; in most cases, the real
 
 
 
-To test the Efficient Tradeoff Hypothesis, we compare the tradeoff curves for the real orders with those for random baseline grammars.
-
-In Figure~\ref{fig:it}, we show the estimated values of $I_t$ for real orders (blue) and the median of $I_t$ across different baseline grammars (red).
-In most languages, $I_1$ is distinctly larger for the actual orderings (blue) compared to the baseline orderings (red). This means that real orderings tend to concentrate more predictive information at the immediately preceding word than baseline grammars.
-
-In Figure~\ref{fig:median-table-expt2}, we show the resulting bounds on the memory-surprisal tradeoff curves, showing median surprisals at given levels of memory, for real and baseline languages.
-We compute surprisal at 40 evenly spaced points of memory (selected individually for each language, between 0 and the maximal memory capacity $H_M$ obtained using Theorem~\ref{prop:suboptimal}), over real orders and baseline grammars.
-We then compute the median surprisal over all runs for the real language, and over all baselines grammars.
-For each point, we compute an non-asymptotic and non-parametric 95\% confidence interval for median surprisal using the binomial test.
-%using the binomial PDF. \mhahn{some standard stats reference}
-%This is an \emph{exact} confidence interval, without parametric assumptions or asymptotic approximations.
-
-Numerically, the real language provides a better tradeoff than the median of the baselines across all languages, with four exceptions (Latvian, North Sami, Polish, Slovak). In order to quantify the degree of optimality of real orders, we further computed the area under the memory-surprisal tradeoff curve (AUC) for real and baseline orderings.
-Area under the curve (AUC) is a general quantity evaluating the efficiency of a tradeoff curve \citep{bradley1997use}.
-A \emph{smaller} area indicates a \emph{more efficient} memory-surprisal tradeoff.
-In Figure~\ref{fig:auc}, we plot the AUC for the real orderings, together with the distribution of AUCs for baseline grammars.
-We quantify the degree of optimality by the fraction of baseline grammars for which the AUC is higher than for the real orders:
-The real ordering is highly efficient if it results in a lower AUC than almost all baseline grammars.
-Numerically, the AUC is smaller in the real orderings than in at least 50\% of baseline grammars in all but three languages (Polish, Slovak, North Sami).
-We evaluated significance using a two-sided binomial test.
-In these three languages, the AUC is higher in the real orderings than in significantly less than 50\% ($p < 0.01$ in each language).
-In all other languages except for Latvian, the fraction of more efficient baseline grammars was significantly less than 50\%, at $p=0.01$, where we applied Hochberg's step-up procedure \citep{hochberg1988sharper} to control for multiple comparisons.
-In 42 of the 54 languages, the real language was more efficient than all of the sampled baseline grammars. % fraction of more efficient baseline grammars out of the samples taken was 0\%.
-
-
-
 \subsection{Discussion}\label{subsec:expt2-discussion}
 
 We have found that 50 out of 54 languages provide better memory-surprisal tradeoffs than random baselines with consistent but counterfactual word order rules.
 Four languages provide exceptions; these are Latvian (Baltic), North Sami (Uralic), Polish and Slovak (both Slavic); these four languages did not have significantly lower AUC values than half of the random baselines.
-One feature that unites these four languages is that they have strong word order freedom, as we will see below in Figure~\ref{fig:freedom-surp} \mhahn{(also CITE something)}.
+One feature that unites these four languages is that they have strong word order freedom, as we will see below in Figure~\ref{fig:freedom-surp}. % \mhahn{(also CITE something)}.
 Word order freedom plausibly makes sentences less predictable, as the same syntactic structure can receive different surface realizations.
 We thus hypothesized that word order freedom  impacts the memory-surprisal tradeoff, and that languages with more strongly fixed word order should display more optimal memory-surprisal tradeoffs.
 
@@ -218,7 +215,7 @@ In Section~\ref{subsec:freedom}, we will test the latter possibility by examinin
 \begin{figure}
 \includegraphics[width=0.95\textwidth]{figures/surprisal-branching-entropy-REAL-invert.pdf}
 	\caption{Word order freedom and strength of optimization: For each of the 54 languages, we show word order freedom as measured by branching entropy, and the difference between the real order's surprisal and the mean surprisal of the baseline grammars, at the maximum memory value (see Figure~\ref{fig:median-table}).
-	Languages with higher branching direction entropy show a smaller reduction in surprisal compared to baseline orders.\jd{is there sth to say about the outliers -- uyghur, arabic, french?} \mhahn{remove `Adap' from labels}
+	Languages with higher branching direction entropy show a smaller reduction in surprisal compared to baseline orders.\jd{is there sth to say about the outliers -- uyghur, arabic, french?}
 	}\label{fig:freedom-surp}
 \end{figure}
 
