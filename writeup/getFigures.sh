@@ -13,6 +13,7 @@ cp ~/memory-surprisal/writeup/quantiles-table.pdf .
 cp ~/memory-surprisal/writeup/auc-table.pdf .
 cp ~/memory-surprisal/writeup/auc-table_MLE.pdf .
 cp ~/memory-surprisal/writeup/it-table.pdf .
+cp ~/memory-surprisal/writeup/it-table-mle.pdf .
 cp ~/memory-surprisal/writeup/results-table.pdf .
 cp ~/memory-surprisal/writeup/results-table-mle.pdf .
 cp ~/memory-surprisal/code/study3/Japanese/tradeoffs/figures/* figures/
