@@ -86,27 +86,20 @@
 
 
 \begin{abstract}
-Online memory limitations are well-established as a factor impacting sentence processing and have been argued to account for crosslinguistic word order regularities. Building off expectation-based models of language processing, we provide an information-theoretic formalization of these memory limitations. We introduce the idea of a memory-surprisal tradeoff: comprehenders can achieve lower average surprisal per word at the cost of storing more information about past context. We show that the shape of the tradeoff is determined in part by word order. In particular, languages will enable more efficient tradeoffs when they exhibit information locality: when predictive information about a word is concentrated in the word’s recent past. We show evidence from corpora of 54 real languages showing that languages allow for more efficient memory-surprisal tradeoffs than random baseline word order grammars. 
+Online memory limitations are well-established as a factor impacting sentence processing and have been argued to account for crosslinguistic word order regularities. Building off expectation-based models of language processing, we provide an information-theoretic formalization of these memory limitations. We introduce the idea of a memory--surprisal tradeoff: comprehenders can achieve lower average surprisal per word at the cost of storing more information about past context. We show that the shape of the tradeoff is determined in part by word order. In particular, languages will enable more efficient tradeoffs when they exhibit information locality: when predictive information about a word is concentrated in the word’s recent past. We show evidence from corpora of 54 real languages showing that languages allow for more efficient memory--surprisal tradeoffs than random baseline word order grammars. 
 We then use data from two agglutinative languages to show that morpheme order also optimizes efficiency of this tradeoff.
 \end{abstract}
 
 
-% A high-level point: We formalize the idea that memory limitations must result in locality in order, giving a new definition for what "locality" must mean
-% 
-
- \jd{throughout the document, ultimately make sure to commit to either the tradeoff or trade-off spelling}
  
  \jd{at the very end, make sure to either consistently use past or present tense for things that were done (i prefer past tense for reports of what was done, and present tense for conclusions, implications, generalizations)}
  
 \section{Introduction}
-
-% Other framing idea: Dependency/information locality is a noted property of language. We show that information locality is a general property of any efficient communication system operating under memory constraints. 
-
 \input{introduction.tex}
 
 
 \section{Background}\label{sec:background}
-% More detailed lit review
+
 
 \input{background.tex}
 
@@ -119,11 +112,9 @@ We then use data from two agglutinative languages to show that morpheme order al
 
 \input{toy-experiment.tex}
 
-%\section{Study 1b: Information Locality and Noun Phrase Order}
-%\input{np-experiment.tex}
 
 
-\section{Study 2: Large-Scale Evidence that Natural Language Optimizes Memory-Surprisal Tradeoff}
+\section{Study 2: Large-Scale Evidence that Word Orders Optimize Memory-Surprisal Tradeoff}
 \label{sec:main-experiment}
 
 \input{main-experiment.tex}
@@ -152,20 +143,6 @@ Using this result, we provided evidence that languages order words and morphemes
 
 Our result shows that wide-ranging principles of order in natural language can be explained from highly generic cognitively-motivated information-theoretic principles. The locality properties we have discussed are some of the most characteristic properties of natural language, setting natural language apart from other codes studied in information theory.
 Therefore, our result raises the question of whether other distinctive characteristics of language---for example, mildly context-sensitive syntax, duality of patterning, and compositionality---might also be explained in terms of information-theoretic resource constraints on production and comprehension.
-
-%\mhahn{make this distinct from the beginning of the General Discussion} \jd{indeed, this is where you want to draw conclusions about the issues raised at the very beginning: whether order of elements in linguistic sequences are structured to reduce incremental memory requirements; emergence of information locality; how this falls out of the memory-surprisal tradeoff considerations; and what this says about fruitful ways to think about language in general}
-
-
-%\mhahn{from background: While these theories are widespread in the linguistics literature, there exists to date no quantifiable definition of `relevance' or `being closer cenceptually'. One of our contributions is to derive such a notion of `relevance' from the minimization of memory usage during language processing. \jd{make sure this relevance point is taken back up in the general discussion}}
-
-
-
-
-%We introduced a notion of memory efficiency in language processing, called the memory--surprisal trade-off.
-%We stated the Efficient Tradeoff Hypothesis: Order of elements in natural language is characterized by efficient memory--surprisal tradeoffs, compared to other possible orders.
-%In Study 1, we showed that the Efficient Tradeoff Hypothesis predicts the known preference for short dependencies.
-%In Study 2, we used corpus data from 54 languages to show that word order provides more efficient tradeoffs than baseline order grammars.
-%In Study 3, we showed that, in two languages (Japanese and Sesotho), the order of verb affixes not only provides approximately optimal tradeoffs, but can also partly be predicted by optimizing for the efficiency of the memory--surprisal tradeoff.
 
 
 

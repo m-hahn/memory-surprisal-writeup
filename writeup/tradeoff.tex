@@ -27,8 +27,7 @@ Surprisal theory is compatible with different views on the mechanisms underlying
 We do not assume that listeners explicitly compute a full-fledged distribution $P(w_t|m_t)$; we view $P(w_t|m_t)$ as a formalization of the probabilistic expectations that listeners form during comprehension.
 
 
-Our expression~(\ref{eq:lossy-surp}) differs from the usual formulation of surprisal theory in that we consider predictability based on a (potentially lossy or noisy) memory representation $m_t$, rather than predictability based on the true complete context $w_1, \dots, w_{t-1}$. The generalization to lossy memory representations is necessary to capture empirically observed effects of memory limitations on language processing, such as dependency locality and structural forgetting \citep{futrell2020lossy}. % For other ways of capturing effects of both memory limitations and probabilistic expectations, see \citet{demberg-incremental-2013} and \citet{rasmussen2018left}, and see Section~\ref{sec:sentprod-models} for discussion of the relations between these approaches and our models.
-%\mhahn{how about also mentioning these two in the discussion} \rljf{Let's move these to the discussion and not mention them here}
+Our expression~(\ref{eq:lossy-surp}) differs from the usual formulation of surprisal theory in that we consider predictability based on a (potentially lossy or noisy) memory representation $m_t$, rather than predictability based on the true complete context $w_1, \dots, w_{t-1}$. The generalization to lossy memory representations is necessary to capture empirically observed effects of memory limitations on language processing, such as dependency locality and structural forgetting \citep{futrell2020lossy}. 
 
 In this work, we are interested in using theories of processing difficulty to derive predictions about languages as a whole, not about individual words or sentences. Therefore, we need a measure of the processing difficulty associated with a language as a whole. For this, we consider the \emph{average} surprisal per word in the language. We call this quantity the \key{average surprisal} of a language given a memory encoding function $M$, denoted $S_M$.
 
@@ -46,10 +45,10 @@ for a given amount of information about previous words $H_M$ stored in the liste
 
 \subsection{Main hypothesis}
 
-Having conceptually introduced the memory--surprisal tradeoff, we can state the main hypothesis of this work, the Efficient Tradeoff Curve Hypothesis.
+Having conceptually introduced the memory--surprisal tradeoff, we can state the main hypothesis of this work, the Efficient Tradeoff Hypothesis.
 
 \begin{adjustwidth}{6em}{6em}
-\textbf{Efficient Tradeoff Curve Hypothesis:}\\
+\textbf{Efficient Tradeoff Hypothesis:}\\
 The order of elements in natural language is characterized by a distinctively steeper memory--surprisal tradeoff curve, compared to other possible orders.
 \end{adjustwidth}
 A steep tradeoff curve corresponds to memory efficiency, in the sense that it is possible to achieve a low level of processing difficulty (average surprisal $S_M$) while storing a relatively small amount of information about previous words (entropy of memory $H_M$).
@@ -59,15 +58,13 @@ We hypothesize that this property is reflected in grammatical structure and usag
 \subsection{Formal definition of the memory--surprisal tradeoff}
 \label{sec:formal-tradeoff}
 
-Here we provide the technical definition of the memory--surprisal tradeoff curve. % and relate it to concepts from information theory, rate--distortion theory, and statistical complexity theory.
-Let $W$ be a stochastic process %\footnote{We will use $W$ to represent languages, and we will construct $W$ to be stationary. Large natural language texts are likely neither stationary nor ergodic \citep{debowski}. However, we are interested in explaining grammatical properties of languages, which mostly involve constraints among words within sentences, not within large texts as a whole. Therefore, we will represent a language using a stochastic process consisting of repeated independent samples from a distribution over sentences. This stochastic process is both stationary and ergodic.}
-generating a stream of symbols extending indefinitely into the past and future: $\dots, w_{-2}, w_{-1}, w_0, w_{1}, w_{2}, \dots$. %indexed as $w_1, \dots, w_t, \dots$.
+Here we provide the technical definition of the memory--surprisal tradeoff curve.
+Let $W$ be a stochastic process generating a stream of symbols extending indefinitely into the past and future: $\dots, w_{-2}, w_{-1}, w_0, w_{1}, w_{2}, \dots$. %indexed as $w_1, \dots, w_t, \dots$.
 These symbols can represent words, morphemes, or other units for decomposing sentences into a sequence of symbols. 
 We model this process as \emph{stationary} \citep{doob1953stochastic}, that is, the joint probability distributions of symbols at different time points depend only on their relative positions in time, not their absolute positions (see SI Section 1.1.1 for more on this modeling assumption).
 
 Let $M$ be a memory encoding function.
 We consider memory and surprisal costs at an arbitrary time point $t$.
-%The process $W$ extends indefinitely into the past and future from this time point: $\dots, w_{t-2}, w_{t-1}, w_t, w_{t+1}, w_{t+2}, \dots$.
 Recall that the surprisal for a specific word $w_t$ after a past word sequence $\dots, w_{t-2}, w_{t-1}$ encoded into a memory state $m_t$ is:
 \begin{equation}
     -\log P(w_t | m_t).
@@ -223,7 +220,7 @@ Importantly, the bound holds for \emph{any} memory encoding function $M$, includ
 
 \begin{figure}
 \includegraphics[width=0.45\textwidth]{figures/listener-tradeoff.pdf}
-	\caption{Listener's memory-surprisal tradeoff for the two hypothetical languages in Figure~\ref{fig:basic}. Recall that the MoreEfficient language has a faster decay of conditional mutual information $I_t$. Correspondingly, this figure shows that a listener can achieve lower average surprisal at the same level of memory load.}\label{fig:listener-tradeoff}
+	\caption{Listener's memory--surprisal tradeoff for the two hypothetical languages in Figure~\ref{fig:basic}. Recall that the MoreEfficient language has a faster decay of conditional mutual information $I_t$. Correspondingly, this figure shows that a listener can achieve lower average surprisal at the same level of memory load.}\label{fig:listener-tradeoff}
 \end{figure}
 
 Eq.~\ref{eq:memory-bound} means that maintaining long-term dependencies requires higher memory usage. Carrying the same amount of information over longer distances requires more memory; this fact is reflected in the factor $t$ inside each term of the sum. 
@@ -241,8 +238,8 @@ This means that predictive information about an observation is concentrated more
 In Figure~\ref{fig:basic} (right), we show $t\cdot I_t$ as a function of $t$.
 Note that the area under the curve is equal to (\ref{eq:memory-bound}).
 This area is smaller for the MoreEfficient language, as $I_t$ decays more quickly there.  
-In Figure~\ref{fig:listener-tradeoff}, we show the resulting bounds on memory-surprisal tradeoffs of the two languages.  
-As $I_t$ decays faster for language MoreEfficient, it has a more efficient memory-surprisal tradeoff, allowing a listener to achieve strictly lower surprisal across a range of memory values.
+In Figure~\ref{fig:listener-tradeoff}, we show the resulting bounds on memory--surprisal tradeoffs of the two languages.  
+As $I_t$ decays faster for language MoreEfficient, it has a more efficient memory--surprisal tradeoff, allowing a listener to achieve strictly lower surprisal across a range of memory values.
 
 
 

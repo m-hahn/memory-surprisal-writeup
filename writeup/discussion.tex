@@ -1,4 +1,4 @@
-We introduced a notion of memory efficiency in language processing: the memory--surprisal trade-off.
+We introduced a notion of memory efficiency in language processing: the memory--surprisal tradeoff.
 We then tested the resulting Efficient Tradeoff Hypothesis: Order of elements in natural language is characterized by efficient memory--surprisal tradeoffs, compared to other possible orders.
 In Study 1, we showed that the Efficient Tradeoff Hypothesis predicts the known preference for short dependencies.
 In Study 2, we used corpus data from 54 languages to show that real word orders provide more efficient tradeoffs than baseline order grammars.
@@ -12,7 +12,7 @@ Here, we discuss the limitations  of our results and the implications they have 
 
 
 %\paragraph{The Roles of Speakers, Listeners, and Interaction}
-%Our derivation of the memory-surprisal tradeoff considers the listener.
+%Our derivation of the memory--surprisal tradeoff considers the listener.
 %Debate about the roles of speaker and listener in shaping language.
 %Interaction: We could make the process include the entire conversational history (including what the listener said before).
 
@@ -26,10 +26,10 @@ Here, we discuss the limitations  of our results and the implications they have 
 
 %\mhahn{TODO reorganize this}
 
-Our results leave open the causal mechanism leading to the observed optimization, in particular, whether optimization is the result of minimizing effort during comprehension, production, or acquisition. One possibility is that optimization reflects an effort on the side of the speaker to produce utterances that are easy to comprehend by listeners, a strategy known as \emph{audience design} \citep{clark1982audience,lindblom1990communication, brennan1995feeling}. More efficient memory-surprisal tradeoffs are useful from the listener's perspective because they allow for better prediction with lower memory investment than less efficient tradeoffs. 
+Our results leave open the causal mechanism leading to the observed optimization, in particular, whether optimization is the result of minimizing effort during comprehension, production, or acquisition. One possibility is that optimization reflects an effort on the side of the speaker to produce utterances that are easy to comprehend by listeners, a strategy known as \emph{audience design} \citep{clark1982audience,lindblom1990communication, brennan1995feeling}. More efficient memory--surprisal tradeoffs are useful from the listener's perspective because they allow for better prediction with lower memory investment than less efficient tradeoffs. 
 
 Another possibility is that optimization reflects production-internal pressures to minimize effort on the speaker's part during sentence planning \citep{bock1985conceptual,ferreira2000effect,macdonald2013language,fedzechkina2020production}. That is, instead of speakers optimizing for the benefit of listeners, the iterated application of production-internal heuristics that reduce speaker effort may result in more efficient tradeoffs \citep{macdonald2013language}. %\jd{is this really true? if one takes seriously the kinds of heuristics that macdonald, bock, ferreira, et al propose -- mention "easily retrievable" things first, ie shorter things, animate things, given things, etc -- would the formulated tradeoff really emerge?}\mhahn{I think the next sentence helps with this}
-While our theory is stated in terms of the efficiency of language processing for a comprehender of language, we can show that an analogous memory--surprisal trade-off exists in language production, and that speakers with bounded memory capacity can minimize production errors when the language has stronger information locality (see SI Section 1.4 for a mathematical statement and proof).
+While our theory is stated in terms of the efficiency of language processing for a comprehender of language, we can show that an analogous memory--surprisal tradeoff exists in language production, and that speakers with bounded memory capacity can minimize production errors when the language has stronger information locality (see SI Section 1.4 for a mathematical statement and proof).
 %\jd{isn't a "produce more accurate language" pressure qualitatively different from the kinds of availability-based production pressures mentioned above? i guess the fedzechkina and jaeger 2020 perspective is more closely aligned with the "produce more accurate language" perspective than with the "produce easy things first perspective"}\mhahn{I have rephrased to `minimize production errors'.}
 
 
@@ -68,7 +68,7 @@ Evidence from artificial language learning experiments suggests that language ac
 There is a substantial literature proposing sentence processing models and quantitative memory metrics for sentence processing.
 In this section, we discuss how our theoretical results relate to and generalize these previously proposed models.
 We do not view our model as competing with or replacing any of these models; instead, our information-theoretic analysis captures aspects that are common to most of these models and shows how they arise from very general modeling assumptions. 
-%In this section, we argue that---although our theory is couched in the language of surprisal theory \citep{hale2001probabilistic,levy2008expectation,hale2016information}---the memory--surprisal curve reflects fundamental information-theoretic trade-offs that must apply in any theory. 
+%In this section, we argue that---although our theory is couched in the language of surprisal theory \citep{hale2001probabilistic,levy2008expectation,hale2016information}---the memory--surprisal curve reflects fundamental information-theoretic tradeoffs that must apply in any theory. 
 
 In Section~\ref{sec:tradeoff}, we proved a formal relationship between the entropy of memory $H_M$ and average surprisal $S_M$. 
 We made no assumptions about the architecture of incremental memory, and so our result is general across all such architectures.
@@ -290,8 +290,8 @@ Related to Theorem~\ref{prop:suboptimal}, \citet{sharan-prediction-2016} show a 
 \cite{debowski-excess-2011} studied the excess entropy of language across very long ranges of text, in particular aiming to determine whether it is finite.
 Our work contrasts with this work in that we are interested in dependencies within sentences.
 \cite{hahn2019estimating} empirically estimate the predictive rate-distortion tradeoff of natural language \citep{still-information-2014,marzen-predictive-2016}.
-This tradeoff is related to but different from the memory-surprisal tradeoff: it models a setting where past observations are compressed once as a whole, while a memory capacity bottleneck holds at every point in time in our model.
-Nonetheless, their method might also be applicable to estimating of memory-surprisal tradeoff curves.
+This tradeoff is related to but different from the memory--surprisal tradeoff: it models a setting where past observations are compressed once as a whole, while a memory capacity bottleneck holds at every point in time in our model.
+Nonetheless, their method might also be applicable to estimating of memory--surprisal tradeoff curves.
 
 %While we define information locality in terms of \emph{conditional} mutual information, prior work has studied  how \emph{unconditional} mutual information decays with distance in natural language texts, at the level of orthographic characters \citep{ebeling-entropy-1994,lin-critical-2017} and words \citep{futrell2019syntactic}.
 %The entropy rate $S_\infty$ of natural language text has been studied by different authors, including \citet{shannon1951entropy,bentz2017entropy,takahashi2018cross}. 

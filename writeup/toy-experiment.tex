@@ -1,6 +1,6 @@
-So far, we have proven that there exists a trade-off between memory invested and surprisal incurred during language processing, and that this trade-off is optimized when languages have relatively short-term dependencies. In this section we qualitatively test the Efficient Tradeoff Curve Hypothesis by reanalyzing the data from \cite{fedzechkina-human-2017}.
+So far, we have proven that there exists a tradeoff between memory invested and surprisal incurred during language processing, and that this tradeoff is optimized when languages have relatively short-term dependencies. In this section we qualitatively test the Efficient Tradeoff Hypothesis by reanalyzing the data from \cite{fedzechkina-human-2017}.
 This is a miniature artificial language study that showed a bias for dependency locality in production in artificial language learning. 
-We will show that, as predicted, the languages which were favored in the artificial language learning experiment are those which optimize the memory--surprisal trade-off. 
+We will show that, as predicted, the languages which were favored in the artificial language learning experiment are those which optimize the memory--surprisal tradeoff. 
 
 \subsection{Background: \citet{fedzechkina-human-2017}}
 
@@ -60,11 +60,11 @@ Crucially, \citet{fedzechkina-human-2017} set up the experiment such that in all
 
 \citet{fedzechkina-human-2017} found that participants favored the $A$ orders over the $B$ orders, despite the fact that there was no pattern in the participants' training input which would have favored $A$ over $B$. That is, when exposed to input which was ambiguous with respect to language $A$ or $B$, participants favored language $A$. \citet{fedzechkina-human-2017} explained this result in terms of dependency locality: because the $A$ orders create short dependencies between the verb and its arguments and the $B$ orders create long dependencies, participants preferred the $A$ orders.
 
-\subsection{Calculating the memory--surprisal trade-off for the artificial languages}
+\subsection{Calculating the memory--surprisal tradeoff for the artificial languages}
 
-The Efficient Tradeoff Curve Hypothesis predicts that the favored language $A$ has a steeper memory--surprisal trade-off curve than the disfavored language $B$. Because of the controlled nature of this artificial language, we are able to test this hypothesis by exactly computing the bound on memory as given in Theorem~\ref{prop:suboptimal}. In fact, for this toy process, we can prove that the bound provided by the theorem is achievable, meaning that our computations reflect the true memory--surprisal trade-off curve, and not only a lower bound on it.
+The Efficient Tradeoff Hypothesis predicts that the favored language $A$ has a steeper memory--surprisal tradeoff curve than the disfavored language $B$. Because of the controlled nature of this artificial language, we are able to test this hypothesis by exactly computing the bound on memory as given in Theorem~\ref{prop:suboptimal}. In fact, for this toy process, we can prove that the bound provided by the theorem is achievable, meaning that our computations reflect the true memory--surprisal tradeoff curve, and not only a lower bound on it.
 
-We only consider the head-final version of \citet{fedzechkina-human-2017}'s artificial language. This is because our bound on the memory--surprisal trade-off curve is invariant under reversal of a language. That is, if we take a language and reverse the order of all the words in all its sentences, we would measure the same lower bound on the memory--surprisal trade-off curve (for a proof, see SI Section 1.5). Therefore, strictly head-final and strictly head-initial languages are equivalent under our bound.\footnote{Note that this invariance to reversal applies only to our \emph{lower bound} on the memory-surprisal trade-off curve; the true curve is not generally invariant to word order reversal \citep{crutchfield-times-2009}.} 
+We only consider the head-final version of \citet{fedzechkina-human-2017}'s artificial language. This is because our bound on the memory--surprisal tradeoff curve is invariant under reversal of a language. That is, if we take a language and reverse the order of all the words in all its sentences, we would measure the same lower bound on the memory--surprisal tradeoff curve (for a proof, see SI Section 1.5). Therefore, strictly head-final and strictly head-initial languages are equivalent under our bound.\footnote{Note that this invariance to reversal applies only to our \emph{lower bound} on the memory--surprisal tradeoff curve; the true curve is not generally invariant to word order reversal \citep{crutchfield-times-2009}.} 
 
 %The language has consistent head-final order, and uses case marking on objects.
 %The relevant production targets are transitive sentences where one of the two arguments is much longer than the other, due to the presence of a PP modifier, as shown in Table~\ref{tab:artificial}.
@@ -111,7 +111,7 @@ The total amount of predictive information---corresponding to the area under the
 	\label{fig:toy-listener-tradeoff}
 \end{figure}
 
-Figure~\ref{fig:toy-listener-tradeoff} shows the resulting memory--surprisal trade-off curve for the two versions of the artificial language from \cite{fedzechkina-human-2017}, obtained by tracing out all values of $T=1, 2, \dots$ in the theorem, and connecting the points linearly.\footnote{Linear interpolation is justified because rate-distortion curves such as the memory-surprisal tradeoff curve are convex \citep{berger2003rate}.}
+Figure~\ref{fig:toy-listener-tradeoff} shows the resulting memory--surprisal tradeoff curve for the two versions of the artificial language from \cite{fedzechkina-human-2017}, obtained by tracing out all values of $T=1, 2, \dots$ in the theorem, and connecting the points linearly.\footnote{Linear interpolation is justified because rate-distortion curves such as the memory--surprisal tradeoff curve are convex \citep{berger2003rate}.}
 The curve shows that, at any desired level of surprisal, language $A$ requires at most as much memory as language $B$.
 To reach optimal surprisal, the empirically-favored language $A$ requires strictly less memory.
 
@@ -173,10 +173,8 @@ To reach optimal surprisal, the empirically-favored language $A$ requires strict
 
 \subsection{Discussion}
 
-In a reinterpretation of previous experimental findings, we showed that the languages which are favored in an artificial language learning experiment are those which optimize the memory--surprisal trade-off.
-%\jd{i'm not sure that saying it quite this generally is justified, given that this is a reanalysis of just one dataset. maybe tone down slightly and/or say that it would be useful to do this kind of analysis on additional, similar datasets -- the prediction, in any case, is clear.}
-This is evidence that learners and/or speakers have a bias toward word orders that optimize the trade-off. 
-Furthermore, this result solidifies the link between the memory--surprisal trade-off and more traditional notions from linguistics, such as dependency locality. 
-We found that the word orders which are optimal from the perspective of dependency locality are also those orders which are optimal from the perspective of the memory--surprisal trade-off, in the setting of a small controlled artificial language.
+In a reinterpretation of previous experimental findings, we showed that the languages which are favored in an artificial language learning experiment are those which optimize the memory--surprisal tradeoff.
+This is evidence that learners and/or speakers have a bias toward word orders that optimize the tradeoff. 
+Furthermore, this result solidifies the link between the memory--surprisal tradeoff and more traditional notions from linguistics, such as dependency locality. 
+We found that the word orders which are optimal from the perspective of dependency locality are also those orders which are optimal from the perspective of the memory--surprisal tradeoff, in the setting of a small controlled artificial language.
 In Study 2, we scale this approach up to larger corpora of real text.
-%\jd{again, just within one small toy dataset. i'd acknowledge that here, then you have a nice segue to the next section}.
