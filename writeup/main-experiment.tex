@@ -127,13 +127,13 @@ Furthermore, the model does not allow rules specifying interactions between diff
 Finally, the model does not account for word order freedom, as all ordering choices are deterministic.
 In this sense, ordering grammars only represent an approximation to the kinds of ordering rules found in natural language \citep{gildea-optimizing-2007, gildea-grammars-2010, gildea-human-2015}.
 Other models described in the literature \citep{futrell2015experiments, wang2016galactic} mostly share these limitations.
-See Sections~\ref{subsec:expt2-discussion} and \ref{subsec:freedom} for further discussion and control studies addressing these limitations.
+%See Sections~\ref{subsec:expt2-discussion} and \ref{subsec:freedom} for further discussion and control studies addressing these limitations.
 %\jd{this paragraph is a little confusing. is this supposed to convince the reader that ordering grammars are a good formalism within which to construct baseline grammars? if so, pre-empt the question about the effect this will have for free word order languages by explicitly mentioning the issue and deferring its discussion to later, rather than simply saying that word order freedom is not modeled (about which the uninitiated reader will wonder whether that's a good or a bad thing)}
 
 
 To ensure that results are not due to the representational restrictions of the word order grammar formalism, we also compare the real languages to the result of ordering the corpora according to grammars that approximates the observed orders to the extent possible in the grammar formalism.
 These grammars have exactly the same representational constraints as the baseline grammars.
-Importantly, they differ from real languages in having entirely deterministic order.
+%Importantly, they differ from real languages in having entirely deterministic order.
 We expect these grammars to have better memory-surprisal tradeoffs than comparable random baseline grammars across all languages.
 
 We create ordering grammars that are fit to the actual orderings of each language.
@@ -144,16 +144,14 @@ These grammars are extracted from the observed orders using the method of \cite{
 
 
 \subsection{Results}\label{sec:main-experiment-results}
-To test the Efficient Tradeoff Curve Hypothesis, we compare the tradeoff curves for the real orders with those for random baseline grammars.
-In Figure~\ref{fig:it}, we show the estimated values of $I_t$ for real orders (blue) and the median of $I_t$ across different baseline grammars (red).
-In most languages, $I_1$ is distinctly larger for the actual orderings (blue) compared to the baseline orderings (red). This means that real orderings tend to concentrate more predictive information at the immediately preceding word than baseline grammars.
+To test the Efficient Tradeoff Hypothesis, we compare the tradeoff curves for the real orders with those for random baseline grammars.
+In Figure~\ref{fig:it}, we show the estimated values of $I_t$ for real and fitted orders and the median of $I_t$ across different baseline grammars.
+In most languages, $I_1$ is distinctly larger for the actual and fitted orderings compared to the baseline orderings. This means that real orderings tend to concentrate more predictive information at the immediately preceding word than baseline grammars.
 
 In Figure~\ref{fig:median-table-expt2}, we show the resulting bounds on the memory-surprisal tradeoff curves, showing median surprisals at given levels of memory, for real and baseline languages.
 We compute surprisal at 40 evenly spaced points of memory (selected individually for each language, between 0 and the maximal memory capacity $H_M$ obtained using Theorem~\ref{prop:suboptimal}), over real orders and baseline grammars.
-We then compute the median surprisal over all runs for the real language, and over all baselines grammars.
-For each point, we compute an non-asymptotic and non-parametric 95\% confidence interval for median surprisal using the binomial test.
-%using the binomial PDF. \mhahn{some standard stats reference}
-%This is an \emph{exact} confidence interval, without parametric assumptions or asymptotic approximations.
+At each point, we then compute the median surprisal over all runs for the real language, and over all baselines grammars.
+For each point, we compute an non-asymptotic and non-parametric 95\% confidence interval for this median surprisal using the binomial test.
 
 Numerically, the real language provides a better tradeoff than the median of the baselines across all languages, with four exceptions (Latvian, North Sami, Polish, Slovak). In order to quantify the degree of optimality of real orders, we further computed the area under the memory-surprisal tradeoff curve (AUC) for real and baseline orderings.
 Area under the curve (AUC) is a general quantity evaluating the efficiency of a tradeoff curve \citep{bradley1997use}.
