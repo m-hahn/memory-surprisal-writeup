@@ -1,5 +1,5 @@
 In this section, we will introduce the main concept and hypothesis of our paper. % from a psycholinguistic perspective. 
-We will provide a technical definition of the memory--surprisal tradeoff curve, and then we will prove a theorem showing that more efficient memory--surprisal tradeoffs are possible in languages exhibiting information locality: that is, languages where words that depend on each other are close to each other. This theorem establishes the formal link between working memory efficiency in online processing and locality in word order.
+We will provide a technical definition of the memory--surprisal tradeoff curve, and then we will prove a theorem showing that more efficient memory--surprisal tradeoffs are possible in languages exhibiting information locality: that is, languages where words that depend on each other are close to each other. This theorem establishes the formal link between memory efficiency in online processing and locality in word order.
 
 The memory--surprisal tradeoff applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension; we return to the production perspective in Section~\ref{sec:sentprod-models}.
 
@@ -14,7 +14,7 @@ See Section~\ref{sec:sentprod-models} for discussion of how our model is related
 
 We formalize these three observations into postulates intended to provide a simplified picture of what is known about online language comprehension. Consider a listener comprehending a sequence of words $w_1, \dots, w_t, \dots, w_n$, at an arbitrary time $t$.
 \begin{enumerate}
-    \item Comprehension Postulate 1 (Incremental memory). At time $t$, the listener has an incremental \key{memory state} $m_t$ that contains her stored information about previous words. The memory state is given by a \key{memory encoding function} $M$ such that $m_t = M(w_{t-1}, m_{t-1})$.
+    \item Comprehension Postulate 1 (Incremental memory). At time $t$, the listener has an incremental \key{memory state} $m_t$ that contains her stored information about previous words. The memory state is characterized by a \key{memory encoding function} $M$ such that $m_t = M(w_{t-1}, m_{t-1})$.
     \item Comprehension Postulate 2 (Incremental prediction). The listener has a subjective probability distribution at time $t$ over the next word $w_t$ as a function of the memory state $m_t$. This probability distribution is denoted $P(w_t|m_t)$.
     \item Comprehension Postulate 3 (Linking hypothesis). Processing a word $w_t$ incurs difficulty proportional to the \key{surprisal} of $w_t$ given the memory state $m_t$:
     \begin{equation}
@@ -52,7 +52,6 @@ Having conceptually introduced the memory--surprisal tradeoff, we can state the 
 \textbf{Efficient Tradeoff Curve Hypothesis:}\\
 The order of elements in natural language is characterized by a distinctively steeper memory--surprisal tradeoff curve, compared to other possible orders.
 \end{adjustwidth}
-
 A steep tradeoff curve corresponds to memory efficiency, in the sense that it is possible to achieve a low level of processing difficulty (average surprisal $S_M$) while storing a relatively small amount of information about previous words (entropy of memory $H_M$).
 We hypothesize that this property is reflected in grammatical structure and usage preferences across languages.
 
@@ -71,7 +70,7 @@ We consider memory and surprisal costs at an arbitrary time point $t$.
 %The process $W$ extends indefinitely into the past and future from this time point: $\dots, w_{t-2}, w_{t-1}, w_t, w_{t+1}, w_{t+2}, \dots$.
 Recall that the surprisal for a specific word $w_t$ after a past word sequence $\dots, w_{t-2}, w_{t-1}$ encoded into a memory state $m_t$ is:
 \begin{equation}
-    -\log P(w_t | m_t)
+    -\log P(w_t | m_t).
 \end{equation}
 The \key{average surprisal} of the process $W$ under the memory encoding function $M$ is obtained by averaging over all possible past sequences $\dots, w_{t-2}, w_{t-1}$ with associated memory states $m_t$:
 \begin{equation}
@@ -80,7 +79,7 @@ The \key{average surprisal} of the process $W$ under the memory encoding functio
 where $w_t$ ranges over possible symbols, $m_t$ ranges over possible outputs of the memory encoding function $M$.
 This quantity is known as the conditional entropy of $w_t$ given $m_t$ \citep[][p. 17]{cover2006elements}:
 \begin{equation}
-    S_M \equiv H[w_t | m_t].
+    S_M = H[w_t | m_t].
 %    S_M \equiv \lim_{T\rightarrow\infty} \frac{1}{T} \sum_{t=1}^T \operatorname{H}[w_t | m_t],
 \end{equation}
 %where the notation $\operatorname{H}[\cdot | \cdot]$ indicates conditional entropy \citep[][p. 17]{cover2006elements}:
@@ -88,7 +87,7 @@ This quantity is known as the conditional entropy of $w_t$ given $m_t$ \citep[][
 %    \operatorname{H}[w_t|m_t] \equiv -\sum_{w_t,m_t} P(m_t) P(w_t|m_t) \log P(w_t|m_t).
 %\end{equation}
 Because the process $W$ is stationary, the average surprisal $S_M$ is independent of the choice of $t$ (see SI Section 1.1.2).
-The lowest possible average surprisal for $W$ that can be attained by any memory encoding function is attained when $m_t$ perfectly encodes all previous observed words.
+The lowest possible average surprisal for $W$ is attained when $m_t$ perfectly encodes all previous observed words.
 This quantity is called the \key{entropy rate} of $W$ \citep[][pp. 74--75]{cover2006elements}:
 \begin{equation}
     \label{eq:entropy-rate}
@@ -96,9 +95,9 @@ This quantity is called the \key{entropy rate} of $W$ \citep[][pp. 74--75]{cover
 %    S_\infty \equiv \lim_{t \rightarrow \infty} \frac{1}{T} \sum_{t=1}^T H[w_t | w_1, \dots, w_{t-1}].
 \end{equation}
 which again is independent of $t$ because $W$ is stationary.
+We use the notation $S_\infty$ to suggest this idea of unlimited resources.
  The entropy rate of a stochastic process is the irreducible unpredictability of the process: the extent to which a stream of symbols remains unpredictable even for a predictor with unlimited resources. 
  The entropy rate $S_\infty$ of natural language text has been studied by \citet{shannon1951entropy}, \citet{bentz2017entropy}, and \citet{takahashi2018cross}. 
- We use the notation $S_\infty$ to suggest this idea of unlimited resources.
  Because the memory state $m_t$ is a function of the previous words $ \dots, w_{t-2}, w_{t-1}$, we can prove by the Data Processing Inequality \citep[][pp. 34--35]{cover2006elements} that the entropy rate must be less than or equal to the average surprisal for any memory encoding function $M$:
 \begin{equation}
     \label{eq:entropy-rate-dpi}
@@ -144,7 +143,7 @@ The \key{memory--surprisal tradeoff curve} for a process $W$ is the lowest achie
 where the minimization is over all memory encoding functions $M$ whose entropy $H_M$ is less than or equal to $R$.
 \end{definition}
 
-The memory state $m_t$ is generally a lossy representation of the true context of words $w_1, \dots, w_{t-1}$, meaning that $m_t$ does not contain all the possible information about $w_1, \dots, w_{t-1}$. The mathematical theory of lossy representations is \key{rate--distortion theory} \citep[for an overview and key results, see][pp. 301--347]{cover2006elements}; this theory has seen recent successful application in cognitive science and linguistics as a model of rational action under resource constraints \citep{sims2018efficient,zaslavsky2018efficient,gershman2020origin}. 
+The memory state $m_t$ is generally a lossy representation of the true context of words $w_1, \dots, w_{t-1}$, meaning that $m_t$ does not contain all the possible information about $w_1, \dots, w_{t-1}$. The mathematical theory of lossy representations is \key{rate--distortion theory} \citep[for an overview and key results, see][pp. 301--347]{cover2006elements}; this theory has seen recent successful application in cognitive science and linguistics as a model of rational action under resource constraints \citep{brady2009compression,sims2012ideal,sims2018efficient,zaslavsky2018efficient,schach2018quantifying,zenon2019information,gershman2020origin}. 
 Rate--distortion theory studies curves of the form of Eq.~\ref{eq:ms-formal}, which quantify tradeoffs between negative utility (`distortion') and information (`rate'). %Our memory--surprisal tradeoff curve is a distortion--rate curve, with $H_M$ as the rate and $S_M$ as the distortion. It differs from the typical curve studied in rate--distortion theory in that we define rate using entropy, rather than mutual information \citep[see][for a discussion of some of the consequences of this formulation]{strouse-deterministic-2017}. 
 %Our theoretical results still hold if we were to define rate using mutual information (see SI Section \REF).
 
@@ -219,12 +218,12 @@ Importantly, the bound holds for \emph{any} memory encoding function $M$, includ
 \includegraphics[width=0.45\textwidth]{figures/decay.pdf}
 \includegraphics[width=0.45\textwidth]{figures/memory.pdf}
 %
-	\caption{Left: $I_t$ as a function of $t$, for two different hypothetical languages. $I_t$ decays faster for the red process: Predictive information about the present observation is concentrated more strongly in the recent past. Right: $t \cdot I_t$ as a function of $t$ for the same processes. }\label{fig:basic}
+	\caption{Left: $I_t$ as a function of $t$, for two different hypothetical languages. $I_t$ decays faster for the MoreEfficient language: Predictive information about the present observation is concentrated more strongly in the recent past. Right: $t \cdot I_t$ as a function of $t$ for the same languages. }\label{fig:basic}
 \end{figure*}
 
 \begin{figure}
 \includegraphics[width=0.45\textwidth]{figures/listener-tradeoff.pdf}
-	\caption{Listener's memory-surprisal tradeoff for the two processes in Figure~\ref{fig:basic}. Recall that the red process has a faster decay of conditional mutual information $I_t$. Correspondingly, this figure shows that a listener can achieve lower average surprisal at the same level of memory load. \jd{should the axis labels here include "average"? it might also be useful to call "A" and "B" sth like "more efficient" and "less efficient" and have the legend header be "Language"} }\label{fig:listener-tradeoff}
+	\caption{Listener's memory-surprisal tradeoff for the two hypothetical languages in Figure~\ref{fig:basic}. Recall that the MoreEfficient language has a faster decay of conditional mutual information $I_t$. Correspondingly, this figure shows that a listener can achieve lower average surprisal at the same level of memory load.}\label{fig:listener-tradeoff}
 \end{figure}
 
 Eq.~\ref{eq:memory-bound} means that maintaining long-term dependencies requires higher memory usage. Carrying the same amount of information over longer distances requires more memory; this fact is reflected in the factor $t$ inside each term of the sum. 
@@ -234,16 +233,16 @@ The information locality bound theorem demonstrates in a highly general way that
 Because processing long-term dependencies requires higher memory usage, the theorem also implies that a language will be easier to process when most of the predictive information about a word is concentrated close to that word in time---that is, when $I_t$ falls off rapidly as $t \rightarrow \infty$. When memory capacity is limited, then there must be some timescale $T$ such that a listener appears to be affected by excess surprisal arising from statistical dependencies of length greater than $T$. A language avoids such cost to the extent that it avoids dependencies with a time-span larger than $T$.
 
 We illustrate the theorem in Figure~\ref{fig:basic}.
-We consider two processes $A$ and $B$, where $I_t := 5t^{-1.5}$ for $A$ and $I_t := 3.5 t^{-2.5}$ for $B$.
+We consider two hypothetical languages, LessEfficient and MoreEfficient, where $I_t := 5t^{-1.5}$ for LessEfficient and $I_t := 3.5 t^{-2.5}$ for MoreEfficient.
 The curves of $I_t$, as a function of the distance $t$, are shown in Figure~\ref{fig:basic} (left).
 In both cases, $I_t$ converges to zero as $t$ grows to infinity. 
-However, $I_t$ decays more quickly for Process A (red).
+However, $I_t$ decays more quickly for language MoreEfficient.
 This means that predictive information about an observation is concentrated more strongly in the recent past.
 In Figure~\ref{fig:basic} (right), we show $t\cdot I_t$ as a function of $t$.
 Note that the area under the curve is equal to (\ref{eq:memory-bound}).
-This area is smaller for the red process, as $I_t$ decays more quickly there.  
-In Figure~\ref{fig:listener-tradeoff}, we show the resulting bounds on memory-surprisal tradeoffs of the two processes.  
-As $I_t$ decays faster for process $A$, it has a more efficient memory-surprisal tradeoff, allowing a listener to achieve strictly lower surprisal across a range of memory values.
+This area is smaller for the MoreEfficient language, as $I_t$ decays more quickly there.  
+In Figure~\ref{fig:listener-tradeoff}, we show the resulting bounds on memory-surprisal tradeoffs of the two languages.  
+As $I_t$ decays faster for language MoreEfficient, it has a more efficient memory-surprisal tradeoff, allowing a listener to achieve strictly lower surprisal across a range of memory values.
 
 
 

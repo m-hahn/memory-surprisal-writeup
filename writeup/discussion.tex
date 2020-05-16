@@ -6,7 +6,7 @@ In Study 3, we showed that in two languages (Japanese and Sesotho) the order of 
 
 Here, we discuss the limitations  of our results and the implications they have more broadly for the fields of psycholinguistics, typology, and information theory.
 
-\mhahn{from background: While these theories are widespread in the linguistics literature, there exists to date no quantifiable definition of `relevance' or `being closer cenceptually'. One of our contributions is to derive such a notion of `relevance' from the minimization of memory usage during language processing. \jd{make sure this relevance point is taken back up in the general discussion}}
+%\mhahn{from background: While these theories are widespread in the linguistics literature, there exists to date no quantifiable definition of `relevance' or `being closer cenceptually'. One of our contributions is to derive such a notion of `relevance' from the minimization of memory usage during language processing. \jd{make sure this relevance point is taken back up in the general discussion}}
 
 
 
@@ -28,8 +28,9 @@ Here, we discuss the limitations  of our results and the implications they have 
 
 Our results leave open the causal mechanism leading to the observed optimization, in particular, whether optimization is the result of minimizing effort during comprehension, production, or acquisition. One possibility is that optimization reflects an effort on the side of the speaker to produce utterances that are easy to comprehend by listeners, a strategy known as \emph{audience design} \citep{clark1982audience,lindblom1990communication, brennan1995feeling}. More efficient memory-surprisal tradeoffs are useful from the listener's perspective because they allow for better prediction with lower memory investment than less efficient tradeoffs. 
 
-Another possibility is that optimization reflects production-internal pressures to minimize effort on the speaker's part during sentence planning \citep{bock1985conceptual,ferreira2000effect,macdonald2013language,fedzechkina2020production}. That is, instead of speakers optimizing for the benefit of listeners, the iterated application of production-internal heuristics that reduce speaker effort may result in more efficient tradeoffs \citep{macdonald2013language}. \jd{is this really true? if one takes seriously the kinds of heuristics that macdonald, bock, ferreira, et al propose -- mention "easily retrievable" things first, ie shorter things, animate things, given things, etc -- would the formulated tradeoff really emerge?}
-While our theory is stated in terms of the efficiency of language processing for a comprehender of language, we can show that an analogous memory--surprisal trade-off exists in language production, and that speakers with bounded memory capacity can minimize production errors when the language has stronger information locality (see SI Section 1.4 for a mathematical statement and proof).\jd{isn't a "produce more accurate language" pressure qualitatively different from the kinds of availability-based production pressures mentioned above? i guess the fedzechkina and jaeger 2020 perspective is more closely aligned with the "produce more accurate language" perspective than with the "produce easy things first perspective"}
+Another possibility is that optimization reflects production-internal pressures to minimize effort on the speaker's part during sentence planning \citep{bock1985conceptual,ferreira2000effect,macdonald2013language,fedzechkina2020production}. That is, instead of speakers optimizing for the benefit of listeners, the iterated application of production-internal heuristics that reduce speaker effort may result in more efficient tradeoffs \citep{macdonald2013language}. %\jd{is this really true? if one takes seriously the kinds of heuristics that macdonald, bock, ferreira, et al propose -- mention "easily retrievable" things first, ie shorter things, animate things, given things, etc -- would the formulated tradeoff really emerge?}\mhahn{I think the next sentence helps with this}
+While our theory is stated in terms of the efficiency of language processing for a comprehender of language, we can show that an analogous memory--surprisal trade-off exists in language production, and that speakers with bounded memory capacity can minimize production errors when the language has stronger information locality (see SI Section 1.4 for a mathematical statement and proof).
+%\jd{isn't a "produce more accurate language" pressure qualitatively different from the kinds of availability-based production pressures mentioned above? i guess the fedzechkina and jaeger 2020 perspective is more closely aligned with the "produce more accurate language" perspective than with the "produce easy things first perspective"}\mhahn{I have rephrased to `minimize production errors'.}
 
 
 Finally, optimization may reflect biases that come into play during language learning.
@@ -57,60 +58,12 @@ Evidence from artificial language learning experiments suggests that language ac
 %This is not predicted by the Information Locality Theorem, because it inherently
 
 
-\subsection{Limitations}
-\jd{perhaps put the limitations section after the "relation to sentence processing models section"? that way, you get all the implications / relation to other accounts proposed in the literature content out first, and can then discuss limitations separately?}
-
-\paragraph{Finiteness of Data}
-As corpora are finite, estimates for $I_t$ may not be reliable for larger values of $t$.
-In particular, we expect that models will underestimate $I_t$ for large $t$, as models will not be able to extract and utilize all available information over longer distances.
-This has implications for the interpretation of the memory--surprisal tradeoffs at higher values of memory entropy $H_M$.
-In Experiment 1, the lowest achieved surprisals are different for real and baseline orderings.
-This need not indicate that, in the limit of very large memory entropies $H_M$, these orderings still have different surprisals $S_\infty$:
-It is logically possible that real and baseline languages actually have the same surprisal $S_\infty$, but that baseline orderings spread the same amount of predictive information over a larger distance, making it harder for models to extract given finite corpus data.
-%Another possibility is that that surprisal differs across all possible memory entropes $H_M$; in this case, $S_\infty$ would be different for real and baseline orderings.
-%Our results are also compatible in principle with a situation where the difference in surprisal \emph{reverses} at high values of memory entropy $H_M$.
-What our results do imply, though, is that real languages provide lower surprisals in the setting of relatively small memory budgets. This result only depends on the estimates of $I_t$ for small values of $t$, which are most trustworthy.
-
-
-\paragraph{Nature of the Bound}
-Our theoretical result provides a lower bound on the tradeoff curve that holds across all ways of physically realizing a memory representation obeying the postulates (1-3).
-However, this bound may be loose in two ways:
-First, architectural properties of human memory might introduce additional constraints on possible representations.
-Depending on the role played by factors other than infomation-theoretic capacity, the tradeoffs achieved by these human memory representations need not be close to achieving the theoretical bounds.
-Furthermore, depending on properties of the stochastic process, the bound might be loose across all models, that is, there are processes where the bound is not attainable by any memory architecture.
-This can happen if there is strong uncertainty as to which aspects of the past observations will be relevant to the future.
-We provide an artificial example with analytical calculations in SI Section 2.1; however, that example does not seem linguistically natural.
-
-\paragraph{Extralinguistic Context}
-Comprehension Postulate 1 states that the memory state after receiving a word is determined by that word and the memory state before receiving this word.
-The assumption about information flow disregards the role of information sources that are external to the linguistic material in the sentence.
-For instance, the interlocutors might have common knowledge of the weather, and the listener might use this to construct predictions for the speaker's utterances, even if no relevant information has been mentioned in the prior discourse.
-Such sources of information are disregarded in our model.
-They are also disregarded in many other models of memory in sentence processing.
-Taking extralinguistic context into account would likely result in more efficient tradeoffs, as this can introduce additional cues helping to predict the future better.
-%\jd{ok, but what would the effect  be if we \emph{could} take extralinguistic context into account? or what is the likely effect of ignoring extralinguistic context? is it likely that the real curves are actually steeper, or flatter, or does that depend on additional assumptions? this is a place where it would be nice to be able to make a prediction about what would happen if you did have access to extralinguistic context, so if someone who reads this is inspired by the prediction, they might find a clever way to test it}
-
-%\paragraph{Capacity vs Retrieval}
-%Our theoretical analysis places the main memory bottleneck in the capacity of short-term memory.
-%Not all models of memory in sentence processing make this assumption.
-%Indeed, there is evidence that difficulty of retrieving items is an important bottleneck in sentence processing.
-%In SI Section X, we show that our theoretical bounds are also compatible with a retrieval-based model such as ACT-R.
-
-\paragraph{Limitations of Grammar Model}
-In Study 2, baseline grammars are constructed in a formalism that cannot fully express some word order regularities found in languages.
-For instance, it cannot express orders that differ in main clauses and embedded clauses. 
-This and the other limitations discussed in Section~\ref{sec:baselines} are common to most other order grammar formalisms considered in the literature \citep{gildea-optimizing-2007,futrell2015experiments,wang2016galactic}.
-This limitation does not hold in Study 3, where the formalism provides very close fit to observed morpheme orders.
-
-
-
-\jd{in section 5.6 (and the discussion of the section right before), where this issue is discussed, it would be useful to give the main/embedded clause example as an example of the problem. re-reading section 5.6 is  a little unsatisfying because the reader never learns what the effect is of not being able to appropriately represent within-language word order variability. section 5.6 just deals with general word order freedom that can be exploited for communicating information structure; the main/embedded clause word order variability seems like a qualitatively different kind of variability -- order is variable across environments, but fixed within environments. what are the languages with this kind of variability (eg, german), and what is the effect of not being able to represent this kind of variability? just saying that other studies have the same problem and that it's not a problem in study 3 seems like a needlessly dismissive reply}
 
 %\paragraph{absolute numbers, how they relate to what's known about human memory}
 
 \subsection{Relation to Models of Sentence Processing}
 \label{sec:sentprod-models}
-\jd{perhaps move this section before "limitations" and replace the first sentence with sth like: "Although, as just discussed, the account proposed here is agnostic as to the optimization source, most memory-based models of sentence processing are explicitly comprehension-centric. We therefore discuss in more detail how our theoretical results relate to...."}
+%\jd{perhaps move this section before "limitations" and replace the first sentence with sth like: "Although, as just discussed, the account proposed here is agnostic as to the optimization source, most memory-based models of sentence processing are explicitly comprehension-centric. We therefore discuss in more detail how our theoretical results relate to...."}
 
 There is a substantial literature proposing sentence processing models and quantitative memory metrics for sentence processing.
 In this section, we discuss how our theoretical results relate to and generalize these previously proposed models.
@@ -140,9 +93,7 @@ These models go back to \citet{yngve1960model}'s production model, where difficu
 %First, it considers not only the cost of maintaining direct syntactic dependencies, but extends this to any statistical relations between words that can be exploited for prediction.
 %Second, it weights these relations by the amount of predictive information shared between the words.
 
-Our measure of memory complexity---i.e., the memory entropy $H_M$---straightforwardly generalizes measures based on counting items stored in memory. If each item stored in memory requires $k$ bits of storage, then storing $n$ items would require a capacity of $nk$ bits in terms of memory entropy $H_M$. In general, if memory entropy is $H_M$ and all items stored in memory take $k$ bits each to store, then we can store $H_M/k$ items. 
-
-The memory entropy $H_M$ generalizes this logic. The memory entropy $H_M$ can be interpreted as the number of bits of memory capacity required to store $n$ different objects, while allowing that different items stored in memory might take different numbers of bits to store, and also that the memory representation might be able to compress the representations of multiple items when they are stored together, so that the capacity required to store two items might be less than the sum of the capacity required to store each individual item. 
+Our measure of memory complexity---i.e., the memory entropy $H_M$---straightforwardly generalizes measures based on counting items stored in memory. If each item stored in memory requires $k$ bits of storage, then storing $n$ items would require a capacity of $nk$ bits in terms of memory entropy $H_M$. In general, if memory entropy is $H_M$ and all items stored in memory take $k$ bits each to store, then we can store $H_M/k$ items. However, the memory entropy $H_M$ is more general as a measure of storage cost, because it allows that different items stored in memory might take different numbers of bits to store, and also that the memory representation might be able to compress the representations of multiple items when they are stored together, so that the capacity required to store two items might be less than the sum of the capacity required to store each individual item. Previous work has argued that visual working memory is characterized by an information-theoretic capacity limit \citep{brady2008efficient,sims2012ideal}; we extend this idea to incremental memory as used in language processing.
 
 \paragraph{The Dependency Locality Theory}
 The connection with the Dependency Locality Theory is particularly interesting.
@@ -161,7 +112,7 @@ In our framework, DLT integration cost corresponds to surprisal given an imperfe
 There is one remaining missing link between our theory of processing difficulty and theories such as the Dependency Locality Theory:
 our information locality theorem says that \emph{statistical} dependencies should be short-term, whereas psycholinguistic theories of locality have typically focused on the time-span of \key{syntactic dependencies}: words which depend on each other to determine the meaning or the well-formedness of a sentence. Statistical dependencies, in contrast, mean that whenever one element of a sequence determines or predicts another element \emph{in any way}, those two elements should be close to each other in time. 
 
-If statistical dependencies, as measured using mutual information, can be identified with syntactic dependencies, then that would mean that information locality is straightforwardly a generalization of dependency locality. \citet{futrell2019syntactic} give theoretical and empirical arguments that this is so. They show that syntactic dependencies as annotated in dependency treebanks identify word pairs with especially high mutual information, and give a derivation showing that this is to be expected according to a formalization of the postulates of dependency grammar. The connection between mutual information and syntactic dependency has also been explored by \citet{de1996selection, yuret1998discovery}. % maximizing mutual information principle; de paiva alves; yuret
+If statistical dependencies, as measured using mutual information, can be identified with syntactic dependencies, then that would mean that information locality is straightforwardly a generalization of dependency locality. \citet{futrell2019syntactic} give theoretical and empirical arguments that this is so. They show that syntactic dependencies as annotated in dependency treebanks identify word pairs with especially high mutual information, and give a derivation showing that this is to be expected according to a formalization of the postulates of dependency grammar. The connection between mutual information and syntactic dependency has also been explored in the grammar induction literature \citep{de1996selection,yuret1998discovery}. % maximizing mutual information principle; de paiva alves; yuret
 
 
 
@@ -265,12 +216,63 @@ In a corpus study, \citet{yadav2020word} found that languages tolerate longer de
 
 
 
-\paragraph{Rate-Distortion Theory in Cognition}\mhahn{TODO this doesn't fit with the heading `memory of sentence processing'}
-As described in Section~\ref{sec:formal-tradeoff}, the Memory-Surprisal Tradeoff instantiates the framework of rate-distortion theory.
-This approach has previously been applied to visual working memory \citep{brady2009compression, sims2012ideal, sims2016rate}.
-These studies model visual working memory as solving the problem of storing a maximal amount of information given fixed capacity, and provide experimental evidence that visual working memory can store more items when they show stronger statistical patterns in cooccurrence \citep{brady2009compression}, and that memory performance is better when encoded items show lower variance \citep{sims2012ideal}, both in accordance with the predictions of optimal compression.
-Relatedly, \citet{gershman2020origin} models perseveration as arising from optimizing action policies for the tradeoff between maximizing rewards and minimizing complexity.
-\mhahn{other examples applying rate-distortion theory: \citet{schach2018quantifying,zaslavsky2018efficient,sims2018efficient}}
+%\paragraph{Rate-Distortion Theory in Cognition}\mhahn{TODO this doesn't fit with the heading `memory of sentence processing'}
+%As described in Section~\ref{sec:formal-tradeoff}, the Memory-Surprisal Tradeoff instantiates the framework of rate-distortion theory.
+%This approach has previously been applied to visual working memory \citep{brady2009compression, sims2012ideal, sims2016rate}.
+%These studies model visual working memory as solving the problem of storing a maximal amount of information given fixed capacity, and provide experimental evidence that visual working memory can store more items when they show stronger statistical patterns in cooccurrence \citep{brady2009compression}, and that memory performance is better when encoded items show lower variance \citep{sims2012ideal}, both in accordance with the predictions of optimal compression.
+%Relatedly, \citet{gershman2020origin} models perseveration as arising from optimizing action policies for the tradeoff between maximizing rewards and minimizing complexity.
+%\mhahn{other examples applying rate-distortion theory: \citet{schach2018quantifying,zaslavsky2018efficient,sims2018efficient}}
+
+\subsection{Limitations}
+%\jd{perhaps put the limitations section after the "relation to sentence processing models section"? that way, you get all the implications / relation to other accounts proposed in the literature content out first, and can then discuss limitations separately?}
+
+\paragraph{Finiteness of Data}
+As corpora are finite, estimates for $I_t$ may not be reliable for larger values of $t$.
+In particular, we expect that models will underestimate $I_t$ for large $t$, as models will not be able to extract and utilize all available information over longer distances.
+This means that we might not be able to consistently estimate the asymptotic values of the average surprisal $S_M$ as the memory capacity goes to infinity, i.e. the entropy rate $S_\infty$. 
+
+This has implications for the interpretation of the memory--surprisal tradeoffs at higher values of memory entropy $H_M$.
+In Experiment 1, the lowest achieved surprisals are different for real and baseline orderings.
+This does not necessarily mean that these orderings really have different entropy rates $S_\infty$.
+It is logically possible that real and baseline languages actually have the same entropy rate $S_\infty$, but that baseline orderings spread the same amount of predictive information over a larger distance, making it harder for models to extract given finite corpus data.
+%Another possibility is that that surprisal differs across all possible memory entropes $H_M$; in this case, $S_\infty$ would be different for real and baseline orderings.
+%Our results are also compatible in principle with a situation where the difference in surprisal \emph{reverses} at high values of memory entropy $H_M$.
+What our results do imply is that real languages provide lower surprisals in the setting of relatively small memory budgets. This result only depends on the estimates of $I_t$ for small values of $t$, which are most trustworthy.
+
+
+\paragraph{Nature of the Bound}
+Our theoretical result provides a lower bound on the tradeoff curve that holds across all ways of physically realizing a memory representation obeying the postulates (1--3).
+However, this bound may be loose in two ways:
+First, architectural properties of human memory might introduce additional constraints on possible representations.
+Depending on the role played by factors other than infomation-theoretic capacity, the tradeoffs achieved by these human memory representations need not be close to achieving the theoretical bounds.
+Furthermore, depending on properties of the stochastic process, the bound might be loose across all models, that is, there are processes where the bound is not attainable by any memory architecture.
+This can happen if there is strong uncertainty as to which aspects of the past observations will be relevant to the future.
+We provide an artificial example with analytical calculations in SI Section 2.1; however, this example does not seem linguistically natural.
+
+\paragraph{Extralinguistic Context}
+Comprehension Postulate 1 states that the memory state after receiving a word is determined by that word and the memory state before receiving this word.
+The assumption about information flow disregards the role of information sources that are external to the linguistic material in the sentence.
+For instance, the interlocutors might have common knowledge of the weather, and the listener might use this to construct predictions for the speaker's utterances, even if no relevant information has been mentioned in the prior discourse.
+Such sources of information are disregarded in our model.
+They are also disregarded in many other models of memory in sentence processing.
+Taking extralinguistic context into account would likely result in more efficient tradeoffs, as this can introduce additional cues helping to predict the future better.
+%\jd{ok, but what would the effect  be if we \emph{could} take extralinguistic context into account? or what is the likely effect of ignoring extralinguistic context? is it likely that the real curves are actually steeper, or flatter, or does that depend on additional assumptions? this is a place where it would be nice to be able to make a prediction about what would happen if you did have access to extralinguistic context, so if someone who reads this is inspired by the prediction, they might find a clever way to test it}
+
+%\paragraph{Capacity vs Retrieval}
+%Our theoretical analysis places the main memory bottleneck in the capacity of short-term memory.
+%Not all models of memory in sentence processing make this assumption.
+%Indeed, there is evidence that difficulty of retrieving items is an important bottleneck in sentence processing.
+%In SI Section X, we show that our theoretical bounds are also compatible with a retrieval-based model such as ACT-R.
+
+\paragraph{Limitations of Grammar Model}
+In Study 2, baseline grammars are constructed in a formalism that cannot fully express some word order regularities found in languages.
+For instance, it cannot express orders that differ in main clauses and embedded clauses. 
+Other limitations discussed in Section~\ref{sec:baselines}.
+These limitations are common to most other order grammar formalisms considered in the literature; despite these limitations, such word order models have demonstrated reasonably good fits to corpus data on word order and human judgments of fluency \citep{futrell2015experiments,wang2016galactic}.
+We emphasize that this limitation does not hold in Study 3, where the formalism provides very close fit to observed morpheme orders.
+
+%\jd{in section 5.6 (and the discussion of the section right before), where this issue is discussed, it would be useful to give the main/embedded clause example as an example of the problem. re-reading section 5.6 is  a little unsatisfying because the reader never learns what the effect is of not being able to appropriately represent within-language word order variability. section 5.6 just deals with general word order freedom that can be exploited for communicating information structure; the main/embedded clause word order variability seems like a qualitatively different kind of variability -- order is variable across environments, but fixed within environments. what are the languages with this kind of variability (eg, german), and what is the effect of not being able to represent this kind of variability? just saying that other studies have the same problem and that it's not a problem in study 3 seems like a needlessly dismissive reply}
+
 
 \subsection{Information-theoretic studies of language}\label{sec:disc:infotheory}
 
@@ -291,10 +293,9 @@ Our work contrasts with this work in that we are interested in dependencies with
 This tradeoff is related to but different from the memory-surprisal tradeoff: it models a setting where past observations are compressed once as a whole, while a memory capacity bottleneck holds at every point in time in our model.
 Nonetheless, their method might also be applicable to estimating of memory-surprisal tradeoff curves.
 
-While we define information locality in terms of \emph{conditional} mutual information, prior work has studied  how \emph{unconditional} mutual information decays with distance in natural language texts, at the level of orthographic characters \citep{ebeling-entropy-1994,lin-critical-2017} and words \citep{futrell2019syntactic}.
-The entropy rate $S_\infty$ of natural language text has been studied by different authors, including \citet{shannon1951entropy,bentz2017entropy,takahashi2018cross}. 
-The Constant Entropy Rate and Uniform Information Density hypotheses \citep{genzel-entropy-2002,florian-jaeger-redundancy-2010} hold that speakers tend to avoid peaks and troughs in surprisal, arguing that this makes information transmission maximally efficient.
-
+%While we define information locality in terms of \emph{conditional} mutual information, prior work has studied  how \emph{unconditional} mutual information decays with distance in natural language texts, at the level of orthographic characters \citep{ebeling-entropy-1994,lin-critical-2017} and words \citep{futrell2019syntactic}.
+%The entropy rate $S_\infty$ of natural language text has been studied by different authors, including \citet{shannon1951entropy,bentz2017entropy,takahashi2018cross}. 
+%The Constant Entropy Rate and Uniform Information Density hypotheses \citep{genzel-entropy-2002,florian-jaeger-redundancy-2010} hold that speakers tend to avoid peaks and troughs in surprisal, arguing that this makes information transmission maximally efficient.
 
 The average surprisal of real and counterfactual word orders have been studied by \citet{gildea-human-2015} and \cite{hahn2020universals}.
 \citet{gildea-human-2015} found that, in five languages, real orders provide lower trigram surprisal than baseline languages.
