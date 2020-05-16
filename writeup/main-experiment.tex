@@ -174,9 +174,9 @@ The AUC for the fitted grammars is lower than more than 50\% of random baseline 
 
 \begin{figure}
 	\begin{center}
-\includegraphics[width=\textwidth]{it-table.pdf}
+\includegraphics[width=\textwidth]{it-table-mle.pdf}
 \end{center}
-	\caption{Conditional mutual information $I_t$ (y-axis) as a function of $t$ (x-axis), for real (blue) and counterfactual (red) orders. We plot the median over all sampled baseline grammars. \mhahn{add MLE}}\label{fig:it}
+	\caption{Conditional mutual information $I_t$ (y-axis) as a function of $t$ (x-axis), for real (blue), fitted (red) and baseline (green) orders. We plot the median over all sampled baseline grammars.}\label{fig:it}
 \end{figure}
 
 
@@ -185,9 +185,9 @@ The AUC for the fitted grammars is lower than more than 50\% of random baseline 
 	\begin{center}
 \includegraphics[width=\textwidth]{results-table-mle.pdf}
 \end{center}
-	\caption{Surprisal (y-axis) at given memory level (x-axis), for real orders (blue) and random baseline grammars (red).
-	For the real orders (blue), we provide the median across multiple random seeds of the neural network estimator for $I_t$ (see SI Section 3.2.2), and 95\% confidence bands.
-	For the baseline grammars (red), we provide the median across both the sampled baseline grammars and multiple random seeds of the estimator, and 95\% confidence bands for the median.
+	\caption{Surprisal (y-axis) at given memory level (x-axis), for real (blue), fitted (red), and baseline (green) orders.
+	For the real (blue) and fitted (red) orders, we provide the median across multiple random seeds of the neural network estimator for $I_t$ (see SI Section 3.2.2), and 95\% confidence bands.
+	For the baseline grammars (green), we provide the median across both the sampled baseline grammars and multiple random seeds of the estimator, and 95\% confidence bands for this median.
 }\label{fig:median-table-expt2}
 \end{figure}
 
@@ -196,9 +196,10 @@ The AUC for the fitted grammars is lower than more than 50\% of random baseline 
 	\begin{center}
 \includegraphics[width=\textwidth]{auc-table_MLE.pdf}
 \end{center}
-\caption{Histograms for the Area under the Curve (AUC) for the memory--surprisal tradeoffs for real (blue) and random baseline (red) orders.
+\caption{Histograms for the Area under the Curve (AUC) for the memory--surprisal tradeoffs for real (blue), fitted (red), and random (green) orders.
 We provide a kernel density smoothing estimate of the distribution of random baseline orders.
-A smaller AUC value indicates a more efficient tradeoff; in most cases, the real orders provide more efficient tradeoffs than most or all baseline grammars.
+A smaller AUC value indicates a more efficient tradeoff.
+In most cases, the real and fitted orders provide more efficient tradeoffs than most or all baseline grammars.
 }\label{fig:auc}
 \end{figure}
 
@@ -230,7 +231,7 @@ In Section~\ref{subsec:freedom}, we will test the latter hypothesis by examining
 \begin{figure}
 \includegraphics[width=0.95\textwidth]{figures/surprisal-branching-entropy-REAL-invert.pdf}
 	\caption{Word order freedom and strength of optimization: For each of the 54 languages, we show word order freedom as measured by branching entropy, and the difference between the real order's surprisal and the mean surprisal of the baseline grammars, at the maximum memory value (see Figure~\ref{fig:median-table-expt2}).
-	Languages with higher branching direction entropy show a smaller reduction in surprisal compared to baseline orders.\jd{is there sth to say about the outliers -- uyghur, arabic, french?}
+	Languages with higher branching direction entropy show a smaller reduction in surprisal compared to baseline orders.%\jd{is there sth to say about the outliers -- uyghur, arabic, french?}
 	}\label{fig:freedom-surp}
 \end{figure}
 
