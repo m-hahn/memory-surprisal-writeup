@@ -83,7 +83,7 @@ However, psycholinguistic theories may differ on whether the entropy of memory $
 
 Below, we discuss the connections between our theory and existing theories of human sentence processing with regard to the points above.
 
-\paragraph{Storage-based theories}
+\paragraph{Storage-Based Theories}
 
 There is a long tradition of models of human language processing in which difficulty is attributed to high working memory load. 
 These models go back to \citet{yngve1960model}'s production model, where difficulty was associated with moments when a large number of items have to be kept on a parser stack; this model correctly predicted the difficulty of center-embedded clauses, but problematically predicted that left-branching structures should be hard \citep{kimball1973seven}. Other early examples include \citet{miller-finitary-1963} and \citet{frazier1985syntactic}'s measure of syntactic complexity based on counting the number of local nonterminal nodes. More recently, a line of literature has formulated complexity metrics based how many nodes are kept in incremental memory for how long during parsing, and used linear or ranked combinations of these metrics to predict acceptability differences in complex embeddings \citep{kobele2013memory,graf2014evaluating,rambow201512,GrafEtAl15MOL,gerth2015memory,GrafEtAl17JLM,desanto2020parsing}.
@@ -140,7 +140,7 @@ See SI Appendix Section 2.1--2.2 for a mathematical example illustrating this ph
 
 % TODO: Should we mention retrieval interference effects? If there is any slowdown that is *directly* attributable to similarity-based interference, then I think we can't capture it. But a lossily-compressed memory will have interference, in the sense that more "semantically" similar items in memory are more likely to be confused for each other.
 
-\paragraph{The role of surprisal}
+\paragraph{The Role of Surprisal}
 
 There are more general reasons to believe that any realistic theory of sentence processing must include surprisal as at least a \emph{component} of the cost of processing a word, even if it is not explicitly stated as such. 
 %More formally, we argue that processing difficulty for a word $w_t$ must at least be given by $k (-\log P(w_t |m_t)) + R$, with $k$ a scaling factor giving the relative contribution of surprisal to processing cost, and $R$ representing all other factors. The scaling factor $k$ may be small, but it cannot be zero, for both empirical and theoretical reasons. 
@@ -163,7 +163,7 @@ The explanation of memory effects can be viewed as a specific type of capacity c
 
 
 
-\paragraph{Previous information locality results}
+\paragraph{Previous Information Locality Results}
 
 Previous work has attempted to derive the principle of information locality from incremental processing models. 
 \citet{futrell2020lossy} describe a processing model where listeners make predictions (and incur surprisal) based on lossy memory representations.
@@ -179,7 +179,7 @@ Our information locality bound theorem differs from this previous result in thre
     \item \citet{futrell2020lossy} required an assumption that incremental memory is subject to decay over time. In contrast, we do not require any assumptions about incremental memory except that it has bounded capacity (or that retrieval operations have bounded capacity; see above).
     \item Our result is a precise bound, whereas the previous result was an approximation based on neglecting higher-order interactions among words.
     \item Our result is about the fall-off of the mutual information between words, \emph{conditional on the intervening words}. The previous result was about the fall-off of \emph{pointwise} mutual information between specific words, without conditioning on the intervening words.
-    We argue that conditional mutual information  is more relevant for measuring memory usage than unconditional mutual information, as conditional mutual information accounts for redundancy between different words, which can be helpful for prediction. See SI Section 2.3 for two mathematical examples.
+%    We argue that conditional mutual information  is more relevant for measuring memory usage than unconditional mutual information, as conditional mutual information accounts for redundancy between different words, which can be helpful for prediction. See SI Section 2.3 for two mathematical examples.
 \end{enumerate}
 
 As noted above, this previous work defined information locality in terms of the \emph{unconditional} (pointwise) mutual information between linguistic elements (see also Section~\ref{sec:disc:infotheory} for further work studying unconditional mutual information.). 
