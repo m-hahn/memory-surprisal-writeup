@@ -11,8 +11,8 @@
 The Efficient Tradeoff Hypothesis should apply not just at the level of words, but at the level of any linguistic element.
 For instance, just as observed word orders exhibit information locality, the order of morphemes within words should also be structured so that morphemes which predict each other are close to each other.
 Here, we apply the Efficient Tradeoff Hypothesis to predict the order of morphemes within morphologically complex words in two agglutinative languages. We study two agglutinative languages for which extensive corpora with hand-annotated morphological segmentation and labeling are available: Japanese and Sesotho. 
-We will compare the memory-surprisal tradeoff of the actual morpheme orders in these languages with hypothetical baseline orderings.
-Furthermore, we will construct hypothetical orderings that are optimized for the efficiency of the memory-surprisal tradeoff, and compare these to the actual morpheme orderings, to investigate whether morpheme order in these languages can be predicted by optimization of tradeoff efficiency.
+We will compare the memory--surprisal tradeoff of the actual morpheme orders in these languages with hypothetical baseline orderings.
+Furthermore, we will construct hypothetical orderings that are optimized for the efficiency of the memory--surprisal tradeoff, and compare these to the actual morpheme orderings, to investigate whether morpheme order in these languages can be predicted by optimization of tradeoff efficiency.
 Below, we first give brief sketches of the morphological patterns in these languages. 
 
 
@@ -132,18 +132,16 @@ We randomly selected 5\% to serve as held-out data and used the remaining 95\% a
 
 
 \paragraph{Estimating Memory-Surprisal Tradeoff}
-We model predicted morpheme sequences.
-To do so, we represent each verb form as a sequence of a stem and suffix morphemes, abstracting away from morphophonemic interactions between neighboring morphemes.
-%\jd{is it possible that, where there is divergence between model predictions and actual order, it has sth to do with phonemic pressures?}
+We model incremental prediction on the level of morpheme sequences.
+To do so, we represent each verb form as a sequence of a stem and affix morphemes, abstracting away from morphophonemic interactions between neighboring morphemes.
 As in many languages, affixes in Japanese and Sesotho show morphophonemic interactions between neighboring morphemes; for instance, the Japanese politeness morpheme -\textit{mas}- takes the form -\textit{masu} when it is word-final, while it has the allomorph -\textit{mase}- when followed by the negation suffix -\textit{n}.
 Modeling prediction on the level of morphemes, as opposed to phonemes, controls for these interactions.\footnote{See SI Section 4.3 for qualitatively similar results when modeling prediction at the phoneme level.}
 
 In analogy to Studies 1--2, we model verb forms as a stationary stochastic process by concatenating the verb forms from the corpus in random order.
-%This means, we model statistical dependencies between the different morphemes in a form, and no dependencies between verb forms and their surrounding words. \jd{i don't know what this is supposed to mean.}
 
 We calculate $I_t$ by estimating an $n$-gram model on the training set and then computing the average surprisal $S_t$ as cross-entropy on the held-out set using Kneser-Ney smoothing.
 The model may overfit as the context size $t$ increases, leading to higher cross-entropies for larger values of $t$.
-To mitigate this problem, we estimate
+We mitigate overfitting for large $t$ by estimating
 \begin{equation}
 \hat{S}_t := \min_{s \leq t} S_s,
 \end{equation}
@@ -164,7 +162,7 @@ Ordering morphemes according to these fitted models recovered the observed order
 
 \paragraph{Creating Optimal Orders}
 
-In order to create optimal orders to compare real orders to, we optimize orderings for the AUC under the memory-surprisal tradeoff curve with an adaptation of the hill climbing method used by \citet{gildea-human-2015} to optimize word order grammars for the length of syntactic dependencies and trigram surprisal.
+In order to create optimal orders to compare real orders to, we optimize orderings for the AUC under the memory--surprisal tradeoff curve with an adaptation of the hill climbing method that \citet{gildea-human-2015} used to optimize word order grammars for the length of syntactic dependencies and trigram surprisal.
 
 We randomly initialize the assignment of weights to morphemes, and then iteratively change the assignment to reduce AUC.
 In each iteration, we randomly choose one morpheme, and evaluate AUC for each way of ordering it between two other morphemes.
@@ -178,10 +176,10 @@ To control for the randomness in initialization and the optimization steps, we r
 For Sesotho, we ran the algorithm separately for prefixes and suffixes due to computational efficiency considerations.\footnote{With the exception of the tense/aspect markers, none of the morpheme types discussed above can occur both as prefixes and suffixes. Therefore, we do not expect this separation to impact results.}
 
 \subsection{Results}
-In Figure~\ref{fig:morph-auc}, we compare the area under curve of the memory--surprisal trade-off for Japanese and Sesotho verb forms under different orderings.
+In Figure~\ref{fig:morph-auc}, we compare the area under curve of the memory--surprisal tradeoff for Japanese and Sesotho verb forms under different orderings.
 Both observed orders and the approximately optimized grammars show lower AUCs than all random baseline samples.
 For comparison, we also show AUC for the order resulting from \emph{reversing} all suffix chains in the observed orders; this results in high AUC even exceeding most random grammars.
-These results show that Japanese and Sesotho affix orderings enable approximately optimal memory-surprisal tradeoffs.
+These results show that Japanese and Sesotho affix orderings enable approximately optimal memory--surprisal tradeoffs.
 
 
 
@@ -189,7 +187,7 @@ These results show that Japanese and Sesotho affix orderings enable approximatel
 	\begin{center}
 \includegraphics[width=\textwidth]{figures/Both-suffixes-byMorphemes-auc-hist-heldout.pdf}
 \end{center}
-	\caption{Areas under the curve for the memory-surprisal tradeoff for verb affixes in Japanese (left) and Sesotho (right). For the baseline grammars, we show a Kernel Density estimate.
+	\caption{Areas under the curve for the memory--surprisal tradeoff for verb affixes in Japanese (left) and Sesotho (right). For the baseline grammars, we show a Kernel Density estimate.
 	For the approximately optimized grammars, we show the mean AUC, with error bars ranging from minimal to maximal AUC among the ten grammars (almost imperceptible in Sesotho).
 	In both Japanese and Sesotho, the AUC of the real orderings falls in the range of approximately optimized grammars.}
 	\label{fig:morph-auc}
@@ -207,8 +205,8 @@ These results show that Japanese and Sesotho affix orderings enable approximatel
 %\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-memsurp-heldout.pdf}
 %\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-auc-hist-heldout.pdf}
 %\end{center}
-%	\caption{Areas under the memory-surprisal tradeoff curve for Japanese verb suffixes.}\label{fig:jap-phon-morph}
-	%\caption{Japanese verb suffixes, measuring prediction on the level of phonemes (top) and morphemes (bottom), for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory-surprisal tradeoff.}\label{fig:jap-phon-morph}
+%	\caption{Areas under the memory--surprisal tradeoff curve for Japanese verb suffixes.}\label{fig:jap-phon-morph}
+	%\caption{Japanese verb suffixes, measuring prediction on the level of phonemes (top) and morphemes (bottom), for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory--surprisal tradeoff.}\label{fig:jap-phon-morph}
 %\end{figure}
 
 
@@ -367,10 +365,10 @@ Neuter & Tense/aspect & 155 \\
 
 
 \subsection{Discussion}
-We have found that the ordering of verb affixes in Japanese and Sesotho provides approximately optimal memory--surprisal trade-offs, close to the efficiency of orderings computationally optimized for efficiency.
+We have found that the ordering of verb affixes in Japanese and Sesotho provides approximately optimal memory--surprisal tradeoffs, close to the efficiency of orderings computationally optimized for efficiency.
 We further found that parts of these languages' ordering rules can be derived from optimizing order for efficient tradeoffs.
 
-Here we argue that the memory--surprisal trade-off provides an explanation of previously-existing typological generalizations, and an operationalization of previous functionally-motivated explanations for them. In particular, the notion of mutual information operationalizes the concept of `relevance.' 
+Here we argue that the memory--surprisal tradeoff provides an explanation of previously-existing typological generalizations, and an operationalization of previous functionally-motivated explanations for them. In particular, the notion of mutual information operationalizes the concept of `relevance.' 
 
 One prominent typological generalization due to \citet{bybee-morphology-1985} claims that there exists a universal ordering of verbal inflectional morphemes across languages:
 \begin{quote}
