@@ -1,4 +1,4 @@
-To test whether word orders as found in natural language reflect optimization for the memory--surprisal trade-off more generally, we compare the memory--surprisal trade-offs of 52 actual languages to those of counterfactual baseline languages. These baseline languages differ from the actual languages only in their word order rules. This method of comparison against counterfactual baseline languages was introduced by \citet{gildea-optimizing-2007,gildea-grammars-2010} and has since been fruitfully applied to study optimization-based models of word order universals  \citep{futrell-large-scale-2015,gildea-human-2015,hahn2020universals}.
+To test whether word orders as found in natural language reflect optimization for the memory--surprisal trade-off more generally, we compare the memory--surprisal trade-offs of 54 actual languages to those of counterfactual baseline languages. These baseline languages differ from the actual languages only in their word order rules. This method of comparison against counterfactual baseline languages was introduced by \citet{gildea-optimizing-2007,gildea-grammars-2010} and has since been fruitfully applied to study optimization-based models of word order universals  \citep{futrell-large-scale-2015,gildea-human-2015,hahn2020universals}.
 
 Here, we describe how we measure the memory--surprisal trade-off in corpora, and how we generate counterfactual baseline languages. In Section~\ref{sec:main-experiment-results}, we compare the trade-off in real corpora against the trade-off in the counterfactual baselines. For the majority of languages, we find that the real languages have more favorable memory--surprisal trade-offs than the baselines, in line with the Efficient Tradeoff Hypothesis.
 
@@ -89,7 +89,7 @@ For each language, we obtain a stationary process by concatenating the sentences
 \subsection{Defining baselines}\label{sec:baselines}
 
 Testing the Efficient Tradeoff Hypothesis requires comparing the memory--surprisal tradeoffs of real grammars to those of baseline grammars. The baseline grammars we construct are counterfactual ordering grammars that define consistent ordering rules similar to those found in actual languages (Figure~\ref{fig:grammars}).
-For instance, these grammars specify which dependents precede or follow their heads (e.g., whether objects follow or precede verbs, whether adjectives follow or precede nouns), and the relative order of different dependents on the same side of the head (e.g., whether noun phrases have order adjective-numeral-noun or numeral-adjective-noun). Our formalism of ordering grammars adapts the method of \citet{gildea-optimizing-2007,gildea-grammars-2010,gildea-human-2015} to the setting of dependency corpora, following \citet{futrell-large-scale-2015} and \citet{hahn2020universals}, among others.
+For instance, these grammars specify which dependents precede or follow their heads (e.g., whether objects follow or precede verbs, whether adjectives follow or precede nouns), and the relative order of different dependents on the same side of the head (e.g., whether noun phrases have order adjective-numeral-noun or numeral-adjective-noun). Our formalism of ordering grammars was introduced in \citet{hahn2020universals}, adapting the method of \citet{gildea-optimizing-2007,gildea-grammars-2010,gildea-human-2015} to the setting of dependency corpora.
 
 
 \begin{figure}
@@ -131,6 +131,17 @@ See Sections~\ref{subsec:expt2-discussion} and \ref{subsec:freedom} for further 
 %\jd{this paragraph is a little confusing. is this supposed to convince the reader that ordering grammars are a good formalism within which to construct baseline grammars? if so, pre-empt the question about the effect this will have for free word order languages by explicitly mentioning the issue and deferring its discussion to later, rather than simply saying that word order freedom is not modeled (about which the uninitiated reader will wonder whether that's a good or a bad thing)}
 
 
+To ensure that results are not due to the representational restrictions of the word order grammar formalism, we also compare the real languages to the result of ordering the corpora according to grammars that approximates the observed orders to the extent possible in the grammar formalism.
+These grammars have exactly the same representational constraints as the baseline grammars.
+Importantly, they differ from real languages in having entirely deterministic order.
+We expect these grammars to have better memory-surprisal tradeoffs than comparable random baseline grammars across all languages.
+
+We create ordering grammars that are fit to the actual orderings of each language.
+These grammars faithfully represent the ordering rules of the actual language, to the extent  possible in the formalism of ordering grammars:
+They match the order of the actual language in those cases where order of a relation is fully consistent; for relations where order is variable, they approximate this by modeling the most frequent order.
+In representing word order rules, they have the same limitations as baseline grammars have, for instance, they cannot specify rules sensitive to the category of the dependent or to larger context.
+These grammars are extracted from the observed orders using the method of \cite{hahn2020universals}.
+
 
 \subsection{Results}\label{sec:main-experiment-results}
 To test the Efficient Tradeoff Curve Hypothesis, we compare the tradeoff curves for the real orders with those for random baseline grammars.
@@ -157,18 +168,22 @@ In all other languages except for Latvian, the fraction of more efficient baseli
 In 42 of the 54 languages, the real language was more efficient than all of the sampled baseline grammars. % fraction of more efficient baseline grammars out of the samples taken was 0\%.
 
 
+
+The AUC for the fitted grammars is lower than more than 50\% of random baseline grammars in all 54 languages ($p < 0.01$, using two-sided Binomial test and Hochberg's step-up procedure). Thus, we replicate the result that ordering regularities of real languages provide more efficient tradeoffs than most possible order grammars even when comparing within the same word order grammar formalism.
+
+
 \begin{figure}
 	\begin{center}
 \includegraphics[width=\textwidth]{it-table.pdf}
 \end{center}
-	\caption{Conditional mutual information $I_t$ (y-axis) as a function of $t$ (x-axis), for real (blue) and counterfactual (red) orders. We plot the median over all sampled baseline grammars.}\label{fig:it}
+	\caption{Conditional mutual information $I_t$ (y-axis) as a function of $t$ (x-axis), for real (blue) and counterfactual (red) orders. We plot the median over all sampled baseline grammars. \mhahn{add MLE}}\label{fig:it}
 \end{figure}
 
 
 
 \begin{figure}
 	\begin{center}
-\includegraphics[width=\textwidth]{results-table.pdf}
+\includegraphics[width=\textwidth]{results-table-mle.pdf}
 \end{center}
 	\caption{Surprisal (y-axis) at given memory level (x-axis), for real orders (blue) and random baseline grammars (red).
 	For the real orders (blue), we provide the median across multiple random seeds of the neural network estimator for $I_t$ (see SI Section 3.2.2), and 95\% confidence bands.
@@ -179,7 +194,7 @@ In 42 of the 54 languages, the real language was more efficient than all of the 
 
 \begin{figure}
 	\begin{center}
-\includegraphics[width=\textwidth]{auc-table.pdf}
+\includegraphics[width=\textwidth]{auc-table_MLE.pdf}
 \end{center}
 \caption{Histograms for the Area under the Curve (AUC) for the memory--surprisal tradeoffs for real (blue) and random baseline (red) orders.
 We provide a kernel density smoothing estimate of the distribution of random baseline orders.
@@ -200,21 +215,21 @@ We thus hypothesized that word order freedom  impacts the memory-surprisal trade
 
 
 To test this hypothesis, we examined the correlation between word order freedom and the surprisal difference between real and baseline orderings.
-To quantify word order freedom, we used a corpus-based estimate, the \emph{branching direction entropy}~\citep{futrell-quantifying-2015}.
+To quantify word order freedom, we used a corpus-based estimate, the \key{branching direction entropy}~\citep{futrell-quantifying-2015}.
 This is the entropy of the ordering (head-first or dependent-first) of dependencies conditioned on the dependency label and the part-of-speech label of head and dependent.
 These two quantities are plotted in Figure~\ref{fig:freedom-surp}.
 We found that branching direction entropy was strongly correlated with the surprisal difference between real and baseline orderings (Spearman correlation $-0.58$, $p < .0001$).
 
 This result might mean that optimization of word orders for memory--surprisal tradeoffs is indeed stronger in languages with more fixed word order, and that word order freedom leads to less efficient memory--surprisal tradeoffs.
 A second possibility is that languages with seemingly free word order encode other information in word order, in particular, information about information structure \citep[e.g.][]{givon1988pragmatics,firbas1966defining,firbas1974aspects,myhill1985pragmatic}.
-In Section~\ref{subsec:freedom}, we will test the latter possibility by examining whether the degree of optimization changes when taking into account information structure.
+In Section~\ref{subsec:freedom}, we will test the latter hypothesis by examining whether the degree of optimization changes when taking into account information structure.
 
 
 
 
 \begin{figure}
 \includegraphics[width=0.95\textwidth]{figures/surprisal-branching-entropy-REAL-invert.pdf}
-	\caption{Word order freedom and strength of optimization: For each of the 54 languages, we show word order freedom as measured by branching entropy, and the difference between the real order's surprisal and the mean surprisal of the baseline grammars, at the maximum memory value (see Figure~\ref{fig:median-table}).
+	\caption{Word order freedom and strength of optimization: For each of the 54 languages, we show word order freedom as measured by branching entropy, and the difference between the real order's surprisal and the mean surprisal of the baseline grammars, at the maximum memory value (see Figure~\ref{fig:median-table-expt2}).
 	Languages with higher branching direction entropy show a smaller reduction in surprisal compared to baseline orders.\jd{is there sth to say about the outliers -- uyghur, arabic, french?}
 	}\label{fig:freedom-surp}
 \end{figure}
@@ -224,8 +239,8 @@ In Section~\ref{subsec:freedom}, we will test the latter possibility by examinin
 
 
 
-A possible concern with this experiment is that the optimization observed in Study 2 might be an artifact of the grammar formalism:
-The baseline grammars, by virtue of being ordering grammars, cannot exactly represent all word order rules found in real languages, and this restriction in representational capacity might potentially impact the optimality of resulting memory-surprisal tradeoffs.
-We will address this in Section~\ref{subsec:freedom} by repeating the experiment comparing the current baseline grammars to grammars that represent the word order of the real languages as faithfully as  possible within the grammar formalism.
+%Relatedly, a possible concern with this experiment is that the optimization observed in Study 2 might be an artifact of the grammar formalism:
+%The baseline grammars, by virtue of being ordering grammars, cannot exactly represent all word order rules found in real languages, and this restriction in representational capacity might potentially impact the measured optimality of the memory-surprisal tradeoffs.
+%We will address this in Section~\ref{subsec:freedom} by comparing the baseline grammars against grammars that represent the word order of the real languages as faithfully as possible within the grammar formalism.
 
 
