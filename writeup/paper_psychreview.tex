@@ -33,103 +33,144 @@
 
 \usepackage[american]{babel}
 
+
+\usepackage{amsmath}
+\usepackage{lingmacros}
+
+\usepackage{tikz-dependency}
+
+\usepackage{changepage}
+
+\usepackage{linguex}
+
+
 \usepackage{csquotes}
-\usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
+\usepackage[bibencoding=utf8, style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
+%\usepackage[backend=biber, bibencoding=utf8, style=authoryear, citestyle=authoryear]{biblatex} % https://tex.stackexchange.com/questions/402714/biblatex-not-working-with-biber-2-8-error-reading-bib-file-in-ascii-format
 \DeclareLanguageMapping{american}{american-apa}
-\addbibresource{bibliography.bib}
+\addbibresource{literature.bib}
 
-\title{Sample APA-Style Document Using the \textsf{apa7} Package}
-\shorttitle{Sample Document}
 
-\author{Daniel A. Weiss}
+
+\title{Modeling word and morpheme order in natural language as an efficient tradeoff of memory and surprisal}
+\shorttitle{Tradeoff of Memory and Surprisal}
+
+\author{Michael Hahn, Judith Degen, Richard Futrell}
 \affiliation{A University Somewhere}
 
-\leftheader{Weiss}
+\leftheader{TODO}
 
-\abstract{\lipsum[1]}
+
+\newcommand\citep[1]{\parencite{#1}}
+\newcommand\citet[1]{\Textcite{#1}}
+
+
+\definecolor{Purple}{RGB}{255,10,140}
+\newcommand{\jd}[1]{\textcolor{Purple}{[jd: #1]}} 
+
+
+\newcommand{\soft}[1]{}
+\newcommand{\nopreview}[1]{}
+\newcommand\comment[1]{{\color{red}#1}}
+\newcommand\mhahn[1]{{\color{red}(mhahn #1)}}
+\newcommand\jdegen[1]{{\color{red}(jdegen #1)}}
+\newcommand\REF[0]{{\color{red}(REF) }}
+\newcommand\CITE[0]{{\color{red}(CITE) }}
+\newcommand\rljf[1]{{\color{red}(#1)}}
+\newcommand{\key}[1]{\textbf{#1}}
+
+
+%\usepackage[dvipsnames]{xcolor}
+
+\usepackage{amsthm}
+
+\newcommand{\thetad}[0]{{\theta_d}}
+\newcommand{\thetal}[0]{{\theta_{LM}}}
+
+\newcounter{theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{thm}[theorem]{Theorem}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\abstract{Online memory limitations are well-established as a factor impacting sentence processing and have been argued to account for crosslinguistic word order regularities. Building off expectation-based models of language processing, we provide an information-theoretic formalization of these memory limitations. We introduce the idea of a memory--surprisal tradeoff: comprehenders can achieve lower average surprisal per word at the cost of storing more information about past context. We show that the shape of the tradeoff is determined in part by word order. In particular, languages will enable more efficient tradeoffs when they exhibit information locality: when predictive information about a word is concentrated in the word’s recent past. We show evidence from corpora of 54 real languages showing that languages allow for more efficient memory--surprisal tradeoffs than random baseline word order grammars. 
+We then use data from two agglutinative languages to show that morpheme order also optimizes efficiency of this tradeoff.
+}
 
 \keywords{APA style, demonstration}
 
 \authornote{
-   \addORCIDlink{Daniel A. Weiss}{0000-0000-0000-0000}
+   \addORCIDlink{Michael Hahn}{0000-0000-0000-0000}
 
-  Correspondence concerning this article should be addressed to Daniel A. Weiss, Department of Educational Psychology, Counseling and
-  Special Education, A University Somewhere, 123 Main St., Oneonta, NY
-  13820.  E-mail: daniel.weiss.led@gmail.com}
+  Correspondence concerning this article should be addressed to Michael Hahn, Department of Linguistics,
+  A University Somewhere, 123 Main St., Oneonta, NY
+  13820.  E-mail: mhahn2@stanford.edu}
 
 \begin{document}
+
 \maketitle
-\lipsum[2]
 
-\Textcite{vonDavier2011} said this,
-too \parencite{vonDavier2011,Lassen2006}.  Further evidence comes from
-other sources \parencite{Shotton1989,Lassen2006}.  \lipsum[3]
 
-\section{Method}
-\subsection{Participants}
-\lipsum[4]
+%\Textcite{vonDavier2011} said this,
+%too \parencite{vonDavier2011,Lassen2006}.  Further evidence comes from
+%other sources \parencite{Shotton1989,Lassen2006}.  \lipsum[3]
+\section{Introduction}
+\input{introduction.tex}
 
-\subsection{Materials}
-\lipsum[5]
 
-\subsection{Design}
-\lipsum[6]
+\section{Background}\label{sec:background}
 
-\subsection{Procedure}
-\lipsum[7]
 
-\subsubsection{Instrument \#1}
-\lipsum[8]
+\input{background.tex}
 
-\paragraph{Reliability}
-\lipsum[9]
 
-\subparagraph{Inter-rater reliability}
-\lipsum[10]
+\section{Memory-Surprisal Tradeoff}\label{sec:ms-tradeoff}
 
-\subparagraph{Test-retest reliability}
-\lipsum[11]
+\input{tradeoff.tex}
 
-\paragraph{Validity}
-\lipsum[12]
+\section{Study 1: Memory and Dependency Length}
 
-\subparagraph{Face validity}
-\lipsum[13]
+\input{toy-experiment.tex}
 
-\subparagraph{Construct validity}
-\lipsum[14]
 
-\section{Results}
-Table~\ref{tab:BasicTable} summarizes the data. \lipsum[15]
 
-\begin{table}
-  \caption{Sample Basic Table}
-  \label{tab:BasicTable}
-  \begin{tabular}{@{}llr@{}}         \toprule
-  \multicolumn{2}{c}{Item}        \\ \cmidrule(r){1-2}
-  Animal    & Description & Price \\ \midrule
-  Gnat      & per gram    & 13.65 \\
-            & each        &  0.01 \\
-  Gnu       & stuffed     & 92.50 \\
-  Emu       & stuffed     & 33.33 \\
-  Armadillo & frozen      &  8.99 \\ \bottomrule
-  \end{tabular}
-\end{table}
+\section{Study 2: Large-Scale Evidence that Word Orders Optimize Memory-Surprisal Tradeoff}
+\label{sec:main-experiment}
 
-\begin{figure}
-    \caption{This is my first figure caption.}
-    \includegraphics[bb=0in 0in 2.5in 2.5in, height=2.5in, width=2.5in]{Figure1.pdf}
-    \label{fig:Figure1}
-\end{figure}
+\input{main-experiment.tex}
 
-Figure~\ref{fig:Figure1} shows this trend. \lipsum[16]
+\subsection{Controlling for Information Structure}\label{subsec:freedom}
 
-\section{Discussion}
-\lipsum[17]
+\input{freedom-control.tex}
 
-\lipsum[18]
+\section{Study 3: Morpheme Order}
 
-\lipsum[19]
+\input{word-internal.tex}
+
+
+\section{General Discussion}
+
+\input{discussion.tex}
+
+
+\section{Conclusion}
+
+In this work, we have provided evidence that human languages order elements in a way that reduces cognitive resource requirements, in particular memory effort.
+We provided an information-theoretic formalization of memory requirements as a tradeoff of memory and surprisal.
+We show theoretically that languages have more efficient tradeoffs when they show stronger degrees of information locality.
+Information locality provides a formalization of various locality principles from the linguistic literature, including dependency locality \citep{gibson1998linguistic}, domain minimization \citep{hawkins2004efficiency}, and the proximity principle \citep{givon1985iconicity}.
+Using this result, we provided evidence that languages order words and morphemes in such a way as to provide efficient memory--surprisal tradeoffs.
+
+Our result shows that wide-ranging principles of order in natural language can be explained from highly generic cognitively-motivated information-theoretic principles. The locality properties we have discussed are some of the most characteristic properties of natural language, setting natural language apart from other codes studied in information theory.
+Therefore, our result raises the question of whether other distinctive characteristics of language---for example, mildly context-sensitive syntax, duality of patterning, and compositionality---might also be explained in terms of information-theoretic resource constraints on production and comprehension.
+
+
+
+
+
 
 \printbibliography
 
@@ -140,11 +181,11 @@ Figure~\ref{fig:Figure1} shows this trend. \lipsum[16]
 
 As shown in Figure~\ref{fig:Figure2}, these results are impressive. \lipsum[20]
 
-\begin{figure}
-    \caption{This is my second figure caption.}
-    \includegraphics[bb=0in 0in 2.5in 2.5in, height=2.5in, width=2.5in]{Figure1.pdf}
-    \label{fig:Figure2}
-\end{figure}
+%\begin{figure}
+%    \caption{This is my second figure caption.}
+%    \includegraphics[bb=0in 0in 2.5in 2.5in, height=2.5in, width=2.5in]{Figure1.pdf}
+%    \label{fig:Figure2}
+%\end{figure}
 
 \lipsum[21]
 \section{Pilot Data}

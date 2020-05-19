@@ -4,4 +4,11 @@ paper.pdf
 *.bbl
 *.blg
 *.log
+*.bcf
+*.fff
+*.out
+paper_psychreview.pdf
+*.run.xml
+*.ttt
+
 
