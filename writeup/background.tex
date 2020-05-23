@@ -61,31 +61,12 @@ Our result immediately entails a link between locality and boundedness of memory
 In particular, our model does not require any assumption that memory representations or activations decay over time \citep[as was required in][]{gibson1998linguistic, lewis-activation-based-2005, futrell2020lossy}.
 We will then show empirical evidence that the orders of words and morphemes in natural language are structured in a way that reduces our measure of memory use compared to the orders of counterfactual baseline languages.
 
+\mhahn{TODO section references aren't right?}
+
 The remainder of the paper is structured as follows. In Section~\ref{sec:ms-tradeoff}, we introduce the memory-surprisal tradeoff, show that information locality is a property of languages with more efficient memory-surprisal tradeoffs, and introduce the main hypothesis that emerges from the account: the Efficient Tradeoff Hypothesis. Sections~\ref{sec:toy-study}, \ref{sec:main-experiment}, and \ref{sec:morphemes} are dedicated to testing the Efficient Tradeoff Hypothesis. In Section~\ref{sec:toy-study}, we qualitatively test the Hypothesis in a reanalysis of word orders emerging in a miniature artificial language study \citep{fedzechkina-human-2017}.
 In Section \ref{sec:main-experiment}, we quantitatively test the Hypothesis in a large-scale study of the word order of 54 languages. In Section~\ref{sec:morphemes}, we test the Hypothesis on morpheme order in Japanese and Sesotho.
 In Section \ref{sec:discussion} we discuss the implications and limitations of the reported results.
 Section \ref{sec:conclusion} concludes.
 
-
-%\jd{writing the above, i realized that it would be really useful if there was a way to introduce the ETCH in some informal way towards the very beginning of the paper, in the intro. i know this is probably difficult, but if there's an intuitive way to formulate the prediction (and simply defer the formal definition to section 3), i think that would make reading the background easier -- because we know what we're working towards -- and would also make writing the proposed forward-looking section a little easier to write}
-
-%\mhahn{can also mention \cite{christiansen2016now}}
-
-% Production argument
-% Idea: A producer wants to approximate a language conditional on a production target G.
-% Ie producer finds m_t to minimize loss: D[ w_t | w_{<t}, g   ||   w_t  | m_t  ] + a * H[m_t]
-% That is, the memory has to contain both the previous words and the current production goal.
-% The loss comes out to I[ w_t : w_{<t},g | m_t] + a * H[m_t]
-%                       = I[w_t : w_{<t} | m_t] + I[w_t : g | w_{<t}, m_t] + a * H[m_t]
-% Now let's decompose the memory m_t into two parts:
-% the part about the previous words: call this r_t
-% the part about the current goal: call this g_t. And let's assume H[g|g_t]=0, i.e. the memory stores
-% all the information about the goal.
-% Then H[m_t] = H[r_t] + H[g_t|r_t].
-% Now we have loss:
-%     I[w_t : w_{<t} | r_t, g] + I[w_t : g | w_{<t}, r_t, g] + a H[r_t, g_t]
-%   = I[w_t : w_{<t} | r_t, g] + a H[r_t, g_t] 
-% Now we have H[r_t, g_t] >= H[r_t] >= \sum t I_t.
-% And then we have 
 
 
