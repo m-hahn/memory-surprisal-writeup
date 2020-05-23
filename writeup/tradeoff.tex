@@ -1,7 +1,8 @@
 In this section, we will introduce the main concept and hypothesis of our paper. % from a psycholinguistic perspective. 
 We will provide a technical definition of the memory--surprisal tradeoff curve, and then we will prove a theorem showing that more efficient memory--surprisal tradeoffs are possible in languages exhibiting information locality: that is, languages where words that depend on each other are close to each other. This theorem establishes the formal link between memory efficiency in online processing and locality in word order.
 
-The memory--surprisal tradeoff applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension; we return to the production perspective in Section~\ref{sec:sentprod-models}.
+The memory--surprisal tradeoff applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension; we return to the production perspective in the Discussion (Section~\ref{sec:discussion}).
+\mhahn{are we raising too many hopes for more discussion of production, given how little we eventually say about it in the discussion?}
 
 
 
@@ -10,7 +11,7 @@ The memory--surprisal tradeoff applies in both language production and comprehen
 
 We begin developing our model by considering the process of language comprehension, where a listener is processing a stream of words uttered by an interlocutor.
 Experimental research has established three properties of online language comprehension: (1) listeners maintain some information about the words received so far in incremental memory, (2) listeners form probabilistic expectations about the upcoming words \citep[e.g.][]{altmann1999incremental,staub2006syntactic,kuperberg2016we}, and (3) words are easy to process to the extent that they are predictable based on a listener's memory of words received so far \citep{hale2001probabilistic,levy2008expectation,futrell2020lossy}. 
-See Section~\ref{sec:sentprod-models} for discussion of how our model is related to theories that do not explicitly make these assumptions.
+See General Discussion (Section~\ref{sec:discussion}) for discussion of how our model is related to theories that do not explicitly make these assumptions.
 
 We formalize these three observations into postulates intended to provide a simplified picture of what is known about online language comprehension. Consider a listener comprehending a sequence of words $w_1, \dots, w_t, \dots, w_n$, at an arbitrary time $t$.
 \begin{enumerate}

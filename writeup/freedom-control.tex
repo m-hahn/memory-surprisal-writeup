@@ -1,6 +1,6 @@
 
 
-In this section we address the question about word order freedom raised in Section~\ref{subsec:expt2-discussion}.
+In this section we address the question about word order freedom raised in the discussion.
 We draw on a corpus of Czech with information structure annotation to determine whether real orders are more optimized when comparing to baselines taking information structure into account.
 
 
@@ -24,7 +24,7 @@ We obtained 38,727 training sentences and 5,228 dev sentences. We created 20 bas
 \paragraph{Results}
 
 We show estimated tradeoffs and the distributions over AUC values in Figure~\ref{fig:median-czech-infostruc}.
-As this experiment was conducted only on the subset of the Prague Dependency Treebank that has information structure annotation, the numerical values are slightly different from those in Section \ref{sec:main-experiment-results}. We compare the real orders both with the same baselines as above (red), and with the baselines taking information structure into account (green).
+As this experiment was conducted only on the subset of the Prague Dependency Treebank that has information structure annotation, the numerical values are slightly different from those in Figure~\ref{fig:median-table-expt2}. We compare the real orders both with the same baselines as above (red), and with the baselines taking information structure into account (green).
 Baselines show a larger gap in efficiency between real and baseline grammars when the baselines condition word order on information structure.
 This suggests that, among word orders that encode information structure, the real order of Czech provides a very efficient memory--surprisal tradeoff, and that the strength of optimization is underestimated when comparing against baselines that do not take information structure into account.
 
@@ -57,7 +57,7 @@ If this finding replicates, then this would mean that the impact of order freedo
 	
 \paragraph{Discussion}
 Using data from Czech, we found that the difference between the memory--surprisal tradeoffs of real and baseline orders increases if we choose baseline orderings that encode information structure, as real orders do.
-We hypothesize that this in part explains why the strength of memory efficiency optimization in Section~\ref{sec:main-experiment-results} is negatively correlated with the degree of word order freedom:
+We hypothesize that this in part explains why the observed strength of memory efficiency optimization is negatively correlated with the degree of word order freedom:
 Languages with flexible word order typically encode information structure in word order, which increases average surprisal.
 This does not mean that conditioning word order on information structure makes language less efficient in general.
 Rather, encoding information structure in word order may increase the information content transmitted to the listener, which may in turn balance an increase in surprisal processing effort \citep{hahn2020universals}.

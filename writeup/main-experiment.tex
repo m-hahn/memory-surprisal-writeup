@@ -1,10 +1,10 @@
 To test whether word orders as found in natural language reflect optimization for the memory--surprisal tradeoff more generally, we compare the memory--surprisal tradeoffs of 54 actual languages to those of counterfactual baseline languages. These baseline languages differ from the actual languages only in their word order rules. This method of comparison against counterfactual baseline languages was introduced by \citet{gildea-optimizing-2007,gildea-grammars-2010} and has since been fruitfully applied to study optimization-based models of word order universals  \citep{futrell-large-scale-2015,gildea-human-2015,hahn2020universals}.
 
-Here, we describe how we measure the memory--surprisal tradeoff in corpora, and how we generate counterfactual baseline languages. In Section~\ref{sec:main-experiment-results}, we compare the tradeoff in real corpora against the tradeoff in the counterfactual baselines. For the majority of languages, we find that the real languages have more favorable memory--surprisal tradeoffs than the baselines, in line with the Efficient Tradeoff Hypothesis.
+Here, we describe how we measure the memory--surprisal tradeoff in corpora, and how we generate counterfactual baseline languages. We then compare the tradeoff in real corpora against the tradeoff in the counterfactual baselines. For the majority of languages, we find that the real languages have more favorable memory--surprisal tradeoffs than the baselines, in line with the Efficient Tradeoff Hypothesis.
 
 \subsection{Measuring the memory--surprisal tradeoff in corpora}
 
-The key to evaluating the memory--surprisal tradeoff from corpus data is the set of quantities $I_t$, the  mutual information between words at distance $t$ conditional on the intervening words (defined in Section~\ref{sec:infoloc}). 
+The key to evaluating the memory--surprisal tradeoff from corpus data is the set of quantities $I_t$, the  mutual information between words at distance $t$ conditional on the intervening words (defined in Section~\ref{sec:ms-tradeoff}). 
 These quantities can be plugged in to Theorem~\ref{prop:suboptimal} to give a lower bound on the memory--surprisal tradeoff.
 
 The quantities $I_t$ can be estimated as the difference between the average surprisal of Markov models that have access to the last $t-1$ or $t$ words.
@@ -27,10 +27,10 @@ Therefore, to evaluate $I_t$, all we need is a way of fitting Markov models of o
 
 To fit Markov models to the data, we use neural language models. In particular, we use Recurrent Neural Networks with Long Short-Term Memory architectures \citep{hochreiter-long-1997}. 
 Neural network models are the basis of the state-of-the art in statistical modeling of language. Surprisal estimates derived from such models have been shown to best predict reading times, compared to other models, e.g., n-gram models~\citep{frank-insensitivity-2011,goodkind-predictive-2018}.
-See Supplementary Materials Section 3.2 for details on how these models were fit to data, and see Supplementary Materials Sections 3.4 and 3.5 for control studies using other methods of estimating $I_t$ (based on $n$-gram models and PCFG chart parsers). These control studies yield the same qualitative results as the neural network-based studies presented here.
+See SI Section 3.2 for details on how these models were fit to data, and see SI Sections 3.4 and 3.5 for control studies using other methods of estimating $I_t$ (based on $n$-gram models and PCFG chart parsers). These control studies yield the same qualitative results as the neural network-based studies presented here.
 
 In order to evaluate the average surprisal values $S_t$, we computed the empirical word-by-word surprisal values under the $t$th-order Markov model for held-out data, different from the data that was used to train the model. By evaluating on held-out data, we avoid underestimating the value of $S_t$ due to overfitting.
-We chose held-out data based on existing splits of corpora (see Section~\ref{sec:exp2-data}).
+We chose held-out data based on existing splits of corpora, see section `Data' below.
 %\jd{say a tiny bit more about the model fitting procedure, eg how much data was held out}
 
 
@@ -59,7 +59,7 @@ Mary \&	 has \& two \& green \& books  \\
    \depedge{5}{4}{amod}
    %\depedge[arc angle=50]{7}{6}{ATT}
 \end{dependency}
-	\caption{An English sentence with dependency annotations, according to the Universal Dependencies 2.4 standard.
+	\caption{An English sentence with dependency annotations, according to the Universal Dependencies 2.4 standard \citep{nivre-universal-2017}.
 	We visualize grammatical relations as arcs drawn from heads (e.g., the verb `has') to dependents (e.g., its object `book').
 	}\label{fig:dependency}
 \end{figure}
@@ -95,7 +95,7 @@ For instance, these grammars specify which dependents precede or follow their he
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{figures-gdrive/counterfactual-languages.pdf}
-\caption{Estimating chance by constructing counterfactual grammars and languages: We start from an annotated dependency corpus of sentences annotated with syntactic dependencies (top left). We then extract the raw dependency structures, stripping away word order information (right left).
+\caption{Estimating chance by constructing counterfactual grammars and languages: We start from an annotated dependency corpus of sentences annotated with syntactic dependencies (top left). We then extract the raw dependency structures, stripping away word order information (bottom left).
 We construct baseline ordering grammars that provide rules for ordering the words in such dependency structures (Grammars 1--3).
 Applying any such grammar to the dependency structures yields a counterfactual corpus of a hypothetical language that has the same dependency structures as the actual language, but different word order rules.}\label{fig:grammars}
 \end{figure}
