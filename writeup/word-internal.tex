@@ -162,13 +162,13 @@ Ordering morphemes according to these fitted models recovered the observed order
 
 \paragraph{Creating Optimal Orders}
 
-In order to create optimal orders to compare real orders to, we optimize orderings for the AUC under the memory--surprisal tradeoff curve with an adaptation of the hill climbing method that \citet{gildea-human-2015} used to optimize word order grammars for the length of syntactic dependencies and trigram surprisal.
+In order to create optimal orders to compare real orders to, we optimized orderings for the AUC under the memory--surprisal tradeoff curve with an adaptation of the hill climbing method that \citet{gildea-human-2015} used to optimize word order grammars for the length of syntactic dependencies and trigram surprisal.
 
-We randomly initialize the assignment of weights to morphemes, and then iteratively change the assignment to reduce AUC.
-In each iteration, we randomly choose one morpheme, and evaluate AUC for each way of ordering it between two other morphemes.
-We then update the weights to the ordering that yields the lowest AUC.
-To speed up optimization, we restrict to morphemes occurring at least 10 times in the corpus for 95\% of iterations, and to 10\% of possible orderings in each step.
-These choices vastly reduce computation time by reducing time spent on low-frequency morphemes.
+We randomly initialized the assignment of weights to morphemes, and then iteratively change the assignment to reduce AUC.
+In each iteration, we randomly chose one morpheme, and evaluate AUC for each way of ordering it between two other morphemes.
+We then updated the weights to the ordering that yields the lowest AUC.
+To speed up optimization, we restricted to morphemes occurring at least 10 times in the corpus for 95\% of iterations, and to 10\% of possible orderings in each step.
+These choices vastly reduced computation time by reducing time spent on low-frequency morphemes.
 This optimization method is approximate, as it only guarantees convergence to a local optimum \citep{gildea-human-2015}, not to a globally optimal assignment.
 
 We ran this method for 1,000 iterations. Empirically, AUC converged after a few hundred iterations.
