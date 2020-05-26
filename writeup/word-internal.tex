@@ -8,11 +8,13 @@
 %- permute morphemes 
 %\section{Morphology}
 
+\label{sec:morphemes}
+
 The Efficient Tradeoff Hypothesis should apply not just at the level of words, but at the level of any linguistic element.
 For instance, just as observed word orders exhibit information locality, the order of morphemes within words should also be structured so that morphemes which predict each other are close to each other.
 Here, we apply the Efficient Tradeoff Hypothesis to predict the order of morphemes within morphologically complex words in two agglutinative languages. We study two agglutinative languages for which extensive corpora with hand-annotated morphological segmentation and labeling are available: Japanese and Sesotho. 
-We will compare the memory--surprisal tradeoff of the actual morpheme orders in these languages with hypothetical baseline orderings.
-Furthermore, we will construct hypothetical orderings that are optimized for the efficiency of the memory--surprisal tradeoff, and compare these to the actual morpheme orderings, to investigate whether morpheme order in these languages can be predicted by optimization of tradeoff efficiency.
+We compare the memory--surprisal tradeoff of the actual morpheme orders in these languages with hypothetical baseline orderings.
+Furthermore, we construct hypothetical orderings that are optimized for the efficiency of the memory--surprisal tradeoff, and compare these to the actual morpheme orderings, to investigate whether morpheme order in these languages can be predicted by optimization of tradeoff efficiency.
 Below, we first give brief sketches of the morphological patterns in these languages. 
 
 
@@ -131,28 +133,28 @@ We randomly selected 5\% to serve as held-out data and used the remaining 95\% a
 
 
 \paragraph{Estimating Memory-Surprisal Tradeoff}
-We model incremental prediction on the level of morpheme sequences.
-To do so, we represent each verb form as a sequence of a stem and affix morphemes, abstracting away from morphophonemic interactions between neighboring morphemes.
+We modeled incremental prediction on the level of morpheme sequences.
+To do so, we represented each verb form as a sequence of a stem and affix morphemes, abstracting away from morphophonemic interactions between neighboring morphemes.
 As in many languages, affixes in Japanese and Sesotho show morphophonemic interactions between neighboring morphemes; for instance, the Japanese politeness morpheme -\textit{mas}- takes the form -\textit{masu} when it is word-final, while it has the allomorph -\textit{mase}- when followed by the negation suffix -\textit{n}.
 Modeling prediction on the level of morphemes, as opposed to phonemes, controls for these interactions.\footnote{See SI Section 4.3 for qualitatively similar results when modeling prediction at the phoneme level.}
 
-In analogy to Studies 1--2, we model verb forms as a stationary stochastic process by concatenating the verb forms from the corpus in random order.
+In analogy to Studies 1--2, we modeled verb forms as a stationary stochastic process by concatenating the verb forms from the corpus in random order.
 
-We calculate $I_t$ by estimating an $n$-gram model on the training set and then computing the average surprisal $S_t$ as cross-entropy on the held-out set using Kneser-Ney smoothing.
+We calculated $I_t$ by estimating an $n$-gram model on the training set and then computing the average surprisal $S_t$ as cross-entropy on the held-out set using Kneser-Ney smoothing.
 The model may overfit as the context size $t$ increases, leading to higher cross-entropies for larger values of $t$.
-We mitigate overfitting for large $t$ by estimating
+We mitigated overfitting for large $t$ by estimating
 \begin{equation}
 \hat{S}_t := \min_{s \leq t} S_s,
 \end{equation}
 where $S_s$ is the cross-entropy of the $s$'th order Markov model on held-out data.
 This procedure ensures that $\hat{S}_t$ can only decrease as the context size $t$ increases.
-Similar results are obtained when instead using the simple `naive' estimator for $I_t$ on the training set; this naive estimator estimates $I_t$ directly from $n$-gram counts in the training set; see the SI for details.
+Similar results were obtained when instead using the simple `naive' estimator for $I_t$ on the training set; this naive estimator estimates $I_t$ directly from $n$-gram counts in the training set; see the SI for details.
 
 \paragraph{Parameterizing Alternative Orderings}
 
-We parameterize alternative affix orderings by assigning a weight in $[0,1]$ to each morpheme.
+We parameterized alternative affix orderings by assigning a weight in $[0,1]$ to each morpheme.
 Given such a grammar, affixes are ordered by the values assigned to their underlying morphemes.
-We consider all morphemes annotated in the corpora, including low-frequency ones going beyond the ones identified above (see SI for details).
+We considered all morphemes annotated in the corpora, including low-frequency ones going beyond the ones identified above (see SI for details).
 
 
 To verify that this formalism is appropriate for capturing morpheme order in Japanese and Sesotho, we fitted models parameterized in this way to the observed orders.

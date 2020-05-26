@@ -66,7 +66,7 @@ Due to the difficulty and cost of annotating information structure, we could onl
 As more annotated data becomes available, this should be replicated on data from further languages.
 
 
-\subsection{Conclusion}
+\subsection{Interim summary}
 In this section, we tested the Efficient Tradeoff Hypothesis on dependency corpora from 54 languages, comparing observed word orders to hypothetical baseline grammars.
 We found that, in 50 out of 54 languages, real orders provide more efficient memory--surprisal tradeoffs than most baseline grammars.
 This suggests that, across languages, word order favors information locality more strongly than most possible alternative orders.
@@ -78,7 +78,7 @@ Using data from Czech that is annotated for both syntax and information structur
 %\mhahn{TODO}
 
 Taken together, Studies 1 and 2 suggest that crosslinguistic word orders are in part impacted by a pressure towards efficient memory--surprisal tradeoffs, and thus information locality.
-To provide evidence that the Efficient Tradeoff Hypothesis holds at different levels of representation, we will consider morpheme order in Study 3.
+To test whether the Efficient Tradeoff Hypothesis holds at different levels of representation, we consider morpheme order in Study 3.
 
 
 
@@ -98,7 +98,7 @@ To provide evidence that the Efficient Tradeoff Hypothesis holds at different le
 \includegraphics[width=0.9\textwidth]{figures/surprisal-branching-entropy-REAL-infostruc-invert.pdf}
 	\caption{Order Freedom vs Difference in Surprisal at maximal memory (compare Figure~\ref{fig:freedom-surp}). The arrow indicates how the data point for Czech would move when modeling word order including information structure.
 	When modeling information structure, branching direction entropy decreases, while the surprisal difference between real and baseline orders increases.
-	This suggests that the weaker optimization in free word order languages observed in Experiment 2 might in part be because ordering grammars did not take information structure into account.%\jd{this is neat, but instead of copying the whole figure, can this be integrated into the previous version of the fig?}
+	This suggests that the weaker optimization in free word order languages observed in Experiment 2 might in part be because ordering grammars did not take information structure into account.\jd{i still think that instead of copying the whole figure, it would be better to just show fig 13 with both versions of czech, where color distinguishes the two versions (labeled in legend). but up to you; i imagine reviewers will make you do this eventually anyway}
 	}\label{fig:freedom-mi-with-infostruc}
 \end{figure}
 
