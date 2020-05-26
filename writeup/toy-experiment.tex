@@ -77,7 +77,7 @@ We constructed a stochastic process representing the language consisting of sent
 
 % TODO: Does the process only include those orders, or does it also include the SOV and OSV orders with equal-complexity O and S?
 
-We interpreted each of the two languages as a stationary processes, extending infinitely in both directions, by concatenating independent samples drawn from the language.
+We interpreted each of the two languages as a stationary processes, extending infinitely in both directions, by concatenating independent samples drawn from the language, and separating them with a special symbol indicating sentence boundaries.
 We computed the bounds on memory and surprisal (\ref{eq:memory-bound}-\ref{eq:surprisal-bound}) from Theorem~\ref{prop:suboptimal} from a chain of 1000 independently sampled sentences, for each of the two versions of the toy language.
 % TODO: More on how this was done.			
 % TODO: Convert nats to bits
