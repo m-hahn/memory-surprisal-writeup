@@ -1,8 +1,8 @@
-In this section, we will introduce the main concept and hypothesis of our paper. % from a psycholinguistic perspective. 
-We will provide a technical definition of the memory--surprisal tradeoff curve, and then we will prove a theorem showing that more efficient memory--surprisal tradeoffs are possible in languages exhibiting information locality: that is, languages where words that depend on each other are close to each other. This theorem establishes the formal link between memory efficiency in online processing and locality in word order.
+In this section, we introduce the main concept and hypothesis of the paper. % from a psycholinguistic perspective. 
+We provide a technical definition of the memory--surprisal tradeoff curve, and we prove a theorem showing that more efficient memory--surprisal tradeoffs are possible in languages exhibiting information locality, i.e., in languages where words that depend on each other are close to each other. This theorem establishes the formal link between memory efficiency in online processing and locality in word order.
 
 The memory--surprisal tradeoff applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension; we return to the production perspective in the Discussion (Section~\ref{sec:discussion}).
-\mhahn{are we raising too many hopes for more discussion of production, given how little we eventually say about it in the discussion?}
+%\mhahn{are we raising too many hopes for more discussion of production, given how little we eventually say about it in the discussion?} \jd{no, i think it's fine.}
 
 
 
@@ -23,7 +23,7 @@ We formalize these three observations into postulates intended to provide a simp
     \text{Difficulty} \propto -\log P(w_t | m_t).
 \end{equation}
 \end{enumerate}
-The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory} \citep{hale2001probabilistic,levy2008expectation}, an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation, antilocality effects, and effects of syntactic construction frequency. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \citep{smith-effect-2013,goodkind-predictive-2018}, and effects of surprisal have been observed for units as small as phonemes \citep{gwilliams2020neural}.
+The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory} \citep{hale2001probabilistic,levy2008expectation}, an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation, antilocality effects, and effects of syntactic construction frequency. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \jd{something's wrong with the smith and levy ref, looks like it occurs multiple times in the bibliography -- fix} \citep{smith-effect-2013,goodkind-predictive-2018}, and effects of surprisal have been observed for units as small as phonemes \citep{gwilliams2020neural}.
 Surprisal theory is compatible with different views on the mechanisms underlying prediction, and can reflect different mechanisms such as preactivation and integration~\citep{kuperberg2016we}.
 We do not assume that listeners explicitly compute a full-fledged distribution $P(w_t|m_t)$; we view $P(w_t|m_t)$ as a formalization of the probabilistic expectations that listeners form during comprehension.
 
@@ -62,7 +62,7 @@ We hypothesize that this property is reflected in grammatical structure and usag
 Here we provide the technical definition of the memory--surprisal tradeoff curve.
 Let $W$ be a stochastic process generating a stream of symbols extending indefinitely into the past and future: $\dots, w_{-2}, w_{-1}, w_0, w_{1}, w_{2}, \dots$. %indexed as $w_1, \dots, w_t, \dots$.
 These symbols can represent words, morphemes, or other units for decomposing sentences into a sequence of symbols. 
-We model this process as \emph{stationary} \citep{doob1953stochastic}, that is, the joint probability distributions of symbols at different time points depend only on their relative positions in time, not their absolute positions (see SI Section 1.1.1 for more on this modeling assumption).
+We model this process as \emph{stationary} \jd{here, italics are used. elsewhere, terms are bolded. do these font variations have a specific and consistent semantics? if not, remove entirely.} \citep{doob1953stochastic}, that is, the joint probability distributions of symbols at different time points depend only on their relative positions in time, not their absolute positions (see SI Section 1.1.1 for more on this modeling assumption).
 
 Let $M$ be a memory encoding function.
 We consider memory and surprisal costs at an arbitrary time point $t$.

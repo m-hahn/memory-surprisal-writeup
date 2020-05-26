@@ -107,7 +107,7 @@ Given a head and a set of dependents, we order each dependent by the parameter $
 Dependents with negative weights are placed to the left of the head; dependents with positive weights are placed to the right. Ordering grammars describe languages that have consistent word order.
 For instance, the subject is consistently ordered before or after the verb, depending on whether the parameter $a_{nsubj}$ for the verb-subject dependency is positive or negative.
 
-We construct baseline grammars by randomly sampling the parameters $a_\tau$.
+We constructed baseline grammars by randomly sampling the parameters $a_\tau$.
 Such baseline grammars define languages that have consistent word order but, crucial for our purposes, do not exhibit systematic preferences for specific word order patterns such as short dependencies.
 
 We first constructed at least 10 baseline grammars for each of the 54 real languages.
@@ -225,7 +225,7 @@ In most cases, the real and fitted orders provide more efficient tradeoffs than 
 \subsection{Discussion}\label{subsec:expt2-discussion}
 
 We have found that 50 out of 54 languages provide better memory--surprisal tradeoffs than random baselines with consistent but counterfactual word order rules.
-Four languages provide exceptions; these are Latvian (Baltic), North Sami (Uralic), Polish and Slovak (both Slavic); these four languages did not have significantly lower AUC values than half of the random baselines.
+Four languages provide exceptions; these are Latvian (Baltic), North Sami (Uralic), Polish and Slovak (both Slavic). These four languages did not have significantly lower AUC values than half of the random baselines.
 One feature that unites these four languages is that they have strong word order freedom, as we will see below in Figure~\ref{fig:freedom-surp}. % \mhahn{(also CITE something)}.
 Word order freedom plausibly makes sentences less predictable, as the same syntactic structure can receive different surface realizations.
 We thus hypothesized that word order freedom  impacts the memory--surprisal tradeoff, and that languages with more strongly fixed word order should display more optimal memory--surprisal tradeoffs.
@@ -239,7 +239,7 @@ We found that branching direction entropy was strongly correlated with the surpr
 
 This result might mean that optimization of word orders for memory--surprisal tradeoffs is indeed stronger in languages with more fixed word order, and that word order freedom leads to less efficient memory--surprisal tradeoffs.
 A second possibility is that languages with seemingly free word order encode other information in word order, in particular, information about information structure \citep[e.g.][]{givon1988pragmatics,firbas1966defining,firbas1974aspects,myhill1985pragmatic}.
-Next, we will test the latter hypothesis by examining whether the degree of optimization changes when taking into account information structure.
+Next, we test the latter hypothesis by examining whether the degree of optimization changes when taking into account information structure.
 
 
 
@@ -247,7 +247,7 @@ Next, we will test the latter hypothesis by examining whether the degree of opti
 \begin{figure}
 \includegraphics[width=0.95\textwidth]{figures/surprisal-branching-entropy-REAL-invert.pdf}
 	\caption{Word order freedom and strength of optimization: For each of the 54 languages, we show word order freedom as measured by branching entropy, and the difference between the real order's surprisal and the median surprisal of the baseline grammars, at the maximum memory value (see Figure~\ref{fig:median-table-expt2}).
-	Languages with higher branching direction entropy show a smaller reduction in surprisal compared to baseline orders.
+	Languages with higher branching direction entropy show a smaller reduction in surprisal compared to baseline orders.\jd{the languages are printed in very low resolution -- not sure if this is an issue with the plot or with my monitor. ideally the labels would generally be a little bigger. you can use the ggrepel package to make sure labels don't overlap}
 	}\label{fig:freedom-surp}
 \end{figure}
 
