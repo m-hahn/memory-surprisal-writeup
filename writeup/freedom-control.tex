@@ -1,6 +1,6 @@
 
 
-In this section we address the question about word order freedom raised in the discussion.
+In this section we address the question about word order freedom raised in the last section.
 We draw on a corpus of Czech with information structure annotation to determine whether real orders are more optimized when comparing to baselines taking information structure into account.
 
 
@@ -19,7 +19,7 @@ These labels were diagnosed based on constituent order and intonation.
 Some constituents remain unmarked, the vast majority of which are function words such as adpositions, conjunctions, and auxiliaries; we introduce a label ``NA'' for these.
 To define baselines, we extend the word order grammar formalism by defining separate weights for each combination of the 37 syntactic relations and these four information structure labels.
 
-We obtained 38,727 training sentences and 5,228 dev sentences. We created 20 baseline grammars with information structure, 20 baseline grammars without it.
+We obtained 38,727 training sentences and 5,228 held-out sentences. We created 20 baseline grammars with information structure, 20 baseline grammars without it.
 %, and created 5 model runs for both real orders and the fitted grammar.
 
 \paragraph{Results}
@@ -69,7 +69,8 @@ As more annotated data becomes available, this should be replicated on data from
 \subsection{Interim summary}
 In this section, we tested the Efficient Tradeoff Hypothesis on dependency corpora from 54 languages, comparing observed word orders to hypothetical baseline grammars.
 We found that, in 50 out of 54 languages, real orders provide more efficient memory--surprisal tradeoffs than most baseline grammars.
-This suggests that, across languages, word order favors information locality more strongly than most possible alternative orders.
+This result also held when comparing real and baseline orderings within a single grammar formalism.
+These results suggests that, across languages, word order favors information locality more strongly than most possible alternative orders.
 
 We also found that the degree of optimization was weaker in languages with high degrees of word order freedom.
 Using data from Czech that is annotated for both syntax and information structure, we provided evidence that this dependence on word order freedom is an artifact of the fact that languages with flexible word order tend to encode information structure in word order.

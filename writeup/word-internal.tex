@@ -37,11 +37,11 @@ Based on corpus data and the linguistic literature on Japanese, we identified th
 \begin{enumerate}
 \item \textit{suru}: obligatory suffix after Sino-Japanese words when they are used as verbs
 \item Valence: causative (-\textit{ase}-) (\citet[142]{hasegawa2014japanese}, \citet[Chapter 13]{kaiser2013japanese})
-\item Voice and Mood: passive (-\textit{are}-, -\textit{rare}-) \cite[152]{hasegawa2014japanese} \cite[Chapter 12]{kaiser2013japanese} and potential (-\textit{e}-, -\textit{are}-, -\textit{rare}-) \cite[398]{kaiser2013japanese}  
-\item Politeness (-\textit{mas}-) \cite[190]{kaiser2013japanese}.
-\item Mood: desiderative (-\textit{ta}-) \cite[238]{kaiser2013japanese}
+\item Voice and Mood: passive (-\textit{are}-, -\textit{rare}-) (\citet[152]{hasegawa2014japanese}, \citet[Chapter 12]{kaiser2013japanese}) and potential (-\textit{e}-, -\textit{are}-, -\textit{rare}-) \citep[398]{kaiser2013japanese}  
+\item Politeness (-\textit{mas}-) \citep[190]{kaiser2013japanese}.
+\item Mood: desiderative (-\textit{ta}-) \citep[238]{kaiser2013japanese}
 \item Negation (-\textit{n}-)
-\item Tense, Aspect, Mood, and Finiteness: past (-\textit{ta}), future/hortative (-\textit{yoo}) \cite[229]{kaiser2013japanese}, nonfiniteness (-\textit{te}) \cite[186]{kaiser2013japanese}
+\item Tense, Aspect, Mood, and Finiteness: past (-\textit{ta}), future/hortative (-\textit{yoo}) \citep[229]{kaiser2013japanese}, nonfiniteness (-\textit{te}) \citep[186]{kaiser2013japanese}
 %\item Nonfiniteness: the suffix -\textit{te} derives a nonfinite form .
 \end{enumerate}
 
@@ -61,10 +61,10 @@ Common suffixes include markers changing valence and voice, and a mood suffix \r
 
 \ex.\ag. oa di rek a \\
 \textsc{subject.agreement} \textsc{object.agreement} buy \textsc{indicative} \\
-`(he) is buying (it)'  \cite[ex (41)]{demuth1992acquisition} \label{ex:oadireka}
+`(he) is buying (it)'  \citep{demuth1992acquisition} \label{ex:oadireka}
 \bg. o pheh el a \\
 \textsc{subject.agreement} cook \textsc{applicative} \textsc{indicative} \\
-`(he) cooks (food) for (him)'  \cite[ex (41)]{demuth1992acquisition}
+`(he) cooks (food) for (him)'  \citep{demuth1992acquisition}
 \label{ex:ophehela}
 
 We identified affix morphemes and their ordering based on the analysis in \cite{demuth1992acquisition}, supplemented with information from grammars of Sesotho \citep{doke1967textbook,guma1971outline}. See SI for details.
@@ -74,11 +74,11 @@ We identified the following prefixes:
     \item Subject agreement: This morpheme encodes agreement with the subject, for person, number, and noun class (the latter only in the 3rd person) \cite[\textsection 395]{doke1967textbook}.
 	    The annotation provided by \cite{demuth1992acquisition} distinguishes between ordinary subject agreement prefixes and agreement prefixes used in relative clauses; we distinguish these morpheme types here.
     
-    \item Negation \cite[\textsection 429]{doke1967textbook}
+    \item Negation \citep[\textsection 429]{doke1967textbook}
     
-    \item Tense/aspect marker   \cite[\textsection 400--424]{doke1967textbook}
+    \item Tense/aspect marker   \citep[\textsection 400--424]{doke1967textbook}
     
-    \item Object agreement or reflexive marker \cite[\textsection 459]{doke1967textbook}. 
+    \item Object agreement or reflexive marker \citep[\textsection 459]{doke1967textbook}. 
     Similar to subject agreement, object agreement denotes person, number, and noun class features of the object.
 \end{enumerate}
 We identified the following suffixes:
@@ -88,12 +88,12 @@ We identified the following suffixes:
 % Jeffrey Good, Strong Linearity: Three Case Studies Towards a Theory of Morphosyntactic Templatic Constructions (Diss, 2003)
     
 \begin{enumerate}
-\item Semantic derivation: reversive (e.g., `do' $\rightarrow$ `undo') \cite[\textsection 345]{doke1967textbook}
-\item Valence: Common valence-altering suffixes include causative, neuter/stative, applicative, and reciprocal \cite[\textsection 307--338]{doke1967textbook}. See SI for details on their meanings.
-    \item Voice: passive \cite[\textsection 300]{doke1967textbook} 
-    \item Tense \cite[\textsection 369]{doke1967textbook}
-    \item Mood \cite[\textsection 386--445]{doke1967textbook}
-    \item Interrogative and relative markers, appended to verbs in certain interrogative and relative clauses \cite[\textsection 160, 271, 320, 714, 793]{doke1967textbook}.
+\item Semantic derivation: reversive (e.g., `do' $\rightarrow$ `undo') \citep[\textsection 345]{doke1967textbook}
+\item Valence: Common valence-altering suffixes include causative, neuter/stative, applicative, and reciprocal \citep[\textsection 307--338]{doke1967textbook}. See SI for details on their meanings.
+    \item Voice: passive \citep[\textsection 300]{doke1967textbook} 
+    \item Tense \citep[\textsection 369]{doke1967textbook}
+    \item Mood \citep[\textsection 386--445]{doke1967textbook}
+    \item Interrogative and relative markers, appended to verbs in certain interrogative and relative clauses \citep[\textsection 160, 271, 320, 714, 793]{doke1967textbook}.
     %-\textit{ng}.
     %The interrogative marker -\textit{ng} is an enclitized form of the interrogative `what'.
     %The relative marker -\textit{ng} is suffixed to verbs in relative clauses.
@@ -113,7 +113,7 @@ We used the GSD corpus, Version 2.4, \citep{tanaka2016universal, asahara2018univ
 In the corpus, verb suffixes largely correspond to auxiliaries (with tag \texttt{AUX}); only a few morphemes tagged \texttt{AUX} are not standardly treated as suffixes (see SI), and one frequent suffix (-\textit{te}) is labeled \texttt{SCONJ}.
 We selected verb forms by selecting all chains of a verb (tag \texttt{VERB}) followed by any number of auxiliaries (tag \texttt{AUX}) from the training set of the corpus. When the suffix -\textit{te} (tag \texttt{SCONJ}) followed such a chain, we added this.
 We labeled suffixes for underlying morphemes with the help of the lemmatization provided for each suffix in the corpus (see SI Section 4.3 for details).
-The passive (slot 3) and potential (slot 4) markers are formally indistinguishable for many verbs.
+The passive and potential (slot 3) markers are formally indistinguishable for many verbs.
 As we cannot systematically distinguish them on the basis of the available corpus annotation, we merge these into a single underlying morpheme `Passive/Potential'.
 
 We obtained 15,281 verb forms in the training set and 1,048 verb forms in the held-out set.
@@ -284,12 +284,10 @@ negation & politeness & 3 \\
 
 \paragraph{Sesotho results.} We compare the real Sesotho grammar with the approximately optimized grammar that achieved the lowest AUC value in Table~\ref{tab:grammar-table-sesotho}. %\jd{hm, is it the case that the lowest-AUC optimized grammars differ in the predicted order? if so, that suggests further analyses}
 In Sesotho, for prefixes, all optimized grammars almost exactly recover the ordering described above.
-The only divergence among the high-frequency morphemes is that negation and the tense/aspect prefix are ordered incorrectly; this accounts for only 12 occurrences in the data set, as the two prefixes rarely co-occur.
-%Other divergences affect lower-frequency morphemes. % (TODO how many).
-%Common divergences are shown in Table~\ref{tab:sesotho-prefix-err-analysis}.
+The only divergence among the high-frequency morphemes is that negation and the tense/aspect prefix are ordered incorrectly; this accounts for only 12 occurrences in the data set, as the two prefixes rarely co-occur (Table~\ref{tab:sesotho-prefix-err-analysis}, top).
 
-For Sesotho suffixes, order is recovered at above-chance accuracies, though with some divergences.
-The most common error (Table~\ref{tab:sesotho-prefix-err-analysis}) is that relative and interrogative suffixes are consistently placed closer to the verb stem than the mood suffix.
+For Sesotho suffixes, order is recovered at above-chance accuracies (Table~\ref{tab:morph-acc}, bottom), though with some divergences.
+The most common error (Table~\ref{tab:sesotho-prefix-err-analysis}, bottom) is that relative and interrogative suffixes are consistently placed closer to the verb stem than the mood suffix.
 We conjecture that this happens because all Sesotho verbs uniformly have a mood suffix, suggesting that there might be lower mutual information between the stem and the mood suffix than between the stem and these two suffixes.
 Furthermore, valence-changing suffixes are ordered farther away from the stem than various other suffixes, in contrast with the actual orders.
 Interestingly, we found that prediction was more accurate in this respect when estimating $I_t$ naively  on the training set (see SI Section 4.3), suggesting that the available corpus data does not sufficiently determine the optimal ordering.

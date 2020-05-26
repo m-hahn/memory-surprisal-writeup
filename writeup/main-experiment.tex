@@ -4,7 +4,7 @@ Here, we describe how we measure the memory--surprisal tradeoff in corpora, and 
 
 \subsection{Measuring the memory--surprisal tradeoff in corpora}
 
-The key to evaluating the memory--surprisal tradeoff from corpus data is the set of quantities $I_t$, the  mutual information between words at distance $t$ conditional on the intervening words (defined in Section~\ref{sec:ms-tradeoff}). 
+The key to evaluating the memory--surprisal tradeoff from corpus data is the set of quantities $I_t$, the  mutual information between words at distance $t$ conditional on the intervening words. % (defined in Section~\ref{sec:ms-tradeoff}). 
 These quantities can be plugged in to Theorem~\ref{prop:suboptimal} to give a lower bound on the memory--surprisal tradeoff.
 
 The quantities $I_t$ can be estimated as the difference between the average surprisal of Markov models that have access to the last $t-1$ or $t$ words.
@@ -28,6 +28,8 @@ Therefore, to evaluate $I_t$, all we need is a way of fitting Markov models of o
 To fit Markov models to the data, we use neural language models. In particular, we use Recurrent Neural Networks with Long Short-Term Memory architectures \citep{hochreiter-long-1997}. 
 Neural network models are the basis of the state-of-the art in statistical modeling of language. Surprisal estimates derived from such models have been shown to best predict reading times, compared to other models, e.g., n-gram models~\citep{frank-insensitivity-2011,goodkind-predictive-2018}.
 See SI Section 3.2 for details on how these models were fit to data, and see SI Sections 3.4 and 3.5 for control studies using other methods of estimating $I_t$ (based on $n$-gram models and PCFG chart parsers). These control studies yield the same qualitative results as the neural network-based studies presented here.
+
+For each language, we run the neural network estimator multiple times with different random seeds, to control for variation in the random initialization of model parameters (see SI Section 3.2.3 for details).
 
 In order to evaluate the average surprisal values $S_t$, we computed the empirical word-by-word surprisal values under the $t$th-order Markov model for held-out data, different from the data that was used to train the model. By evaluating on held-out data, we avoid underestimating the value of $S_t$ due to overfitting.
 We chose held-out data based on existing splits of corpora, see section `Data' below.
@@ -124,10 +126,10 @@ In this sense, ordering grammars only represent an approximation to the kinds of
 Other models described in the literature \citep{futrell2015experiments, wang2016galactic} mostly share these limitations.
 
 
-To ensure that results are not due to the representational restrictions of the word order grammar formalism, we also compared the real languages to the result of ordering the corpora according to grammars that approximates the observed orders to the extent possible in the grammar formalism.
-These grammars have exactly the same representational constraints as the baseline grammars.
+To ensure that results are not due to the representational restrictions of the word order grammar formalism, we also compared the baselines to the result of ordering the corpora according to grammars that approximate the real orders to the extent possible in the grammar formalism.
+These grammars have exactly the same representational constraints as the baseline grammars while approximating the real orderings.
 We expect these grammars to have better memory--surprisal tradeoffs than comparable random baseline grammars across all languages.
-We create these ordering grammars by fitting them to the actual orderings of each language using the method of \cite{hahn2020universals}.
+We created these ordering grammars by fitting them to the actual orderings of each language using the method of \cite{hahn2020universals}.
 They match the order of the actual language in those cases where order of a relation is fully consistent; for relations where order is variable, they approximate this by modeling the most frequent order.
 In representing word order rules, they have the same limitations as baseline grammars have, for instance, they cannot specify rules sensitive to the category of the dependent or to larger context.
 
@@ -137,9 +139,9 @@ To test the Efficient Tradeoff Hypothesis, we compare the tradeoff curves for th
 In Figure~\ref{fig:it}, we show the estimated values of $I_t$ for real and fitted orders and the median of $I_t$ across different baseline grammars.
 In most languages, $I_1$ is distinctly larger for the actual and fitted orderings compared to the baseline orderings. This means that real orderings tend to concentrate more predictive information at the immediately preceding word than baseline grammars.
 
-In Figure~\ref{fig:median-table-expt2}, we show the resulting bounds on the memory--surprisal tradeoff curves, showing median surprisals at given levels of memory, for real and baseline languages.
+In Figure~\ref{fig:median-table-expt2}, we show the resulting bounds on the memory--surprisal tradeoff curves, showing surprisals at given levels of memory, for real and baseline languages.
 We compute surprisal at 40 evenly spaced points of memory (selected individually for each language, between 0 and the maximal memory capacity $H_M$ obtained using Theorem~\ref{prop:suboptimal}), over real orders and baseline grammars.
-At each point, we then compute the median surprisal over all runs for the real language, and over all baselines grammars.
+At each point, we then compute the median surprisal over all model runs for the real language, and over all baselines grammars.
 For each point, we compute an non-asymptotic and non-parametric 95\% confidence interval for this median surprisal using the binomial test.
 
 Numerically, the real language provides a better tradeoff than the median of the baselines across all languages, with four exceptions (Latvian, North Sami, Polish, Slovak). In order to quantify the degree of optimality of real orders, we further computed the area under the memory--surprisal tradeoff curve (AUC) for real and baseline orderings.
