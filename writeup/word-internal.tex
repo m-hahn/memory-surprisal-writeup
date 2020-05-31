@@ -223,8 +223,8 @@ In both measures, we average over all ten approximately optimized grammars for e
 \begin{tabular}{cc||ll|ll}
              &              & \multicolumn{2}{c}{Prefixes}    & \multicolumn{2}{|c}{Suffixes} \\
              &              & Pairs & Full & Pairs & Full \\ \hline\hline
-Japanese & Optimized  & -- &  -- &   0.954 (SD 0.009) & 0.945 (SD 0.012) \\ 
-& Baseline    & -- & -- & 0.504 (SD 0.0) & 0.414 (SD 0.0) \\ \hline
+Japanese    & Optimized   & -- &  -- &   0.953 (SD 0.011) & 0.943 (SD 0.014) \\ % updated
+             & Baseline    & -- & --  & 0.497 (SD 0.287) & 0.425 (SD 0.29) \\ \hline % updated
 Sesotho &   Optimized  &  0.988 (SD 0.0) & 0.989 (SD 0.0) & 0.756 (SD 0.014) & 0.676 (SD 0.017) \\
 &   Baseline  &  0.672 (SD 0.305) & 0.604 (SD 0.338) & 0.423 (SD 0.204) & 0.332 (SD 0.211) \\ 
 \end{tabular}
@@ -233,16 +233,14 @@ Sesotho &   Optimized  &  0.988 (SD 0.0) & 0.989 (SD 0.0) & 0.756 (SD 0.014) & 0
 
 \paragraph{Japanese results.} In Japanese, by both measures, optimized grammars recover the observed orders with high accuracy.
 We compare the real grammar with the approximately optimized grammar that achieved the lowest AUC value in Table~\ref{tab:grammar-table-jap}; the main divergence is that desiderative suffixes are placed after the negation suffix (slot 6), whereas real Japanese orders place them before the politeness suffix (slot 5).
-
 We conducted an error analysis comparing the real Japanese morpheme order against our approximately optimized orders.
-For each grammar, we extracted the pairs of morphemes whose relative order is incorrectly predicted, excluding pairs involving low-frequency morphemes not discussed here. 
+We extracted the pairs of morphemes whose relative order is incorrectly predicted, excluding pairs involving low-frequency morphemes not discussed here. 
 Results are shown in Table~\ref{tab:jap-err-analysis}.
-The most frequent divergence is that past and negation suffixes are consistently ordered incorrectly; this affects 88 corpus examples (out of 15K total examples).
+The most frequent divergence for this grammar is that politeness and negation suffixes are consistently ordered incorrectly; this affects 74 corpus examples (out of 15K total examples).
 
 We also found that prediction was more accurate when modeling on the level of phonemes, suggesting that divergence between model predictions and actual order might be related to phonological pressure (see SI Section 4.3).
-%A few of the optimized grammars show additional divergences among high-frequency morphemes, for instance, some grammars order politeness and negation incorrectly. 
 
-\begin{table}
+\begin{table} % updated forWords_Japanese_OptimizeOrder_MorphemeGrammar_Normalized_FullData_HeldoutClip/optimized_forWords_Japanese_OptimizeOrder_MorphemeGrammar_Normalized_FullData_HeldoutClip.py
     \centering
     \begin{tabular}{llllllll}
 	    &	    Real & Optimized \\ \hline\hline
@@ -250,34 +248,29 @@ We also found that prediction was more accurate when modeling on the level of ph
 1 & suru & suru \\
 2 & causative & causative \\
 3 & passive/potential & passive/potential \\
-4 & desiderative & desiderative \\
+4 & desiderative & negation \\
 5 & politeness & future \\
 6 & negation & politeness \\
-7 & future & past \\
- & past & negation \\
- & nonfinite & nonfinite \\ 
+7 & future & desiderative \\
+ & past & nonfinite \\
+ & nonfinite & past \\
  \hline
     \end{tabular}
     \caption{Comparing order of Japanese affixes in the observed orders (left) and according to an approximately optimized grammar (right). We organize the affixes in the real order into the seven slots described above.}
     \label{tab:grammar-table-jap}
 \end{table}
 
-\begin{table}
+\begin{table} % updated forWords_Japanese_OptimizeOrder_MorphemeGrammar_Normalized_FullData_HeldoutClip/optimized_forWords_Japanese_OptimizeOrder_MorphemeGrammar_Normalized_FullData_HeldoutClip.py
     \centering
     \begin{tabular}{ll|ll}
     \multicolumn{2}{c|}{Error} & Frequency \\ \hline\hline
-negation & past & 88 \\
+politeness & negation & 74 \\
+desiderative & negation & 14 \\
 politeness & future & 9 \\
-%negation & suru & 6 \\
-negation & politeness & 3 \\
-%politeness & passive/potential & 2 \\
-%causative & suru & 2 \\
 \end{tabular}
-    \caption{Errors in Japanese: We show pairs of morphemes that are ordered incorrectly by the approximately optimized grammar.
+    \caption{Errors in Japanese: We show pairs of morphemes that are ordered incorrectly by the approximately optimized grammar with the lowest AUC value.
     We indicate the number of such pairs occurring in the corpus.
-    %We only count divergences as errors here if they are predicted by the order (TODO figure out where exceptions come from). Also, 
     We only show errors where both morphemes are among the high-frequency ones studied here.
-    %\rljf{How is the frequency column calculated?}
     }
     \label{tab:jap-err-analysis}
 \end{table}
