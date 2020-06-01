@@ -190,8 +190,8 @@ These results show that Japanese and Sesotho affix orderings enable approximatel
 \includegraphics[width=\textwidth]{figures/Both-suffixes-byMorphemes-auc-hist-heldout.pdf}
 \end{center}
 	\caption{Areas under the curve for the memory--surprisal tradeoff for verb affixes in Japanese (left) and Sesotho (right). For the baseline grammars, we show a Kernel Density estimate.
-	%	For the approximately optimized grammars, we show the mean AUC, with error bars ranging from minimal to maximal AUC among the ten grammars (almost imperceptible in Sesotho).
-	In both Japanese and Sesotho, the AUC of the real orderings falls in the range of approximately optimized grammars.}
+	For the approximately optimized grammars, we show the mean AUC. %, with error bars ranging from minimal to maximal AUC among the ten grammars (almost imperceptible in Sesotho).
+	In both Japanese and Sesotho, both the real and the approximately optimized orderings show a lower AUC than all 40 sampled baseline grammars.}
 	\label{fig:morph-auc}
 \end{figure}
 
@@ -209,10 +209,10 @@ In both measures, we average over all ten approximately optimized grammars for e
 \begin{tabular}{cc||ll|ll}
              &              & \multicolumn{2}{c}{Prefixes}    & \multicolumn{2}{|c}{Suffixes} \\
              &              & Pairs & Full & Pairs & Full \\ \hline\hline
-Japanese    & Optimized   & -- &  -- &   0.953 (SD 0.011) & 0.943 (SD 0.014) \\ % updated
-             & Baseline    & -- & --  & 0.497 (SD 0.287) & 0.425 (SD 0.29) \\ \hline % updated
-Sesotho &   Optimized  &  0.988 (SD 0.0) & 0.989 (SD 0.0) & 0.756 (SD 0.014) & 0.676 (SD 0.017) \\
-&   Baseline  &  0.672 (SD 0.305) & 0.604 (SD 0.338) & 0.423 (SD 0.204) & 0.332 (SD 0.211) \\ 
+Japanese & Optimized  & -- &  -- &   0.954 (SD 0.009) & 0.945 (SD 0.012) \\ 
+& Baseline    & -- & -- & 0.504 (SD 0.0) & 0.414 (SD 0.0) \\ \hline
+Sesotho &   Optimized  &  0.999 (SD 0.0) & 0.998 (SD 0.0) & 0.806 (SD 0.0) & 0.723 (SD 0.0) \\
+        &   Baseline  &  0.398 (SD 0.313) & 0.303 (SD 0.319) & 0.569 (SD 0.208) & 0.511 (SD 0.228) \\
 \end{tabular}
 \caption{Accuracy of approximately optimized orderings, and of random baseline orderings, in predicting verb affix order in Japanese and Sesotho. `Pairs' denotes the rate of pairs of morphemes that are ordered correctly, and `Full' denotes the rate of verb forms where order is predicted entirely correctly. We show means and standard deviations over ten different runs of the optimization algorithm (`Optimized'), and over different random orderings (`Random').}\label{tab:morph-acc}
 \end{table}
@@ -272,46 +272,54 @@ Furthermore, valence-changing suffixes are ordered farther away from the stem th
 Interestingly, we found that prediction was more accurate in this respect when estimating $I_t$ naively  on the training set (see SI Section 4.3), suggesting that the available corpus data does not sufficiently determine the optimal ordering.
 
 
-\begin{table}
+\begin{table} % updated
     \centering
     \begin{tabular}{llllllll}
 	    &	    Real & Optimized \\ \hline\hline
-	    1 & Subject & Subject \\
-	      & Subject (rel.) & Subject (rel.) \\
-	    2 & Negation & Tense/aspect \\
-	    3& Tense/aspect & Negation \\
-	    4 &Object & Object \\ \hline
-	    &Stem & Stem  \\ \hline
+	    1 & Subject (relative) & Subject (relative) \\
+ & Subject & Subject \\
+2 & Negation & Tense/aspect \\
+3 & Tense/aspect & Negation \\
+4 & Object & Object \\
+            \hline
+            &Stem & Stem \\ \hline
 	    1 & Reversive & Passive \\
-	    2& Causative & Reciprocal \\
-	    &Neuter & Tense/aspect \\
-	    &Applicative & Neuter \\
-	    &Reciprocal & Relative \\
-	    3&Passive & Causative \\
-	    4&Tense/aspect & Applicative \\
-	    5&Mood & Interrogative \\
-	    6&Interrogative & Reversive \\
-	    &Relative & Mood \\ \hline
+2 & Causative & Reciprocal \\
+ & Neuter & Tense/aspect \\
+ & Applicative & Neuter \\
+ & Reciprocal & Relative \\
+3 & Passive & Causative \\
+4 & Tense/aspect & Applicative \\
+5 & Mood & Interrogative \\
+6 & Interrogative & Reversive \\
+ & Relative & Mood \\\hline
     \end{tabular}
 	\caption{Comparing order of Sesotho affixes in the observed orders (left) and according to an approximatively optimized grammar (right). Note that order was separately optimized for prefixes and suffixes.}
     \label{tab:grammar-table-sesotho}
 \end{table}
 
-\begin{table}
+\begin{table} % updated
     \centering
     \begin{tabular}{ll|ll}
     \multicolumn{2}{c|}{Error} & Frequency \\ \hline\hline
-Negation & Tense/aspect & 12 \\
+    Negation & Tense/aspect & 12 \\
+Interrogative & Object & 4 \\
 \\
     \multicolumn{2}{c|}{Error} & Frequency \\ \hline\hline
 Mood & Interrogative & 2204 \\
 Mood & Relative & 858 \\
 Applicative & Tense/aspect & 347 \\
-%Tense/aspect & Passive & 302 \\
+%Tense/aspect & Passive & 302 \\ % this one also arises for the fitted grammar
 Causative & Tense/aspect & 174 \\
 Neuter & Tense/aspect & 155 \\
+Reversive & Causative & 100 \\
+Applicative & Passive & 81 \\
+Causative & Passive & 61 \\
+Applicative & Relative & 49 \\
 \end{tabular}
-    \caption{Errors in Sesotho prefixes (top) and suffixes (bottom). %We only count divergences as errors here if they are predicted by the order (TODO figure out where exceptions come from). Also, w
+    \caption{Errors in Sesotho prefixes (top) and suffixes (bottom).
+    %We exclude divergences in those cases where they are also predicted incorrectly by the grammar fitted to the orders.
+    %We only count divergences as errors here if they are predicted by the order (TODO figure out where exceptions come from). Also, w
     We only show errors where both morphemes are among the high-frequency ones studied here.}
     \label{tab:sesotho-prefix-err-analysis}
 \end{table}
