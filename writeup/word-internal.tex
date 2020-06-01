@@ -190,8 +190,7 @@ These results show that Japanese and Sesotho affix orderings enable approximatel
 \includegraphics[width=\textwidth]{figures/Both-suffixes-byMorphemes-auc-hist-heldout.pdf}
 \end{center}
 	\caption{Areas under the curve for the memory--surprisal tradeoff for verb affixes in Japanese (left) and Sesotho (right). For the baseline grammars, we show a Kernel Density estimate.
-	%	For the approximately optimized grammars, we show the mean AUC, with error bars ranging from minimal to maximal AUC among the ten grammars (almost imperceptible in Sesotho).
-	In both Japanese and Sesotho, the AUC of the real orderings falls in the range of approximately optimized grammars.}
+	In both Japanese and Sesotho, real and optimized orderings lead to lower AUC than all of the 40 baseline samples.}
 	\label{fig:morph-auc}
 \end{figure}
 
@@ -316,22 +315,6 @@ Neuter & Tense/aspect & 155 \\
     \label{tab:sesotho-prefix-err-analysis}
 \end{table}
 
-
-
-
-
-
-%\begin{figure}
-%\begin{center}
-%\begin{tabular}{c||llll}
-%             &       Pairs & Full \\ \hline\hline
-%Optimized for Phoneme Prediction   &   0.962 (SD 0.001) & 0.957 (SD 0.002) \\
-%Optimized  &   0.954 (SD 0.009) & 0.945 (SD 0.012) \\ 
-%Random Baseline    &  0.504 (SD 0.0) & 0.414 (SD 0.0) \\ 
-%\end{tabular}
-%\end{center}
-%\caption{Accuracy of approximately optimized orderings, and of random baseline orderings, in predicting verb suffix order in Japanese. `Pairs' denotes the rate of pairs of morphemes that are ordered correctly, and `Full' denotes the rate of verb forms where order is predicted entirely correctly. We show means and standard deviations over different runs of the optimization algorithm (`Optimized'), and over different random orderings (`Random').}\label{fig:acc-japanese}
-%\end{figure}
 
 
 
