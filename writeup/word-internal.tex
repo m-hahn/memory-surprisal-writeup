@@ -148,7 +148,7 @@ We mitigated overfitting for large $t$ by estimating
 \end{equation}
 where $S_s$ is the cross-entropy of the $s$'th order Markov model on held-out data.
 This procedure ensures that $\hat{S}_t$ can only decrease as the context size $t$ increases.
-Similar results were obtained when instead using the simple `naive' estimator for $I_t$ on the training set; this naive estimator estimates $I_t$ directly from $n$-gram counts in the training set; see the SI for details.
+%Similar results were obtained when instead using the simple `naive' estimator for $I_t$ on the training set; this naive estimator estimates $I_t$ directly from $n$-gram counts in the training set; see the SI for details.
 
 \paragraph{Parameterizing Alternative Orderings}
 
@@ -156,10 +156,10 @@ We parameterized alternative affix orderings by assigning a weight in $[0,1]$ to
 Given such a grammar, affixes are ordered by the values assigned to their underlying morphemes.
 We considered all morphemes annotated in the corpora, including low-frequency ones going beyond the ones identified above (see SI for details).
 
-
 To verify that this formalism is appropriate for capturing morpheme order in Japanese and Sesotho, we fitted models parameterized in this way to the observed orders.
 Ordering morphemes according to these fitted models recovered the observed order for almost all forms (98.6 \% for Japanese, 99.93\% for Sesotho prefixes, 97.4\% for Sesotho suffixes). Exceptions largely concern low-frequency affixes beyond those considered here. We take this as confirmation that the formalism is generally suited to capture morpheme order.
 
+For each language, we constructed 40 baseline grammars by randomly sampling weights.
 
 \paragraph{Creating Optimal Orders}
 
@@ -174,11 +174,12 @@ This optimization method is approximate, as it only guarantees convergence to a 
 
 We ran this method for 1,000 iterations. Empirically, AUC converged after a few hundred iterations.
 To control for the randomness in initialization and the optimization steps, we ran this algorithm ten times.
+Different runs achieved almost the same AUC values (SD $0.0051$ in Japanese, $0.0036$ in Sesotho). % numbers from analyze_Morphemic_Heldout.R
 For Sesotho, we ran the algorithm separately for prefixes and suffixes due to computational efficiency considerations.\footnote{With the exception of the tense/aspect markers, none of the morpheme types discussed above can occur both as prefixes and suffixes. Therefore, we do not expect this separation to impact results.}
 
 \subsection{Results}
 In Figure~\ref{fig:morph-auc}, we compare the area under curve of the memory--surprisal tradeoff for Japanese and Sesotho verb forms under different orderings.
-Both observed orders and the approximately optimized grammars show lower AUCs than all random baseline samples.
+Both observed orders and the approximately optimized grammars show lower AUCs than all 40 random baseline samples, in both languages.
 For comparison, we also show AUC for the order resulting from \emph{reversing} all suffix chains in the observed orders; this results in high AUC even exceeding most random grammars.
 These results show that Japanese and Sesotho affix orderings enable approximately optimal memory--surprisal tradeoffs.
 
@@ -194,21 +195,6 @@ These results show that Japanese and Sesotho affix orderings enable approximatel
 	\label{fig:morph-auc}
 \end{figure}
 
-
-
-%\begin{figure}
-%	\begin{center}
-%\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byPhonemes-it-heldout.pdf}
-%\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byPhonemes-memsurp-heldout.pdf}
-%\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byPhonemes-auc-hist-heldout.pdf}
-%
-%\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-it-heldout.pdf}
-%\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-memsurp-heldout.pdf}
-%\includegraphics[width=0.3\textwidth]{figures/Japanese-suffixes-byMorphemes-auc-hist-heldout.pdf}
-%\end{center}
-%	\caption{Areas under the memory--surprisal tradeoff curve for Japanese verb suffixes.}\label{fig:jap-phon-morph}
-	%\caption{Japanese verb suffixes, measuring prediction on the level of phonemes (top) and morphemes (bottom), for real (blue), random (green), and approximately optimized (red) orderings. Left: $I_t$ as a function of $t$. Center: Memory-surprisal tradeoff. Right: Areas under the curve for the memory--surprisal tradeoff.}\label{fig:jap-phon-morph}
-%\end{figure}
 
 
 We now ask to what extent the observed morpheme ordering is predicted correctly by approximately optimized grammars.
@@ -233,16 +219,14 @@ Sesotho &   Optimized  &  0.999 (SD 0.0) & 0.998 (SD 0.0) & 0.806 (SD 0.0) & 0.7
 
 \paragraph{Japanese results.} In Japanese, by both measures, optimized grammars recover the observed orders with high accuracy.
 We compare the real grammar with the approximately optimized grammar that achieved the lowest AUC value in Table~\ref{tab:grammar-table-jap}; the main divergence is that desiderative suffixes are placed after the negation suffix (slot 6), whereas real Japanese orders place them before the politeness suffix (slot 5).
-
 We conducted an error analysis comparing the real Japanese morpheme order against our approximately optimized orders.
-For each grammar, we extracted the pairs of morphemes whose relative order is incorrectly predicted, excluding pairs involving low-frequency morphemes not discussed here. 
+We extracted the pairs of morphemes whose relative order is incorrectly predicted, excluding pairs involving low-frequency morphemes not discussed here. 
 Results are shown in Table~\ref{tab:jap-err-analysis}.
-The most frequent divergence is that past and negation suffixes are consistently ordered incorrectly; this affects 88 corpus examples (out of 15K total examples).
+The most frequent divergence for this grammar is that politeness and negation suffixes are consistently ordered incorrectly; this affects 74 corpus examples (out of 15K total examples).
 
 We also found that prediction was more accurate when modeling on the level of phonemes, suggesting that divergence between model predictions and actual order might be related to phonological pressure (see SI Section 4.3).
-%A few of the optimized grammars show additional divergences among high-frequency morphemes, for instance, some grammars order politeness and negation incorrectly. 
 
-\begin{table}
+\begin{table} % updated forWords_Japanese_OptimizeOrder_MorphemeGrammar_Normalized_FullData_HeldoutClip/optimized_forWords_Japanese_OptimizeOrder_MorphemeGrammar_Normalized_FullData_HeldoutClip.py
     \centering
     \begin{tabular}{llllllll}
 	    &	    Real & Optimized \\ \hline\hline
@@ -250,34 +234,29 @@ We also found that prediction was more accurate when modeling on the level of ph
 1 & suru & suru \\
 2 & causative & causative \\
 3 & passive/potential & passive/potential \\
-4 & desiderative & desiderative \\
+4 & desiderative & negation \\
 5 & politeness & future \\
 6 & negation & politeness \\
-7 & future & past \\
- & past & negation \\
- & nonfinite & nonfinite \\ 
+7 & future & desiderative \\
+ & past & nonfinite \\
+ & nonfinite & past \\
  \hline
     \end{tabular}
     \caption{Comparing order of Japanese affixes in the observed orders (left) and according to an approximately optimized grammar (right). We organize the affixes in the real order into the seven slots described above.}
     \label{tab:grammar-table-jap}
 \end{table}
 
-\begin{table}
+\begin{table} % updated forWords_Japanese_OptimizeOrder_MorphemeGrammar_Normalized_FullData_HeldoutClip/optimized_forWords_Japanese_OptimizeOrder_MorphemeGrammar_Normalized_FullData_HeldoutClip.py
     \centering
     \begin{tabular}{ll|ll}
     \multicolumn{2}{c|}{Error} & Frequency \\ \hline\hline
-negation & past & 88 \\
+politeness & negation & 74 \\
+desiderative & negation & 14 \\
 politeness & future & 9 \\
-%negation & suru & 6 \\
-negation & politeness & 3 \\
-%politeness & passive/potential & 2 \\
-%causative & suru & 2 \\
 \end{tabular}
-    \caption{Errors in Japanese: We show pairs of morphemes that are ordered incorrectly by the approximately optimized grammar.
+    \caption{Errors in Japanese: We show pairs of morphemes that are ordered incorrectly by the approximately optimized grammar with the lowest AUC value.
     We indicate the number of such pairs occurring in the corpus.
-    %We only count divergences as errors here if they are predicted by the order (TODO figure out where exceptions come from). Also, 
     We only show errors where both morphemes are among the high-frequency ones studied here.
-    %\rljf{How is the frequency column calculated?}
     }
     \label{tab:jap-err-analysis}
 \end{table}
