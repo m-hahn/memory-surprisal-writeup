@@ -247,11 +247,22 @@ Next, we test the latter hypothesis by examining whether the degree of optimizat
 
 
 \begin{figure}
-\includegraphics[width=0.95\textwidth]{figures/surprisal-branching-entropy-REAL-invert.pdf}
+\includegraphics[width=0.95\textwidth]{figures/surprisal-branching-entropy-REAL-infostruc-invert.pdf}
 	\caption{Word order freedom and strength of optimization: For each of the 54 languages, we show word order freedom as measured by branching entropy, and the difference between the real order's surprisal and the median surprisal of the baseline grammars, at the maximum memory value (see Figure~\ref{fig:median-table-expt2}).
-	Languages with higher branching direction entropy show a smaller reduction in surprisal compared to baseline orders.\jd{the languages are printed in very low resolution -- not sure if this is an issue with the plot or with my monitor. ideally the labels would generally be a little bigger. you can use the ggrepel package to make sure labels don't overlap}
+	Languages with higher branching direction entropy show a smaller reduction in surprisal compared to baseline orders.
+	For Czech, we also provide an estimate accounting for information strcuture (red dot), see below, `Controlling for Information Structure`, for more information.
 	}\label{fig:freedom-surp}
 \end{figure}
+
+%\begin{figure}
+%\includegraphics[width=0.9\textwidth]{figures/surprisal-branching-entropy-REAL-infostruc-invert.pdf}
+%	\caption{Order Freedom vs Difference in Surprisal at maximal memory (compare Figure~\ref{fig:freedom-surp}). The arrow indicates how the data point for Czech would move when modeling word order including information structure.
+%	When modeling information structure, branching direction entropy decreases, while the surprisal difference between real and baseline orders increases.
+%	This suggests that the weaker optimization in free word order languages observed in Experiment 2 might in part be because ordering grammars did not take information structure into account.\jd{i still think that instead of copying the whole figure, it would be better to just show fig 13 with both versions of czech, where color distinguishes the two versions (labeled in legend). but up to you; i imagine reviewers will make you do this eventually anyway}
+%	}\label{fig:freedom-mi-with-infostruc}
+%\end{figure}
+
+
 
 
 
