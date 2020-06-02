@@ -100,15 +100,14 @@
 \newtheorem{lemma}[theorem]{Lemma}
 
 \abstract{
-Memory limitations are known to constrain language comprehension and production, and have been argued to account for crosslinguistic word order regularities.
-However, a systematic assessment of the role of memory limitations in language structure has proven elusive, in part because it is hard to extract precise large-scale quantitative generalizations about language from existing mechanistic models of memory use in sentence processing.
-We provide an architecture-independent information-theoretic formalization of memory limitations which enables a simple calculation of the memory efficiency of languages.
-Our notion of memory efficiency is based on the idea of a \emph{memory--surprisal tradeoff}: a certain level of average surprisal per word can only be achieved at the cost of storing some amount of information about past context.
-Based on this notion of memory usage, we advance the \emph{Efficient Tradeoff Hypothesis}: the order of elements in natural language is under pressure to enable favorable memory-surprisal tradeoffs.
-We derive that languages enable more efficient tradeoffs when they exhibit \emph{information locality}: when predictive information about an element is concentrated in its recent past.
-We provide empirical evidence from three test domains in support of the Efficient Tradeoff Hypothesis:
-a reanalysis of a miniature artificial language learning experiment, a large-scale study of word order in corpora of 54 languages, and an analysis of morpheme order in two agglutinative languages. These results suggest that principles of order in natural language can be explained via highly generic cognitively motivated principles and lend support to efficiency-based models of the structure of human language.
-}
+Memory has well-documented effects on language at different time scales. For instance, memory limitations are known to constrain language comprehension and production. They have also been argued to account for crosslinguistic word order regularities.
+However, a systematic assessment of the role of memory limitations in the structure of language has proven elusive, in part because it is hard to extract precise large-scale quantitative generalizations about language from the existing mechanistic models of memory use in sentence processing.
+Here, we provide an architecture-independent information-theoretic formalization of memory limitations which enables a simple calculation of the memory efficiency of languages.
+Our notion of memory efficiency is based on the idea of a \emph{memory--surprisal tradeoff}: that a certain level of average surprisal per word can only be achieved at the cost of storing some amount of information about past context.
+Based on the idea of this notion of memory usage, we advance the \emph{Efficient Tradeoff Hypothesis}: that the order of elements in natural language is under a pressure to enable favorable memory--surprisal tradeoffs.
+We derive that languages enable more efficient tradeoffs when they exhibit \emph{information locality}: when predictive information about an element (like a word) is concentrated in its recent past. 
+Next, we provide empirical evidence from three test domains in support of the Efficient Tradeoff Hypothesis: 
+a reanalysis of a miniature artificial language learning experiment, a large-scale study of word order in corpora of 54 languages, and an analysis of morpheme order in two agglutinative languages. These results suggest that principles of order in natural language can be explained via highly generic cognitively motivated principles and lend support to efficiency-based models of the structure of human language.}
 
 \keywords{Language universals, sentence processing, information theory}
 
@@ -124,66 +123,6 @@ a reanalysis of a miniature artificial language learning experiment, a large-sca
 \begin{document}
 
 \maketitle
-%\jd{2 stylistic notes on plots: 1. it would generally be better to use a color-blind friendly palette. 2. it would be helpful if a particular color had a particular semantics throughout the paper, eg, if real languages across plots always had the same color, if different baselines that correspond to analogous versions of each other across plots did, etc. not strictly necessary, just makes it a lot easier on the reader.}
-
-
-\section{Introduction}
-\input{introduction.tex}
-
-
-\section{Background}\label{sec:background}
-
-
-\input{background.tex}
-
-
-\section{Memory-Surprisal Tradeoff}\label{sec:ms-tradeoff}
-
-\input{tradeoff.tex}
-
-\section{Study 1: Memory and Dependency Length}\label{sec:toy-study}
-
-\input{toy-experiment.tex}
-
-
-
-\section{Study 2: Large-Scale Evidence that Word Orders Optimize Memory-Surprisal Tradeoff}
-\label{sec:main-experiment}
-
-\input{main-experiment.tex}
-
-\subsection{Controlling for Information Structure}\label{subsec:freedom}
-
-\input{freedom-control.tex}
-
-\section{Study 3: Morpheme Order}\label{sec:morphemes}
-
-\input{word-internal.tex}
-
-
-\section{General Discussion}\label{sec:discussion}
-
-\input{discussion.tex}
-
-
-\section{Conclusion}\label{sec:conclusion}
-
-In this work, we have provided evidence that human languages order elements in a way that reduces cognitive resource requirements, in particular memory effort.
-We provided an information-theoretic formalization of memory requirements as a tradeoff of memory and surprisal.
-We showed theoretically that languages have more efficient tradeoffs when they show stronger degrees of information locality.
-Information locality provides a formalization of various locality principles from the linguistic literature, including dependency locality \citep{gibson1998linguistic}, domain minimization \citep{hawkins2004efficiency}, and the proximity principle \citep{givon1985iconicity}.
-Using this result, we provided evidence that languages order words and morphemes in such a way as to provide efficient memory--surprisal tradeoffs.
-
-Our result shows that wide-ranging principles of order in natural language can be explained from highly generic cognitively-motivated information-theoretic principles. The locality properties we have discussed are some of the most characteristic properties of natural language, setting natural language apart from other codes studied in information theory.
-Therefore, our result raises the question of whether other distinctive characteristics of language---for example, mildly context-sensitive syntax, duality of patterning, and compositionality---might also be explained in terms of information-theoretic resource constraints on production and comprehension.
-
-
-
-
-
-
-\printbibliography
-
 \end{document}
 
 %\appendix
