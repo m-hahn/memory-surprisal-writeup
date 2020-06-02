@@ -29,10 +29,10 @@ As this experiment was conducted only on the subset of the Prague Dependency Tre
 Baselines show a larger gap in efficiency between real and baseline grammars when the baselines condition word order on information structure.
 This suggests that, among word orders that encode information structure, the real order of Czech provides a very efficient memory--surprisal tradeoff, and that the strength of optimization is underestimated when comparing against baselines that do not take information structure into account.
 
-\definecolor{baselineInfo_czech}{HTML}{00F9DE}
-\definecolor{baseline_czech}{HTML}{7CAE00}
-\definecolor{real_czech}{HTML}{C77CFF}
-\definecolor{fitted_czech}{HTML}{F8766D}
+\definecolor{baselineInfo_czech}{HTML}{C77CFF}
+\definecolor{baseline_czech}{HTML}{F8766D}
+\definecolor{real_czech}{HTML}{00BFC4}
+\definecolor{fitted_czech}{HTML}{7CAE00}
 
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{figures/Czech-PDT-listener-surprisal-memory-MEDIANS_onlyWordForms_boundedVocab.pdf}
@@ -46,7 +46,7 @@ This suggests that, among word orders that encode information structure, the rea
 \textbf{\textcolor{baselineInfo_czech}{----}} Baselines with Information Structure
 \end{tabular}
 \end{center}
-	\caption{Left: Memory-surprisal tradeoff Czech with information structure. Green: Baselines with information structure. Red: Baselines without information structure. Blue: Real. Right: AUC for Czech, for baselines without information structure (red) and baselines with information structure (green). Optimization of real orders is stronger when considering information structure in baselines. }\label{fig:median-czech-infostruc}
+	\caption{Left: Memory-surprisal tradeoff for Czech with information structure. Green: Baselines with information structure. Red: Baselines without information structure. Blue: Real. Right: AUC for Czech, for baselines without information structure (red) and baselines with information structure (green). Optimization of real orders is stronger when considering information structure in baselines. }\label{fig:median-czech-infostruc}
 \end{figure}
 
 
