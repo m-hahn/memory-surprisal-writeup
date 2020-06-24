@@ -25,7 +25,7 @@ We obtained 38,727 training sentences and 5,228 held-out sentences. We created 2
 \paragraph{Results}
 
 We show estimated tradeoffs and the distributions over AUC values in Figure~\ref{fig:median-czech-infostruc}.
-As this experiment was conducted only on the subset of the Prague Dependency Treebank that has information structure annotation, the numerical values are slightly different from those in Figure~\ref{fig:median-table-expt2}. We compare the real orders both with the same baselines as above (red), and with the baselines taking information structure into account (green).
+As this experiment was conducted only on the subset of the Prague Dependency Treebank that has information structure annotation, the numerical values are slightly different from those in Figure~\ref{fig:median-table-expt2}. We compare the real orders both with the same baselines as above, and with the baselines taking information structure into account.
 Baselines show a larger gap in efficiency between real and baseline grammars when the baselines condition word order on information structure.
 This suggests that, among word orders that encode information structure, the real order of Czech provides a very efficient memory--surprisal tradeoff, and that the strength of optimization is underestimated when comparing against baselines that do not take information structure into account.
 
@@ -46,7 +46,7 @@ This suggests that, among word orders that encode information structure, the rea
 \textbf{\textcolor{baselineInfo_czech}{----}} Baselines with Information Structure
 \end{tabular}
 \end{center}
-	\caption{Left: Memory-surprisal tradeoff for Czech with information structure. Green: Baselines with information structure. Red: Baselines without information structure. Blue: Real. Right: AUC for Czech, for baselines without information structure (red) and baselines with information structure (green). Optimization of real orders is stronger when considering information structure in baselines. }\label{fig:median-czech-infostruc}
+	\caption{Left: Memory-surprisal tradeoff for Czech with information structure. Right: AUC for Czech, for baselines without information structure and baselines with information structure. Optimization of real orders is stronger when considering information structure in baselines. }\label{fig:median-czech-infostruc}
 \end{figure}
 
 
