@@ -69,32 +69,32 @@ We thank the reviewers for their insightful comments; we have considered them ca
 My biggest concerns are regarding Figures 10 and 11. Page 19 claims, "In most languages, $I_1$ is distinctly larger for the actual and fitted orderings compared to the baseline orderings." But this doesn't match Figure 10, where the red line (baseline) is consistently above the green (fitted), and in most cases very close to blue (real). I'm wondering if the legend is wrong/the graph is miscolored, and green line is in fact the baseline condition? I find it hard to make sense of both this graph and the ensuing results otherwise.
 
 \begin{reply}
-	TODO
+Apologies, this was a typo, which we've now fixed.
 \end{reply}
 
 Figures 10 through 12 are missing axis labels. I'm particularly concerned about how to interpret the x axis in Figure 11. Is this indicating bits of memory? If so, it seems like in many cases, all of the interesting differentiation is occuring at less than 1 bit of memory. This seems like a bizarrely small amount of memory to be concerning ourselves with.
 
 \begin{reply}
-	TODO
+	TODO point out that these are per-word costs, and accumulate over time. 
 \end{reply}
 
 While the UD corpora are the largest annotated cross-linguistic corpora readily available, they are in fact quite small (as indicated by the fact that the average training data size was ~5,000 sentences per language). This means that the neural models from which the $I_t$ are estimated are probably not very predictive except of extremely high frequency words/collocations. How would this bias in terms of what can be correctly predicted affect the memory-surprisal tradeoff results?
 
 \begin{reply}
-	TODO
+	TODO Czech study?
 \end{reply}
 
 Minor concerns:
 Page 17 states, "Some languages enable more efficient tradeoffs than others by allowing a listener to store fewer bits in memory to achieve the same level of average surprisal." From the remainder of the paper, it's clear that this is refering to some theoretically possible languages, rather than some real languages, but it would be helpful to clarify that the goal of this paper is not to attempt to rank real languages in terms of which are more efficient than others.
 
 \begin{reply}
-	TODO
+	TODO do this
 \end{reply}
 
 In Figure 9, I believe Grammar 1 should have subjects = 0.2 and objects = -0.8.
 
 \begin{reply}
-	TODO
+	TODO do this
 \end{reply}
 
 
@@ -103,92 +103,92 @@ In Figure 9, I believe Grammar 1 should have subjects = 0.2 and objects = -0.8.
 - Having $m_t$ not include the t'th word I found a little confusing. I think it would be more natural to think about e.g. $P(w_t | m_{t-1})$
 
 \begin{reply}
-	TODO
+	TODO convention for HMMs, reduce the number of times ``-1'' is spelled out.
 \end{reply}
 
 - "The claim that processing difficulty should be directly proportional to surprisal comes from surprisal theory " -- I think citation/discussion of Smith \& Levy is probably good here (they have two different derivations of why surprisal should matter to RT)
 
 \begin{reply}
-	TODO
+	TODO okay
 \end{reply}
 
 - I wonder if there is a simpler way to think about the theorem if you took time out of it -- this isn't quite it, but if you just said there was some memory capacity M (which is informative about the outcome / next word), some entropy rate R (you called it $S_\infty$), and some information I don't have in memory called W (so that the total memory+context/environment has M+W bits). If S is my personal entropy rate (given M), and I was encoding/predicting efficiently, I think you'd have S = R+W-M (my uncertainty is at best the true uncertainty plus uncertainty from stuff I don't model minus my knowledge), which implies S > R+W. Something like that? Not sure if that's quite right, but it seems like it's much simpler to think about without time, and you might consider a time-free version first to help give intuitions)
 
 \begin{reply}
-	TODO
+	TODO think about this
 \end{reply}
 
 - I wondered about the assumption that carrying I bits for t timesteps should cost me I*t (e.g. pg 18 "The minimal amount of memory capacity which would be required to retain this information is the sum $\sum t I_t$"). I don't understand why that's not just $\sum I_t$. I found this pretty confusing and couldn't tell if I just should be ignoring the t and thinking of like (11) as just giving me a bound as a function of T. That is, do we need to interpret the "t" inside the sum, or are we just treating $\sum_{t=1}^T t I_t$ as an arbitrary mathematical function that defines T?
 
 \begin{reply}
-	TODO
+	TODO think about this
 \end{reply}
 
 - It wasn't clear to me what the cost of remembering is (is that where the "t" in the previous point comes from?). It could be, for instance, that remembering information is essentially free and only reading/writing is costly (this is, for instance, how a thumb drive works). There's always an opportunity cost of other things you could have stored, but there's a huge literature (that I don't know well) in memory research about the relative costs of encoding, decoding, interference, and maintenance, which seems like it should be brought in here. What happens, for instance, if there are primarily costs associated with retrieval? Or interference in memory?
 
 \begin{reply}
-	TODO
+	TODO point to retrieval bounds, maybe we can make this a bit more prominent
 \end{reply}
 
 - One thing that always puzzled me about DLT was that, if I recall correctly, it only counted nouns in its dependency length. I believe it was because nouns were supposed to interfere with each other more. I wonder what this theory has to say about that, and maybe more generally what the right unit of "time" is (words? syllables? seconds? nouns?)
 
 \begin{reply}
-	TODO
+	TODO think about this
 \end{reply}
 
 - Why it's $\sum t I_t$ was really not clear to me when I got to (11), until later. It might help to introduce that early.
 
 \begin{reply}
-	TODO
+	TODO do this
 \end{reply}
 
 - Note sure why Fedzechkina is always cited with a first name.
 
 \begin{reply}
-	TODO
+	TODO fix this
 \end{reply}
 
 - Study 2 seems much stronger to me and I think should be presented before Study 1. They also seem like separable questions -- Study 2 is about what happened in natural languages, whereas Study 1 looks at what happens in a lab setting within individuals (which is a less natural "experiment")
 
 \begin{reply}
-	TODO
+	TODO Study 1 seems like a good illustration of the theoretical results.
 \end{reply}
 
 - I would suggest moving some methods of Study 2 into the SI.
 
 \begin{reply}
-	TODO
+	TODO think about this
 \end{reply}
 
 - For the "four exceptions" in Figure 11 -- it's worth discussing maybe whether this method works less well on some languages (depending on their dependency corpora, etc.)?
 
 \begin{reply}
-	TODO
+	TODO think about this
 \end{reply}
 
 - The morphology section made me wonder if there was an analogous analysis one could apply to e.g. adjective ordering in English
 
 \begin{reply}
-	TODO
+	TODO point to papers
 \end{reply}
 
 - I wondered throughout if entropy of memory $H_M$ was really the right measure, as opposed to e.g. mutual information between memory and upcoming material. While these quantities are related (and may be equal in an idealized picture the authors have in mind), entropy could just be true disorder and thus not informative about the upcoming material. This makes me think the entropy part of memory is less important to emphasize than the informativeness part.
 
 \begin{reply}
-	TODO
+	TODO add a paragraph in SI explaining this
 \end{reply}
 
 - For the discussion on entropy in memory, the authors might find it informative to look at e.g. Konkle, Brady, Alvarez and those kinds of models -- they cite work by Landauer etc which tries to estimate the information capacity of memory (under various assumptions).
 
 \begin{reply}
-	TODO
+	TODO maybe cite these more prominently?
 \end{reply}
 
 - Is it possible to disentangle predictions from this paper's theory from minimum dependency length theories? Are they always the same or are there some technical differences? If they are ever different, it would be nice to see how and where exactly, even if they just predict for instance different patterns of noise around the optimum.
 
 
 \begin{reply}
-	TODO
+	TODO say more about this
 \end{reply}
 
 
@@ -202,25 +202,25 @@ I only have a few smaller comments.
 1. I would like to push the authors to be a bit more clear and consistent about the source of the memory-surprisal trade-off. On p. 3, they present the model as a comprehension model, on p. 10, they state that the trade-off applies to comprehension and production, while on p. 44, they state that they leave the mechanism open (whether it's production, comprehension, or acquisition).
 
 \begin{reply}
-	TODO
+	TODO emphasize the comprehension model more
 \end{reply}
 
 2. I missed the discussion of connections and implications of the current findings to typology in the general discussion (despite the promise of them on p. 43). I'm curious about what phenomena the memory-surprisal trade-off can capture and where its predictions might differ from other theories.
 
 \begin{reply}
-	TODO
+	TODO think about this
 \end{reply}
 
 3. I'm a bit confused by the results pertaining to the artificial grammar. The background on p.20 led me to believe that what is going to be predicted is sentence word order (A or B). However, the results reference the findings about the case marker, which wasn't even mentioned in the background. I think its relevance to the prediction and its function in the artificial grammar need to be explained in more detail.
 
 \begin{reply}
-	TODO
+	TODO make this clearer
 \end{reply}
 
 4. Finally, what I missed about the memory-surprisal trade-off in the paper is why I as researcher should investigate it further and what it provides that previous models do not. Does it capture the artificial/natural language data better than dependency locality? Is it a more parsimonious model? Does it capture a wider range of phenomena? Where do its predictions diverge from the previous models? I'd like to see some of such discussion in the paper.
 
 \begin{reply}
-	TODO
+	TODO think about this. Info locality predictions will help (morpheme ordering, adjective order)
 \end{reply}
 
 
