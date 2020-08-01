@@ -23,7 +23,7 @@ We formalize these three observations into postulates intended to provide a simp
     \text{Difficulty} \propto -\log P(w_t | m_t).
 \end{equation}
 \end{enumerate}
-The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory} \citep{hale2001probabilistic,levy2008expectation}, an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation, antilocality effects, and effects of syntactic construction frequency. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \citep{smith2013effect,goodkind-predictive-2018}, and effects of surprisal have been observed for units as small as phonemes \citep{gwilliams2020neural}.
+The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory} \citep{hale2001probabilistic,levy2008expectation}, an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation, antilocality effects, and effects of syntactic construction frequency. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \citep{smith2013effect,goodkind-predictive-2018}, effects of surprisal have been observed for units as small as phonemes \citep{gwilliams2020neural}, and there are several converging theoretical arguments for surprisal as a measure of processing cost \citep{levy2008expectation,smith2013effect}.
 Surprisal theory is compatible with different views on the mechanisms underlying prediction, and can reflect different mechanisms such as preactivation and integration~\citep{kuperberg2016we}.
 We do not assume that listeners explicitly compute a full-fledged distribution $P(w_t|m_t)$; we view $P(w_t|m_t)$ as a formalization of the probabilistic expectations that listeners form during comprehension.
 
@@ -202,6 +202,11 @@ S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
 \end{equation}
 \end{thm}
 A formal proof based on the Comprehension Postulates 1--3 is given in SI Section 1.2.
+An intuitive argument, forming the basis of the proof, is the following.
+If the comprehender utilizes an average of $I_t$ bits of information coming from $X_{t_0-t}$ in predicting $X_{t_0}$, then these bits must have been carried over $t$ timesteps, and thus have occupied memory for $t$ timesteps.
+Since this happens for every word in a sequence, there are, for any given point in time, $t$ such packages of information with an average size of $I_t$ bits each that have to be carried across it, summing up to $t I_t$.
+In the specific setting where $M$ encodes information from a contiguous span of the past $T$ words, the total amount of encoded information thus sums up to $\sum_{t=1}^T t I_t$, while information from longer contexts is lost, increasing surprisal by $\sum_{t=T+1}^\infty I_t$.
+While this informal argument specifically considers a memory encoding function that utilizes information  from a contiguous span of the past $T$ words, the formal proof extends this to all memory encoding functions $M$ satisfying the Comprehension Postulates.
 
 \paragraph{Interpretation} The theorem means that a predictor with limited memory capacity will always be affected by surprisal cost arising from long-term statistical dependencies of length greater than $T$, for some finite $T$. This is why we call the result `information locality': processes are easier to predict when most statistical dependencies are short-term (shorter than $T$). Below we explain in more detail how this interpretation matches the mathematics of the theorem.
 
