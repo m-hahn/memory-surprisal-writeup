@@ -95,12 +95,15 @@ This quantity is called the \key{entropy rate} of $W$ \citep[][pp. 74--75]{cover
 which again is independent of $t$ because $W$ is stationary.
 We use the notation $S_\infty$ to suggest this idea of unlimited resources.
  The entropy rate of a stochastic process is the irreducible unpredictability of the process: the extent to which a stream of symbols remains unpredictable even for a predictor with unlimited resources. 
- The entropy rate $S_\infty$ of natural language text has been studied by \citet{shannon1951entropy}, \citet{bentz2017entropy}, and \citet{takahashi2018cross}. 
+
  Because the memory state $m_t$ is a function of the previous words $ \dots, w_{t-2}, w_{t-1}$, we can prove by the Data Processing Inequality \citep[][pp. 34--35]{cover2006elements} that the entropy rate must be less than or equal to the average surprisal for any memory encoding function $M$:
 \begin{equation}
     \label{eq:entropy-rate-dpi}
     S_\infty \le S_M.
 \end{equation}
+
+
+
 If the memory state $m_t$ stores all information about the previous words $ \dots, w_{t-2}, w_{t-1}$, then we have $S_M = S_\infty$.
 %Based on Eq.~\ref{eq:entropy-rate-dpi}, we can write the average surprisal $S_M$ as a sum of two non-negative terms,
 %\begin{equation}
