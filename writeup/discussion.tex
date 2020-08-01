@@ -114,7 +114,46 @@ In our framework, DLT integration cost corresponds to surprisal given an imperfe
 There is one remaining missing link between our theory of processing difficulty and theories such as the Dependency Locality Theory:
 our information locality theorem says that \emph{statistical} dependencies should be short-term, whereas psycholinguistic theories of locality have typically focused on the time-span of \key{syntactic dependencies}: words which depend on each other to determine the meaning or the well-formedness of a sentence. Statistical dependencies, in contrast, mean that whenever one element of a sequence determines or predicts another element \emph{in any way}, those two elements should be close to each other in time. 
 
-If statistical dependencies, as measured using mutual information, can be identified with syntactic dependencies, then that would mean that information locality is straightforwardly a generalization of dependency locality. \citet{futrell2019syntactic} give theoretical and empirical arguments that this is so. They show that syntactic dependencies as annotated in dependency treebanks identify word pairs with especially high mutual information, and give a derivation showing that this is to be expected according to a formalization of the postulates of dependency grammar. The connection between mutual information and syntactic dependency has also been explored in the grammar induction literature \citep{de1996selection,yuret1998discovery}. % maximizing mutual information principle; de paiva alves; yuret
+If statistical dependencies, as measured using mutual information, can be identified with syntactic dependencies, then that would mean that information locality is straightforwardly a generalization of dependency locality. \citet{futrell2019syntactic} give theoretical and empirical arguments that this is so. They show that syntactic dependencies as annotated in dependency treebanks identify word pairs with especially high mutual information, and give a derivation showing that this is to be expected according to a formalization of the postulates of dependency grammar. The connection between mutual information and syntactic dependency has also been explored in the literature on grammar induction and unsupervised chunking \citep{harris1955phonemes,de1996selection,yuret1998discovery,mccauley2019language,clark2020consistent}. % maximizing mutual information principle; de paiva alves; yuret
+
+% @article{harris1955phonemes,
+% author={Zellig Harris},
+% year={1955},
+% title={From phonemes to morphemes},
+% journal={Language},
+% volume={31},
+% pages={190--222}}
+
+% @article{mccauley2019language,
+% title={Language learning as language use: A cross-linguistic model of child language development},
+% year={2019},
+% journal={Psychological Review},
+% volume={126},
+% number={1},
+% pages={1},
+% author={Stewart M. McCauley and Morten H. Christiansen}}
+
+% @article{clark2020consistent,
+%author = {Clark, Alexander and Fijalkow, Nathanaël},
+%title = {Consistent Unsupervised Estimators for Anchored PCFGs},
+%journal = {Transactions of the Association for Computational Linguistics},
+%volume = {8},
+%number = {},
+%pages = {409--422},
+%year = {2020},
+%doi = {10.1162/tacl\_a\_00323},
+%URL = { 
+        %https://doi.org/10.1162/tacl_a_00323
+%},
+%eprint = { 
+%        https://doi.org/10.1162/tacl_a_00323
+%    
+%}
+%}
+
+
+
+
 
 
 
@@ -184,11 +223,10 @@ Our information locality bound theorem differs from this previous result in thre
 %    We argue that conditional mutual information  is more relevant for measuring memory usage than unconditional mutual information, as conditional mutual information accounts for redundancy between different words, which can be helpful for prediction. See SI Section 2.3 for two mathematical examples.
 \end{enumerate}
 
-As noted above, this previous work defined information locality in terms of the \emph{unconditional} (pointwise) mutual information between linguistic elements.
-Here we argue that conditional mutual information is more relevant for measuring memory usage than unconditional mutual information. 
+We would like to emphasize the last point: previous work defined information locality in terms of the \emph{unconditional} mutual information between linguistic elements. %, and other previous work has shown that unconditional mutual information falls off with distance in natural language \citep{li1989mutual,lin2017critical}.
+In contrast, we advocate that \emph{conditional} mutual information is more relevant for measuring memory usage than unconditional mutual information. 
 While the decay of conditional mutual information provably provides a lower bound on memory entropy, the decay of unconditional mutual information does not.
 In SI Section 2.3, we provide an example of a stochastic process where unconditional mutual information does not decay with distance, but memory requirements remain low.
-
 
 
 %\mhahn{TODO: \cite{qian-cue-2012}}
@@ -247,7 +285,7 @@ Our theoretical result provides a lower bound on the tradeoff curve that holds a
 However, this bound may be loose in two ways:
 First, architectural properties of human memory might introduce additional constraints on possible representations.
 Depending on the role played by factors other than infomation-theoretic capacity, the tradeoffs achieved by these human memory representations need not be close to achieving the theoretical bounds.
-Furthermore, depending on properties of the stochastic process, the bound might be loose across all models, that is, there are processes where the bound is not attainable by any memory architecture.
+Second, depending on properties of the stochastic process, the bound might be loose across all models, that is, there are processes where the bound is not attainable by any memory architecture.
 This can happen if there is strong uncertainty as to which aspects of the past observations will be relevant to the future.
 We provide an artificial example with analytical calculations in SI Section 2.1; however, this example does not seem linguistically natural.
 
@@ -286,23 +324,58 @@ Our work opens up a connection between psycholinguistics, linguistic typology, a
 
 
 Our formalization of memory is related to studies of dynamic systems in the physics literature.
-Our memory--surprisal curve is closely related to the \emph{predictive information bottleneck} introduced by \citet{still-information-2014} and studied by \citet{marzen-predictive-2016}; in particular, it is a version of the \emph{recursive information bottleneck} \citep[][\S 4]{still-information-2014}. 
-In the limit of optimal prediction and minimal surprisal, our formalization of memory cost is equivalent to the notion of \emph{Statistical Complexity} \citep{crutchfield-inferring-1989,shalizi2001computational}; this is the minimum value of $H_M$ that achieves $S_M = S_\infty$.
-In the limit $T \rightarrow \infty$, the quantity in Eq.~\ref{eq:memory-bound} is equal to the \emph{excess entropy} \citep{crutchfield-inferring-1989}.
+Our memory--surprisal curve is closely related to the \key{predictive information bottleneck} introduced by \citet{still-information-2014} and studied by \citet{marzen-predictive-2016}; in particular, it is a version of the \key{recursive information bottleneck} \citep[][\S 4]{still-information-2014}. 
+\cite{hahn2019estimating} empirically estimate the predictive information bottleneck tradeoff of natural language using neural variational inference, providing an upper bound on the trade-off, whereas the current paper provides a lower bound.
+
+In the limit of optimal prediction and minimal surprisal, our formalization of memory cost is equivalent to the notion of \key{Statistical Complexity} \citep{crutchfield-inferring-1989,shalizi2001computational}; this is the minimum value of $H_M$ that achieves $S_M = S_\infty$.
+In the limit $T \rightarrow \infty$, the quantity in Eq.~\ref{eq:memory-bound} is equal to the \key{excess entropy} \citep{crutchfield-inferring-1989}.
 The link between memory and information locality provided by our Theorem~\ref{prop:suboptimal} appears to be a novel theoretical contribution.
-Related to Theorem~\ref{prop:suboptimal}, \citet{sharan-prediction-2016} show a link between excess entropy and approximability by $n$-th order Markov models, noting that processes with low excess entropy can be approximated well with Markov models of low order.
+Related to Theorem~\ref{prop:suboptimal}, \citet{sharan-prediction-2016} show a link between excess entropy and approximability by $n$'th order Markov models, noting that processes with low excess entropy can be approximated well with Markov models of low order.
 
-\cite{debowski-excess-2011} studied the excess entropy of language across very long ranges of text, in particular aiming to determine whether it is finite.
-Our work contrasts with this work in that we are interested in dependencies within sentences.
-\cite{hahn2019estimating} empirically estimate the predictive rate-distortion tradeoff of natural language \citep{still-information-2014,marzen-predictive-2016}.
-This tradeoff is related to but different from the memory--surprisal tradeoff: it models a setting where past observations are compressed once as a whole, while a memory capacity bottleneck holds at every point in time in our model.
-Nonetheless, their method might also be applicable to estimating memory--surprisal tradeoff curves.
+%@article{debowski2015relaxed,
+%  title={The relaxed Hilberg conjecture: A review and new experimental support},
+%  author={D{\k{e}}bowski, {\L}ukasz},
+%  journal={Journal of Quantitative Linguistics},
+%  volume={22},
+%  number={4},
+%  pages={311--337},
+%  year={2015},
+%  publisher={Taylor \& Francis}
+%}
 
-%While we define information locality in terms of \emph{conditional} mutual information, prior work has studied  how \emph{unconditional} mutual information decays with distance in natural language texts, at the level of orthographic characters \citep{ebeling-entropy-1994,lin-critical-2017} and words \citep{futrell2019syntactic}.
-%The entropy rate $S_\infty$ of natural language text has been studied by different authors, including \citet{shannon1951entropy,bentz2017entropy,takahashi2018cross}. 
+%@book{debowski2020information,
+%author={D{\k{e}}bowski, {\L}ukasz},
+%title={Information theory meets power laws: {S}tochastic processes and language modesl},
+%publisher={John Wiley \& Sons},
+%year={2020}}
+
+
+% @article{hilberg1990bekannte,
+% author={W. Hilberg},
+% title={Der bekannte Grenzwert der redundanzfreien Information in Texten---eine Fehlinterpretation der Shannonschen Experimente?},
+% journal={Frequenz},
+% volume={44},
+% pages={243--248}}
+
+Our results are also closely related to previously-studied information-theoretic patterns in natural language, and in particular the Relaxed Hilberg Conjecture \citep{hilberg1990bekannte,debowski2015relaxed,debowski2020information}. The Relaxed Hilberg Conjecture is the claim that the average surprisal of a $t$'th-order Markov approximation to language decays as a power law in $t$:
+\begin{equation*}
+    S_t \approx k t^{-\alpha} + S_\infty,
+\end{equation*}
+with the Hilberg exponent $\alpha \approx \frac{1}{2}$, and $k$ a scaling factor. The Relaxed Hilberg Conjecture implies that conditional mutual information $I_t$ falls off with distance as
+\begin{align}
+    \nonumber
+    I_t &= S_t - S_{t+1} \\
+    \nonumber
+    &\propto t^{-\alpha} - \left(t+1\right)^{-\alpha}.
+\end{align}
+The steepness of the fall-off of mutual information depends on the value of the Hilberg exponent $\alpha$. As $\alpha$ gets small, the fall-off of mutual information is more rapid, corresponding to more information locality.
+Therefore, our Efficient Tradeoff Hypothesis can be read as a statement about the Hilberg exponent $\alpha$ for natural language: that it is lower than would be expected in a comparable system not constrained by incremental memory.
+
+While we define information locality in terms of \emph{conditional} mutual information, prior work has studied  how \emph{unconditional} mutual information decays with distance in natural language texts, at the level of orthographic characters \citep{ebeling-entropy-1994,lin-critical-2017} and words \citep{futrell2019syntactic}.
+
+The entropy rate $S_\infty$ of natural language text has been studied by different authors, including \citet{shannon1951entropy,bentz2017entropy,takahashi2018cross}. 
 %The Constant Entropy Rate and Uniform Information Density hypotheses \citep{genzel-entropy-2002,jaeger-speakers-2006,florian-jaeger-redundancy-2010} hold that speakers tend to avoid peaks and troughs in surprisal, arguing that this makes information transmission maximally efficient.
-
-The average surprisal of real and counterfactual word orders have been studied by \citet{gildea-human-2015} and \cite{hahn2020universals}.
+The average surprisal of real and counterfactual word orders has been studied by \citet{gildea-human-2015} and \cite{hahn2020universals}.
 \citet{gildea-human-2015} found that, in five languages, real orders provide lower trigram surprisal than baseline languages.
 This work can be viewed as instantiating our model in the case where the encoding function $M$ records exactly the past two words, and showing that these five languages show optimization for surprisal under this encoding function.
 \citet{hahn2020universals} compared surprisal and parseability for real and baseline orders as estimated using neural network models, arguing that word orders optimize a tradeoff between these quantities.
