@@ -16,7 +16,7 @@ That is, if we have a $t$'th-order Markov model with average surprisal
 \end{equation}
 and a $(t+1)$'th-order Markov model with average surprisal
 \begin{equation*}
-    S_{t+1} = \operatorname{H}[w_{t+1} | w_1, \dots, w_t],
+    S_{t+1} = \operatorname{H}[w_t | w_0, \dots, w_{t-1}],
 \end{equation*}
 then we can calculate $I_t$ straightforwardly in the following way:
 \begin{align}

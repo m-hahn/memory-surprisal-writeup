@@ -71,14 +71,14 @@ The question remains of whether these assumptions about memory architecture are 
 
 In this work, we adopt an information-theoretic perspective on memory use in language processing, which abstracts away from the details of memory architecture. 
 Within our framework, we will establish the connection between memory resources and locality principles by providing general information-theoretic lower bounds on memory use.
-Our result immediately entails a link between locality and boundedness of memory, following only from the stipulation that memory has bounded capacity measured in bits. 
-In particular, our model does not require any assumption that memory representations or activations decay over time \citep[as was required in][]{gibson1998linguistic, lewis-activation-based-2005, futrell2020lossy}.
+Our result immediately entails a link between locality and boundedness of memory, following only from the stipulation that memory is finite in capacity. 
+In particular, our model does not require any assumption that memory representations or activations decay over time \citep[as was required in previous work:][]{gibson1998linguistic, lewis-activation-based-2005, futrell2020lossy}.
 We will then show empirical evidence that the orders of words and morphemes in natural language are structured in a way that reduces our measure of memory use compared to the orders of counterfactual baseline languages.
 
 %\mhahn{TODO section references aren't right?}\jd{fixed}
 % NOTE: psychreview has no section numbers
 
-The remainder of the paper is structured as follows. We first introduce the memory-surprisal tradeoff, show that information locality is a property of languages with more efficient memory-surprisal tradeoffs, and introduce the main hypothesis that emerges from the account: the Efficient Tradeoff Hypothesis. Then, we test the Efficient Tradeoff Hypothesis. In Study 1, we qualitatively test the Hypothesis in a reanalysis of word orders emerging in a miniature artificial language study \citep{fedzechkina-human-2017}.
+The remainder of the paper is structured as follows. We first introduce the memory-surprisal tradeoff and introduce our Efficient Tradeoff Hypothesis. Then, we test the Efficient Tradeoff Hypothesis in three studies. In Study 1, we qualitatively test the Hypothesis in a reanalysis of word orders emerging in a miniature artificial language study \citep{fedzechkina-human-2017}.
 In Study 2, we quantitatively test the Hypothesis in a large-scale study of the word order of 54 languages.
 In Study 3, we test the Hypothesis on morpheme order in Japanese and Sesotho.
 Finally, we discuss the implications and limitations of the reported results.
