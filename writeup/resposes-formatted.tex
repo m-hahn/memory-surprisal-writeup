@@ -87,7 +87,9 @@ The x-axis indicates nats of memory, i.e. computing logarithms using base e.
 While the UD corpora are the largest annotated cross-linguistic corpora readily available, they are in fact quite small (as indicated by the fact that the average training data size was ~5,000 sentences per language). This means that the neural models from which the $I_t$ are estimated are probably not very predictive except of extremely high frequency words/collocations. How would this bias in terms of what can be correctly predicted affect the memory-surprisal tradeoff results?
 
 \begin{reply}
-	TODO Czech study?
+	\mhahn{TODO should we add this discussion in General Discussion?}
+We expect that small data size will result in underestimating $I_t$, in particular as $t$ increases. This may bias estimates towards curves where surprisal doesn't further decrease beyond a certain level of memory.
+However, as this equally applies to difefrent ordering grammars, we expect that estimating the relative efficiency of different orderings at the same level of memory is still reliable.
 \end{reply}
 
 Minor concerns:
