@@ -27,8 +27,22 @@ The existence of dependency locality effects in human language processing, and t
 
 \subsection{Locality and cross-linguistic universals of order}
 
+% @article{ferrericancho2004euclidean,
+%  year = {2004},
+%  title = {Euclidean distance between syntactically linked words},
+%  author = {{Ferrer-i-Cancho}, Ramon},
+%  journal = {Physical Review E},
+%  volume = {70},
+%  issue = {5},
+%  pages = {056135},
+%  numpages = {5},
+%  publisher = {American Physical Society},
+%  doi = {10.1103/PhysRevE.70.056135},
+%  url = {http://link.aps.org/doi/10.1103/PhysRevE.70.056135}
+%}
+
 Dependency locality in word order means that there is a pressure for words which depend on each other syntactically to be close to each other in linear order.
-There is ample evidence from corpus statistics indicating that dependency locality is a real property of word order across many languages \citep{gildea-optimizing-2007,liu2008dependency,gildea-grammars-2010,futrell-large-scale-2015,liu-dependency-2017,temperley-minimizing-2018}. 
+There is ample evidence from corpus statistics indicating that dependency locality is a real property of word order across many languages \citep{ferrericancho2004euclidean,gildea-optimizing-2007,liu2008dependency,gildea-grammars-2010,futrell-large-scale-2015,liu-dependency-2017,temperley-minimizing-2018}. 
 \citet{hawkins1994performance,hawkins-efficiency-2003} formulates dependency locality as the Principle of Domain Minimization, and has shown that this principle can explain cross-linguistic universals of word order that have been documented by linguistic typologists for decades \citep{greenberg-universals-1963}. 
 Such a pressure can be motivated in terms of the documented online processing difficulty associated with long-term dependencies among words: dependency locality in word order means that online processing is easier.
 
@@ -57,14 +71,14 @@ The question remains of whether these assumptions about memory architecture are 
 
 In this work, we adopt an information-theoretic perspective on memory use in language processing, which abstracts away from the details of memory architecture. 
 Within our framework, we will establish the connection between memory resources and locality principles by providing general information-theoretic lower bounds on memory use.
-Our result immediately entails a link between locality and boundedness of memory, following only from the stipulation that memory has bounded capacity measured in bits. 
-In particular, our model does not require any assumption that memory representations or activations decay over time \citep[as was required in][]{gibson1998linguistic, lewis-activation-based-2005, futrell2020lossy}.
+Our result immediately entails a link between locality and boundedness of memory, following only from the stipulation that memory is finite in capacity. 
+In particular, our model does not require any assumption that memory representations or activations decay over time \citep[as was required in previous work:][]{gibson1998linguistic, lewis-activation-based-2005, futrell2020lossy}.
 We will then show empirical evidence that the orders of words and morphemes in natural language are structured in a way that reduces our measure of memory use compared to the orders of counterfactual baseline languages.
 
 %\mhahn{TODO section references aren't right?}\jd{fixed}
 % NOTE: psychreview has no section numbers
 
-The remainder of the paper is structured as follows. We first introduce the memory-surprisal tradeoff, show that information locality is a property of languages with more efficient memory-surprisal tradeoffs, and introduce the main hypothesis that emerges from the account: the Efficient Tradeoff Hypothesis. Then, we test the Efficient Tradeoff Hypothesis. In Study 1, we qualitatively test the Hypothesis in a reanalysis of word orders emerging in a miniature artificial language study \citep{fedzechkina-human-2017}.
+The remainder of the paper is structured as follows. We first introduce the memory-surprisal tradeoff and introduce our Efficient Tradeoff Hypothesis. Then, we test the Efficient Tradeoff Hypothesis in three studies. In Study 1, we qualitatively test the Hypothesis in a reanalysis of word orders emerging in a miniature artificial language study \citep{fedzechkina-human-2017}.
 In Study 2, we quantitatively test the Hypothesis in a large-scale study of the word order of 54 languages.
 In Study 3, we test the Hypothesis on morpheme order in Japanese and Sesotho.
 Finally, we discuss the implications and limitations of the reported results.

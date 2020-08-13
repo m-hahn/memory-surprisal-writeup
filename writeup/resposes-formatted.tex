@@ -69,7 +69,7 @@ We thank the reviewers for their insightful comments; we have considered them ca
 My biggest concerns are regarding Figures 10 and 11. Page 19 claims, "In most languages, $I_1$ is distinctly larger for the actual and fitted orderings compared to the baseline orderings." But this doesn't match Figure 10, where the red line (baseline) is consistently above the green (fitted), and in most cases very close to blue (real). I'm wondering if the legend is wrong/the graph is miscolored, and green line is in fact the baseline condition? I find it hard to make sense of both this graph and the ensuing results otherwise.
 
 \begin{reply}
-Apologies, this was a typo, which we've now fixed.
+This was a typo, which we've now fixed.
 \end{reply}
 
 Figures 10 through 12 are missing axis labels. I'm particularly concerned about how to interpret the x axis in Figure 11. Is this indicating bits of memory? If so, it seems like in many cases, all of the interesting differentiation is occuring at less than 1 bit of memory. This seems like a bizarrely small amount of memory to be concerning ourselves with.
@@ -124,28 +124,31 @@ In Figure 9, I believe Grammar 1 should have subjects = 0.2 and objects = -0.8.
 - I wonder if there is a simpler way to think about the theorem if you took time out of it -- this isn't quite it, but if you just said there was some memory capacity M (which is informative about the outcome / next word), some entropy rate R (you called it $S_\infty$), and some information I don't have in memory called W (so that the total memory+context/environment has M+W bits). If S is my personal entropy rate (given M), and I was encoding/predicting efficiently, I think you'd have S = R+W-M (my uncertainty is at best the true uncertainty plus uncertainty from stuff I don't model minus my knowledge), which implies S > R+W. Something like that? Not sure if that's quite right, but it seems like it's much simpler to think about without time, and you might consider a time-free version first to help give intuitions)
 
 \begin{reply}
-The argment described by the reviewer can be formalized as
+The argument described by the reviewer can be formalized as
 \begin{equation}
-H[X_{t}|M_t] \geq H[X_{t}] - H[M_t]
+H[X_t|M_t] \geq H[X_t] - H[M_t]
 \end{equation}
 where the term on the left corresponds to $S$, and the term on the right corresponds to $R+W-M$.
-This inequality follows from the Data Processing Inequality.
+This follows because $H[M_t] \ge I[X_t : M_t]$.
+%Th%iTs hiis inequality follows from the Data Processing Inequality.
 
 This can be restated as 
 \begin{equation}
-H[M_t] \geq H[X_{t}] - H[X_{t}|M_t]
+H[M_t] \geq H[X_t] - H[X_t|M_t],
 \end{equation}
-i.e., memory load is lower-bounded by the surprisal reduction compared to the memory-free setting.
+i.e., memory load is lower-bounded by the reduction in surprisal about $X_t$ when comparing a setting without memory to a setting where we are given $M_t$.
 
-	Given that $H[X_{t}] - H[X_t|X_{t}] = \sum_{t=1}^\infty I_t$, this entails that, for any $T$, a listener investing at most $H[M_t] \leq \sum_{t=1}^T I_t$ bits of memory incurs average surprisal at least $H[X_t|X_{<t}] + \sum_{t=T+1}^\infty I_t$.
+Given that $H[X_t] - H[X_t|X_{<t}] = I[X_t:X_{<t}] = \sum_{t=1}^\infty I_t$, this entails that, for any $T$, a listener investing at most $H[M_t] \leq \sum_{t=1}^T I_t$ bits of memory incurs average surprisal at least $H[X_t|X_{<t}] + \sum_{t=T+1}^\infty I_t$.
 
-This looks very similar to the theorem, but the crucial difference is that the factor $t$ is missing in the term bounding bits of memory, i.e., this bound is in general weaker than the one provided by the theorem.
-	We believe that taking in time is necessary to derive the stronger bound $\sum_{t=1}^T t I_t$.
+This looks very similar to our theorem, but the crucial difference is that the factor $t$ is missing in the term bounding bits of memory, i.e., this bound is in general weaker than the one provided by the theorem.
+We believe that taking in time is necessary to derive the stronger bound $\sum_{t=1}^T t I_t$.
 \end{reply}
 
-- I wondered about the assumption that carrying I bits for t timesteps should cost me I*t (e.g. pg 18 "The minimal amount of memory capacity which would be required to retain this information is the sum $\sum t I_t$"). I don't understand why that's not just $\sum I_t$. I found this pretty confusing and couldn't tell if I just should be ignoring the t and thinking of like (11) as just giving me a bound as a function of T. That is, do we need to interpret the "t" inside the sum, or are we just treating $\sum_{t=1}^T t I_t$ as an arbitrary mathematical function that defines T?
+- I wondered about the assumption that carrying I bits for t timesteps should cost me I*t (e.g. pg 18 "The minimal amount of memory capacity which would be required to retain this information is the sum $\sum t I_t$"). I don't understand why that's not just $\sum I_t$. I found this pretty confusing and couldn't tell if I just should be ignoring the t and thinking of like (11) as just giving me a bound as a function of T. That is, do we need to interpret the ``t'' inside the sum, or are we just treating $\sum_{t=1}^T t I_t$ as an arbitrary mathematical function that defines T?
 
 \begin{reply}
+The factor $t$ is important because it establishes the information locality result: essentially, memory capacity fills up more slowly when the $I_t$ curve falls off more quickly in $t$.
+
 An intuition for the factor $t$ is that, if $I_t$ bits of information have to be carried over $t$ timesteps on average, then these bits occupy memory for $t$ timesteps.
 This means that, for any given point in time, there are $t$ ``packages'' with an average size of $I_t$ bits each that have to be carried across it, summing up to $t I_t$.
 
@@ -155,8 +158,7 @@ We have added this intuitive argument directly below the statement of the theore
 - It wasn't clear to me what the cost of remembering is (is that where the "t" in the previous point comes from?). It could be, for instance, that remembering information is essentially free and only reading/writing is costly (this is, for instance, how a thumb drive works). There's always an opportunity cost of other things you could have stored, but there's a huge literature (that I don't know well) in memory research about the relative costs of encoding, decoding, interference, and maintenance, which seems like it should be brought in here. What happens, for instance, if there are primarily costs associated with retrieval? Or interference in memory?
 
 \begin{reply}
-We provide discussion of retrieval and interference in the subsection on `Cue-Based Retrieval Models' in the General Discussion and in SI Section 1.3, where we show that a version of the information locality theorem continues to hold in a model that assumes that maintenance is free and that the cost is entirely in retrieval operations.
-	We have made these results more prominent in the paper by making the following changes \mhahn{TODO}.
+We now provide discussion of retrieval and interference in the subsection on ``Other kinds of memory bottlenecks'' in the Memory--Surprisal Tradeoff section, in the ``Cue-based retrieval'' section of the General Discussion, and in SI Section 1.3, where we show that a version of the information locality theorem continues to hold in a model that assumes that maintenance is free and that the cost is entirely in retrieval operations.
 \end{reply}
 
 - One thing that always puzzled me about DLT was that, if I recall correctly, it only counted nouns in its dependency length. I believe it was because nouns were supposed to interfere with each other more. I wonder what this theory has to say about that, and maybe more generally what the right unit of "time" is (words? syllables? seconds? nouns?)
@@ -165,10 +167,10 @@ We provide discussion of retrieval and interference in the subsection on `Cue-Ba
 In the memory-surprisal tradeoff, intervening elements come in via the definition of $I_t$, which controls for redundancy with intervening material.
 Which concrete consequences for nouns and other intervening elements this has will depend on their co-occurrence statistics.
 	\mhahn{what should we say here?}
-
-
 Regarding the unit of time, the memory-surprisal tradeoff should hold at all units of time at which humans engage in incremental predictive processing.
 	\mhahn{what should we say here?}
+	
+	\rljf{If our result is relevant to this question, it isn't obvious, because we measure average memory usage, and we don't end up providing a pointwise distance measure for information locality. If there is a connection to the DLT distance metric, then it is not obvious to us.}
 
 \end{reply}
 
@@ -182,6 +184,8 @@ Regarding the unit of time, the memory-surprisal tradeoff should hold at all uni
 
 \begin{reply}
 	We fixed this. \mhahn{TODO fix this}
+	
+	\mhahn{make sure to also fix R. Levy}
 \end{reply}
 
 - Study 2 seems much stronger to me and I think should be presented before Study 1. They also seem like separable questions -- Study 2 is about what happened in natural languages, whereas Study 1 looks at what happens in a lab setting within individuals (which is a less natural "experiment")
@@ -205,30 +209,30 @@ We chose to keep the order, as we believe Study 1 can serve as an illustration o
 - The morphology section made me wonder if there was an analogous analysis one could apply to e.g. adjective ordering in English
 
 \begin{reply}
-We have added a discussion of the difference to dependency locality in \mhahn{where?}, where we cite studies providing evidence of information locality in adjective ordering.
+We have added a discussion of the difference to dependency locality in the section `Relation to linguistic typology' in the General Discussion, where we cite studies providing evidence of information locality in adjective ordering.
 \end{reply}
 
 - I wondered throughout if entropy of memory $H_M$ was really the right measure, as opposed to e.g. mutual information between memory and upcoming material. While these quantities are related (and may be equal in an idealized picture the authors have in mind), entropy could just be true disorder and thus not informative about the upcoming material. This makes me think the entropy part of memory is less important to emphasize than the informativeness part.
 
 \begin{reply}
-We have added a paragraph at the end of SI Section 1.2, explaining how the theoretical result remains true when modeling memory cost as the mutual information $I_M$ between memory and preceding material.
-	We have also added a pointer to this in the main paper in \mhahn{where?}.
+We have added a paragraph at the end of SI Section 1.2, explaining how the theoretical result remains true when modeling memory cost as the mutual information $I_M$ between memory and preceding material. For deterministic memory encoding functions, $I_M=H_M$.
 
 The information between memory and *preceding* material is an upper bound on the information between memory and *upcoming* material suggested by the reviewer.
-We believe the information with *preceding* material is more appropriate because it accounts for the fact that the comprehender may not know which aspects of the past input ultimately are useful for predicting the future, so might have to store some bits that turn out to be ultimately useless. This is captured both by the entropy measure and the mutual information with preceding material, though not by mutual information with upcoming material.
+We believe the information with *preceding* material is more appropriate because it accounts for the fact that the comprehender may not know which aspects of the past input ultimately are useful for predicting the future, so might have to store some bits that turn out to be ultimately useless. This is captured both by the entropy measure and the mutual information with preceding material, though not by mutual information with upcoming material. 
 \end{reply}
 
 - For the discussion on entropy in memory, the authors might find it informative to look at e.g. Konkle, Brady, Alvarez and those kinds of models -- they cite work by Landauer etc which tries to estimate the information capacity of memory (under various assumptions).
 
 \begin{reply}
-	TODO maybe cite these more prominently?
+	TODO maybe cite these more prominently? maybe cite them in ``Architectural Assumptions''
 \end{reply}
 
 - Is it possible to disentangle predictions from this paper's theory from minimum dependency length theories? Are they always the same or are there some technical differences? If they are ever different, it would be nice to see how and where exactly, even if they just predict for instance different patterns of noise around the optimum.
 
 
 \begin{reply}
-	\mhahn{We should point out that info locality makes predictions beyond DLM, in morpheme ordering and adjective ordering. Where do we do this in the paper?}
+    We now discuss the relation between the predictions of our theory and the predictions of dependency length minimization in the section `Relation to linguistic typology' in the General Discussion. Information locality makes predictions beyond dependency length minimization, for example in the domains of morpheme ordering and adjective ordering.
+	%\mhahn{We should point ut that info locality makes predictions beyond DLM, in morpheme ordering and adjective ordering. Where do we do this in the paper?}
 \end{reply}
 
 
@@ -248,19 +252,26 @@ I only have a few smaller comments.
 2. I missed the discussion of connections and implications of the current findings to typology in the general discussion (despite the promise of them on p. 43). I'm curious about what phenomena the memory-surprisal trade-off can capture and where its predictions might differ from other theories.
 
 \begin{reply}
-	TODO think about this
+	We now include a section `Relation to linguistic typology' in the General Discussion to address the Reviewer's comment. 
 \end{reply}
 
 3. I'm a bit confused by the results pertaining to the artificial grammar. The background on p.20 led me to believe that what is going to be predicted is sentence word order (A or B). However, the results reference the findings about the case marker, which wasn't even mentioned in the background. I think its relevance to the prediction and its function in the artificial grammar need to be explained in more detail.
 
 \begin{reply}
-	TODO make this clearer \mhahn{how to make this clearer?}
+	This is an important point. Our theory's predictions are determined entirely by the statistical properties of surface forms. In this situation, uncertainty about whether a subject or object will follow a certain word manifests as uncertainty about a case marker. In other languages, this uncertainty may manifest as uncertainty about which wordform will follow, where subjects and objects have different distributions over lexemes. We modified the paragraph to be clearer as below:
+	
+	The source of the difference lies in predicting the presence and absence of a case marker on the second argument.
+Conceptually, a comprehender may be in a state of uncertainty as to whether a subject or object might follow.
+Since surprisal is determined entirely by the statistical properties of distributions over wordforms, this uncertainty manifests as uncertainty about whether to expect an accusative case marker.
+[Footnote: In other languages lacking case markers, similar uncertainty may manifest as uncertainty about wordform, since subjects and objects often have very different distributions over wordforms.]
+In the $A$ orders, considering the last two words is sufficient to make this decision.
+In the $B$ orders, it is necessary to consider the word before the long second constituent, which is five words in the past.
 \end{reply}
 
 4. Finally, what I missed about the memory-surprisal trade-off in the paper is why I as researcher should investigate it further and what it provides that previous models do not. Does it capture the artificial/natural language data better than dependency locality? Is it a more parsimonious model? Does it capture a wider range of phenomena? Where do its predictions diverge from the previous models? I'd like to see some of such discussion in the paper.
 
 \begin{reply}
-	We have added discussion of the differences with dependency locality in \mhahn{where?}.
+	We now include a section `Relation to linguistic typology' in the General Discussion to address the Reviewer's comment and why our model is interesting to questions in linguistic typology.
 \end{reply}
 
 
