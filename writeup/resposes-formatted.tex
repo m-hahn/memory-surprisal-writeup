@@ -17,6 +17,7 @@
 \usepackage{xcolor}
 \newcommand\mhahn[1]{\textcolor{red}{[mhahn: #1]}}
 \newcommand\rljf[1]{\textcolor{green}{[rljf: #1]}}
+\newcommand\jd[1]{\textcolor{teal}{[jd: #1]}}
 \newcommand\action[1]{\textcolor{blue}{Action Item: #1}}
 \newcommand\meeting[1]{\textcolor{orange}{Meeting notes: #1}}
 %\newcommand\response[1]{\textcolor{blue}{#1}}
@@ -77,18 +78,22 @@ Figures 10 through 12 are missing axis labels. I'm particularly concerned about 
 \begin{reply}
 We have added the missing axis labels. \mhahn{TODO do this}
 The x-axis indicates nats of memory, i.e. computing logarithms using base e.
-	\mhahn{We might change it to bits, though changing it throughout the entire paper \& SI seems like a bigger task}
+	\mhahn{We might change it to bits, though changing it throughout the entire paper \& SI seems like a bigger task} \jd{it's typically easier for people to think in bits than nats ("people" being me), so if possible, changing it in all the figures might be a useful time investment. or else keep it at nats, but be clear in axis labels about what is displayed -- somehow the reviewer came away with the idea that it's bits that are displayed, probably because the text consistently makes reference to bits (and in fact fig 1 explicitly says bits on the x-axis). so actually, thinking through this: either change all the text or change all the figures. changing text is faster but changing figures will make it easier on readers.}
 
 	While 1 bit (or nat) of memory seems like a small difference, this is a difference in cost at \emph{every word}, which accumulates over a sentence.
 	In a sentence with 20 words, the overall number of bits that have to be encoded over time (though not simultaneously) additionally might add up to 20 bits.
-	\mhahn{do we have to say something in the paper?}
+	\mhahn{do we have to say something in the paper?}\jd{yes, add a note to this effect! this will be confusing to many readers}
 \end{reply}
 
 While the UD corpora are the largest annotated cross-linguistic corpora readily available, they are in fact quite small (as indicated by the fact that the average training data size was ~5,000 sentences per language). This means that the neural models from which the $I_t$ are estimated are probably not very predictive except of extremely high frequency words/collocations. How would this bias in terms of what can be correctly predicted affect the memory-surprisal tradeoff results?
 
 \begin{reply}
 	\mhahn{TODO should we add this discussion in General Discussion?}
-We expect that small data size will result in underestimating $I_t$, in particular as $t$ increases. This may bias estimates towards curves where surprisal doesn't further decrease beyond a certain level of memory.
+
+\jd{not sure what you have in mind here. it's not clear to me that there would be an obvious bias in the results -- should there be? though i think it would be useful to include some kind of visualization of dataset size, either directly on the plot (perhaps just by including training data size in fig 10) or by including a table, and point out that the larger the dataset, the more trustworthy the result is? }
+
+	
+	We expect that small data size will result in underestimating $I_t$, in particular as $t$ increases. This may bias estimates towards curves where surprisal doesn't further decrease beyond a certain level of memory.
 However, as this equally applies to difefrent ordering grammars, we expect that estimating the relative efficiency of different orderings at the same level of memory is still reliable.
 \end{reply}
 
@@ -141,7 +146,7 @@ i.e., memory load is lower-bounded by the reduction in surprisal about $X_t$ whe
 Given that $H[X_t] - H[X_t|X_{<t}] = I[X_t:X_{<t}] = \sum_{t=1}^\infty I_t$, this entails that, for any $T$, a listener investing at most $H[M_t] \leq \sum_{t=1}^T I_t$ bits of memory incurs average surprisal at least $H[X_t|X_{<t}] + \sum_{t=T+1}^\infty I_t$.
 
 This looks very similar to our theorem, but the crucial difference is that the factor $t$ is missing in the term bounding bits of memory, i.e., this bound is in general weaker than the one provided by the theorem.
-We believe that taking in time is necessary to derive the stronger bound $\sum_{t=1}^T t I_t$.
+We believe that taking in time is necessary to derive the stronger bound $\sum_{t=1}^T t I_t$. \jd{nice. ``we believe that" is pretty weak -- either it's necessary or not. but more generally: what the reviewer is pointing out is that it might help people to start out with a time-free version to build intuitions, then add time. looking back at the manuscript, it's not clear to me that this is easily done, but perhaps sth to think about?}
 \end{reply}
 
 - I wondered about the assumption that carrying I bits for t timesteps should cost me I*t (e.g. pg 18 "The minimal amount of memory capacity which would be required to retain this information is the sum $\sum t I_t$"). I don't understand why that's not just $\sum I_t$. I found this pretty confusing and couldn't tell if I just should be ignoring the t and thinking of like (11) as just giving me a bound as a function of T. That is, do we need to interpret the ``t'' inside the sum, or are we just treating $\sum_{t=1}^T t I_t$ as an arbitrary mathematical function that defines T?
@@ -152,13 +157,13 @@ The factor $t$ is important because it establishes the information locality resu
 An intuition for the factor $t$ is that, if $I_t$ bits of information have to be carried over $t$ timesteps on average, then these bits occupy memory for $t$ timesteps.
 This means that, for any given point in time, there are $t$ ``packages'' with an average size of $I_t$ bits each that have to be carried across it, summing up to $t I_t$.
 
-We have added this intuitive argument directly below the statement of the theorem.
+We have added this intuitive argument directly below the statement of the theorem. \jd{always add page numbers to changes made}
 \end{reply}
 
 - It wasn't clear to me what the cost of remembering is (is that where the "t" in the previous point comes from?). It could be, for instance, that remembering information is essentially free and only reading/writing is costly (this is, for instance, how a thumb drive works). There's always an opportunity cost of other things you could have stored, but there's a huge literature (that I don't know well) in memory research about the relative costs of encoding, decoding, interference, and maintenance, which seems like it should be brought in here. What happens, for instance, if there are primarily costs associated with retrieval? Or interference in memory?
 
 \begin{reply}
-We now provide discussion of retrieval and interference in the subsection on ``Other kinds of memory bottlenecks'' in the Memory--Surprisal Tradeoff section, in the ``Cue-based retrieval'' section of the General Discussion, and in SI Section 1.3, where we show that a version of the information locality theorem continues to hold in a model that assumes that maintenance is free and that the cost is entirely in retrieval operations.
+We now provide discussion of retrieval and interference in the subsection on ``Other kinds of memory bottlenecks'' in the Memory--Surprisal Tradeoff section, in the ``Cue-based retrieval'' section of the General Discussion, and in SI Section 1.3, where we show that a version of the information locality theorem continues to hold in a model that assumes that maintenance is free and that the cost is entirely in retrieval operations.\jd{add page numbers and/or include version of manuscript with changes highlighted (for me, too, so i can see changes)}
 \end{reply}
 
 - One thing that always puzzled me about DLT was that, if I recall correctly, it only counted nouns in its dependency length. I believe it was because nouns were supposed to interfere with each other more. I wonder what this theory has to say about that, and maybe more generally what the right unit of "time" is (words? syllables? seconds? nouns?)
@@ -191,25 +196,26 @@ Regarding the unit of time, the memory-surprisal tradeoff should hold at all uni
 - Study 2 seems much stronger to me and I think should be presented before Study 1. They also seem like separable questions -- Study 2 is about what happened in natural languages, whereas Study 1 looks at what happens in a lab setting within individuals (which is a less natural "experiment")
 
 \begin{reply}
+\jd{``We agree that Study 2 is stronger than Study 1. But Study 1 serves as an illustration of the theoretical results in a simpler, controlled but language-like setting, which we hope allows the reader to build intuitions about the application of the theorem. We have thus chosen to keep the order.''}We chose to keep the order, as we believe Study 1 can serve as an illustration of the theoretical results in a controlled but language-like setting.
 We chose to keep the order, as we believe Study 1 can serve as an illustration of the theoretical results in a controlled but language-like setting.
 \end{reply}
 
 - I would suggest moving some methods of Study 2 into the SI.
 
 \begin{reply}
-	TODO think about this
+	TODO think about this \jd{given that the reviewer has zero recommendations about which parts of the methods they found superfluous, i'm not sure it's worth doing this. reading through the methods again, it's not at all obvious what should be moved to the SI}
 \end{reply}
 
 - For the "four exceptions" in Figure 11 -- it's worth discussing maybe whether this method works less well on some languages (depending on their dependency corpora, etc.)?
 
 \begin{reply}
-	TODO think about this
+	TODO think about this \jd{isn't this precisely what section 5.5 does? perhaps i misunderstand the reviewer's point}
 \end{reply}
 
 - The morphology section made me wonder if there was an analogous analysis one could apply to e.g. adjective ordering in English
 
 \begin{reply}
-We have added a discussion of the difference to dependency locality in the section `Relation to linguistic typology' in the General Discussion, where we cite studies providing evidence of information locality in adjective ordering.
+We have added a discussion of the difference to dependency locality in the section `Relation to linguistic typology' in the General Discussion, where we cite studies providing evidence of information locality in adjective ordering.\jd{insert page numbers}
 \end{reply}
 
 - I wondered throughout if entropy of memory $H_M$ was really the right measure, as opposed to e.g. mutual information between memory and upcoming material. While these quantities are related (and may be equal in an idealized picture the authors have in mind), entropy could just be true disorder and thus not informative about the upcoming material. This makes me think the entropy part of memory is less important to emphasize than the informativeness part.
@@ -224,14 +230,14 @@ We believe the information with *preceding* material is more appropriate because
 - For the discussion on entropy in memory, the authors might find it informative to look at e.g. Konkle, Brady, Alvarez and those kinds of models -- they cite work by Landauer etc which tries to estimate the information capacity of memory (under various assumptions).
 
 \begin{reply}
-	TODO maybe cite these more prominently? maybe cite them in ``Architectural Assumptions''
+	TODO maybe cite these more prominently? maybe cite them in ``Architectural Assumptions'' \jd{that sounds like a good place for them}
 \end{reply}
 
 - Is it possible to disentangle predictions from this paper's theory from minimum dependency length theories? Are they always the same or are there some technical differences? If they are ever different, it would be nice to see how and where exactly, even if they just predict for instance different patterns of noise around the optimum.
 
 
 \begin{reply}
-    We now discuss the relation between the predictions of our theory and the predictions of dependency length minimization in the section `Relation to linguistic typology' in the General Discussion. Information locality makes predictions beyond dependency length minimization, for example in the domains of morpheme ordering and adjective ordering.
+    We now discuss the relation between the predictions of our theory and the predictions of dependency length minimization in the section `Relation to linguistic typology' in the General Discussion. Information locality makes predictions beyond dependency length minimization, for example in the domains of morpheme ordering and adjective ordering.  \jd{page numbers}
 	%\mhahn{We should point ut that info locality makes predictions beyond DLM, in morpheme ordering and adjective ordering. Where do we do this in the paper?}
 \end{reply}
 
@@ -252,7 +258,7 @@ I only have a few smaller comments.
 2. I missed the discussion of connections and implications of the current findings to typology in the general discussion (despite the promise of them on p. 43). I'm curious about what phenomena the memory-surprisal trade-off can capture and where its predictions might differ from other theories.
 
 \begin{reply}
-	We now include a section `Relation to linguistic typology' in the General Discussion to address the Reviewer's comment. 
+	We now include a section `Relation to linguistic typology' in the General Discussion to address the Reviewer's comment. \jd{this is a great new section}
 \end{reply}
 
 3. I'm a bit confused by the results pertaining to the artificial grammar. The background on p.20 led me to believe that what is going to be predicted is sentence word order (A or B). However, the results reference the findings about the case marker, which wasn't even mentioned in the background. I think its relevance to the prediction and its function in the artificial grammar need to be explained in more detail.
@@ -271,7 +277,7 @@ In the $B$ orders, it is necessary to consider the word before the long second c
 4. Finally, what I missed about the memory-surprisal trade-off in the paper is why I as researcher should investigate it further and what it provides that previous models do not. Does it capture the artificial/natural language data better than dependency locality? Is it a more parsimonious model? Does it capture a wider range of phenomena? Where do its predictions diverge from the previous models? I'd like to see some of such discussion in the paper.
 
 \begin{reply}
-	We now include a section `Relation to linguistic typology' in the General Discussion to address the Reviewer's comment and why our model is interesting to questions in linguistic typology.
+	We now include a section `Relation to linguistic typology' in the General Discussion to address the Reviewer's comment and why our model is interesting to questions in linguistic typology.\jd{what about the other questions the reviewer asks?}
 \end{reply}
 
 
