@@ -77,10 +77,14 @@ Figures 10 through 12 are missing axis labels. I'm particularly concerned about 
 
 \begin{reply}
 We have added the missing axis labels. \mhahn{TODO do this}
-The x-axis indicates nats of memory, i.e. computing logarithms using base e.
-	\mhahn{We might change it to bits, though changing it throughout the entire paper \& SI seems like a bigger task} \jd{it's typically easier for people to think in bits than nats ("people" being me), so if possible, changing it in all the figures might be a useful time investment. or else keep it at nats, but be clear in axis labels about what is displayed -- somehow the reviewer came away with the idea that it's bits that are displayed, probably because the text consistently makes reference to bits (and in fact fig 1 explicitly says bits on the x-axis). so actually, thinking through this: either change all the text or change all the figures. changing text is faster but changing figures will make it easier on readers.}
 
-	While 1 bit (or nat) of memory seems like a small difference, this is a difference in cost at \emph{every word}, which accumulates over a sentence.
+In the original version, the x-axis indicated \emph{nats} of memory, that is, all logarithms were computed using base $e$.
+	We have now changed all values to \emph{bits} throughout the paper and the SI, i.e. computing logarithms using base $2$ (one \emph{nat} equals about $1.44$ \emph{bits}).
+	We did this in order to ensure consistency with the explicit use of bits as the unit of information at a few places in the text.
+
+%	\mhahn{We might change it to bits, though changing it throughout the entire paper \& SI seems like a bigger task} \jd{it's typically easier for people to think in bits than nats ("people" being me), so if possible, changing it in all the figures might be a useful time investment. or else keep it at nats, but be clear in axis labels about what is displayed -- somehow the reviewer came away with the idea that it's bits that are displayed, probably because the text consistently makes reference to bits (and in fact fig 1 explicitly says bits on the x-axis). so actually, thinking through this: either change all the text or change all the figures. changing text is faster but changing figures will make it easier on readers.}
+
+	While 1 bit of memory seems like a small difference, this is a difference in cost at \emph{every word}, which accumulates over a sentence.
 	In a sentence with 20 words, the overall number of bits that have to be encoded over time (though not simultaneously) additionally might add up to 20 bits.
 	\mhahn{do we have to say something in the paper?}\jd{yes, add a note to this effect! this will be confusing to many readers}
 \end{reply}
@@ -107,7 +111,7 @@ Page 17 states, "Some languages enable more efficient tradeoffs than others by a
 In Figure 9, I believe Grammar 1 should have subjects = 0.2 and objects = -0.8.
 
 \begin{reply}
-	TODO do this
+We have corrected this.
 \end{reply}
 
 
@@ -146,7 +150,9 @@ i.e., memory load is lower-bounded by the reduction in surprisal about $X_t$ whe
 Given that $H[X_t] - H[X_t|X_{<t}] = I[X_t:X_{<t}] = \sum_{t=1}^\infty I_t$, this entails that, for any $T$, a listener investing at most $H[M_t] \leq \sum_{t=1}^T I_t$ bits of memory incurs average surprisal at least $H[X_t|X_{<t}] + \sum_{t=T+1}^\infty I_t$.
 
 This looks very similar to our theorem, but the crucial difference is that the factor $t$ is missing in the term bounding bits of memory, i.e., this bound is in general weaker than the one provided by the theorem.
-We believe that taking in time is necessary to derive the stronger bound $\sum_{t=1}^T t I_t$. \jd{nice. ``we believe that" is pretty weak -- either it's necessary or not. but more generally: what the reviewer is pointing out is that it might help people to start out with a time-free version to build intuitions, then add time. looking back at the manuscript, it's not clear to me that this is easily done, but perhaps sth to think about?}
+	Due to the absence of the factor $t$, it does not imply information locality.
+In this sense, taking in time is necessary to derive the stronger bound $\sum_{t=1}^T t I_t$ and thus information locality.
+	%\jd{nice. ``we believe that" is pretty weak -- either it's necessary or not. but more generally: what the reviewer is pointing out is that it might help people to start out with a time-free version to build intuitions, then add time. looking back at the manuscript, it's not clear to me that this is easily done, but perhaps sth to think about?}
 \end{reply}
 
 - I wondered about the assumption that carrying I bits for t timesteps should cost me I*t (e.g. pg 18 "The minimal amount of memory capacity which would be required to retain this information is the sum $\sum t I_t$"). I don't understand why that's not just $\sum I_t$. I found this pretty confusing and couldn't tell if I just should be ignoring the t and thinking of like (11) as just giving me a bound as a function of T. That is, do we need to interpret the ``t'' inside the sum, or are we just treating $\sum_{t=1}^T t I_t$ as an arbitrary mathematical function that defines T?
@@ -188,16 +194,16 @@ Regarding the unit of time, the memory-surprisal tradeoff should hold at all uni
 - Note sure why Fedzechkina is always cited with a first name.
 
 \begin{reply}
-	We fixed this. \mhahn{TODO fix this}
-	
-	\mhahn{make sure to also fix R. Levy}
+	We fixed this.
 \end{reply}
 
 - Study 2 seems much stronger to me and I think should be presented before Study 1. They also seem like separable questions -- Study 2 is about what happened in natural languages, whereas Study 1 looks at what happens in a lab setting within individuals (which is a less natural "experiment")
 
 \begin{reply}
-\jd{``We agree that Study 2 is stronger than Study 1. But Study 1 serves as an illustration of the theoretical results in a simpler, controlled but language-like setting, which we hope allows the reader to build intuitions about the application of the theorem. We have thus chosen to keep the order.''}We chose to keep the order, as we believe Study 1 can serve as an illustration of the theoretical results in a controlled but language-like setting.
-We chose to keep the order, as we believe Study 1 can serve as an illustration of the theoretical results in a controlled but language-like setting.
+We agree that Study 2 is stronger than Study 1. But Study 1 serves as an illustration of the theoretical results in a simpler, controlled but language-like setting, which we hope allows the reader to build intuitions about the application of the theorem. We have thus chosen to keep the order.
+	
+	%We chose to keep the order, as we believe Study 1 can serve as an illustration of the theoretical results in a controlled but language-like setting.
+%We chose to keep the order, as we believe Study 1 can serve as an illustration of the theoretical results in a controlled but language-like setting.
 \end{reply}
 
 - I would suggest moving some methods of Study 2 into the SI.
@@ -258,7 +264,7 @@ I only have a few smaller comments.
 2. I missed the discussion of connections and implications of the current findings to typology in the general discussion (despite the promise of them on p. 43). I'm curious about what phenomena the memory-surprisal trade-off can capture and where its predictions might differ from other theories.
 
 \begin{reply}
-	We now include a section `Relation to linguistic typology' in the General Discussion to address the Reviewer's comment. \jd{this is a great new section}
+	We now include a section `Relation to linguistic typology' in the General Discussion to address the Reviewer's comment. %\jd{this is a great new section}
 \end{reply}
 
 3. I'm a bit confused by the results pertaining to the artificial grammar. The background on p.20 led me to believe that what is going to be predicted is sentence word order (A or B). However, the results reference the findings about the case marker, which wasn't even mentioned in the background. I think its relevance to the prediction and its function in the artificial grammar need to be explained in more detail.
@@ -277,7 +283,7 @@ In the $B$ orders, it is necessary to consider the word before the long second c
 4. Finally, what I missed about the memory-surprisal trade-off in the paper is why I as researcher should investigate it further and what it provides that previous models do not. Does it capture the artificial/natural language data better than dependency locality? Is it a more parsimonious model? Does it capture a wider range of phenomena? Where do its predictions diverge from the previous models? I'd like to see some of such discussion in the paper.
 
 \begin{reply}
-	We now include a section `Relation to linguistic typology' in the General Discussion to address the Reviewer's comment and why our model is interesting to questions in linguistic typology.\jd{what about the other questions the reviewer asks?}
+	We now include a section `Relation to linguistic typology' in the General Discussion to address the Reviewer's comment, including the relation to dependency locality and why our model is interesting to questions in linguistic typology.\jd{what about the other questions the reviewer asks?}
 \end{reply}
 
 
