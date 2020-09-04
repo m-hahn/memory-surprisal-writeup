@@ -76,11 +76,12 @@ This was a typo, which we've now fixed.
 Figures 10 through 12 are missing axis labels. I'm particularly concerned about how to interpret the x axis in Figure 11. Is this indicating bits of memory? If so, it seems like in many cases, all of the interesting differentiation is occuring at less than 1 bit of memory. This seems like a bizarrely small amount of memory to be concerning ourselves with.
 
 \begin{reply}
-We have added the missing axis labels. \mhahn{TODO do this}
+We have added the missing axis labels in Figures 10--12.
 
-In the original version, the x-axis indicated \emph{nats} of memory, that is, all logarithms were computed using base $e$.
-	We have now changed all values to \emph{bits} throughout the paper and the SI, i.e. computing logarithms using base $2$ (one \emph{nat} equals about $1.44$ \emph{bits}).
+In the origianl version, all logarithms were interpreted as natural logarithms, i.e., using basis $e$. Therefore, the x-axis indicated \emph{nats} of memory (one \emph{nat} equals about $1.44$ \emph{bits}).
+	We have now changed all logarithms to $\log_2$, so that all results are displayed in \emph{bits} instead of nats.
 	We did this in order to ensure consistency with the explicit use of bits as the unit of information at a few places in the text.
+	For full clarity, we also added a footnote at the first appearance of $\log_2$ (\mhahn{page number}), explaining that changing the basis of the logarithm only results in a proportionality factor.
 
 %	\mhahn{We might change it to bits, though changing it throughout the entire paper \& SI seems like a bigger task} \jd{it's typically easier for people to think in bits than nats ("people" being me), so if possible, changing it in all the figures might be a useful time investment. or else keep it at nats, but be clear in axis labels about what is displayed -- somehow the reviewer came away with the idea that it's bits that are displayed, probably because the text consistently makes reference to bits (and in fact fig 1 explicitly says bits on the x-axis). so actually, thinking through this: either change all the text or change all the figures. changing text is faster but changing figures will make it easier on readers.}
 
@@ -188,7 +189,7 @@ Regarding the unit of time, the memory-surprisal tradeoff should hold at all uni
 - Why it's $\sum t I_t$ was really not clear to me when I got to (11), until later. It might help to introduce that early.
 
 \begin{reply}
-	TODO do this
+We now provide an informal argument for the theorem immediately after stating it, which should elucidate an intuition for $\sum t I_t$.
 \end{reply}
 
 - Note sure why Fedzechkina is always cited with a first name.
@@ -209,7 +210,7 @@ We agree that Study 2 is stronger than Study 1. But Study 1 serves as an illustr
 - I would suggest moving some methods of Study 2 into the SI.
 
 \begin{reply}
-	TODO think about this \jd{given that the reviewer has zero recommendations about which parts of the methods they found superfluous, i'm not sure it's worth doing this. reading through the methods again, it's not at all obvious what should be moved to the SI}
+We have carefully thought about methods that could be moved into the SI. We decided to keep all methods in the main paper, as every one of the subsections in Study 2 seems relevant to understanding the experiment and results, and the minor details are already in SI Section 3.2-3.5.
 \end{reply}
 
 - For the "four exceptions" in Figure 11 -- it's worth discussing maybe whether this method works less well on some languages (depending on their dependency corpora, etc.)?
@@ -236,7 +237,11 @@ We believe the information with *preceding* material is more appropriate because
 - For the discussion on entropy in memory, the authors might find it informative to look at e.g. Konkle, Brady, Alvarez and those kinds of models -- they cite work by Landauer etc which tries to estimate the information capacity of memory (under various assumptions).
 
 \begin{reply}
-	TODO maybe cite these more prominently? maybe cite them in ``Architectural Assumptions'' \jd{that sounds like a good place for them}
+	We have added the sentence \emph{We
+quantify memory resources in terms of their information-theoretic capacity measured in
+bits, following models proposed for working memory in other domains (Brady, Konkle, \&
+	Alvarez, 2008, 2009; Sims, Jacobs, \& Knill, 2012).} in the ``Architectural Assumptions'' section (page \mhahn{TODO}).
+	We also refer to that line of work in ``Relation to Models of Sentence Processing'' (page \mhahn{TODO}).
 \end{reply}
 
 - Is it possible to disentangle predictions from this paper's theory from minimum dependency length theories? Are they always the same or are there some technical differences? If they are ever different, it would be nice to see how and where exactly, even if they just predict for instance different patterns of noise around the optimum.
@@ -258,7 +263,9 @@ I only have a few smaller comments.
 1. I would like to push the authors to be a bit more clear and consistent about the source of the memory-surprisal trade-off. On p. 3, they present the model as a comprehension model, on p. 10, they state that the trade-off applies to comprehension and production, while on p. 44, they state that they leave the mechanism open (whether it's production, comprehension, or acquisition).
 
 \begin{reply}
-	TODO emphasize the comprehension model more \mhahn{We could remove the paragraph on Production on page 10 to streamline this a bit.}
+	In order to be more consistent, we have de-emphasized the production side by removing the paragraph \emph{The memory--surprisal tradeoff applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension; we return to the production perspective in the General Discussion.} on page 10.
+
+	With this change, we focus the presentation of the model on the comprehension side and limit discussion of production to the section ``Role of Comprehension, Production, and Acquisition''.
 \end{reply}
 
 2. I missed the discussion of connections and implications of the current findings to typology in the general discussion (despite the promise of them on p. 43). I'm curious about what phenomena the memory-surprisal trade-off can capture and where its predictions might differ from other theories.

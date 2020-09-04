@@ -17,10 +17,10 @@ We formalize these three observations into postulates intended to provide a simp
 \begin{enumerate}
     \item Comprehension Postulate 1 (Incremental memory). At time $t$, the listener has an incremental \key{memory state} $m_t$ that contains her stored information about previous words. The memory state is characterized by a \key{memory encoding function} $M$ such that $m_t = M(w_{t-1}, m_{t-1})$.
     \item Comprehension Postulate 2 (Incremental prediction). The listener has a subjective probability distribution at time $t$ over the next word $w_t$ as a function of the memory state $m_t$. This probability distribution is denoted $P(w_t|m_t)$.
-    \item Comprehension Postulate 3 (Linking hypothesis). Processing a word $w_t$ incurs difficulty proportional to the \key{surprisal} of $w_t$ given the memory state $m_t$:
+    \item Comprehension Postulate 3 (Linking hypothesis). Processing a word $w_t$ incurs difficulty proportional to the \key{surprisal} of $w_t$ given the memory state $m_t$:\footnote{In this paper, all logarithms are taken with basis $2$. As choosing another basis (e.g., $e$) would only result in multiplication with a proportionality constant, this assumption does not impact the generality of this linking hypothesis.}
     \begin{equation}
     \label{eq:lossy-surp}
-    \text{Difficulty} \propto -\log P(w_t | m_t).
+    \text{Difficulty} \propto -\log_2 P(w_t | m_t).
 \end{equation}
 \end{enumerate}
 The claim that processing difficulty should be directly proportional to surprisal comes from \key{surprisal theory} \citep{hale2001probabilistic,levy2008expectation}, an established psycholinguistic theory that can capture reading time effects related to garden-path disambiguation, antilocality effects, and effects of syntactic construction frequency. Surprisal is a robust linear predictor of reading times in large-scale eye-tracking studies based on naturalistic text \citep{smith2013effect,goodkind-predictive-2018,frank2019interaction,aurnhammer2019evaluating,wilcox2020predictive}, and effects of surprisal have been observed for units as small as phonemes \citep{gwilliams2020neural}. There are several converging theoretical arguments for surprisal as a measure of processing cost \citep{levy2008expectation,smith2013effect}.
@@ -92,11 +92,11 @@ Let $M$ be a memory encoding function.
 We consider memory and surprisal costs at an arbitrary time point $t$.
 Recall that the surprisal for a specific word $w_t$ after a past word sequence $\dots, w_{t-2}, w_{t-1}$ encoded into a memory state $m_t$ is:
 \begin{equation*}
-    -\log P(w_t | m_t).
+    -\log_2 P(w_t | m_t).
 \end{equation*}
 The \key{average surprisal} of the process $W$ under the memory encoding function $M$ is obtained by averaging over all possible past sequences $\dots, w_{t-2}, w_{t-1}$ with associated memory states $m_t$, and possible next words $w_t$:
 \begin{equation*}
-   S_M \equiv -\sum_{w_t,m_t}  P(m_t) P(w_t|m_t) \log P(w_t | m_t).
+   S_M \equiv -\sum_{w_t,m_t}  P(m_t) P(w_t|m_t) \log_2 P(w_t | m_t).
 \end{equation*}
 where $w_t$ ranges over possible symbols, and $m_t$ ranges over possible outputs of the memory encoding function $M$.
 This quantity is known as the conditional entropy of $w_t$ given $m_t$ \citep[][p. 17]{cover2006elements}:
@@ -151,7 +151,7 @@ This is given by the entropy of the stationary distribution over memory states, 
 \end{align}
 where
 \begin{equation*}
-    \operatorname{H}[m_t] = - \sum_m P(m_t = m) \log P(m_t=m)
+    \operatorname{H}[m_t] = - \sum_m P(m_t = m) \log_2 P(m_t=m)
 \end{equation*}
 where $m$ runs over all possible states of the memory encoding $m_t$.
 Again, because $W$ is stationary, this quantity does not depend on the choice of $t$ (see SI Section 1.1.2). 
@@ -196,7 +196,7 @@ We will make our argument by defining a lower bound on the memory--surprisal tra
 Our argument will make use of a quantity called \key{mutual information}. Mutual information is the most general measure of statistical association between two random variables. The mutual information between two random variables $X$ and $Y$, conditional on a third random variable $Z$, is defined as:
 \begin{align}
 \label{eq:mi}
-    \operatorname{I}[X:Y|Z] &\equiv \sum_{x,y,z} P(x,y,z) \log \frac{P(x,y|z)}{P(x|z)P(y|z)}. % \text{ bits} \\
+    \operatorname{I}[X:Y|Z] &\equiv \sum_{x,y,z} P(x,y,z) \log_2 \frac{P(x,y|z)}{P(x|z)P(y|z)}. % \text{ bits} \\
     %\nonumber
     %&= \operatorname{H}[X|Z] - \operatorname{H}[X|Y,Z] \\
     %\nonumber
