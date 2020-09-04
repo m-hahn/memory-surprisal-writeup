@@ -27,30 +27,6 @@ The claim that processing difficulty should be directly proportional to surprisa
 Surprisal theory is compatible with different views on the mechanisms underlying prediction, and can reflect different mechanisms such as preactivation and integration~\citep{kuperberg2016we}.
 We do not assume that listeners explicitly compute a full-fledged distribution $P(w_t|m_t)$; we view $P(w_t|m_t)$ as a formalization of the probabilistic expectations that listeners form during comprehension.
 
-%@inproceedings{frank2019interaction,
-%  title={The interaction between structure and meaning in sentence comprehension. Recurrent neural networks and reading times},
-%  author={Frank, Stefan L. and Hoeks, John C. J.},
-%  booktitle={Proceedings of the 41st Annual Conference of the Cognitive Science Society},
-%  pages={337--343},
-%  year={2019},
-%  organization={[Sl: sn]}
-%}
-
-%@inproceedings{wilcox2020predictive,
-%author={Ethan G. Wilcox and Jon Gauthier and Jennifer Hu and Peng Qian and Roger P. Levy},
-%title={On the predictive power of neural language models for human real-time comprehension behavior},
-%year={2020},
-%booktitle={Proceedings of CogSci 2020},
-%pages={1707--1713}}
-
-%@article{aurnhammer2019evaluating,
-%author={Christoph Aurnhammer and Stefan L. Frank},
-%title={Evaluating information-theoretic measures of word prediction in naturalistic sentence reading},
-%journal={Neuropsychologia},
-%volume={134},
-%year={2019},
-%pages={107198}}
-
 
 Our expression~(\ref{eq:lossy-surp}) differs from the usual formulation of surprisal theory in that we consider predictability based on a (potentially lossy or noisy) memory representation $m_t$, rather than predictability based on the true complete context $w_1, \dots, w_{t-1}$. The generalization to lossy memory representations is necessary to capture empirically observed effects of memory limitations on language processing, such as dependency locality and structural forgetting \citep{futrell2020lossy}. 
 
@@ -188,7 +164,7 @@ Rate--distortion theory studies curves of the form of Eq.~\ref{eq:ms-formal}, wh
 \label{sec:infoloc}\label{sec:tradeoff}
 
 The shape of the memory--surprisal tradeoff is determined in part by the grammatical structure of a language.
-Some languages enable more efficient tradeoffs than others by allowing a listener to store fewer bits in memory to achieve the same level of average surprisal.
+Some \revision{hypothetical} languages enable more efficient tradeoffs than others by allowing a listener to store fewer bits in memory to achieve the same level of average surprisal.
 
 Here, we will demonstrate that the memory--surprisal tradeoff is optimized by languages with word orders exhibiting a property called \key{information locality}. Information locality means that words that depend on each other statistically are located close to each other in time. We will argue that information locality generalizes the well-known word order principle of dependency locality.
 

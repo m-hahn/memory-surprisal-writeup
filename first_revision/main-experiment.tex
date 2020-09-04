@@ -238,6 +238,14 @@ In most cases, the real and fitted orders provide more efficient tradeoffs than 
 \subsection{Discussion}\label{subsec:expt2-discussion}
 
 We have found that 50 out of 54 languages provide better memory--surprisal tradeoffs than random baselines with consistent but counterfactual word order rules.
+
+\revision{TODO WHAT EXACTLY TO WRITE? WHERE TO PUT THIS? In Figure~\ref{fig:median-table-expt2}, the difference in memory capacity between real and baseline orders, as provided by our bound, is in the range of at most a few bits.
+While 1 bit of memory seems like a small difference, this is a difference in cost at \emph{every word}, which accumulates over a sentence.
+In a sentence with 20 words, the overall number of bits that have to be encoded over time (though not simultaneously) additionally might add up to 20 bits.}
+
+
+
+
 Four languages provide exceptions; these are Latvian (Baltic), North Sami (Uralic), Polish and Slovak (both Slavic). These four languages did not have significantly lower AUC values than half of the random baselines.
 One feature that unites these four languages is that they have strong word order freedom, as we will see below in Figure~\ref{fig:freedom-surp}. % \mhahn{(also CITE something)}.
 Word order freedom plausibly makes sentences less predictable, as the same syntactic structure can receive different surface realizations.

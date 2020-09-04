@@ -40,7 +40,7 @@ We leave the proper formulation of an information-theoretic model of production 
 
 Finally, optimization may reflect biases that come into play during language learning.
 It is possible that memory efficiency makes languages more learnable, as learning should require less memory resources for languages with more efficient memory--surprisal tradeoffs.
-Evidence from artificial language learning experiments suggests that language acquisition is biased towards efficiency in communication and processing \citep[e.g.][]{fedzechkina2012language,fedzechkina-human-2017}.
+Evidence from artificial language learning experiments suggests that language acquisition is biased towards efficiency in communication and processing \citep[e.g.][]{fedzechkina2012language, fedzechkina-human-2017}.
 
 %The language processing system might be set up to favor more efficient orders. \jd{i'll leave this sentence here since maybe you had sth in mind with it, but i'm not sure what function it serves}
 
@@ -117,42 +117,7 @@ In our framework, DLT integration cost corresponds to surprisal given an imperfe
 There is one remaining missing link between our theory of processing difficulty and theories such as the Dependency Locality Theory:
 our information locality theorem says that \emph{statistical} dependencies should be short-term, whereas psycholinguistic theories of locality have typically focused on the time-span of \key{syntactic dependencies}: words which depend on each other to determine the meaning or the well-formedness of a sentence. Statistical dependencies, in contrast, mean that whenever one element of a sequence determines or predicts another element \emph{in any way}, those two elements should be close to each other in time. 
 
-If statistical dependencies, as measured using mutual information, can be identified with syntactic dependencies, then that would mean that information locality is straightforwardly a generalization of dependency locality. \citet{futrell2019syntactic} give theoretical and empirical arguments that this is so. They show that syntactic dependencies as annotated in dependency treebanks identify word pairs with especially high mutual information, and give a derivation showing that this is to be expected according to a formalization of the postulates of dependency grammar. The connection between mutual information and syntactic dependency has also been explored in the literature on grammar induction and unsupervised chunking \citep{harris1955phonemes,de1996selection,yuret1998discovery,mccauley2019language,clark2020consistent}. % maximizing mutual information principle; de paiva alves; yuret
-
-% @article{harris1955phonemes,
-% author={Zellig Harris},
-% year={1955},
-% title={From phonemes to morphemes},
-% journal={Language},
-% volume={31},
-% pages={190--222}}
-
-% @article{mccauley2019language,
-% title={Language learning as language use: A cross-linguistic model of child language development},
-% year={2019},
-% journal={Psychological Review},
-% volume={126},
-% number={1},
-% pages={1},
-% author={Stewart M. McCauley and Morten H. Christiansen}}
-
-% @article{clark2020consistent,
-%author = {Clark, Alexander and Fijalkow, Nathanaël},
-%title = {Consistent Unsupervised Estimators for Anchored PCFGs},
-%journal = {Transactions of the Association for Computational Linguistics},
-%volume = {8},
-%number = {},
-%pages = {409--422},
-%year = {2020},
-%doi = {10.1162/tacl\_a\_00323},
-%URL = { 
-        %https://doi.org/10.1162/tacl_a_00323
-%},
-%eprint = { 
-%        https://doi.org/10.1162/tacl_a_00323
-%    
-%}
-%}
+If statistical dependencies, as measured using mutual information, can be identified with syntactic dependencies, then that would mean that information locality is straightforwardly a generalization of dependency locality. \citet{futrell2019syntactic} give theoretical and empirical arguments that this is so. They show that syntactic dependencies as annotated in dependency treebanks identify word pairs with especially high mutual information, and give a derivation showing that this is to be expected according to a formalization of the postulates of dependency grammar. The connection between mutual information and syntactic dependency has also been explored in the \revision{literature on grammar induction and unsupervised chunking \citep{harris1955phonemes,de1996selection,yuret1998discovery,mccauley2019language,clark2020consistent}}. % maximizing mutual information principle; de paiva alves; yuret
 
 \paragraph{Cue-Based Retrieval Models} 
 
@@ -218,11 +183,10 @@ Our information locality bound theorem differs from this previous result in thre
 %    We argue that conditional mutual information  is more relevant for measuring memory usage than unconditional mutual information, as conditional mutual information accounts for redundancy between different words, which can be helpful for prediction. See SI Section 2.3 for two mathematical examples.
 \end{enumerate}
 
-We would like to emphasize the last point: previous work defined information locality in terms of the \emph{unconditional} mutual information between linguistic elements. %, and other previous work has shown that unconditional mutual information falls off with distance in natural language \citep{li1989mutual,lin2017critical}.
+We would like to emphasize the last point: previous work defined information locality in terms of the \emph{unconditional} mutual information between linguistic elements.
 In contrast, we advocate that \emph{conditional} mutual information is more relevant for measuring memory usage than unconditional mutual information. 
 While the decay of conditional mutual information provably provides a lower bound on memory entropy, the decay of unconditional mutual information does not.
 In SI Section 2.3, we provide an example of a stochastic process where unconditional mutual information does not decay with distance, but memory requirements remain low.
-
 
 
 
@@ -267,6 +231,7 @@ A case in point is the observation that forgetting effects in nested head-final 
 As corpora are finite, estimates for $I_t$ may not be reliable for larger values of $t$.
 In particular, we expect that models will underestimate $I_t$ for large $t$, as models will not be able to extract and utilize all available information over longer distances.
 This means that we might not be able to consistently estimate the asymptotic values of the average surprisal $S_M$ as the memory capacity goes to infinity, i.e. the entropy rate $S_\infty$. 
+\revision{We specifically expect this to happen in languages where less data is available (see SI Section 3.1 for corpus sizes).}
 
 This has implications for the interpretation of the memory--surprisal tradeoffs at higher values of memory entropy $H_M$.
 In Study 2, the lowest achieved surprisals are different for real and baseline orderings.
@@ -275,7 +240,7 @@ It is logically possible that real and baseline languages actually have the same
 %Another possibility is that that surprisal differs across all possible memory entropes $H_M$; in this case, $S_\infty$ would be different for real and baseline orderings.
 %Our results are also compatible in principle with a situation where the difference in surprisal \emph{reverses} at high values of memory entropy $H_M$.
 What our results do imply is that real languages provide lower surprisals in the setting of relatively small memory budgets. This result only depends on the estimates of $I_t$ for small values of $t$, which are most trustworthy.
-
+\revision{To the extent that $I_t$ is underestimated even for small values of $t$, such a bias equally applies to different ordering grammars. We therefore expect that estimating the relative efficiency of different orderings at the same level of memory is still reliable.}
 
 \paragraph{Nature of the Bound}
 Our theoretical result provides a lower bound on the tradeoff curve that holds across all ways of physically realizing a memory representation obeying the postulates (1--3).
@@ -349,32 +314,7 @@ Our memory--surprisal curve is closely related to the \key{predictive informatio
 In the limit of optimal prediction, our formalization of memory cost is equivalent to the notion of \key{statistical complexity} \citep{crutchfield-inferring-1989,shalizi2001computational}; in our terminology, the statistical complexity of a stochastic process is the minimum value of $H_M$ that achieves $S_M = S_\infty$.
 Furthermore, in the limit $T \rightarrow \infty$, the quantity in Eq.~\ref{eq:memory-bound} is equal to another quantity from the theory of statistical complexity: \key{excess entropy} \citep{crutchfield-inferring-1989}, the mutual information between the past and future of a sequence.
 
-%@article{debowski2015relaxed,
-%  title={The relaxed Hilberg conjecture: A review and new experimental support},
-%  author={D{\k{e}}bowski, {\L}ukasz},
-%  journal={Journal of Quantitative Linguistics},
-%  volume={22},
-%  number={4},
-%  pages={311--337},
-%  year={2015},
-%  publisher={Taylor \& Francis}
-%}
-
-%@book{debowski2020information,
-%author={D{\k{e}}bowski, {\L}ukasz},
-%title={Information theory meets power laws: {S}tochastic processes and language modesl},
-%publisher={John Wiley \& Sons},
-%year={2020}}
-
-
-% @article{hilberg1990bekannte,
-% author={W. Hilberg},
-% title={Der bekannte Grenzwert der redundanzfreien Information in Texten---eine Fehlinterpretation der Shannonschen Experimente?},
-% journal={Frequenz},
-% volume={44},
-% pages={243--248}}
-
-Our results are also closely related to information-theoretic scaling laws that characterize natural language, and in particular the Relaxed Hilberg Conjecture \citep{hilberg1990bekannte,debowski2015relaxed,debowski2020information}. The Relaxed Hilberg Conjecture is the claim that the average surprisal of a $t$'th-order Markov approximation to language decays as a power law in $t$:
+\revision{Our results are also closely related to information-theoretic scaling laws that characterize natural language, and in particular the Relaxed Hilberg Conjecture \citep{hilberg1990bekannte,debowski2015relaxed,debowski2020information}. The Relaxed Hilberg Conjecture is the claim that the average surprisal of a $t$'th-order Markov approximation to language decays as a power law in $t$:
 \begin{equation*}
     S_t \approx k t^{-\alpha} + S_\infty,
 \end{equation*}
@@ -386,7 +326,7 @@ with the Hilberg exponent $\alpha \approx \frac{1}{2}$, and $k$ a scaling factor
     &\propto t^{-\alpha} - \left(t+1\right)^{-\alpha}.
 \end{align}
 The steepness of the fall-off of mutual information depends on the value of the Hilberg exponent $\alpha$. As $\alpha$ gets small, the fall-off of mutual information is more rapid, corresponding to more information locality.
-Therefore, our Efficient Tradeoff Hypothesis can be read as a claim about the Hilberg exponent $\alpha$ for natural language: that it is lower than would be expected in a comparable system not constrained by incremental memory.
+Therefore, our Efficient Tradeoff Hypothesis can be read as a claim about the Hilberg exponent $\alpha$ for natural language: that it is lower than would be expected in a comparable system not constrained by incremental memory.}
 
 
 

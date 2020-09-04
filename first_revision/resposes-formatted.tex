@@ -61,7 +61,7 @@
 
 We thank the reviewers for their insightful comments; we have considered them carefully in revising the paper. In the following, we respond to the comments, describing how we revised the paper to address the concerns and suggestions.
 
-
+Throughout the revised paper and the SI, we have indicated all substantial changes by coloring text in blue.
 
 \section{Reviewer 1}
 
@@ -83,30 +83,26 @@ In the origianl version, all logarithms were interpreted as natural logarithms, 
 	We did this in order to ensure consistency with the explicit use of bits as the unit of information at a few places in the text.
 	For full clarity, we also added a footnote at the first appearance of $\log_2$ (\mhahn{page number}), explaining that changing the basis of the logarithm only results in a proportionality factor.
 
-%	\mhahn{We might change it to bits, though changing it throughout the entire paper \& SI seems like a bigger task} \jd{it's typically easier for people to think in bits than nats ("people" being me), so if possible, changing it in all the figures might be a useful time investment. or else keep it at nats, but be clear in axis labels about what is displayed -- somehow the reviewer came away with the idea that it's bits that are displayed, probably because the text consistently makes reference to bits (and in fact fig 1 explicitly says bits on the x-axis). so actually, thinking through this: either change all the text or change all the figures. changing text is faster but changing figures will make it easier on readers.}
-
 	While 1 bit of memory seems like a small difference, this is a difference in cost at \emph{every word}, which accumulates over a sentence.
 	In a sentence with 20 words, the overall number of bits that have to be encoded over time (though not simultaneously) additionally might add up to 20 bits.
-	\mhahn{do we have to say something in the paper?}\jd{yes, add a note to this effect! this will be confusing to many readers}
+	\mhahn{do we have to say something in the paper?}\jd{yes, add a note to this effect! this will be confusing to many readers} TODO
 \end{reply}
 
 While the UD corpora are the largest annotated cross-linguistic corpora readily available, they are in fact quite small (as indicated by the fact that the average training data size was ~5,000 sentences per language). This means that the neural models from which the $I_t$ are estimated are probably not very predictive except of extremely high frequency words/collocations. How would this bias in terms of what can be correctly predicted affect the memory-surprisal tradeoff results?
 
 \begin{reply}
-	\mhahn{TODO should we add this discussion in General Discussion?}
-
-\jd{not sure what you have in mind here. it's not clear to me that there would be an obvious bias in the results -- should there be? though i think it would be useful to include some kind of visualization of dataset size, either directly on the plot (perhaps just by including training data size in fig 10) or by including a table, and point out that the larger the dataset, the more trustworthy the result is? }
-
-	
 	We expect that small data size will result in underestimating $I_t$, in particular as $t$ increases. This may bias estimates towards curves where surprisal doesn't further decrease beyond a certain level of memory.
 However, as this equally applies to difefrent ordering grammars, we expect that estimating the relative efficiency of different orderings at the same level of memory is still reliable.
+
+	We have added the following in ``Finiteness of Data'' in the General Discussion (page \mhahn{TODO}):
+	``\textit{To the extent that $I_t$ is underestimated even for small values of $t$, such a bias equally applies to different ordering grammars. We therefore expect that estimating the relative efficiency of different orderings at the same level of memory is still reliable.}''
 \end{reply}
 
 Minor concerns:
 Page 17 states, "Some languages enable more efficient tradeoffs than others by allowing a listener to store fewer bits in memory to achieve the same level of average surprisal." From the remainder of the paper, it's clear that this is refering to some theoretically possible languages, rather than some real languages, but it would be helpful to clarify that the goal of this paper is not to attempt to rank real languages in terms of which are more efficient than others.
 
 \begin{reply}
-	TODO do this
+We have added the adjective ``hypothetical'' in front of ``languages''.
 \end{reply}
 
 In Figure 9, I believe Grammar 1 should have subjects = 0.2 and objects = -0.8.
@@ -121,7 +117,7 @@ We have corrected this.
 - Having $m_t$ not include the t'th word I found a little confusing. I think it would be more natural to think about e.g. $P(w_t | m_{t-1})$
 
 \begin{reply}
-	Our choice of writing $P(w_t | m_{t})$ follows the convention for HMMs as in, e.g. \mhahn{cite something}.
+	Our choice of writing $P(w_t | m_{t})$ is inspired by the convention for HMMs as in, e.g. \url{en.wikipedia.org/wiki/Hidden_Markov_model}.
 	We also feel that this choice helps reduce the number of times ``+1'' or ``-1'' occurs in formulas, making them a bit easier to read.
 \end{reply}
 
@@ -177,13 +173,18 @@ We now provide discussion of retrieval and interference in the subsection on ``O
 
 \begin{reply}
 In the memory-surprisal tradeoff, intervening elements come in via the definition of $I_t$, which controls for redundancy with intervening material.
-Which concrete consequences for nouns and other intervening elements this has will depend on their co-occurrence statistics.
-	\mhahn{what should we say here?}
-Regarding the unit of time, the memory-surprisal tradeoff should hold at all units of time at which humans engage in incremental predictive processing.
-	\mhahn{what should we say here?}
-	
-	\rljf{If our result is relevant to this question, it isn't obvious, because we measure average memory usage, and we don't end up providing a pointwise distance measure for information locality. If there is a connection to the DLT distance metric, then it is not obvious to us.}
-
+However, our result measures average memory usage, and does not provide a pointwise distance measure that could be directly applied to individual sentences like the DLT distance metric.
+Therefore, if there is a connection to this aspect of the DLT distance metric, it is not obvious to us.
+%
+%
+%What concrete consequences for nouns and other intervening elements this has will depend on their co-occurrence statistics.
+%
+%	\mhahn{what should we say here?}
+%Regarding the unit of time, the memory-surprisal tradeoff should hold at all units of time at which humans engage in incremental predictive processing.
+%	\mhahn{what should we say here?}
+%	
+%	\rljf{If our result is relevant to this question, it isn't obvious, because we measure average memory usage, and we don't end up providing a pointwise distance measure for information locality. If there is a connection to the DLT distance metric, then it is not obvious to us.}
+%
 \end{reply}
 
 - Why it's $\sum t I_t$ was really not clear to me when I got to (11), until later. It might help to introduce that early.
@@ -210,13 +211,14 @@ We agree that Study 2 is stronger than Study 1. But Study 1 serves as an illustr
 - I would suggest moving some methods of Study 2 into the SI.
 
 \begin{reply}
-We have carefully thought about methods that could be moved into the SI. We decided to keep all methods in the main paper, as every one of the subsections in Study 2 seems relevant to understanding the experiment and results, and the minor details are already in SI Section 3.2-3.5.
+We carefully thought about methods that could be moved into the SI. We decided to keep all methods in the main paper, as every one of the remaining methods subsections in Study 2 seems relevant to understanding the experiment and results, and some of the details are already in SI Section 3.2-3.5.
 \end{reply}
 
 - For the "four exceptions" in Figure 11 -- it's worth discussing maybe whether this method works less well on some languages (depending on their dependency corpora, etc.)?
 
 \begin{reply}
-	TODO think about this \jd{isn't this precisely what section 5.5 does? perhaps i misunderstand the reviewer's point}
+We mainly expect that corpus size impacts the reliability of the estimates of $I_t$, and that this will be underestimated for larger values of $t$ for languages with less available data.
+	To acknowledge this, we added the following sentence in ``Finiteness of Data'' in the General Discussion (\mhahn{page number}): ``\textit{We specifically expect this to happen in languages where less data is available (see SI Section 3.1 for corpus sizes).}''
 \end{reply}
 
 - The morphology section made me wonder if there was an analogous analysis one could apply to e.g. adjective ordering in English
@@ -230,17 +232,17 @@ We have added a discussion of the difference to dependency locality in the secti
 \begin{reply}
 We have added a paragraph at the end of SI Section 1.2, explaining how the theoretical result remains true when modeling memory cost as the mutual information $I_M$ between memory and preceding material. For deterministic memory encoding functions, $I_M=H_M$.
 
-The information between memory and *preceding* material is an upper bound on the information between memory and *upcoming* material suggested by the reviewer.
-We believe the information with *preceding* material is more appropriate because it accounts for the fact that the comprehender may not know which aspects of the past input ultimately are useful for predicting the future, so might have to store some bits that turn out to be ultimately useless. This is captured both by the entropy measure and the mutual information with preceding material, though not by mutual information with upcoming material. 
+	The information between memory and \emph{preceding} material is an upper bound on the information between memory and \emph{upcoming} material suggested by the reviewer.
+	We believe the information with \emph{preceding} material is more appropriate because it accounts for the fact that the comprehender may not know which aspects of the past input ultimately are useful for predicting the future, so might have to store some bits that turn out to be ultimately useless. This is captured both by the entropy measure and the mutual information with preceding material, though not by mutual information with upcoming material. 
 \end{reply}
 
 - For the discussion on entropy in memory, the authors might find it informative to look at e.g. Konkle, Brady, Alvarez and those kinds of models -- they cite work by Landauer etc which tries to estimate the information capacity of memory (under various assumptions).
 
 \begin{reply}
-	We have added the sentence \emph{We
+	We have added the sentence: ``\textit{We
 quantify memory resources in terms of their information-theoretic capacity measured in
 bits, following models proposed for working memory in other domains (Brady, Konkle, \&
-	Alvarez, 2008, 2009; Sims, Jacobs, \& Knill, 2012).} in the ``Architectural Assumptions'' section (page \mhahn{TODO}).
+	Alvarez, 2008, 2009; Sims, Jacobs, \& Knill, 2012).}'' in the ``Architectural Assumptions'' section (page \mhahn{TODO}).
 	We also refer to that line of work in ``Relation to Models of Sentence Processing'' (page \mhahn{TODO}).
 \end{reply}
 
@@ -263,7 +265,7 @@ I only have a few smaller comments.
 1. I would like to push the authors to be a bit more clear and consistent about the source of the memory-surprisal trade-off. On p. 3, they present the model as a comprehension model, on p. 10, they state that the trade-off applies to comprehension and production, while on p. 44, they state that they leave the mechanism open (whether it's production, comprehension, or acquisition).
 
 \begin{reply}
-	In order to be more consistent, we have de-emphasized the production side by removing the paragraph \emph{The memory--surprisal tradeoff applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension; we return to the production perspective in the General Discussion.} on page 10.
+	In order to be more consistent, we have de-emphasized the production side by removing the paragraph ``\textit{The memory--surprisal tradeoff applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension; we return to the production perspective in the General Discussion.}'' on page \mhahn{page number}.
 
 	With this change, we focus the presentation of the model on the comprehension side and limit discussion of production to the section ``Role of Comprehension, Production, and Acquisition''.
 \end{reply}
@@ -279,18 +281,18 @@ I only have a few smaller comments.
 \begin{reply}
 	This is an important point. Our theory's predictions are determined entirely by the statistical properties of surface forms. In this situation, uncertainty about whether a subject or object will follow a certain word manifests as uncertainty about a case marker. In other languages, this uncertainty may manifest as uncertainty about which wordform will follow, where subjects and objects have different distributions over lexemes. We modified the paragraph to be clearer as below:
 	
-	The source of the difference lies in predicting the presence and absence of a case marker on the second argument.
+	``\textit{The source of the difference lies in predicting the presence and absence of a case marker on the second argument.
 Conceptually, a comprehender may be in a state of uncertainty as to whether a subject or object might follow.
 Since surprisal is determined entirely by the statistical properties of distributions over wordforms, this uncertainty manifests as uncertainty about whether to expect an accusative case marker.
 [Footnote: In other languages lacking case markers, similar uncertainty may manifest as uncertainty about wordform, since subjects and objects often have very different distributions over wordforms.]
 In the $A$ orders, considering the last two words is sufficient to make this decision.
-In the $B$ orders, it is necessary to consider the word before the long second constituent, which is five words in the past.
+	In the $B$ orders, it is necessary to consider the word before the long second constituent, which is five words in the past.}''
 \end{reply}
 
 4. Finally, what I missed about the memory-surprisal trade-off in the paper is why I as researcher should investigate it further and what it provides that previous models do not. Does it capture the artificial/natural language data better than dependency locality? Is it a more parsimonious model? Does it capture a wider range of phenomena? Where do its predictions diverge from the previous models? I'd like to see some of such discussion in the paper.
 
 \begin{reply}
-	We now include a section `Relation to linguistic typology' in the General Discussion to address the Reviewer's comment, including the relation to dependency locality and why our model is interesting to questions in linguistic typology.\jd{what about the other questions the reviewer asks?}
+	We now include a section `Relation to linguistic typology' in the General Discussion to address the Reviewer's comment, including the relation to dependency locality and why our model is interesting to questions in linguistic typology.
 \end{reply}
 
 
