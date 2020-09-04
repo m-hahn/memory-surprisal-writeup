@@ -91,10 +91,9 @@
 \newcommand{\thetal}[0]{{\theta_{LM}}}
 
 \newcounter{theorem}
-\newcounter{def}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{thm}[theorem]{Theorem}
-\newtheorem{definition}[def]{Definition}
+\newtheorem{definition}[theorem]{Definition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{question}[theorem]{Question}
 \newtheorem{example}[theorem]{Example}
@@ -116,12 +115,8 @@ a reanalysis of a miniature artificial language learning experiment, a large-sca
 \authornote{
    \addORCIDlink{Michael Hahn}{0000-0003-4828-4834}
 
-  Correspondence concerning this article should be addressed to Michael Hahn, Department of Linguistics, Stanford University Stanford, CA 94305-2150.  E-mail: mhahn2@stanford.edu
+  Correspondence concerning this article should be addressed to Michael Hahn, Department of Linguistics, Stanford University Stanford, CA 94305-2150.  E-mail: mhahn2@stanford.edu}
   
-  An earlier version of this work was presented at the 32nd Annual CUNY Conference on Human Sentence Processing, 2019.
-All code and data is freely available at \url{https://github.com/m-hahn/memory-surprisal}.
-  }
-
   % Old abstract
   
   %Memory has well-documented effects on language at different time scales. For instance, memory limitations are known to constrain language comprehension and production. They have also been argued to account for crosslinguistic word order regularities. However, a systematic assessment of the role of memory limitations in the structure of language has proven elusive, partly due to the architecture-dependence of many memory accounts of language. \jd{not sure about the previous sentence -- basically, we need to be clear what the motivation is for the work. if someone has a better idea, please insert.} Building on expectation-based models of language processing, we provide an architecture-independent information-theoretic formalization of memory limitations. We show that comprehenders can achieve lower average surprisal per word at the cost of storing more information about past context, an idea we refer to as the \emph{memory--surprisal tradeoff}. We show that the shape of the tradeoff is determined in part by the order of linguistic elements, e.g., word order or morpheme order. In particular, languages enable more efficient tradeoffs when they exhibit \emph{information locality}: if predictive information about an element (like a word) is concentrated in its recent past. The account yields a novel prediction, which we term the \emph{Efficient Tradeoff Hypothesis}: that the order of elements in natural language is characterized by a distinctively steeper memory-surprisal tradeoff curve compared to other possible orders. We provide evidence from three test domains in support of the Efficient Tradeoff Hypothesis: a reanalysis of a miniature artificial grammar experiment shows that languages resulting from regularization exhibit a steeper tradeoff curve than the original input language; evidence from corpora of 54  languages shows that the grammar of real languages allows for more efficient memory--surprisal tradeoffs than random baseline word order grammars; and an analysis of two agglutinative languages shows that optimization of the memory-surprisal tradeoff is also reflected in morpheme order. These results suggest that principles of order in natural language can be explained via highly generic cognitively motivated principles
@@ -178,10 +173,9 @@ We provided an information-theoretic formalization of memory requirements as a t
 We showed theoretically that languages have more efficient tradeoffs when they show stronger degrees of information locality.
 Information locality provides a formalization of various locality principles from the linguistic literature, including dependency locality \citep{gibson1998linguistic}, domain minimization \citep{hawkins2004efficiency}, and the proximity principle \citep{givon1985iconicity}.
 Using this result, we provided evidence that languages order words and morphemes in such a way as to provide efficient memory--surprisal tradeoffs.
-Therefore, the memory--surprisal tradeoff simultaneously provides (1) a unified explanation of diverse typological phenomena which is rigorously grounded in the psycholinguistics literature, (2) a theory which makes new successful quantitative predictions about word and morpheme order within and across languages, and (3) a mathematical framework relating universals of language to principles of efficient coding from information theory. 
 
 Our result shows that wide-ranging principles of order in natural language can be explained from highly generic cognitively-motivated information-theoretic principles. The locality properties we have discussed are some of the most characteristic properties of natural language, setting natural language apart from other codes studied in information theory.
-Therefore, our result raises the question of whether other distinctive characteristics of language---for example, mildly context-sensitive syntax, duality of patterning, and compositionality---might also be explained in terms of information-theoretic resource constraints.
+Therefore, our result raises the question of whether other distinctive characteristics of language---for example, mildly context-sensitive syntax, duality of patterning, and compositionality---might also be explained in terms of information-theoretic resource constraints on production and comprehension.
 
 
 

@@ -31,15 +31,13 @@ Here, we discuss the limitations  of our results and the implications they have 
 Our results leave open the causal mechanism leading to the observed optimization, in particular, whether optimization is the result of minimizing effort during comprehension, production, or acquisition. One possibility is that optimization reflects an effort on the side of the speaker to produce utterances that are easy to comprehend by listeners, a strategy known as \emph{audience design} \citep{clark1982audience,lindblom1990communication, brennan1995feeling}. More efficient memory--surprisal tradeoffs are useful from the listener's perspective because they allow for better prediction with lower memory investment than less efficient tradeoffs. 
 
 Another possibility is that optimization reflects production-internal pressures to minimize effort on the speaker's part during sentence planning \citep{bock1985conceptual,ferreira2000effect,macdonald2013language,fedzechkina2020production}. That is, instead of speakers optimizing for the benefit of listeners, the iterated application of production-internal heuristics that reduce speaker effort may result in more efficient tradeoffs \citep{macdonald2013language}. %\jd{is this really true? if one takes seriously the kinds of heuristics that macdonald, bock, ferreira, et al propose -- mention "easily retrievable" things first, ie shorter things, animate things, given things, etc -- would the formulated tradeoff really emerge?}\mhahn{I think the next sentence helps with this}
-While our theory is stated in terms of the efficiency of language processing for a comprehender of language, we can show that an analogous memory--surprisal tradeoff exists in language production, and that speakers with bounded memory capacity can minimize production errors when the language has stronger information locality.
-For discussion including mathematical proofs, see SI Section 1.4.
-Depending on the precise formalization of the production problem, the production-oriented version of the memory--surprisal tradeoff may or may not be identical the comprehension-oriented version we have presented here. 
-We leave the proper formulation of an information-theoretic model of production to future work.
+While our theory is stated in terms of the efficiency of language processing for a comprehender of language, we can show that an analogous memory--surprisal tradeoff exists in language production, and that speakers with bounded memory capacity can minimize production errors when the language has stronger information locality (see SI Section 1.4 for a mathematical statement and proof).
 %\jd{isn't a "produce more accurate language" pressure qualitatively different from the kinds of availability-based production pressures mentioned above? i guess the fedzechkina and jaeger 2020 perspective is more closely aligned with the "produce more accurate language" perspective than with the "produce easy things first perspective"}\mhahn{I have rephrased to `minimize production errors'.}
+
 
 Finally, optimization may reflect biases that come into play during language learning.
 It is possible that memory efficiency makes languages more learnable, as learning should require less memory resources for languages with more efficient memory--surprisal tradeoffs.
-Evidence from artificial language learning experiments suggests that language acquisition is biased towards efficiency in communication and processing \citep[e.g.][]{fedzechkina2012language,fedzechkina-human-2017}.
+Evidence from artificial language learning experiments suggests that language acquisition is biased towards efficiency in communication and processing \citep[e.g.][]{fedzechkina2012language, fedzechkina-human-2017}.
 
 %The language processing system might be set up to favor more efficient orders. \jd{i'll leave this sentence here since maybe you had sth in mind with it, but i'm not sure what function it serves}
 
@@ -116,44 +114,21 @@ In our framework, DLT integration cost corresponds to surprisal given an imperfe
 There is one remaining missing link between our theory of processing difficulty and theories such as the Dependency Locality Theory:
 our information locality theorem says that \emph{statistical} dependencies should be short-term, whereas psycholinguistic theories of locality have typically focused on the time-span of \key{syntactic dependencies}: words which depend on each other to determine the meaning or the well-formedness of a sentence. Statistical dependencies, in contrast, mean that whenever one element of a sequence determines or predicts another element \emph{in any way}, those two elements should be close to each other in time. 
 
-If statistical dependencies, as measured using mutual information, can be identified with syntactic dependencies, then that would mean that information locality is straightforwardly a generalization of dependency locality. \citet{futrell2019syntactic} give theoretical and empirical arguments that this is so. They show that syntactic dependencies as annotated in dependency treebanks identify word pairs with especially high mutual information, and give a derivation showing that this is to be expected according to a formalization of the postulates of dependency grammar. The connection between mutual information and syntactic dependency has also been explored in the literature on grammar induction and unsupervised chunking \citep{harris1955phonemes,de1996selection,yuret1998discovery,mccauley2019language,clark2020consistent}. % maximizing mutual information principle; de paiva alves; yuret
+If statistical dependencies, as measured using mutual information, can be identified with syntactic dependencies, then that would mean that information locality is straightforwardly a generalization of dependency locality. \citet{futrell2019syntactic} give theoretical and empirical arguments that this is so. They show that syntactic dependencies as annotated in dependency treebanks identify word pairs with especially high mutual information, and give a derivation showing that this is to be expected according to a formalization of the postulates of dependency grammar. The connection between mutual information and syntactic dependency has also been explored in the grammar induction literature \citep{de1996selection,yuret1998discovery}. % maximizing mutual information principle; de paiva alves; yuret
 
-% @article{harris1955phonemes,
-% author={Zellig Harris},
-% year={1955},
-% title={From phonemes to morphemes},
-% journal={Language},
-% volume={31},
-% pages={190--222}}
 
-% @article{mccauley2019language,
-% title={Language learning as language use: A cross-linguistic model of child language development},
-% year={2019},
-% journal={Psychological Review},
-% volume={126},
-% number={1},
-% pages={1},
-% author={Stewart M. McCauley and Morten H. Christiansen}}
 
-% @article{clark2020consistent,
-%author = {Clark, Alexander and Fijalkow, Nathanaël},
-%title = {Consistent Unsupervised Estimators for Anchored PCFGs},
-%journal = {Transactions of the Association for Computational Linguistics},
-%volume = {8},
-%number = {},
-%pages = {409--422},
-%year = {2020},
-%doi = {10.1162/tacl\_a\_00323},
-%URL = { 
-        %https://doi.org/10.1162/tacl_a_00323
-%},
-%eprint = { 
-%        https://doi.org/10.1162/tacl_a_00323
-%    
-%}
-%}
 
-\paragraph{Cue-Based Retrieval Models} 
+\paragraph{Cue-Based Retrieval Models}
+
+In some psycholinguistic theories, memory-related difficulty arises not because of a bound on memory capacity, but rather because of difficulties involved in retrieving information from memory \citep{mcelree2000sentence,lewis-activation-based-2005,nicenboim2018models,vasishth2019computational}. We are able to prove an analogous theorem that applies to such theories: see SI Section 1.3 for an extension of our analysis to the case involving a short-term memory (STM) with unbounded capacity, a working memory (WM) with limited capacity, and cost associated with communication between WM and STM. Essentially, the constraint on the memory state in our theorem above can be re-interpreted as a constraint on the capacity of a communication channel linking STM to WM. In particular, this result constrains average surprisal for memory models based on cue-based retrieval such as the ACT-R model of \citet{lewis-activation-based-2005}.
+
+The ACT-R model of \cite{lewis-activation-based-2005} does not have an explicit surprisal cost.
+Instead, surprisal effects are interpreted as arising because, in less constraining contexts, the parser is more likely to make decisions that then turn out to be incorrect, leading to additional correcting steps.
+%We see this as an algorithmic-level implementation of the justification for surprisal theory provided by \citet{levy2008expectation}:
+We view this as an algorithmic-level implementation of a surprisal cost:
+If a word $w_t$ is unexpected given the current state of the working memory, then its current state must provide insufficient information to constrain the actual syntactic state of the sentence, meaning that the parsing steps made to integrate $w_t$ are likely to include more backtracking and correction steps.
+Thus, we argue that cue-based retrieval models predict that the surprisal $- \log P(w_t|m_t)$ will be part of the cost of processing word $w_t$.
 
 Work within cue-based retrieval frameworks has suggested that working memory is not characterized by a decay in information over time, but rather an accumulation of interference among similar items stored in memory \citep[][p. 408]{lewis-activation-based-2005}.
 In contrast, the formula for memory usage in Eq.~\ref{eq:memory-bound} might appear to suggest that boundedness of memory entails that representations have to decay over time.
@@ -162,14 +137,6 @@ our theorem does not imply that a listener forgets words beyond some amount of t
 An optimal listener may well decide to remember information about words more distant than $T$, but in order to stay within the bounds of memory, she can only do so at the cost of forgetting some information about words closer than $T$.
 The Information Locality Lower Bound still holds, in the sense that the long-term dependency will cause processing difficulty, even if the long-term dependency is not itself forgotten.
 See SI Section 2.1--2.2 for a mathematical example illustrating this phenomenon.
-
-The ACT-R model of \cite{lewis-activation-based-2005} also does not have an explicit surprisal cost.
-Instead, surprisal effects are interpreted as arising because, in less constraining contexts, the parser is more likely to make decisions that then turn out to be incorrect, leading to additional correcting steps.
-%We see this as an algorithmic-level implementation of the justification for surprisal theory provided by \citet{levy2008expectation}:
-We view this as an algorithmic-level implementation of a surprisal cost:
-If a word $w_t$ is unexpected given the current state of the working memory, then its current state must provide insufficient information to constrain the actual syntactic state of the sentence, meaning that the parsing steps made to integrate $w_t$ are likely to include more backtracking and correction steps.
-Thus, we argue that cue-based retrieval models predict that the surprisal $- \log P(w_t|m_t)$ will be part of the cost of processing word $w_t$.
-
 
 %y and non-redundantly depends on the character $T$ steps in the past, with $T$ large, this will create a memory cost proportional to $T$.
 
@@ -181,7 +148,7 @@ There are more general reasons to believe that any realistic theory of sentence 
 %More formally, we argue that processing difficulty for a word $w_t$ must at least be given by $k (-\log P(w_t |m_t)) + R$, with $k$ a scaling factor giving the relative contribution of surprisal to processing cost, and $R$ representing all other factors. The scaling factor $k$ may be small, but it cannot be zero, for both empirical and theoretical reasons. 
 There are both empirical and theoretical grounds for this claim.
 Empirically, surprisal makes a well-documented and robust contribution to processing difficulty in empirical studies of reading times and event-related potentials \citep{smith2013effect,frank2015erp}. 
-Theoretically, surprisal may represent an irreducible thermodynamic cost incurred by any information processing system \citep{landauer1961irreversibility,still2012thermodynamic,zenon2019information}, and there are multiple converging theoretical arguments for why it should hold as a cost in human language processing in particular \citep[see][for a review]{levy2013memory}. 
+Theoretically, surprisal may represent an irreducible thermodynamic cost incurred by any information processing system \citep{landauer1961irreversibility,still2012thermodynamic,zenon2019information}, and there are multiple converging theoretical arguments for why it should hold as a cost in human language processing in particular \cite[see][for a review]{levy2013memory}. 
 
 % Demberg and Keller (2009)
 
@@ -203,7 +170,7 @@ The explanation of memory effects can be viewed as a specific type of capacity c
 Previous work has attempted to derive the principle of information locality from incremental processing models. 
 \citet{futrell2020lossy} describe a processing model where listeners make predictions (and incur surprisal) based on lossy memory representations.
 In particular, they consider loss models that delete, erase, or replace words in the past.
-Within this model, they were able to establish a similar information locality result, by showing that the theoretical processing difficulty increases when words with high \emph{pointwise mutual information} are separated by large distances. Pointwise mutual information is the extent to which a \emph{particular value} predicts another value in a joint probability distribution. For example, if we have words $w_1$ and $w_2$ in a sentence, their pointwise mutual information is:
+Within this model, they were able to establish a similar information locality result, by showing that the theoretical processing difficulty increases when words with high \emph{pointwise mutual information} are separated by large distances \citep{futrell2019information,futrell2020lossy}. Pointwise mutual information is the extent to which a \emph{particular value} predicts another value in a joint probability distribution. For example, if we have words $w_1$ and $w_2$ in a sentence, their pointwise mutual information is:
 \begin{equation*}
     \text{pmi}(w_1; w_2) \equiv \log \frac{P(w_2|w_1)}{P(w_2)}.
 \end{equation*}
@@ -212,16 +179,15 @@ Mutual information, as we defined it in Eq.~\ref{eq:mi}, is the \emph{average} p
 Our information locality bound theorem differs from this previous result in three ways:
 \begin{enumerate}
     \item \citet{futrell2020lossy} required an assumption that incremental memory is subject to decay over time. In contrast, we do not require any assumptions about incremental memory except that it has bounded capacity (or that retrieval operations have bounded capacity; see above).
-    \item Our result is a precise bound, whereas the previous result was an approximation based on neglecting higher-order interactions among words. 
+    \item Our result is a precise bound, whereas the previous result was an approximation based on neglecting higher-order interactions among words.
     \item Our result is about the fall-off of the mutual information between words, \emph{conditional on the intervening words}. The previous result was about the fall-off of \emph{pointwise} mutual information between specific words, without conditioning on the intervening words.
 %    We argue that conditional mutual information  is more relevant for measuring memory usage than unconditional mutual information, as conditional mutual information accounts for redundancy between different words, which can be helpful for prediction. See SI Section 2.3 for two mathematical examples.
 \end{enumerate}
 
-We would like to emphasize the last point: previous work defined information locality in terms of the \emph{unconditional} mutual information between linguistic elements. %, and other previous work has shown that unconditional mutual information falls off with distance in natural language \citep{li1989mutual,lin2017critical}.
-In contrast, we advocate that \emph{conditional} mutual information is more relevant for measuring memory usage than unconditional mutual information. 
+As noted above, this previous work defined information locality in terms of the \emph{unconditional} (pointwise) mutual information between linguistic elements.
+Here we argue that conditional mutual information is more relevant for measuring memory usage than unconditional mutual information. 
 While the decay of conditional mutual information provably provides a lower bound on memory entropy, the decay of unconditional mutual information does not.
 In SI Section 2.3, we provide an example of a stochastic process where unconditional mutual information does not decay with distance, but memory requirements remain low.
-
 
 
 
@@ -236,7 +202,7 @@ In SI Section 2.3, we provide an example of a stochastic process where unconditi
 \paragraph{Experience-Based and Connectionist Models}
 Our model and results are compatible with work arguing that memory strategies adapt to language structure and language statistics, and that experience shapes memory performance in syntactic processing \citep[e.g.][]{macdonald2002reassessing,wells2009experience}.
 For instance, \citet{macdonald2002reassessing} argue for a connectionist model in which network structure and language experience account for processing capacity.
-Such models use recurrent neural networks with some fixed number of neurons, which can be understood as a specific kind of constrained memory.
+Such models use recurrent neural networks with some fixed number of neurons, which can be understood as a specific kind of constrained memory \citep{futrell2020lossy}.
 A case in point is the observation that forgetting effects in nested head-final dependencies are reduced or absent in  head-final structures \citep{vasishth2010short,frank2016cross,frank2019judgements}, which has been modeled using connectionist models \citep{engelmann2009processing,frank-cross-linguistic-2015}, which can be interpreted as modeling surprisal conditioned on imperfect memory \citep{futrell2020lossy}.
 
 
@@ -278,14 +244,13 @@ What our results do imply is that real languages provide lower surprisals in the
 
 \paragraph{Nature of the Bound}
 Our theoretical result provides a lower bound on the tradeoff curve that holds across all ways of physically realizing a memory representation obeying the postulates (1--3).
-However, this bound may be loose in two ways.
-
+However, this bound may be loose in two ways:
 First, architectural properties of human memory might introduce additional constraints on possible representations.
 Depending on the role played by factors other than infomation-theoretic capacity, the tradeoffs achieved by these human memory representations need not be close to achieving the theoretical bounds.
-
-Second, depending on properties of the stochastic process, the bound might be loose across all models; that is, there are processes where the bound is not attainable by any memory architecture.
+%
+Furthermore, depending on properties of the stochastic process, the bound might be loose across all models, that is, there are processes where the bound is not attainable by any memory architecture.
 This can happen if there is strong uncertainty as to which aspects of the past observations will be relevant to the future.
-We provide an artificial example with analytical calculations in SI Section 2.1, but this example does not seem linguistically natural.
+We provide an artificial example with analytical calculations in SI Section 2.1; however, this example does not seem linguistically natural.
 
 \paragraph{Extralinguistic Context}
 Comprehension Postulate 1 states that the memory state after receiving a word is determined by that word and the memory state before receiving this word.
@@ -305,94 +270,44 @@ Taking extralinguistic context into account would likely result in more efficien
 \paragraph{Limitations of Baseline Language Grammar Model}
 In Study 2, baseline grammars are constructed in a formalism that cannot fully express some word order regularities found in languages.
 For instance, it cannot express orders that differ in main clauses and embedded clauses (see discussion there for further limitations). %. Other limitations are discussed in Section~\ref{sec:main-experiment}.
-These limitations are common to most other order grammar formalisms considered in the literature; despite these limitations, such word order models have demonstrated reasonably good fits to corpus data and human judgments of fluency \citep{futrell2015experiments,wang2016galactic}.
+These limitations are common to most other order grammar formalisms considered in the literature; despite these limitations, such word order models have demonstrated reasonably good fits to corpus data on word order and human judgments of fluency \citep{futrell2015experiments,wang2016galactic}.
 These limitations do not affect the estimated tradeoffs of real orders.
-However, the grammar model determines the baseline distribution, and thus impacts their comparison with real orders.
-For example, to the extent that strict word order decreases surprisal, this baseline distribution will put more weight on relatively efficient baselines, potentially resulting in a smaller difference with real orders than for baseline distributions that allow more flexibility.
-This limitation does not hold in Study 3, where the formalism provides very close fit to observed morpheme orders.
+However, the grammar model determines the baseline distribution, and thus impacts the comparison with real orders.
+For example, to the extent that strict word order decreases surprisal, this baseline distribution will put more weight on relatively efficient baselines, potentially resulting in a smaller difference with real orders than for baseline distributions thtat allow more flexibility.
+We emphasize that this limitation does not hold in Study 3, where the formalism provides very close fit to observed morpheme orders.
 
 
 %\jd{in section 5.6 (and the discussion of the section right before), where this issue is discussed, it would be useful to give the main/embedded clause example as an example of the problem. re-reading section 5.6 is  a little unsatisfying because the reader never learns what the effect is of not being able to appropriately represent within-language word order variability. section 5.6 just deals with general word order freedom that can be exploited for communicating information structure; the main/embedded clause word order variability seems like a qualitatively different kind of variability -- order is variable across environments, but fixed within environments. what are the languages with this kind of variability (eg, german), and what is the effect of not being able to represent this kind of variability? just saying that other studies have the same problem and that it's not a problem in study 3 seems like a needlessly dismissive reply}
 
-\subsection{Relation to linguistic typology}
-\label{sec:disc:typology}
 
-As a theory of linguistic typology, our Efficient Tradeoff Hypothesis aims to explain universals in terms of efficiency in communicative function \citep{haspelmath2008parametric,haspelmath2018}. We have shown that it derives two previous typological principles---dependency length minimization and the Proximity Principle---which have been claimed to explain typological patterns such as Greenberg's harmonic word order correlations \citep{greenberg-universals-1963,dryer-greenbergian-1992}, universal tendencies to order phrases with respect to their length \citep{behaghel-1909,chang-2009,wasow-post-verbal-2003}, and the order of morphemes within words \citep{givon1985iconicity,bybee-morphology-1985}. The Efficient Tradeoff Hypothesis explains these apparently disparate phenomena via a simple and easily operationalizable principle of information locality: elements with high mutual information are expected to be close to each other.
-
-The idea of information locality goes beyond the idea of dependency length minimization by claiming that the strength of the pressure for words to be close to each other varies in proportion to their mutual information. This allows information locality to make predictions where dependency length minimization does not, for example in the order of elements with the noun phrase, including adjective ordering. These predictions have met with empirical success \citep{kirby2018the,futrell2019information,hahn-information-theoretic-2018,DBLP:conf/acl/FutrellDS20}. Similar predictions are available in other domains where ordering universals exist, such as the order of adverbs \citep{}.
-
-Given the success of the memory--surprisal tradeoff in capturing previous generalizations and in making new ones, further work on using the tradeoff to predict more properties of languages seems promising. In this connection, we note that the memory--surprisal tradeoff is mathematically non-trivial, and its properties have not yet been fully explored. We have provided only a lower bound on the tradeoff and shown that it derives a principle of information locality. A fuller mathematical treatment may reveal further predictions to be tested, perhaps expanding the empirical coverage of the theory.
-
-One limitation of our current treatment of the memory--surprisal tradeoff is that its predictions are invariant with respect to word order reversal.\footnote{For a mathematical proof, see SI Section 1.5.} That is, it does not make any direct predictions about what elements should go earlier or later in a sentence; rather, it only predicts what elements should be relatively close or far from each other. This limitation means that the theory might not capture widespread universals which are \emph{not} invariant to word order reversal, for example the fact that suffixes are generally preferred over prefixes in morphology \citep{}, or the fact that elements which are animate, given, definite, and frequent tend to go earlier in sentences \citep{}. Similarly, any asymmetries between head-final and head-initial constructions and languages are beyond the reach of our treatment. These order-asymmetrical universals have been explained in previous work using principles such as easy-first production \citep{} and the principle of Maximize Online Processing \citep[MaxOP:][]{hawkins2004efficiency,hawkins2014crosslinguistic}. 
-
-However, this invariance to reversal applies only to our \emph{lower bound} on the memory--surprisal tradeoff curve; the true curve is not generally invariant to word order reversal \citep{crutchfield-times-2009}. Therefore, a more complete mathematical treatment might make predictions that are not invariant to word order reversal. We leave it to future work to derive these predictions and to determine if they match the typological data and the intuitions underlying theories such as MaxOP.
-
-\subsection{Relation to information-theoretic studies of language}\label{sec:disc:infotheory}
+\subsection{Information-theoretic studies of language}\label{sec:disc:infotheory}
 
 Our work opens up a connection between psycholinguistics, linguistic typology, and statistical studies of language. Here, we survey the connections between our work and previous statistical studies.
 
-The average surprisal of real and counterfactual word orders has been studied by \citet{gildea-human-2015} and \citet{hahn2020universals}.
+
+
+Our formalization of memory is related to studies of dynamic systems in the physics literature.
+Our memory--surprisal curve is closely related to the \emph{predictive information bottleneck} introduced by \citet{still-information-2014} and studied by \citet{marzen-predictive-2016}; in particular, it is a version of the \emph{recursive information bottleneck} \citep[][\S 4]{still-information-2014}. 
+In the limit of optimal prediction and minimal surprisal, our formalization of memory cost is equivalent to the notion of \emph{Statistical Complexity} \citep{crutchfield-inferring-1989,shalizi2001computational}; this is the minimum value of $H_M$ that achieves $S_M = S_\infty$.
+In the limit $T \rightarrow \infty$, the quantity in Eq.~\ref{eq:memory-bound} is equal to the \emph{excess entropy} \citep{crutchfield-inferring-1989}.
+The link between memory and information locality provided by our Theorem~\ref{prop:suboptimal} appears to be a novel theoretical contribution.
+Related to Theorem~\ref{prop:suboptimal}, \citet{sharan-prediction-2016} show a link between excess entropy and approximability by $n$-th order Markov models, noting that processes with low excess entropy can be approximated well with Markov models of low order.
+
+\cite{debowski-excess-2011} studied the excess entropy of language across very long ranges of text, in particular aiming to determine whether it is finite.
+Our work contrasts with this work in that we are interested in dependencies within sentences.
+\cite{hahn2019estimating} empirically estimate the predictive rate-distortion tradeoff of natural language \citep{still-information-2014,marzen-predictive-2016}.
+This tradeoff is related to but different from the memory--surprisal tradeoff: it models a setting where past observations are compressed once as a whole, while a memory capacity bottleneck holds at every point in time in our model.
+Nonetheless, their method might also be applicable to estimating memory--surprisal tradeoff curves.
+
+%While we define information locality in terms of \emph{conditional} mutual information, prior work has studied  how \emph{unconditional} mutual information decays with distance in natural language texts, at the level of orthographic characters \citep{ebeling-entropy-1994,lin-critical-2017} and words \citep{futrell2019syntactic}.
+%The entropy rate $S_\infty$ of natural language text has been studied by different authors, including \citet{shannon1951entropy,bentz2017entropy,takahashi2018cross}. 
+%The Constant Entropy Rate and Uniform Information Density hypotheses \citep{genzel-entropy-2002,jaeger-speakers-2006,florian-jaeger-redundancy-2010} hold that speakers tend to avoid peaks and troughs in surprisal, arguing that this makes information transmission maximally efficient.
+
+The average surprisal of real and counterfactual word orders have been studied by \citet{gildea-human-2015} and \cite{hahn2020universals}.
 \citet{gildea-human-2015} found that, in five languages, real orders provide lower trigram surprisal than baseline languages.
 This work can be viewed as instantiating our model in the case where the encoding function $M$ records exactly the past two words, and showing that these five languages show optimization for surprisal under this encoding function.
 \citet{hahn2020universals} compared surprisal and parseability for real and baseline orders as estimated using neural network models, arguing that word orders optimize a tradeoff between these quantities.
 The results of Experiment 2 complement this by showing that real word orders optimize surprisal across possible memory capacities and memory encoding functions.
-
-While we define information locality in terms of \emph{conditional} mutual information, prior work has studied  how \emph{unconditional} mutual information decays with distance in natural language texts, at the level of orthographic characters \citep{ebeling-entropy-1994,lin-critical-2017} and words \citep{futrell2019syntactic}.
-The link between memory and information locality provided by our Theorem~\ref{prop:suboptimal} appears to be a novel contribution.
-The closest existing result is by \citet{sharan-prediction-2016}, who show a link between excess entropy and approximability by $n$'th order Markov models, noting that processes with low excess entropy can be approximated well with Markov models of low order.
-
-Our formalization of memory is related to studies of dynamic systems in the physics literature.
-Our memory--surprisal curve is closely related to the \key{predictive information bottleneck} introduced by \citet{still-information-2014} and studied by \citet{marzen-predictive-2016}; in particular, it is a version of the \key{recursive information bottleneck} \citep[][\S 4]{still-information-2014}. 
-\citet{hahn2019estimating} empirically estimate the predictive information bottleneck tradeoff of natural language using neural variational inference, providing an upper bound on the trade-off, whereas the current paper provides a lower bound.
-
-In the limit of optimal prediction, our formalization of memory cost is equivalent to the notion of \key{statistical complexity} \citep{crutchfield-inferring-1989,shalizi2001computational}; in our terminology, the statistical complexity of a stochastic process is the minimum value of $H_M$ that achieves $S_M = S_\infty$.
-Furthermore, in the limit $T \rightarrow \infty$, the quantity in Eq.~\ref{eq:memory-bound} is equal to another quantity from the theory of statistical complexity: \key{excess entropy} \citep{crutchfield-inferring-1989}, the mutual information between the past and future of a sequence.
-
-%@article{debowski2015relaxed,
-%  title={The relaxed Hilberg conjecture: A review and new experimental support},
-%  author={D{\k{e}}bowski, {\L}ukasz},
-%  journal={Journal of Quantitative Linguistics},
-%  volume={22},
-%  number={4},
-%  pages={311--337},
-%  year={2015},
-%  publisher={Taylor \& Francis}
-%}
-
-%@book{debowski2020information,
-%author={D{\k{e}}bowski, {\L}ukasz},
-%title={Information theory meets power laws: {S}tochastic processes and language modesl},
-%publisher={John Wiley \& Sons},
-%year={2020}}
-
-
-% @article{hilberg1990bekannte,
-% author={W. Hilberg},
-% title={Der bekannte Grenzwert der redundanzfreien Information in Texten---eine Fehlinterpretation der Shannonschen Experimente?},
-% journal={Frequenz},
-% volume={44},
-% pages={243--248}}
-
-Our results are also closely related to information-theoretic scaling laws that characterize natural language, and in particular the Relaxed Hilberg Conjecture \citep{hilberg1990bekannte,debowski2015relaxed,debowski2020information}. The Relaxed Hilberg Conjecture is the claim that the average surprisal of a $t$'th-order Markov approximation to language decays as a power law in $t$:
-\begin{equation*}
-    S_t \approx k t^{-\alpha} + S_\infty,
-\end{equation*}
-with the Hilberg exponent $\alpha \approx \frac{1}{2}$, and $k$ a scaling factor. The Relaxed Hilberg Conjecture implies that conditional mutual information $I_t$ falls off with distance as
-\begin{align}
-    \nonumber
-    I_t &= S_t - S_{t+1} \\
-    \nonumber
-    &\propto t^{-\alpha} - \left(t+1\right)^{-\alpha}.
-\end{align}
-The steepness of the fall-off of mutual information depends on the value of the Hilberg exponent $\alpha$. As $\alpha$ gets small, the fall-off of mutual information is more rapid, corresponding to more information locality.
-Therefore, our Efficient Tradeoff Hypothesis can be read as a claim about the Hilberg exponent $\alpha$ for natural language: that it is lower than would be expected in a comparable system not constrained by incremental memory.
-
-
-
-
-%The entropy rate $S_\infty$ of natural language text has been studied by different authors, including \citet{shannon1951entropy,bentz2017entropy,takahashi2018cross}. 
-%The Constant Entropy Rate and Uniform Information Density hypotheses \citep{genzel-entropy-2002,jaeger-speakers-2006,florian-jaeger-redundancy-2010} hold that speakers tend to avoid peaks and troughs in surprisal, arguing that this makes information transmission maximally efficient.
-
 
 
 

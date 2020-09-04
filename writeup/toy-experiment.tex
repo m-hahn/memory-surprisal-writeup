@@ -95,15 +95,9 @@ We computed the bounds on memory and surprisal (\ref{eq:memory-bound}-\ref{eq:su
 Figure~\ref{fig:toy-mis} (left) shows the curve of the conditional mutual information $I_t$ as a function of the distance $t$, for the two languages $A$ and $B$. 
 The curves differ at $t=2$ and $t=5$: 
 About 0.073 units of predictive information that are at distance $t=2$ in the $A$ orders are moved to $t=5$ in the $B$ orders.
-
-
-The source of the difference lies in predicting the presence and absence of a case marker on the second argument.
-Conceptually, a comprehender may be in a state of uncertainty as to whether a subject or object might follow.
-Since surprisal is determined entirely by the statistical properties of distributions over wordforms, this uncertainty manifests as uncertainty about whether to expect an accusative case marker.
-\footnote{In other languages lacking case markers, similar uncertainty may manifest as uncertainty about wordform, since subjects and objects often have very different distributions over wordforms.}
+The source of the difference lies in predicting the presence and absence of a case marker on the second argument---i.e., whether to anticipate a subject or object.
 In the $A$ orders, considering the last two words is sufficient to make this decision.
 In the $B$ orders, it is necessary to consider the word before the long second constituent, which is five words in the past.
-
 
 The total amount of predictive information---corresponding to the area under the $I_t$ curve---is the same for both languages, indicating that both languages are equally predictable. However, the memory demands differ between the two languages. Figure~\ref{fig:toy-mis} (right) shows the minimal memory requirements for remembering predictive information at a distance $t$ ($t\cdot I_t$) as a function of $t$. As $I_t$ decays faster in $A$ orders, the total area under the curve differs between $A$ and $B$, and is larger in $B$. Thus, achieving the same predictive accuracy in language $B$ requires more memory resources than in language $A$.
 			%This area corresponds to the lower bound in (\ref{eq:memory-bound}), and is 2.21 nats in A orders, and 2.43 nats in B orders.
