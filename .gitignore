@@ -1,0 +1,12 @@
+*.swp
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fff
+*.log
+*.out
+*.pdf
+*.run.xml
+*.ttt
+
