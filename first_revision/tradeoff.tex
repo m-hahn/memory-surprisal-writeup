@@ -17,7 +17,7 @@ We formalize these three observations into postulates intended to provide a simp
 \begin{enumerate}
     \item Comprehension Postulate 1 (Incremental memory). At time $t$, the listener has an incremental \key{memory state} $m_t$ that contains her stored information about previous words. The memory state is characterized by a \key{memory encoding function} $M$ such that $m_t = M(w_{t-1}, m_{t-1})$.
     \item Comprehension Postulate 2 (Incremental prediction). The listener has a subjective probability distribution at time $t$ over the next word $w_t$ as a function of the memory state $m_t$. This probability distribution is denoted $P(w_t|m_t)$.
-    \item Comprehension Postulate 3 (Linking hypothesis). Processing a word $w_t$ incurs difficulty proportional to the \key{surprisal} of $w_t$ given the memory state $m_t$:\footnote{In this paper, all logarithms are taken with basis $2$. As choosing another basis (e.g., $e$) would only result in multiplication with a proportionality constant, this assumption does not impact the generality of this linking hypothesis.}
+    \item Comprehension Postulate 3 (Linking hypothesis). Processing a word $w_t$ incurs difficulty proportional to the \key{surprisal} of $w_t$ given the memory state $m_t$:\footnote{\revision{In this paper, all logarithms are taken with basis $2$. As choosing another basis (e.g., $e$) would only result in multiplication with a proportionality constant, this assumption does not impact the generality of this linking hypothesis.}}
     \begin{equation}
     \label{eq:lossy-surp}
     \text{Difficulty} \propto -\log_2 P(w_t | m_t).
@@ -64,7 +64,7 @@ for a given amount of information about previous words $H_M$ stored in the liste
 \begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{figures-gdrive/tradeoff-schematic.pdf}
-\caption{Example memory--surprisal tradeoff curves for two languages, $A$ and $B$. Achieving an average surprisal of 3.5 bits requires storing at least 1.0 bits in language $A$, while it requires storing 2.0 bits in language $B$. Language $A$ has a steeper memory--surprisal tradeoff than Language $B$, and requires less memory resources to achieve the same level of processing difficulty.}
+	\caption{Example memory--surprisal tradeoff curves for two languages, $A$ and $B$. Achieving an average surprisal of 3.5 bits requires storing at least 1.0 bits in language $A$, while it requires storing 2.0 bits in language $B$. \revision{Language $A$ has a steeper memory--surprisal tradeoff than Language $B$}, and requires less memory resources to achieve the same level of processing difficulty.}
 \label{fig:examples}
 \end{figure}
 
@@ -154,7 +154,8 @@ where
     \operatorname{H}[m_t] = - \sum_m P(m_t = m) \log_2 P(m_t=m)
 \end{equation*}
 where $m$ runs over all possible states of the memory encoding $m_t$.
-Again, because $W$ is stationary, this quantity does not depend on the choice of $t$ (see SI Section 1.1.2). 
+Again, because $W$ is stationary, this quantity does not depend on the choice of $t$ (see SI Section 1.1.2).
+
 
 We will be imposing bounds on $H_M$ and studying the resulting values of $S_M$. 
 
@@ -225,12 +226,12 @@ S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
 \end{equation}
 \end{thm}
 A formal proof based on the Comprehension Postulates 1--3 is given in SI Section 1.2.
-An intuitive argument, forming the basis of the proof, is the following.
+\revision{An intuitive argument, forming the basis of the proof, is the following.
 Suppose that a comprehender predicting the $t$'th word $w_t$ uses an average of $I_t$ bits of information coming from the previous word $w_0$. 
 Then these bits must have been carried over $t$ timesteps and thus have occupied memory for $t$ timesteps.
 Since this happens for every word in a sequence, there are, at any given point in time, $t$ such packets of information, each with an average size of $I_t$ bits, that have to be maintained, summing up to $t I_t$.
 In the specific setting where $M$ encodes information from a contiguous span of the past $T$ words, the total amount of encoded information thus sums up to $\sum_{t=1}^T t I_t$, while information from longer contexts is lost, increasing surprisal by $\sum_{t=T+1}^\infty I_t$.
-While this informal argument specifically considers a memory encoding function that utilizes information from a contiguous span of the past $T$ words, the formal proof extends this to all memory encoding functions $M$ satisfying the Comprehension Postulates.
+While this informal argument specifically considers a memory encoding function that utilizes information from a contiguous span of the past $T$ words, the formal proof extends this to all memory encoding functions $M$ satisfying the Comprehension Postulates.}
 
 \paragraph{Interpretation} The theorem means that a predictor with limited memory capacity will always be affected by surprisal cost arising from long-term statistical dependencies of length greater than $T$, for some finite $T$. This is why we call the result `information locality': processes are easier to predict when most statistical dependencies are short-term (shorter than some $T$). Below we explain in more detail how this interpretation matches the mathematics of the theorem.
 
@@ -261,7 +262,7 @@ The information locality bound theorem demonstrates in a highly general way that
 Because processing long-term dependencies requires higher memory usage, the theorem also implies that a language can be easier to process when most of the predictive information about a word is concentrated close to that word in time---that is, when $I_t$ falls off rapidly as $t \rightarrow \infty$. When memory capacity is limited, then there must be some timescale $T$ such that a listener appears to be affected by excess surprisal arising from statistical dependencies of length greater than $T$. A language avoids such cost to the extent that it avoids dependencies with a time-span larger than $T$.
 
 We illustrate the theorem in Figure~\ref{fig:basic}.
-We consider two hypothetical languages, LessEfficient and MoreEfficient, where $I_t := 5t^{-1.5}$ for LessEfficient and $I_t := 3.5 t^{-2.5}$ for MoreEfficient.\footnote{Although these are purely mathematical examples, the $I_t$ curve for natural languages does seem empirically to fall off as a power law as in these examples \citep{debowski2016relaxed}.}
+We consider two hypothetical languages, LessEfficient and MoreEfficient, where $I_t := 5t^{-1.5}$ for LessEfficient and $I_t := 3.5 t^{-2.5}$ for MoreEfficient.\footnote{\revision{Although these are purely mathematical examples, the $I_t$ curve for natural languages does seem empirically to fall off as a power law as in these examples \citep{debowski2016relaxed}.}}
 The curves of $I_t$, as a function of the distance $t$, are shown in Figure~\ref{fig:basic} (left).
 In both cases, $I_t$ converges to zero as $t$ grows to infinity. 
 However, $I_t$ decays more quickly for language MoreEfficient.
@@ -274,8 +275,8 @@ As $I_t$ decays faster for language MoreEfficient, it has a more efficient memor
 
 \subsection{Other kinds of memory bottlenecks}
 
-We derived the memory--surprisal tradeoff and the Information Locality Lower Bound by imposing a capacity limit on memory using the entropy $H_M$. The entropy $H_M$ represents the average amount of information that can be stored in memory at any time. However, in some psycholinguistic theories, memory-related difficulty arises not because of a bound on memory capacity, but rather because of difficulties involved in retrieving information from memory \citep{mcelree2000sentence,lewis-activation-based-2005,nicenboim2018models,vasishth2019computational}. 
+\revision{We derived the memory--surprisal tradeoff and the Information Locality Lower Bound by imposing a capacity limit on memory using the entropy $H_M$. The entropy $H_M$ represents the average amount of information that can be stored in memory at any time. However, in some psycholinguistic theories, memory-related difficulty arises not because of a bound on memory capacity, but rather because of difficulties involved in retrieving information from memory \citep{mcelree2000sentence,lewis-activation-based-2005,nicenboim2018models,vasishth2019computational}. }
 
-It turns out that it is possible to derive results closely analogous to ours by imposing a capacity limit on the retrieval of information from memory, rather than the storage of information. Essentially, the constraint on the memory state in our Theorem~\ref{prop:suboptimal} can be re-interpreted as a constraint on the capacity of a communication channel linking short-term memory to working memory. This result constrains average surprisal for memory models based on cue-based retrieval such as the ACT-R model of \citet{lewis-activation-based-2005}. In fact, the theorem based on retrieval capacity gives a tighter bound than the theorem based on storage capacity. For the full model and derivation, see SI Section 1.3. 
+\revision{It turns out that it is possible to derive results closely analogous to ours by imposing a capacity limit on the retrieval of information from memory, rather than the storage of information. Essentially, the constraint on the memory state in our Theorem~\ref{prop:suboptimal} can be re-interpreted as a constraint on the capacity of a communication channel linking short-term memory to working memory. This result constrains average surprisal for memory models based on cue-based retrieval such as the ACT-R model of \citet{lewis-activation-based-2005}. In fact, the theorem based on retrieval capacity gives a tighter bound than the theorem based on storage capacity. For the full model and derivation, see SI Section 1.3. }
 
-We believe that concepts analogous to the memory--surprisal tradeoff and the Information Locality Lower Bound are likely to be valid across a broad range of models of incremental processing and memory.
+\revision{We believe that concepts analogous to the memory--surprisal tradeoff and the Information Locality Lower Bound are likely to be valid across a broad range of models of incremental processing and memory.}
