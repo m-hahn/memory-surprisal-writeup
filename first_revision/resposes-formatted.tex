@@ -78,10 +78,10 @@ Figures 10 through 12 are missing axis labels. I'm particularly concerned about 
 \begin{reply}
 We have added the missing axis labels in Figures 10--12.
 
-In the original submission, all logarithms were interpreted as natural logarithms, i.e., using basis $e$. Therefore, the x-axis indicated \emph{nats} of memory (one \emph{nat} equals about $1.44$ \emph{bits}).
+In the original submission, all logarithms were interpreted as natural logarithms, i.e., using base $e$. Therefore, the x-axis indicated \emph{nats} of memory (one \emph{nat} equals about $1.44$ \emph{bits}).
 	We have now changed all logarithms to $\log_2$, so that all results are displayed in \emph{bits} instead of nats.
 	We did this in order to ensure consistency with the explicit use of bits as the unit of information at a few places in the text.
-	For full clarity, we also added a footnote at the first appearance of $\log_2$ (page 11), explaining that changing the basis of the logarithm only results in a proportionality factor.
+	For full clarity, we also added a footnote at the first appearance of $\log_2$ (page 11), explaining that changing the base of the logarithm only results in a proportionality factor.
 
 	While 1 bit of memory seems like a small difference, this is a difference in cost at \emph{every word}, which accumulates over a sentence.
 	In a sentence with 20 words, the overall number of bits that have to be encoded over time (though not simultaneously) additionally might add up to 20 bits.
@@ -99,7 +99,7 @@ While the UD corpora are the largest annotated cross-linguistic corpora readily 
 
 \begin{reply}
 	We expect that small data size will result in underestimating $I_t$, in particular as $t$ increases. This may bias estimates towards curves where surprisal doesn't further decrease beyond a certain level of memory.
-However, as this equally applies to difefrent ordering grammars, we expect that estimating the relative efficiency of different orderings at the same level of memory is still reliable.
+However, as this equally applies to different ordering grammars, we expect that estimating the relative efficiency of different orderings at the same level of memory is still reliable.
 
 	We have added the following in ``Finiteness of Data'' in the General Discussion (page 54):
 	``\textit{To the extent that $I_t$ is underestimated even for small values of $t$, such a bias equally applies to different ordering grammars. We therefore expect that estimating the relative efficiency of different orderings at the same level of memory is still reliable.}''

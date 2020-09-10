@@ -17,7 +17,7 @@ We formalize these three observations into postulates intended to provide a simp
 \begin{enumerate}
     \item Comprehension Postulate 1 (Incremental memory). At time $t$, the listener has an incremental \key{memory state} $m_t$ that contains her stored information about previous words. The memory state is characterized by a \key{memory encoding function} $M$ such that $m_t = M(w_{t-1}, m_{t-1})$.
     \item Comprehension Postulate 2 (Incremental prediction). The listener has a subjective probability distribution at time $t$ over the next word $w_t$ as a function of the memory state $m_t$. This probability distribution is denoted $P(w_t|m_t)$.
-    \item Comprehension Postulate 3 (Linking hypothesis). Processing a word $w_t$ incurs difficulty proportional to the \key{surprisal} of $w_t$ given the memory state $m_t$:\footnote{\revision{In this paper, all logarithms are taken with basis $2$. As choosing another basis (e.g., $e$) would only result in multiplication with a proportionality constant, this assumption does not impact the generality of this linking hypothesis.}}
+    \item Comprehension Postulate 3 (Linking hypothesis). Processing a word $w_t$ incurs difficulty proportional to the \key{surprisal} of $w_t$ given the memory state $m_t$:\footnote{\revision{In this paper, all logarithms are taken with base $2$. As choosing another base (e.g., $e$) would only result in multiplication with a proportionality constant, this assumption does not impact the generality of this linking hypothesis.}}
     \begin{equation}
     \label{eq:lossy-surp}
     \text{Difficulty} \propto -\log_2 P(w_t | m_t).
