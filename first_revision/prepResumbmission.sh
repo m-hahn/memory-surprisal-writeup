@@ -1,0 +1,6 @@
+biber paper_psychreview_annotated.tex
+biber paper_psychreview.tex
+pdflatex paper_psychreview_annotated.tex
+pdflatex paper_psychreview.tex
+pdflatex resposes-formatted.tex
+pdftk resposes-formatted.pdf paper_psychreview_annotated.pdf cat output responses_full.pdf

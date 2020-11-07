@@ -1,59 +1,88 @@
-\documentclass[11pt,letterpaper]{article}
+%%
+%% This is file `./samples/longsample.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% apa7.dtx  (with options: `longsample')
+%% ----------------------------------------------------------------------
+%% 
+%% apa7 - A LaTeX class for formatting documents in compliance with the
+%% American Psychological Association's Publication Manual, 7th edition
+%% 
+%% Copyright (C) 2019 by Daniel A. Weiss <daniel.weiss.led at gmail.com>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License (LPPL), either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in the file:
+%% 
+%% http://www.latex-project.org/lppl.txt
+%% 
+%% Users may freely modify these files without permission, as long as the
+%% copyright line and this statement are maintained intact.
+%% 
+%% This work is not endorsed by, affiliated with, or probably even known
+%% by, the American Psychological Association.
+%% 
+%% ----------------------------------------------------------------------
+%% 
+\documentclass[man]{apa7}
 
-%\usepackage{showlabels}
-\usepackage{fullpage}
-\usepackage{pslatex}
-%\usepackage{latexsym}
-\usepackage[english]{babel}
-\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+
+\usepackage[american]{babel}
+
+
 \usepackage{amsmath}
-\usepackage{bm}
-\usepackage{graphicx}
-\usepackage{tikz}
-\usepackage{xcolor}
-\usepackage{url}
-%\usepackage[colorinlistoftodos]{todonotes}
-\usepackage{rotating}
-\usepackage{natbib}
-\usepackage{amssymb}
 \usepackage{lingmacros}
 
 \usepackage{tikz-dependency}
-\usepackage{longtable}
 
 \usepackage{changepage}
 
-
-%\usepackage{paralist} 
-%\usepackage{graphicx} 
-%\usepackage{multirow} 
-%\usepackage{enumitem}
 \usepackage{linguex}
-%\raggedbottom
-\usepackage{hyperref}
+
+
+\usepackage{csquotes}
+\usepackage[bibencoding=utf8, style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
+%\usepackage[backend=biber, bibencoding=utf8, style=authoryear, citestyle=authoryear]{biblatex} % https://tex.stackexchange.com/questions/402714/biblatex-not-working-with-biber-2-8-error-reading-bib-file-in-ascii-format
+\DeclareLanguageMapping{american}{american-apa}
+\addbibresource{literature.bib}
+
+
+
+\title{Modeling Word and Morpheme Order in Natural Language as an Efficient Tradeoff of Memory and Surprisal}
+\shorttitle{Tradeoff of Memory and Surprisal}
+
+\author{Michael Hahn$^1$, Judith Degen$^1$, Richard Futrell$^2$}
+\affiliation{$^1$ Stanford University, $^2$ University of California, Irvine}
+
+\leftheader{Hahn, Degen, Futrell}
+
+
+%\newcommand\citep[1]{\parencite{#1}}
+%\newcommand\citet[1]{\Textcite{#1}}
+
+\newcommand{\citep}{\parencite}
+\newcommand{\citet}{\Textcite}
 
 \definecolor{Purple}{RGB}{255,10,140}
 \newcommand{\jd}[1]{\textcolor{Purple}{[jd: #1]}} 
+\newcommand\rljf[1]{\textcolor{blue}{[rljf: #1]}}
 
 
-\newcommand{\R}[0]{\mathbb{R}}
-\newcommand{\E}[0]{\mathbb{E}}
-\newcommand{\Ff}[0]{\mathcal{F}}
-
-\usepackage{multirow}
-
+\usepackage{soul}
 \newcommand{\soft}[1]{}
 \newcommand{\nopreview}[1]{}
 \newcommand\comment[1]{{\color{red}#1}}
 \newcommand\mhahn[1]{{\color{red}(mhahn #1)}}
 \newcommand\jdegen[1]{{\color{red}(jdegen #1)}}
-\newcommand\note[1]{{\color{red}(#1)}}
 \newcommand\REF[0]{{\color{red}(REF) }}
 \newcommand\CITE[0]{{\color{red}(CITE) }}
-\newcommand\rljf[1]{{\color{red}(#1)}}
 \newcommand{\key}[1]{\textbf{#1}}
-\newcommand\revision[1]{{#1}}
-\newcommand\revdeleted[1]{{}}
+\newcommand\revision[1]{\textcolor{blue}{#1}}
+\newcommand\revdeleted[1]{\textcolor{red}{\st{#1}}}
 
 
 %\usepackage[dvipsnames]{xcolor}
@@ -73,23 +102,7 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{lemma}[theorem]{Lemma}
 
-
-\frenchspacing
-%\def\baselinestretch{0.975}
-
-%\emnlpfinalcopy
-%\def\emnlppaperid{496}
-
-\title{Modeling word and morpheme order in natural language as an efficient tradeoff of memory and surprisal}
-\author{\begin{tabular}{ccc}Michael Hahn & Judith Degen & Richard Futrell \\ Stanford University & Stanford University & UC Irvine \\ mhahn2@stanford.edu & jdegen@stanford.edu & rfutrell@uci.edu \end{tabular}}
-%\date{2018}
-
-\begin{document}
-
-\maketitle
-
-
-\begin{abstract}
+\abstract{
 Memory limitations are known to constrain language comprehension and production, and have been argued to account for crosslinguistic word order regularities.
 However, a systematic assessment of the role of memory limitations in language structure has proven elusive, in part because it is hard to extract precise large-scale quantitative generalizations about language from existing mechanistic models of memory use in sentence processing.
 We provide an architecture-independent information-theoretic formalization of memory limitations which enables a simple calculation of the memory efficiency of languages.
@@ -98,11 +111,28 @@ Based on this notion of memory usage, we advance the \emph{Efficient Tradeoff Hy
 We derive that languages enable more efficient tradeoffs when they exhibit \emph{information locality}: when predictive information about an element is concentrated in its recent past.
 We provide empirical evidence from three test domains in support of the Efficient Tradeoff Hypothesis:
 a reanalysis of a miniature artificial language learning experiment, a large-scale study of word order in corpora of 54 languages, and an analysis of morpheme order in two agglutinative languages. These results suggest that principles of order in natural language can be explained via highly generic cognitively motivated principles and lend support to efficiency-based models of the structure of human language.
-\end{abstract}
+}
 
+\keywords{Language universals, sentence processing, information theory}
+
+\authornote{
+   \addORCIDlink{Michael Hahn}{0000-0003-4828-4834}
+
+  Correspondence concerning this article should be addressed to Michael Hahn, Department of Linguistics, Stanford University Stanford, CA 94305-2150.  E-mail: mhahn2@stanford.edu
+  
+  An earlier version of this work was presented at the 32nd Annual CUNY Conference on Human Sentence Processing, 2019.
+All code and data is freely available at \url{https://github.com/m-hahn/memory-surprisal}.
+  }
+
+  % Old abstract
+  
+  %Memory has well-documented effects on language at different time scales. For instance, memory limitations are known to constrain language comprehension and production. They have also been argued to account for crosslinguistic word order regularities. However, a systematic assessment of the role of memory limitations in the structure of language has proven elusive, partly due to the architecture-dependence of many memory accounts of language. \jd{not sure about the previous sentence -- basically, we need to be clear what the motivation is for the work. if someone has a better idea, please insert.} Building on expectation-based models of language processing, we provide an architecture-independent information-theoretic formalization of memory limitations. We show that comprehenders can achieve lower average surprisal per word at the cost of storing more information about past context, an idea we refer to as the \emph{memory--surprisal tradeoff}. We show that the shape of the tradeoff is determined in part by the order of linguistic elements, e.g., word order or morpheme order. In particular, languages enable more efficient tradeoffs when they exhibit \emph{information locality}: if predictive information about an element (like a word) is concentrated in its recent past. The account yields a novel prediction, which we term the \emph{Efficient Tradeoff Hypothesis}: that the order of elements in natural language is characterized by a distinctively steeper memory-surprisal tradeoff curve compared to other possible orders. We provide evidence from three test domains in support of the Efficient Tradeoff Hypothesis: a reanalysis of a miniature artificial grammar experiment shows that languages resulting from regularization exhibit a steeper tradeoff curve than the original input language; evidence from corpora of 54  languages shows that the grammar of real languages allows for more efficient memory--surprisal tradeoffs than random baseline word order grammars; and an analysis of two agglutinative languages shows that optimization of the memory-surprisal tradeoff is also reflected in morpheme order. These results suggest that principles of order in natural language can be explained via highly generic cognitively motivated principles
+
+\begin{document}
+
+\maketitle
 %\jd{2 stylistic notes on plots: 1. it would generally be better to use a color-blind friendly palette. 2. it would be helpful if a particular color had a particular semantics throughout the paper, eg, if real languages across plots always had the same color, if different baselines that correspond to analogous versions of each other across plots did, etc. not strictly necessary, just makes it a lot easier on the reader.}
 
-\footnotetext{©American Psychological Association, 2020. This paper is not the copy of record and may not exactly replicate the authoritative document published in the APA journal. Please do not copy or cite without author's permission. The final article is available, upon publication, at: [ARTICLE DOI]"}
 
 \section{Introduction}
 \input{introduction.tex}
@@ -157,13 +187,11 @@ Therefore, our result raises the question of whether other distinctive character
 
 
 
-\bibliographystyle{apalike}
-\bibliography{literature}
+
+
+
+\printbibliography
 
 \end{document}
 
-
-
-
-
-
+%\appendix

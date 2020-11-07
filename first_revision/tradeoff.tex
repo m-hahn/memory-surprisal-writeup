@@ -1,7 +1,7 @@
 In this section, we introduce the main concept and hypothesis of the paper. % from a psycholinguistic perspective. 
 We provide a technical definition of the memory--surprisal tradeoff curve, and we prove a theorem showing that more efficient memory--surprisal tradeoffs are possible in languages exhibiting information locality, i.e., in languages where words that depend on each other are close to each other. This theorem establishes the formal link between memory efficiency in online processing and locality in word order.
 
-%The memory--surprisal tradeoff applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension; we return to the production perspective in the General Discussion. % (Section~\ref{sec:discussion}).
+\revdeleted{The memory--surprisal tradeoff applies in both language production and comprehension---more generally, it applies to any system that incrementally produces sequences or extracts information from them. Below, we will develop the theory first in terms of language comprehension; we return to the production perspective in the General Discussion.}
 
 
 
@@ -40,7 +40,7 @@ for a given amount of information about previous words $H_M$ stored in the liste
 \begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{figures-gdrive/tradeoff-schematic.pdf}
-	\caption{Example memory--surprisal tradeoff curves for two languages, $A$ and $B$. Achieving an average surprisal of 3.5 bits requires storing at least 1.0 bits in language $A$, while it requires storing 2.0 bits in language $B$. \revision{Language $A$ has a steeper memory--surprisal tradeoff than Language $B$}, and requires less memory resources to achieve the same level of processing difficulty.}
+\caption{Example memory--surprisal tradeoff curves for two languages, $A$ and $B$. Achieving an average surprisal of 3.5 bits requires storing at least 1.0 bits in language $A$, while it requires storing 2.0 bits in language $B$. \revision{Language $A$ has a steeper memory--surprisal tradeoff than Language $B$}, and requires less memory resources to achieve the same level of processing difficulty.}
 \label{fig:examples}
 \end{figure}
 
@@ -238,7 +238,7 @@ The information locality bound theorem demonstrates in a highly general way that
 Because processing long-term dependencies requires higher memory usage, the theorem also implies that a language can be easier to process when most of the predictive information about a word is concentrated close to that word in time---that is, when $I_t$ falls off rapidly as $t \rightarrow \infty$. When memory capacity is limited, then there must be some timescale $T$ such that a listener appears to be affected by excess surprisal arising from statistical dependencies of length greater than $T$. A language avoids such cost to the extent that it avoids dependencies with a time-span larger than $T$.
 
 We illustrate the theorem in Figure~\ref{fig:basic}.
-We consider two hypothetical languages, LessEfficient and MoreEfficient, where $I_t := 5t^{-1.5}$ for LessEfficient and $I_t := 3.5 t^{-2.5}$ for MoreEfficient.\footnote{\revision{Although these are purely mathematical examples, the $I_t$ curve for natural languages does seem empirically to fall off as a power law as in these examples \citep{debowski2016relaxed}.}}
+We consider two hypothetical languages, LessEfficient and MoreEfficient, where $I_t := 5t^{-1.5}$ for LessEfficient and $I_t := 3.5 t^{-2.5}$ for MoreEfficient.\footnote{\revision{Although these are purely mathematical examples, the $I_t$ curve for natural languages does seem empirically to fall off as a power law as in these examples \citep{debowski2015relaxed}.}}
 The curves of $I_t$, as a function of the distance $t$, are shown in Figure~\ref{fig:basic} (left).
 In both cases, $I_t$ converges to zero as $t$ grows to infinity. 
 However, $I_t$ decays more quickly for language MoreEfficient.

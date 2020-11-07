@@ -180,7 +180,7 @@ In SI Section 2.3, we provide an example of a stochastic process where unconditi
 Our model and results are compatible with work arguing that memory strategies adapt to language structure and language statistics, and that experience shapes memory performance in syntactic processing \citep[e.g.][]{macdonald2002reassessing,wells2009experience}.
 For instance, \citet{macdonald2002reassessing} argue for a connectionist model in which network structure and language experience account for processing capacity.
 Such models use recurrent neural networks with some fixed number of neurons, which can be understood as a specific kind of constrained memory.
-A case in point is the observation that forgetting effects in nested head-final dependencies are reduced or absent in  head-final structures \citep{vasishth2010short,frank2016cross,frank2019judgements}, which has been modeled using connectionist models \citep{engelmann2009processing,frank-cross-linguistic-2015}, which can be interpreted as modeling surprisal conditioned on imperfect memory \citep{futrell2020lossy}.
+A case in point is the observation that forgetting effects in nested head-final dependencies are reduced or absent in  head-final structures \citep{vasishth2010short,frank-cross-linguistic-2015,frank2019judgements}, which has been modeled using connectionist models \citep{engelmann2009processing,frank-cross-linguistic-2015}, which can be interpreted as modeling surprisal conditioned on imperfect memory \citep{futrell2020lossy}.
 
 
 %\mhahn{other citations:
@@ -211,7 +211,7 @@ In particular, we expect that models will underestimate $I_t$ for large $t$, as 
 This means that we might not be able to consistently estimate the asymptotic values of the average surprisal $S_M$ as the memory capacity goes to infinity, i.e. the entropy rate $S_\infty$. 
 \revision{We specifically expect this to happen in languages where less data is available (see SI Section 3.1 for corpus sizes). We expect this bias to be roughly equal in magnitude across real and baseline languages for a given $t$, enabling us to compare across these languages at a given $t$.}
 
-The finiteness of data also has implications for the interpretation of the memory--surprisal tradeoffs at higher values of memory entropy $H_M$.
+\revision{The finiteness of data also} has implications for the interpretation of the memory--surprisal tradeoffs at higher values of memory entropy $H_M$.
 In Study 2, the lowest achieved surprisals are different for real and baseline orderings.
 This does not necessarily mean that these orderings really have different entropy rates $S_\infty$.
 It is logically possible that real and baseline languages actually have the same entropy rate $S_\infty$, but that baseline orderings spread the same amount of predictive information over a larger distance, making it harder for models to extract given finite corpus data.
@@ -276,7 +276,7 @@ This limitation does not hold in Study 3, where the formalism provides very clos
 
 \revision{One limitation of our current treatment of the memory--surprisal tradeoff is that its predictions are invariant with respect to word order reversal.\footnote{For a mathematical proof, see SI Section 1.5.} That is, it does not make any direct predictions about what elements should go earlier or later in a sentence; rather, it only predicts what elements should be relatively close or far from each other. This limitation means that the theory might not capture widespread universals which are \emph{not} invariant to word order reversal, for example the fact that suffixes are generally preferred over prefixes in morphology \citep{cutler1985the}, or the fact that elements which are animate, given, definite, and frequent tend to go earlier in sentences \citep{bock1985conceptual}. Similarly, any asymmetries between head-final and head-initial constructions and languages are beyond the reach of our treatment. These order-asymmetrical universals have been explained in previous work using principles such as easy-first production \citep[e.g.,][]{bock1985conceptual, macdonald2013language} and the principle of Maximize Online Processing \citep[MaxOP:][]{hawkins2004efficiency,hawkins2014crosslinguistic}. }
 
-\revision{However, this invariance to reversal applies only to our \emph{lower bound} on the memory--surprisal tradeoff curve; the true curve may not generally be invariant to word order reversal \citep{crutchfield-times-2009}. Therefore, a more complete mathematical treatment might make predictions that are not invariant to word order reversal. We leave it to future work to derive these predictions and to determine if they match the typological data and the intuitions underlying theories such as MaxOP.}
+\revision{However, this invariance to reversal applies only to our \emph{lower bound} on the memory--surprisal tradeoff curve; the true curve may not generally be invariant to word order reversal \citep[cf.][]{crutchfield-times-2009}. Therefore, a more complete mathematical treatment might make predictions that are not invariant to word order reversal. We leave it to future work to derive these predictions and to determine if they match the typological data and the intuitions underlying theories such as MaxOP.}
 
 \subsection{Relation to information-theoretic studies of language}\label{sec:disc:infotheory}
 
@@ -344,4 +344,44 @@ Therefore, our Efficient Tradeoff Hypothesis can be read as a claim about the Hi
 
 
 
+\nocite{bentz2017entropy}
+\nocite{cover2006elements}
+\nocite{crutchfield2003regularities}
+\nocite{daniluk2017frustratingly}
+\nocite{debowski-excess-2011}
+\nocite{DBLP:journals/coling/DembergKK13}
+\nocite{demuth1992acquisition}
+\nocite{doke1967textbook}
+\nocite{doob1953stochastic}
+\nocite{ebeling-entropy-1994}
+\nocite{DBLP:journals/coling/Goodman99}
+\nocite{guma1971outline}
+\nocite{hahn2019estimating}
+\nocite{hasegawa2014japanese}
+\nocite{hochreiter-long-1997}
+\nocite{DBLP:journals/coling/JelinekL91}
+\nocite{kaiser2013japanese}
+\nocite{DBLP:conf/acl/KimDR19}
+\nocite{kneser-improved-1995}
+\nocite{lewis-activation-based-2005}
+\nocite{lin-critical-2017}
+\nocite{mcelree2000sentence}
+\nocite{mikolov-recurrent-2010}
+\nocite{DBLP:conf/emnlp/NederhofS11}
+\nocite{DBLP:conf/lrec/NeubigM10}
+\nocite{DBLP:conf/acl/NeubigNM11}
+\nocite{nicenboim2018models}
+\nocite{DBLP:conf/aaai/PetrovK07}
+\nocite{DBLP:journals/coling/Roark01}
+\nocite{schadeberg2003derivation}
+\nocite{DBLP:journals/topics/SchijndelES13}
+\nocite{shannon1951entropy}
+\nocite{snoek-practical-2012}
+\nocite{srivastava-dropout:-2014}
+\nocite{still-information-2014}
+\nocite{DBLP:journals/coling/Stolcke95}
+\nocite{takahashi2018cross}
+\nocite{vaccari1938complete}
+\nocite{vasishth2019computational}
+\nocite{xie2017data}
 
