@@ -1,0 +1,362 @@
+%- datasets
+%-- unimorph
+%-- bibles corpus?
+%-- celex
+%- permute phonemes
+%- permute syllables
+%- permute phonemes only within syllables
+%- permute morphemes 
+%\section{Morphology}
+
+\label{sec:morphemes}
+
+The Efficient Tradeoff Hypothesis should apply not just at the level of words, but at the level of any linguistic element.
+For instance, just as observed word orders exhibit information locality, the order of morphemes within words should also be structured so that morphemes which predict each other are close to each other.
+Here, we apply the Efficient Tradeoff Hypothesis to predict the order of morphemes within morphologically complex words in two agglutinative languages. We study two agglutinative languages for which extensive corpora with hand-annotated morphological segmentation and labeling are available: Japanese and Sesotho. 
+We compare the memory--surprisal tradeoff of the actual morpheme orders in these languages with hypothetical baseline orderings.
+Furthermore, we construct hypothetical orderings that are optimized for the efficiency of the memory--surprisal tradeoff, and compare these to the actual morpheme orderings, to investigate whether morpheme order in these languages can be predicted by optimization of tradeoff efficiency.
+Below, we first give brief sketches of the morphological patterns in these languages. 
+
+
+\paragraph{Verb Suffixes in Japanese}
+
+In Japanese, verbs are marked with an extensive number of suffixes. For example, the following verb forms are marked with multiple suffixes:
+
+\ex.\ag. mi  rare mash yoo \\
+%Stem (3) (5) (8) \\
+see  \textsc{passive}  \textsc{politeness}  \textsc{future} \\
+`will be seen'
+\bg. mi taku nakat ta \\
+%Stem (6) (7) (8) \\
+see \textsc{desiderative} \textsc{negation} \textsc{past} \\
+`did not wish to see'
+
+Based on corpus data and the linguistic literature on Japanese, we identified the following frequent verb suffixes, occurring in the following order outwards from the verb root (see SI for details).
+
+
+\begin{enumerate}
+\item \textit{suru}: obligatory suffix after Sino-Japanese words when they are used as verbs
+\item Valence: causative (-\textit{ase}-) (\citet[142]{hasegawa2014japanese}, \citet[Chapter 13]{kaiser2013japanese})
+\item Voice and Mood: passive (-\textit{are}-, -\textit{rare}-) (\citet[152]{hasegawa2014japanese}, \citet[Chapter 12]{kaiser2013japanese}) and potential (-\textit{e}-, -\textit{are}-, -\textit{rare}-) \citep[398]{kaiser2013japanese}  
+\item Politeness (-\textit{mas}-) \citep[190]{kaiser2013japanese}.
+\item Mood: desiderative (-\textit{ta}-) \citep[238]{kaiser2013japanese}
+\item Negation (-\textit{n}-)
+\item Tense, Aspect, Mood, and Finiteness: past (-\textit{ta}), future/hortative (-\textit{yoo}) \citep[229]{kaiser2013japanese}, nonfiniteness (-\textit{te}) \citep[186]{kaiser2013japanese}
+%\item Nonfiniteness: the suffix -\textit{te} derives a nonfinite form .
+\end{enumerate}
+
+%In accordance with Bybee's hierarchy, valence is marked closest to the verb, followed by voice.
+%Unlike predicted by the hierarchy, tense/aspect markers are not placed closer to the verb than mood/modality markers.
+
+
+
+
+
+
+\paragraph{Verb Affixes in Sesotho}
+Sesotho (also known as Southern Sotho) is a Southern Bantu language spoken primarily in Lesotho and South Africa.
+Sesotho verbs are marked with both prefixes and suffixes \citep{demuth1992acquisition}.
+Common prefixes include markers for agreement with subjects and objects; object prefixes always follow subject prefixes \ref{ex:oadireka}.
+Common suffixes include markers changing valence and voice, and a mood suffix \ref{ex:ophehela}.
+
+\ex.\ag. oa di rek a \\
+\textsc{subject.agreement} \textsc{object.agreement} buy \textsc{indicative} \\
+`(he) is buying (it)'  \citep{demuth1992acquisition} \label{ex:oadireka}
+\bg. o pheh el a \\
+\textsc{subject.agreement} cook \textsc{applicative} \textsc{indicative} \\
+`(he) cooks (food) for (him)'  \citep{demuth1992acquisition}
+\label{ex:ophehela}
+
+We identified affix morphemes and their ordering based on the analysis in \cite{demuth1992acquisition}, supplemented with information from grammars of Sesotho \citep{doke1967textbook,guma1971outline}. See SI for details.
+We identified the following prefixes:
+
+\begin{enumerate}
+    \item Subject agreement: This morpheme encodes agreement with the subject, for person, number, and noun class (the latter only in the 3rd person) \cite[\textsection 395]{doke1967textbook}.
+	    The annotation provided by \cite{demuth1992acquisition} distinguishes between ordinary subject agreement prefixes and agreement prefixes used in relative clauses; we distinguish these morpheme types here.
+    
+    \item Negation \citep[\textsection 429]{doke1967textbook}
+    
+    \item Tense/aspect marker   \citep[\textsection 400--424]{doke1967textbook}
+    
+    \item Object agreement or reflexive marker \citep[\textsection 459]{doke1967textbook}. 
+    Similar to subject agreement, object agreement denotes person, number, and noun class features of the object.
+\end{enumerate}
+We identified the following suffixes:
+
+% something we might cite at some point (pointers from Beth Levine), about templatic morpheme order in Bantu
+% Hyman2003 in literature.bib
+% Jeffrey Good, Strong Linearity: Three Case Studies Towards a Theory of Morphosyntactic Templatic Constructions (Diss, 2003)
+    
+\begin{enumerate}
+\item Semantic derivation: reversive (e.g., `do' $\rightarrow$ `undo') \citep[\textsection 345]{doke1967textbook}
+\item Valence: Common valence-altering suffixes include causative, neuter/stative, applicative, and reciprocal \citep[\textsection 307--338]{doke1967textbook}. See SI for details on their meanings.
+    \item Voice: passive \citep[\textsection 300]{doke1967textbook} 
+    \item Tense \citep[\textsection 369]{doke1967textbook}
+    \item Mood \citep[\textsection 386--445]{doke1967textbook}
+    \item Interrogative and relative markers, appended to verbs in certain interrogative and relative clauses \citep[\textsection 160, 271, 320, 714, 793]{doke1967textbook}.
+    %-\textit{ng}.
+    %The interrogative marker -\textit{ng} is an enclitized form of the interrogative `what'.
+    %The relative marker -\textit{ng} is suffixed to verbs in relative clauses.
+\end{enumerate}
+
+
+
+%For prefixes, in agreement with Bybee's hierarchy, subject agreement is encoded in a position further away than TAM features.
+%For suffixes, relation to Bybee hierarchy: valence closest, then voice, then tense, then mood.
+
+
+\subsection{Experiment}
+\paragraph{Data Selection and Processing}
+For Japanese, we drew on Universal Dependencies data.
+In the tokenization scheme used for Japanese, most affixes are separated as individual tokens, effectively providing morpheme segmentations.
+We used the GSD corpus, Version 2.4, \citep{tanaka2016universal, asahara2018universal}, as it was the only corpus with a training set and freely available word forms.
+In the corpus, verb suffixes largely correspond to auxiliaries (with tag \texttt{AUX}); only a few morphemes tagged \texttt{AUX} are not standardly treated as suffixes (see SI), and one frequent suffix (-\textit{te}) is labeled \texttt{SCONJ}.
+We selected verb forms by selecting all chains of a verb (tag \texttt{VERB}) followed by any number of auxiliaries (tag \texttt{AUX}) from the training set of the corpus. When the suffix -\textit{te} (tag \texttt{SCONJ}) followed such a chain, we added this.
+We labeled suffixes for underlying morphemes with the help of the lemmatization provided for each suffix in the corpus (see SI Section 4.3 for details).
+The passive and potential (slot 3) markers are formally indistinguishable for many verbs.
+As we cannot systematically distinguish them on the basis of the available corpus annotation, we merge these into a single underlying morpheme `Passive/Potential'.
+
+We obtained 15,281 verb forms in the training set and 1,048 verb forms in the held-out set.
+Of the forms in the training set, 27\% had two or more suffixes (modal group: two suffixes, accounting for 20\% of forms; maximum seven suffixes).
+While predicting order naturally focuses on datapoints with more than one suffix, we include the other datapoints for estimating conditional mutual information $I_t$.
+%We used the annotation provided in the corpus to identify underlying morphemes (see SI).
+
+%In the corpus, each morpheme is annotated with a lemma, indicating a normalized context-independent representation of the morpheme.
+%For both verbs and affixes, this lemma annotation abstracts away from most morphophonological and other allomorphic variation, it thus largely identifies underlying morphemes (see SI for limitations).
+
+For Sesotho, we used the Demuth Corpus \citep{demuth1992acquisition} of child and child-directed speech, containing about 13K utterances with 500K morphemes.
+The corpus has very extensive manual morphological segmentation and annotation; each verb form is segmented into morphemes, which are annotated for their function.
+Sesotho verbs carry both prefixes and suffixes.
+We extracted 37K verb forms (see SI 4.2 for details).
+We randomly selected 5\% to serve as held-out data and used the remaining 95\% as training data.
+93\% of forms had two or more affixes (modal group: three affixes, accounting for 36\% of forms; maximum eight affixes).
+
+
+\paragraph{Estimating Memory-Surprisal Tradeoff}
+We modeled incremental prediction on the level of morpheme sequences.
+To do so, we represented each verb form as a sequence of a stem and affix morphemes, abstracting away from morphophonemic interactions between neighboring morphemes.
+As in many languages, affixes in Japanese and Sesotho show morphophonemic interactions between neighboring morphemes; for instance, the Japanese politeness morpheme -\textit{mas}- takes the form -\textit{masu} when it is word-final, while it has the allomorph -\textit{mase}- when followed by the negation suffix -\textit{n}.
+Modeling prediction on the level of morphemes, as opposed to phonemes, controls for these interactions.\footnote{See SI Section 4.3 for qualitatively similar results when modeling prediction at the phoneme level.}
+
+In analogy to Studies 1--2, we modeled verb forms as a stationary stochastic process by concatenating the verb forms from the corpus in random order.
+
+We calculated $I_t$ by estimating an $n$-gram model on the training set and then computing the average surprisal $S_t$ as cross-entropy on the held-out set using Kneser-Ney smoothing.
+The model may overfit as the context size $t$ increases, leading to higher cross-entropies for larger values of $t$.
+We mitigated overfitting for large $t$ by estimating
+\begin{equation}
+\hat{S}_t := \min_{s \leq t} S_s,
+\end{equation}
+where $S_s$ is the cross-entropy of the $s$'th order Markov model on held-out data.
+This procedure ensures that $\hat{S}_t$ can only decrease as the context size $t$ increases.
+%Similar results were obtained when instead using the simple `naive' estimator for $I_t$ on the training set; this naive estimator estimates $I_t$ directly from $n$-gram counts in the training set; see the SI for details.
+
+\paragraph{Parameterizing Alternative Orderings}
+
+We parameterized alternative affix orderings by assigning a weight in $[0,1]$ to each morpheme.
+Given such a grammar, affixes are ordered by the values assigned to their underlying morphemes.
+We considered all morphemes annotated in the corpora, including low-frequency ones going beyond the ones identified above (see SI for details).
+
+To verify that this formalism is appropriate for capturing morpheme order in Japanese and Sesotho, we fitted models parameterized in this way to the observed orders.
+Ordering morphemes according to these fitted models recovered the observed order for almost all forms (98.6 \% for Japanese, 99.93\% for Sesotho prefixes, 97.4\% for Sesotho suffixes). Exceptions largely concern low-frequency affixes beyond those considered here. We take this as confirmation that the formalism is generally suited to capture morpheme order.
+
+For each language, we constructed 40 baseline grammars by randomly sampling weights.
+
+\paragraph{Creating Optimal Orders}
+
+In order to create optimal orders to compare real orders to, we optimized orderings for the AUC under the memory--surprisal tradeoff curve with an adaptation of the hill climbing method that \citet{gildea-human-2015} used to optimize word order grammars for the length of syntactic dependencies and trigram surprisal.
+
+We randomly initialized the assignment of weights to morphemes, and then iteratively change the assignment to reduce AUC.
+In each iteration, we randomly chose one morpheme, and evaluate AUC for each way of ordering it between two other morphemes.
+We then updated the weights to the ordering that yields the lowest AUC.
+To speed up optimization, we restricted to morphemes occurring at least 10 times in the corpus for 95\% of iterations, and to 10\% of possible orderings in each step.
+These choices vastly reduced computation time by reducing time spent on low-frequency morphemes.
+This optimization method is approximate, as it only guarantees convergence to a local optimum \citep{gildea-human-2015}, not to a globally optimal assignment.
+
+We ran this method for 1,000 iterations. Empirically, AUC converged after a few hundred iterations.
+To control for the randomness in initialization and the optimization steps, we ran this algorithm ten times.
+Different runs achieved almost the same AUC values (SD $0.0051$ in Japanese, $0.0036$ in Sesotho). % numbers from analyze_Morphemic_Heldout.R
+For Sesotho, we ran the algorithm separately for prefixes and suffixes due to computational efficiency considerations.\footnote{With the exception of the tense/aspect markers, none of the morpheme types discussed above can occur both as prefixes and suffixes. Therefore, we do not expect this separation to impact results.}
+
+\subsection{Results}
+In Figure~\ref{fig:morph-auc}, we compare the area under curve of the memory--surprisal tradeoff for Japanese and Sesotho verb forms under different orderings.
+Both observed orders and the approximately optimized grammars show lower AUCs than all 40 random baseline samples, in both languages.
+For comparison, we also show AUC for the order resulting from \emph{reversing} all suffix chains in the observed orders; this results in high AUC even exceeding most random grammars.
+These results show that Japanese and Sesotho affix orderings enable approximately optimal memory--surprisal tradeoffs.
+
+
+
+\begin{figure}
+	\begin{center}
+\includegraphics[width=\textwidth]{figures/Both-suffixes-byMorphemes-auc-hist-heldout.pdf}
+\end{center}
+	\caption{Areas under the curve for the memory--surprisal tradeoff for verb affixes in Japanese (left) and Sesotho (right). For the baseline grammars, we show a Kernel Density estimate.
+	In both Japanese and Sesotho, real and optimized orderings lead to lower AUC than all of the 40 baseline samples.}
+	\label{fig:morph-auc}
+\end{figure}
+
+
+
+We now ask to what extent the observed morpheme ordering is predicted correctly by approximately optimized grammars.
+In Table~\ref{tab:morph-acc}, we give summary statistics about the accuracy of optimized grammars in predicting affix order in the corpus, together with random baseline figures.
+We evaluate accuracy using two methods:
+In one method (`Pairs'), we consider, for each verb form in the corpus, all pairs of prefixes (or suffixes).
+We report the proportion of these pairs in the corpus for which the relative order of the two affixes is as predicted by the grammar.
+In the other method, (`Full'), we report the proportion of verb forms in the corpus that has exactly the affix ordering predicted by the grammar.
+In both measures, we average over all ten approximately optimized grammars for each language.
+
+\begin{table}
+\begin{tabular}{cc||ll|ll}
+             &              & \multicolumn{2}{c}{Prefixes}    & \multicolumn{2}{|c}{Suffixes} \\
+             &              & Pairs & Full & Pairs & Full \\ \hline\hline
+Japanese    & Optimized   & -- &  -- &   0.953 (SD 0.011) & 0.943 (SD 0.014) \\ % updated
+             & Baseline    & -- & --  & 0.497 (SD 0.287) & 0.425 (SD 0.29) \\ \hline % updated
+Sesotho &   Optimized  &  0.988 (SD 0.0) & 0.989 (SD 0.0) & 0.756 (SD 0.014) & 0.676 (SD 0.017) \\
+&   Baseline  &  0.672 (SD 0.305) & 0.604 (SD 0.338) & 0.423 (SD 0.204) & 0.332 (SD 0.211) \\ 
+\end{tabular}
+\caption{Accuracy of approximately optimized orderings, and of random baseline orderings, in predicting verb affix order in Japanese and Sesotho. `Pairs' denotes the rate of pairs of morphemes that are ordered correctly, and `Full' denotes the rate of verb forms where order is predicted entirely correctly. We show means and standard deviations over ten different runs of the optimization algorithm (`Optimized'), and over different random orderings (`Random').}\label{tab:morph-acc}
+\end{table}
+
+\paragraph{Japanese results.} In Japanese, by both measures, optimized grammars recover the observed orders with high accuracy.
+We compare the real grammar with the approximately optimized grammar that achieved the lowest AUC value in Table~\ref{tab:grammar-table-jap}. %; the main divergence is that desiderative suffixes are placed after the politeness suffix (slot 6), whereas real Japanese orders place them before the politeness suffix (slot 5).
+We conducted an error analysis comparing the real Japanese morpheme order against our approximately optimized orders.
+We extracted the pairs of morphemes whose relative order is incorrectly predicted, excluding pairs involving low-frequency morphemes not discussed here. 
+Results are shown in Table~\ref{tab:jap-err-analysis}.
+The most frequent divergence for this grammar is that politeness and negation suffixes are consistently ordered incorrectly; this affects 74 corpus examples (out of 15K total examples).
+
+We also found that prediction was more accurate when modeling on the level of phonemes, suggesting that divergence between model predictions and actual order might be related to phonological pressure (see SI Section 4.3).
+
+\begin{table} % updated forWords_Japanese_OptimizeOrder_MorphemeGrammar_Normalized_FullData_HeldoutClip/optimized_forWords_Japanese_OptimizeOrder_MorphemeGrammar_Normalized_FullData_HeldoutClip.py
+    \centering
+    \begin{tabular}{llllllll}
+	    &	    Real & Optimized \\ \hline\hline
+	    &    Stem & Stem \\ \hline
+1 & suru & suru \\
+2 & causative & causative \\
+3 & passive/potential & passive/potential \\
+4 & desiderative & negation \\
+5 & politeness & future \\
+6 & negation & politeness \\
+7 & future & desiderative \\
+ & past & nonfinite \\
+ & nonfinite & past \\
+ \hline
+    \end{tabular}
+    \caption{Comparing order of Japanese affixes in the observed orders (left) and according to an approximately optimized grammar (right). We organize the affixes in the real order into the seven slots described above.}
+    \label{tab:grammar-table-jap}
+\end{table}
+
+\begin{table} % updated forWords_Japanese_OptimizeOrder_MorphemeGrammar_Normalized_FullData_HeldoutClip/optimized_forWords_Japanese_OptimizeOrder_MorphemeGrammar_Normalized_FullData_HeldoutClip.py
+    \centering
+    \begin{tabular}{ll|ll}
+    \multicolumn{2}{c|}{Error} & Frequency \\ \hline\hline
+politeness & negation & 74 \\
+desiderative & negation & 14 \\
+politeness & future & 9 \\
+\end{tabular}
+    \caption{Errors in Japanese: We show pairs of morphemes that are ordered incorrectly by the approximately optimized grammar with the lowest AUC value.
+    We indicate the number of such pairs occurring in the corpus.
+    We only show errors where both morphemes are among the high-frequency ones studied here.
+    }
+    \label{tab:jap-err-analysis}
+\end{table}
+
+\paragraph{Sesotho results.} We compare the real Sesotho grammar with the approximately optimized grammar that achieved the lowest AUC value in Table~\ref{tab:grammar-table-sesotho}. %\jd{hm, is it the case that the lowest-AUC optimized grammars differ in the predicted order? if so, that suggests further analyses}
+In Sesotho, for prefixes, all optimized grammars almost exactly recover the ordering described above.
+The only divergence among the high-frequency morphemes is that negation and the tense/aspect prefix are ordered incorrectly; this accounts for only 12 occurrences in the data set, as the two prefixes rarely co-occur (Table~\ref{tab:sesotho-prefix-err-analysis}, top).
+
+For Sesotho suffixes, order is recovered at above-chance accuracies (Table~\ref{tab:morph-acc}, bottom), though with some divergences.
+The most common error (Table~\ref{tab:sesotho-prefix-err-analysis}, bottom) is that relative and interrogative suffixes are consistently placed closer to the verb stem than the mood suffix.
+We conjecture that this happens because all Sesotho verbs uniformly have a mood suffix, suggesting that there might be lower mutual information between the stem and the mood suffix than between the stem and these two suffixes.
+Furthermore, valence-changing suffixes are ordered farther away from the stem than various other suffixes, in contrast with the actual orders.
+Interestingly, we found that prediction was more accurate in this respect when estimating $I_t$ naively  on the training set (see SI Section 4.3), suggesting that the available corpus data does not sufficiently determine the optimal ordering.
+
+
+\begin{table}
+    \centering
+    \begin{tabular}{llllllll}
+	    &	    Real & Optimized \\ \hline\hline
+	    1 & Subject & Subject \\
+	      & Subject (rel.) & Subject (rel.) \\
+	    2 & Negation & Tense/aspect \\
+	    3& Tense/aspect & Negation \\
+	    4 &Object & Object \\ \hline
+	    &Stem & Stem  \\ \hline
+	    1 & Reversive & Passive \\
+	    2& Causative & Reciprocal \\
+	    &Neuter & Tense/aspect \\
+	    &Applicative & Neuter \\
+	    &Reciprocal & Relative \\
+	    3&Passive & Causative \\
+	    4&Tense/aspect & Applicative \\
+	    5&Mood & Interrogative \\
+	    6&Interrogative & Reversive \\
+	    &Relative & Mood \\ \hline
+    \end{tabular}
+	\caption{Comparing order of Sesotho affixes in the observed orders (left) and according to an approximatively optimized grammar (right). Note that order was separately optimized for prefixes and suffixes.}
+    \label{tab:grammar-table-sesotho}
+\end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{ll|ll}
+    \multicolumn{2}{c|}{Error} & Frequency \\ \hline\hline
+Negation & Tense/aspect & 12 \\
+\\
+    \multicolumn{2}{c|}{Error} & Frequency \\ \hline\hline
+Mood & Interrogative & 2204 \\
+Mood & Relative & 858 \\
+Applicative & Tense/aspect & 347 \\
+%Tense/aspect & Passive & 302 \\
+Causative & Tense/aspect & 174 \\
+Neuter & Tense/aspect & 155 \\
+Reversive & Causative & 100 \\
+Applicative & Passive & 81 \\
+Causative & Passive & 61 \\
+Applicative & Relative & 49 \\
+Causative & Relative & 41 \\
+\end{tabular}
+    \caption{Errors in Sesotho prefixes (top) and suffixes (bottom). %We only count divergences as errors here if they are predicted by the order (TODO figure out where exceptions come from). Also, w
+    We show the ten most common errors where both morphemes are among the high-frequency ones studied here.}
+    \label{tab:sesotho-prefix-err-analysis}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Discussion}
+We have found that the ordering of verb affixes in Japanese and Sesotho provides approximately optimal memory--surprisal tradeoffs, close to the efficiency of orderings computationally optimized for efficiency.
+We further found that parts of these languages' ordering rules can be derived from optimizing order for efficient tradeoffs.
+
+Here we argue that the memory--surprisal tradeoff provides an explanation of previously-existing typological generalizations, and an operationalization of previous functionally-motivated explanations for them; in particular, we argue that the notion of mutual information operationalizes the concept of `relevance.'
+
+One prominent typological generalization due to \citet[p. 24, 34--35]{bybee-morphology-1985} claims that there exists a universal ordering of verbal inflectional morphemes across languages:
+\begin{quote}
+\begin{tabular}{llllllllllllllllllllllllll}
+verb stem & valence & voice & aspect & tense& mood &  subject agreement
+\end{tabular}
+\end{quote}
+Morphemes are claimed either to go in the order above (suffixes), or its reverse (prefixes). This hierarchy makes no statements as to which affixes are realized as prefixes or suffixes.
+
+Japanese and Sesotho verb affixes are broadly in agreement with Bybee's generalization.
+For instance, valence and voice suffixes are closer to the stem than tense/aspect/mood markers.
+Subject agreement in Sesotho is farther away from the verb than tense/aspect/mood prefixes.
+This ordering is reproduced closely by optimization in Japanese and for Sesotho prefixes, and to some extent also for Sesotho suffixes.
+
+\citet[p. 37]{bybee-morphology-1985} argues further that morpheme order is determined by the degree of \emph{relevance} between the affix and the stem, that is, the degree to which ``the semantic content of the first [element] directly affects or modifies the semantic content of the second'' (p. 13).
+She argues that elements whose meanings are more relevant to each other appear closer together.
+For instance, the meaning of a verb is impacted more strongly by a causative affix than by a tense affix:
+Combining a verb with a causative marker results in a form that denotes a different action, whereas a tense affix only locates the action in time.
+
+We conjecture that this notion of relevance is related to mutual information.
+If an affix has a stronger impact on the meaning of the verb, it will typically not be applicable to all verbs.
+For instance, causative markers will only attach to verbs whose semantics is compatible with causation.
+In contrast, a past tense marker can attach to all verbs that are compatible with actions that can have occurred in the past.
+Therefore, we expect that affixes that are more relevant to a verb stem will also tend to have higher mutual information with the verb stem.
+If they have higher mutual information with the verb stem, then the principle of information locality predicts that they will go close to the verb stem.
